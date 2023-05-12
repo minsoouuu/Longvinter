@@ -70,5 +70,6 @@ public abstract class Player : MonoBehaviour
     void SetAnimation(State state)
     {
         animator.SetTrigger(state.ToString());
+        //asdasdasd
     }
 }
