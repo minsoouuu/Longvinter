@@ -39,6 +39,7 @@ public abstract class Player : MonoBehaviour
     public float Damage
     {
         get { return damage; }
+        set { Damage = value; }
     }
     void Start()
     {
@@ -47,11 +48,22 @@ public abstract class Player : MonoBehaviour
     void FixedUpdate()
     {
         if (state.Equals(State.Die)) return;
-
         Move();
         Direction();
     }
     void Move()
+    {
+        switch (state)
+        {
+            case State.Walk:
+                break;
+            case State.Run:
+                break;
+            case State.Attack:
+                break;
+        }
+    }
+    void Walk()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
@@ -61,14 +73,21 @@ public abstract class Player : MonoBehaviour
 
         SetAnimation(state);
     }
+    void Run()
+    {
+
+    }
 
     void Direction()
     {
         float yDir = transform.rotation.y;
     }
-
     void SetAnimation(State state)
     {
         animator.SetTrigger(state.ToString());
+    }
+    void Die()
+    {
+        
     }
 }
