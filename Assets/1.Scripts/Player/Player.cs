@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum MyState
+{
+    Idle,
+    Walk,
+    Run,
+    Attack,
+    Die
+}
 public abstract class Player : MonoBehaviour
 {
-    public enum State
-    {
-        None,
-        Idle,
-        Walk,
-        Run,
-        Attack,
-        Die
-    }
 
-    [SerializeField] private State state = State.None;
+    [SerializeField] private MyState myState = MyState.Idle;
     [SerializeField] private Animator animator;
 
     float maxHP = 100f;
@@ -22,6 +20,7 @@ public abstract class Player : MonoBehaviour
     float curHP = 0f;
     float damage = 10f;
 
+    State state;
     public float HP
     {
         get { return curHP; }
@@ -47,47 +46,48 @@ public abstract class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (state.Equals(State.Die)) return;
-        Move();
-        Direction();
+        if (myState.Equals(MyState.Die)) return;
+        Walk();
     }
-    void Move()
+    void Update()
     {
-        switch (state)
+        
+    }
+    void DoState()
+    {
+        switch (myState)
         {
-            case State.Walk:
+            case MyState.Idle:
+                state = gameObject.AddComponent<Idle>();
+                state.Action();
                 break;
-            case State.Run:
+            case MyState.Walk:
+                state = gameObject.AddComponent<Walk>();
+                state.Action();
                 break;
-            case State.Attack:
+            case MyState.Run:
+                state = gameObject.AddComponent<Run>();
+                state.Action();
+                break;
+            case MyState.Attack:
+                state = gameObject.AddComponent<Attack>();
+                state.Action();
                 break;
         }
     }
     void Walk()
     {
+        myState = MyState.Idle;
+        DoState();
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-
+        Direction(x, z);
         Vector3 vec = new Vector3(x, 0, z);
         transform.position += vec * Speed * Time.deltaTime;
-
-        SetAnimation(state);
     }
-    void Run()
+    void Direction(float x , float z)
     {
-
-    }
-
-    void Direction()
-    {
-        float yDir = transform.rotation.y;
-    }
-    void SetAnimation(State state)
-    {
-        animator.SetTrigger(state.ToString());
-    }
-    void Die()
-    {
-        
+        Vector3 dir = x * Vector3.right + z * Vector3.forward;
+        transform.rotation = Quaternion.LookRotation(dir);
     }
 }
