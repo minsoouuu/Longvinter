@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum MyState
 {
+    None,
     Idle,
     Walk,
     Run,
@@ -11,7 +12,7 @@ public enum MyState
 }
 public abstract class Player : MonoBehaviour
 {
-    [SerializeField] private MyState myState = MyState.Idle;
+    [SerializeField] private MyState myState = MyState.None;
     [SerializeField] private Animator animator;
 
     float x;
@@ -23,14 +24,16 @@ public abstract class Player : MonoBehaviour
     float damage = 10f;
     float mentalPower = 0f;
 
-    State state;
     public float HP
     {
         get { return curHP; }
         set
         {
             curHP = value;
-            // 죽을때 상태 처리
+            if (curHP <= 0)
+            {
+                myState = MyState.Die;
+            }
         }
     }
     public float Speed
@@ -50,63 +53,35 @@ public abstract class Player : MonoBehaviour
     }
     void Start()
     {
-        state.animator = GetComponent<Animator>();
         curHP = maxHP;
     }
     void FixedUpdate()
     {
         if (myState.Equals(MyState.Die)) return;
-        Walk();
+        Move();
     }
     void Update()
     {
-        SetState();
-        DoState();
+        if (myState.Equals(MyState.Die)) return;
     }
-    void SetState()
-    {
-        if (x <= 0 && z <= 0)
-        {
-            myState = MyState.Idle;
-        }
-        else if (x > 0 || z > 0)
-        {
-            myState = MyState.Walk;
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            myState = MyState.Attack;
-        }
-    }
-    void DoState()
-    {
-        switch (myState)
-        {
-            case MyState.Idle:
-                state = gameObject.AddComponent<Idle>();
-                state.Action();
-                break;
-            case MyState.Walk:
-                state = gameObject.AddComponent<Walk>();
-                state.Action();
-                break;
-            case MyState.Run:
-                state = gameObject.AddComponent<Run>();
-                state.Action();
-                break;
-            case MyState.Attack:
-                state = gameObject.AddComponent<Attack>();
-                state.Action();
-                break;
-        }
-    }
-    void Walk()
+
+    void Move()
     {
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
+        if (myState != MyState.Idle)
+        {
+            myState = MyState.Idle;
+            SetAnimation("Idle");
+        }
+
         Direction(x, z);
         Vector3 vec = new Vector3(x, 0, z);
         transform.position += vec * Speed * Time.deltaTime;
+    }
+    void SetAnimation(string name)
+    {
+        animator.SetTrigger(name);
     }
     void Direction(float x , float z)
     {
