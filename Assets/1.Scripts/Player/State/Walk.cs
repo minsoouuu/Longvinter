@@ -6,6 +6,8 @@ public class Walk : State
 {
     public override void Action()
     {
-
+        if (animator == null)
+            return;
+        animator.SetTrigger("Walk");
     }
 }

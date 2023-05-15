@@ -6,6 +6,8 @@ public class Idle : State
 {
     public override void Action()
     {
-        Debug.Log("Idle");
+        if (animator == null)
+            return;
+        animator.SetTrigger("Idle");
     }
 }

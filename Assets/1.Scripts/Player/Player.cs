@@ -11,21 +11,24 @@ public enum MyState
 }
 public abstract class Player : MonoBehaviour
 {
-
     [SerializeField] private MyState myState = MyState.Idle;
     [SerializeField] private Animator animator;
+
+    float x;
+    float z;
 
     float maxHP = 100f;
     float speed = 3f;
     float curHP = 0f;
     float damage = 10f;
+    float mentalPower = 0f;
 
     State state;
     public float HP
     {
         get { return curHP; }
         set
-        { 
+        {
             curHP = value;
             // 죽을때 상태 처리
         }
@@ -40,8 +43,14 @@ public abstract class Player : MonoBehaviour
         get { return damage; }
         set { Damage = value; }
     }
+    public float MentalPower
+    {
+        get { return mentalPower; }
+        set { mentalPower = value; }
+    }
     void Start()
     {
+        state.animator = GetComponent<Animator>();
         curHP = maxHP;
     }
     void FixedUpdate()
@@ -51,7 +60,23 @@ public abstract class Player : MonoBehaviour
     }
     void Update()
     {
-        
+        SetState();
+        DoState();
+    }
+    void SetState()
+    {
+        if (x <= 0 && z <= 0)
+        {
+            myState = MyState.Idle;
+        }
+        else if (x > 0 || z > 0)
+        {
+            myState = MyState.Walk;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            myState = MyState.Attack;
+        }
     }
     void DoState()
     {
@@ -77,10 +102,8 @@ public abstract class Player : MonoBehaviour
     }
     void Walk()
     {
-        myState = MyState.Idle;
-        DoState();
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
         Direction(x, z);
         Vector3 vec = new Vector3(x, 0, z);
         transform.position += vec * Speed * Time.deltaTime;
@@ -88,6 +111,6 @@ public abstract class Player : MonoBehaviour
     void Direction(float x , float z)
     {
         Vector3 dir = x * Vector3.right + z * Vector3.forward;
-        transform.rotation = Quaternion.LookRotation(dir);
+        //transform.rotation = Quaternion.LookRotation(dir);
     }
 }

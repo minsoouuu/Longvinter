@@ -6,6 +6,6 @@ public class Run : State
 {
     public override void Action()
     {
-        throw new System.NotImplementedException();
+        animator.SetTrigger("Run");
     }
 }
