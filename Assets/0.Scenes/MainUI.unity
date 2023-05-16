@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571337, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1718,7 +1718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5816c7def096602459c9ffbc564d3ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inven_tile: {fileID: 6743421154578441565, guid: 5b7c510b9b6722e41a1622714dc36d5a, type: 3}
+  invenBG: {fileID: 7156303827247336535}
+  inven_Slot: {fileID: 6743421154578441565, guid: 5b7c510b9b6722e41a1622714dc36d5a, type: 3}
   parent: {fileID: 7156303827048778516}
 --- !u!1 &6802512434365483190
 GameObject:
@@ -1750,7 +1751,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7156303827247336534}
-  - {fileID: 7156303826815460825}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1858,7 +1858,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 30
   m_Viewport: {fileID: 7156303827438491614}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 7156303827341018519}
@@ -1876,19 +1876,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7156303826815460830}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7156303827438491614}
   - {fileID: 7156303827341018516}
-  m_Father: {fileID: 7156303826237625433}
-  m_RootOrder: 1
+  m_Father: {fileID: 7156303827247336534}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7156303826815460826
@@ -2058,7 +2058,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7156303826815460825}
   m_Father: {fileID: 7156303826237625433}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2208,7 +2209,7 @@ MonoBehaviour:
   m_Direction: 2
   m_Value: 0.99999905
   m_Size: 0.54545456
-  m_NumberOfSteps: 0
+  m_NumberOfSteps: 3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
