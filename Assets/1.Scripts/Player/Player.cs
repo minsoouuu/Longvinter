@@ -69,13 +69,20 @@ public abstract class Player : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
-        if (myState != MyState.Idle)
+
+        if (transform.position != Vector3.zero)
+        {
+            myState = MyState.Walk;
+            SetAnimation("Walk");
+        }
+        else if(myState != MyState.Idle)
         {
             myState = MyState.Idle;
             SetAnimation("Idle");
         }
 
         Direction(x, z);
+
         Vector3 vec = new Vector3(x, 0, z);
         transform.position += vec * Speed * Time.deltaTime;
     }
@@ -85,7 +92,9 @@ public abstract class Player : MonoBehaviour
     }
     void Direction(float x , float z)
     {
-        Vector3 dir = x * Vector3.right + z * Vector3.forward;
-        //transform.rotation = Quaternion.LookRotation(dir);
+        float dir = 0;
+        dir = Mathf.Lerp(dir, x, Time.deltaTime);
+        Vector3 asd = x * Vector3.right + z * Vector3.forward;
+        transform.rotation = Quaternion.LookRotation(asd);
     }
 }
