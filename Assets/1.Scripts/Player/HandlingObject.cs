@@ -10,7 +10,6 @@ public class HandlingObject : MonoBehaviour
     {
         offset = transform.position - ClickObject();
     }
-
     private void OnMouseDrag()
     {
         //마우스에 따라서 포지션값[화면] 수정
