@@ -27,6 +27,7 @@ public class PlaceableObject : MonoBehaviour
     {
         BoxCollider box = gameObject.GetComponent<BoxCollider>();
         vertices = new Vector3[4];
+
         //정육면체 아래 면의 사각형의 포지션
         vertices[0] = box.center + new Vector3(-box.size.x, -box.size.y, -box.size.z) * 0.5f;
         vertices[1] = box.center + new Vector3(box.size.x, -box.size.y, -box.size.z) * 0.5f;

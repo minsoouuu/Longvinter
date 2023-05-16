@@ -9,11 +9,13 @@ public class BuildingSystem : MonoBehaviour
     private PlaceableObject selectedObject;
 
     public GridLayout gridLayout;
-    public Grid grid;
+    [HideInInspector] public Grid grid;
     public Tilemap mainTilemap;
     public TileBase takenTile;
 
     public GameObject prefab1;
+
+    House house;
     private void Awake()
     {
         instance = this;
@@ -22,11 +24,6 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update()
     {
-        //건물 생성
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            //InitWithObject(prefab1);
-        }
         //건물 생성
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -41,11 +38,12 @@ public class BuildingSystem : MonoBehaviour
 
         if (!selectedObject)
         {
-            return;
+            //return;
         }
         //놓는
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Space");
             //타일이 없으면
             if (CheckTile(selectedObject))
             {
@@ -79,7 +77,7 @@ public class BuildingSystem : MonoBehaviour
 
         GameObject obj = Instantiate(building, position, Quaternion.identity);
         //생성된 오브젝트에 HandlingObject속성 추가
-        obj.AddComponent<HandlingObject>();
+        //obj.AddComponent<HandlingObject>();
     }
 
     public Vector3 SnapCoordinateToGrid(Vector3 position)
