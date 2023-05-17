@@ -25,10 +25,11 @@ public class InvenSlot : MonoBehaviour
         itemCount += _count;
 
         if (itemCount <= 0)
+        {
             ClearSlot();
+        }
     }
 
-    // 해당 슬롯 하나 삭제
     private void ClearSlot()
     {
         item = null;

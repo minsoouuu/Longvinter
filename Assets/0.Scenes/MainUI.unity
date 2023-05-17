@@ -926,7 +926,31 @@ MonoBehaviour:
   m_Group: {fileID: 118107650}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6802512434365483191}
+        m_TargetAssemblyTypeName: InvenTabButton, Assembly-CSharp
+        m_MethodName: ToggleOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6802512434365483191}
+        m_TargetAssemblyTypeName: InvenTabButton, Assembly-CSharp
+        m_MethodName: ToggleClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &396594408
 MonoBehaviour:
@@ -1251,7 +1275,19 @@ MonoBehaviour:
   m_Group: {fileID: 118107650}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6802512434365483191}
+        m_TargetAssemblyTypeName: InvenTabButton, Assembly-CSharp
+        m_MethodName: ToggleOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &505887786
 MonoBehaviour:
@@ -2400,7 +2436,19 @@ MonoBehaviour:
   m_Group: {fileID: 118107650}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6802512434365483191}
+        m_TargetAssemblyTypeName: InvenTabButton, Assembly-CSharp
+        m_MethodName: ToggleOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!222 &965440169
 CanvasRenderer:
@@ -3869,6 +3917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6802512434365483184}
   - component: {fileID: 6802512434365483185}
+  - component: {fileID: 6802512434365483191}
   m_Layer: 0
   m_Name: InventoryController
   m_TagString: Untagged
@@ -3876,6 +3925,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6802512434365483191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6802512434365483190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5febb379a991c594fb1db026b080e407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backpackTab: {fileID: 965440168}
+  equipTab: {fileID: 505887785}
+  collectionTab: {fileID: 396594407}
+  backpack: {fileID: 453167533}
+  equip: {fileID: 1330214921}
+  collection: {fileID: 858675746}
 --- !u!224 &7156303826237625433
 RectTransform:
   m_ObjectHideFlags: 0

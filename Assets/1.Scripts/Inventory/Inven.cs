@@ -17,7 +17,10 @@ public class Inven : MonoBehaviour
 
     List<GameObject> invenlist = new List<GameObject>();
 
-    
+
+    private InvenSlot[] slots;
+
+
     void Start()
     {
         // 인벤토리창 가로 4개, 세로로 8줄 총 32개
@@ -63,5 +66,10 @@ public class Inven : MonoBehaviour
     private void CloseInventory()
     {
         invenBG.SetActive(false);
+    }
+
+    public void AcquireItem()
+    {
+        
     }
 }
