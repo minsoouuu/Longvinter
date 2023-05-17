@@ -13,23 +13,11 @@ public class InvenTabButton : MonoBehaviour
     public GameObject equip;
     public GameObject collection;
 
-    Button backpackBtn;
-    Button equipBtn;
-    Button collectionBtn;
-
-
     private void Awake()
     {
         backpackTab.isOn = true;
         equipTab.isOn = false;
         collectionTab.isOn = false;
-    }
-
-    private void Start()
-    {
-        backpackBtn = backpack.GetComponent<Button>();
-        equipBtn = equip.GetComponent<Button>();
-        collectionBtn = collection.GetComponent<Button>();
     }
 
     public void ToggleOn()
@@ -39,8 +27,6 @@ public class InvenTabButton : MonoBehaviour
             backpack.SetActive(true);
             equip.SetActive(false);
             collection.SetActive(false);
-
-            backpackBtn.onClick.Invoke();
             
         }
         else if (equipTab.isOn)
@@ -48,19 +34,16 @@ public class InvenTabButton : MonoBehaviour
             equip.SetActive(true);
             backpack.SetActive(false);
             collection.SetActive(false);
-
-            equipBtn.onClick.Invoke();
         }
         else if (collectionTab.isOn)
         {
             collection.SetActive(true);
             backpack.SetActive(false);
             equip.SetActive(false);
-
-            collectionBtn.onClick.Invoke();
         }
     }
     
+    //버튼 눌렸을 때 Type에 맞는 아이템 보여주기
     public void ButtonClick()
     {
         if (backpack)

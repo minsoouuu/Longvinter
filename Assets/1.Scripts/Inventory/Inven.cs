@@ -15,10 +15,7 @@ public class Inven : MonoBehaviour
     [HideInInspector] public int InvenX { get; set; }
     [HideInInspector] public int InvenY { get; set; }
 
-    List<GameObject> invenlist = new List<GameObject>();
-
-
-    private InvenSlot[] slots;
+   public  List<GameObject> invenlist = new List<GameObject>();
 
 
     void Start()
@@ -52,12 +49,16 @@ public class Inven : MonoBehaviour
             invectoryActivated = !invectoryActivated;
 
             if (invectoryActivated)
+            {
                 OpenInventory();
+            }
             else
+            {
                 CloseInventory();
-
+            }
         }
     }
+
     private void OpenInventory()
     {
         invenBG.SetActive(true);
@@ -68,8 +69,5 @@ public class Inven : MonoBehaviour
         invenBG.SetActive(false);
     }
 
-    public void AcquireItem()
-    {
-        
-    }
+    
 }
