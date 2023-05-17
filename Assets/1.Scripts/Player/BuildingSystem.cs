@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class BuildingSystem : MonoBehaviour
 {
     public static BuildingSystem instance;
-    private PlaceableObject selectedObject;
+    [SerializeField] private PlaceableObject selectedObject;
 
     public GridLayout gridLayout;
     [HideInInspector] public Grid grid;
@@ -76,6 +76,7 @@ public class BuildingSystem : MonoBehaviour
         Vector3 position = SnapCoordinateToGrid(Vector3.zero);
 
         GameObject obj = Instantiate(building, position, Quaternion.identity);
+        selectedObject = obj.GetComponent<PlaceableObject>();
         //생성된 오브젝트에 HandlingObject속성 추가
         //obj.AddComponent<HandlingObject>();
     }
@@ -84,6 +85,7 @@ public class BuildingSystem : MonoBehaviour
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         position = grid.GetCellCenterWorld(cellPos);
+        position.y = 0f;
         return position;
     }
     private static TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
