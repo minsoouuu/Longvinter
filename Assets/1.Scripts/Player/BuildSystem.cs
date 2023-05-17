@@ -64,18 +64,16 @@ public class BuildSystem : MonoBehaviour
             return Vector3.zero;
         }
     }
-
     public Vector3 SnapCoordinateToGrid(Vector3 position)
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         position = grid.GetCellCenterWorld(cellPos);
         return position;
     }
-
     static TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
     {
         TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
-        int counter = 0;
+        //int counter = 0;
 
         foreach (var v in area.allPositionsWithin)
         {
@@ -85,6 +83,7 @@ public class BuildSystem : MonoBehaviour
     }
     bool CanBePlaced(Placeable placeable)
     {
+        
         BoundsInt area = new BoundsInt();
         area.position = gridLayout.WorldToCell(placeable.GetStartPosition());
         area.size = placeable.Size;
@@ -98,6 +97,7 @@ public class BuildSystem : MonoBehaviour
                 return false;
             }
         }
+
         return true;
     }
 

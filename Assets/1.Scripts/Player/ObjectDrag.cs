@@ -15,6 +15,7 @@ public class ObjectDrag : MonoBehaviour
     {
         Vector3 pos = BuildSystem.GetMouseWorldPositoin() + offset;
         transform.position = BuildSystem.current.SnapCoordinateToGrid(pos);
+
     }
 
     public void InitializeWithObject(GameObject prefab)
