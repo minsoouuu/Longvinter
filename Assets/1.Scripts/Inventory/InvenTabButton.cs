@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class InvenTabButton : MonoBehaviour
 {
+
+    [SerializeField] private ItemData[] itemData;
+
     public Toggle backpackTab;
     public Toggle equipTab;
     public Toggle collectionTab;
