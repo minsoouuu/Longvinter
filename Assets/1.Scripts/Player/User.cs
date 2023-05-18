@@ -45,7 +45,7 @@ public class User : MonoBehaviour
     private List<Collider> m_collisions = new List<Collider>();
 
     private float curHp;
-    private float maxHp = 100f;
+    [HideInInspector] public float maxHp = 100f;
 
 
     public float HP
