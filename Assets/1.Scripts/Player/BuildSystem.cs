@@ -83,7 +83,6 @@ public class BuildSystem : MonoBehaviour
     }
     bool CanBePlaced(Placeable placeable)
     {
-        
         BoundsInt area = new BoundsInt();
         area.position = gridLayout.WorldToCell(placeable.GetStartPosition());
         area.size = placeable.Size;
