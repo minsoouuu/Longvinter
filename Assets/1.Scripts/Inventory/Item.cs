@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "New Item/item")]
-public class Item : ScriptableObject
+public class Item : MonoBehaviour
 {
-    public enum InvenItemType
+    [SerializeField] private Image image;
+
+    ItemData iData;
+
+    public void SetData(ItemData data)
     {
-        Backpack,       // 배낭
-        Equipment,      // 장비
-        Collection      // 도감
+        iData = data;
+        SetSprite();
     }
 
-
-    public string itemName;
-    public InvenItemType itemType;
-    public Sprite itemImage; // 인벤토리 안에서 띄울 아이템 이미지
-    public GameObject itemPrefab;  // 아이템 프리팹
-
+    public void SetSprite()
+    {
+        image.enabled = true;
+        this.image.sprite = iData.itemImage;
+    }
 }
-
