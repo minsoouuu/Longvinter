@@ -44,10 +44,23 @@ public class User : MonoBehaviour
 
     private List<Collider> m_collisions = new List<Collider>();
 
+    private float curHp;
+    private float maxHp = 100f;
+
+
+    public float HP
+    {
+        get { return curHp; }
+        set
+        {
+            curHp = value;
+        }
+    }
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+        curHp = maxHp;
     }
 
     private void OnCollisionEnter(Collision collision)
