@@ -5,48 +5,28 @@ using UnityEngine.UI;
 
 public class Merchant : MonoBehaviour
 {
-    [SerializeField] private GameObject b_itemlist;
-    [SerializeField] private Transform b_parent;
-    [SerializeField] private GameObject s_itemlist;
-    [SerializeField] private Transform s_parent;
+    Slot slot = new Slot();
+    Sprite sprite;
+    Inven inven;
+    Item itemdata;
+    int money;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void OnClickBuy()
     {
-        CreateMerchant_b_ItemList();
-        CreateMerchant_s_ItemList();
+        // slot.SetData(this.transform.GetChild(0).GetComponent<Image>().sprite = this.sprite);
+        // inven.Money(money, true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickSell()
     {
-        
+        // slot.SetData(this.transform.GetChild(0).GetComponent<Image>().sprite = this.sprite);
+        // inven.Money(money, false);
     }
 
-    void CreateMerchant_b_ItemList()
+    void SetSprite(Item itemdata)
     {
-        for(int i = 0; i < 10; i++)
-        {
-            Instantiate(b_itemlist, b_parent);
-        }
-    }
-    void CreateMerchant_s_ItemList()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            Instantiate(s_itemlist, s_parent);
-        }
-    }
-
-    public void Onclick_Buy()
-    {
-
-    }
-
-    public void Onclick_Sell()
-    {
-
+        this.itemdata = itemdata;
+        sprite = this.itemdata.data.itemImage;
     }
     
 }

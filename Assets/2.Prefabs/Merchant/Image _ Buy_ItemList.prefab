@@ -162,6 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8748583486534324681}
+  - component: {fileID: -738530078829217955}
   - component: {fileID: 8748583486534324686}
   - component: {fileID: 8748583486534324687}
   - component: {fileID: 230671744300627787}
@@ -195,6 +196,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-738530078829217955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8748583486534324682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf89434c39cf6745800c7a1de65ed3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &8748583486534324686
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -277,10 +290,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: -738530078829217955}
         m_TargetAssemblyTypeName: Merchant, Assembly-CSharp
-        m_MethodName: Onclick_ItemList
-        m_Mode: 6
+        m_MethodName: OnClickBuy
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -301,7 +314,7 @@ GameObject:
   - component: {fileID: 8748583486818515032}
   - component: {fileID: 8748583486818515033}
   m_Layer: 5
-  m_Name: 'Image : left arrow'
+  m_Name: 'Image : arrow'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
