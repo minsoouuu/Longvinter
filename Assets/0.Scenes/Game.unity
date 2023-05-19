@@ -4053,6 +4053,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4030908645742064, guid: a1dee65b7ef7c344a97ff258503f49e7, type: 3}
   m_PrefabInstance: {fileID: 765646299}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &768414147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 768414149}
+  - component: {fileID: 768414148}
+  m_Layer: 0
+  m_Name: RecipeDataJson
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &768414148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768414147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71a9497a31d986419e20fbd2307a590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeJson: {fileID: 4900000, guid: 7be4e816efe68cb4d8ff934280e0713f, type: 3}
+  recipeData:
+    recipe: []
+--- !u!4 &768414149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768414147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &769866908
 GameObject:
   m_ObjectHideFlags: 0
@@ -4108,9 +4155,10 @@ MonoBehaviour:
   - {fileID: 1934761093}
   - {fileID: 1519802809}
   - {fileID: 1766830047}
-  makedSlot: {fileID: 1767532809}
-  btn: {fileID: 0}
+  completedItem: {fileID: 1767532809}
+  btn: {fileID: 1095037595}
   items: []
+  recipe: {fileID: 0}
   itemDatas: []
 --- !u!1001 &785645618
 PrefabInstance:

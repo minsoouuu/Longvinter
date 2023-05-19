@@ -12,18 +12,18 @@ public class JsonData : MonoBehaviour
     [Serializable]
     public class RecipeJson
     {
-        string material1;
-        string material2;
+        public string completeitem;
+        public string material1;
+        public string material2;
     }
-
     [Serializable]
     public class Recipe
     {
-        public List<RecipeJson> fence = new List<RecipeJson>();
+        public List<RecipeJson> recipe = new List<RecipeJson>();
     }
-
     private void Start()
     {
         recipeData = JsonUtility.FromJson<Recipe>(recipeJson.text);
     }
 }
+

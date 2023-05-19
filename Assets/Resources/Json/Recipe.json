@@ -1,6 +1,7 @@
 {
-  "fence": [
+  "recipe": [
     {
+      "completeitem": "fance",
       "material1": "wood",
       "material2": "wood"
     }
