@@ -12,6 +12,8 @@ public class InvenTabButton : MonoBehaviour
     public Toggle equipTab;
     public Toggle collectionTab;
 
+    private string nowToggle;
+
     public GameObject backpack;
     public GameObject equip;
     public GameObject collection;
@@ -30,29 +32,40 @@ public class InvenTabButton : MonoBehaviour
             backpack.SetActive(true);
             equip.SetActive(false);
             collection.SetActive(false);
-            
+            nowToggle = backpack.name;
         }
         else if (equipTab.isOn)
         {
             equip.SetActive(true);
             backpack.SetActive(false);
             collection.SetActive(false);
+            nowToggle = equip.name;
         }
         else if (collectionTab.isOn)
         {
             collection.SetActive(true);
             backpack.SetActive(false);
             equip.SetActive(false);
+            nowToggle = collection.name;
         }
     }
     
-    //버튼 눌렸을 때 Type에 맞는 아이템 보여주기
+    //토글 눌렸을 때 Type에 맞는 아이템 보여주기
     public void ButtonClick()
     {
-        if (backpack)
+        switch (nowToggle)
         {
-            
+            case "Backpack":
+                ItemData.InvenItemType.Backpack
+                break;
+            case "Equipment":
+
+                break;
+            case "Collection":
+
+                break;
         }
+            
     }
 
 }
