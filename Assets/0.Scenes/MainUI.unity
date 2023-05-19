@@ -3137,7 +3137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395047492}
   m_Layer: 5
-  m_Name: InvenButton
+  m_Name: InvenTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

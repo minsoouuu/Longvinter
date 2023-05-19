@@ -7,12 +7,12 @@ public class Inven : MonoBehaviour
     // 인벤토리 활성화 여부. true : 카메라 움직임 및 다른 입력 막기
     public static bool invectoryActivated = false;
 
-    [SerializeField] private Item prefab;
-    [SerializeField] private ItemData[] itemData;
+    [SerializeField] private Slot prefab;
+    [SerializeField] private Item[] itemData;
     [SerializeField] private GameObject invenBG;
     [SerializeField] private Transform parent;
 
-    public List<Item> invenlist = new List<Item>();
+    public List<Slot> invenlist = new List<Slot>();
 
     [HideInInspector] public int InvenX { get; set; }
     [HideInInspector] public int InvenY { get; set; }
@@ -21,9 +21,9 @@ public class Inven : MonoBehaviour
 
     void Start()
     {
-        // 인벤토리창 가로 4개, 세로로 8줄 총 32개
+        // 인벤토리창 가로 4개, 세로로 5줄 총 20개
         InvenX = 4;
-        InvenY = 8;
+        InvenY = 5;
         gameObject.SetActive(false);
         CreateInven();
     }
@@ -38,7 +38,7 @@ public class Inven : MonoBehaviour
     {
         for(int i = 0; i < InvenX * InvenY; i++)
         {
-            Item gb =  Instantiate(prefab, parent);
+            Slot gb =  Instantiate(prefab, parent);
             invenlist.Add(gb);
         }
     }

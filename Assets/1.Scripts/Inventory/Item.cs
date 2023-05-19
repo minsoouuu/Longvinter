@@ -1,23 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public enum InvenItemType
 {
-    [SerializeField] private Image image;
-
-    ItemData iData;
-
-    public void SetData(ItemData data)
-    {
-        iData = data;
-        SetSprite();
-    }
-
-    public void SetSprite()
-    {
-        image.enabled = true;
-        this.image.sprite = iData.itemImage;
-    }
+    Backpack,       // 배낭
+    Equipment,      // 장비
+    Collection      // 도감
 }
+public struct Data
+{
+    public string itemName;
+    public InvenItemType itemType;
+    public Sprite itemImage; // 인벤토리 안에서 띄울 아이템 이미지
+}
+
+public abstract class Item : MonoBehaviour
+{
+    public Data data = new Data();
+    private void Start()
+    {
+        Init();
+    }
+
+    public abstract void Init();
+    public abstract void Action();
+
+
+}
+
+

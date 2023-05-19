@@ -5,20 +5,20 @@ using UnityEngine.UI;
 public class MakingSlot : MonoBehaviour
 {
     [SerializeField] private MakeController makeController;
-    private ItemData itemData;
+    private Item itemData;
     private Image itemIcon;
 
     void Awake()
     {
         itemIcon = GetComponent<Image>();
     }
-    public void SetItmeData(ItemData itemdata)
+    public void SetItmeData(Item itemdata)
     {
         this.itemData = itemdata;
-        itemIcon.sprite = this.itemData.itemImage;
+        itemIcon.sprite = this.itemData.data.itemImage;
         makeController.itemDatas.Add(this.itemData);
     }
-    public ItemData GetItemData()
+    public Item GetItemData()
     {
         return itemData;
     }

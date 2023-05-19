@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InvenTabButton : MonoBehaviour
 {
 
-    [SerializeField] private ItemData[] itemData;
+    [SerializeField] private Item[] itemData;
 
     public Toggle backpackTab;
     public Toggle equipTab;
@@ -33,6 +33,7 @@ public class InvenTabButton : MonoBehaviour
             equip.SetActive(false);
             collection.SetActive(false);
             nowToggle = backpack.name;
+            //ItemData.InvenItemType.Backpack
         }
         else if (equipTab.isOn)
         {
@@ -40,6 +41,7 @@ public class InvenTabButton : MonoBehaviour
             backpack.SetActive(false);
             collection.SetActive(false);
             nowToggle = equip.name;
+
         }
         else if (collectionTab.isOn)
         {
@@ -47,25 +49,9 @@ public class InvenTabButton : MonoBehaviour
             backpack.SetActive(false);
             equip.SetActive(false);
             nowToggle = collection.name;
+
         }
     }
     
-    //토글 눌렸을 때 Type에 맞는 아이템 보여주기
-    public void ButtonClick()
-    {
-        switch (nowToggle)
-        {
-            case "Backpack":
-                ItemData.InvenItemType.Backpack
-                break;
-            case "Equipment":
-
-                break;
-            case "Collection":
-
-                break;
-        }
-            
-    }
 
 }

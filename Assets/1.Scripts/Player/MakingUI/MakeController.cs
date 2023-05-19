@@ -9,9 +9,9 @@ public class MakeController : MonoBehaviour
     [SerializeField] private MakingSlot[] slots;
     [SerializeField] private MakingSlot completedItem;
     [SerializeField] private Button btn;
-    [SerializeField] private ItemData[] items;
+    [SerializeField] private Item[] items;
 
-    [HideInInspector] public List<ItemData> itemDatas = new List<ItemData>();
+    [HideInInspector] public List<Item> itemDatas = new List<Item>();
 
     void Awake()
     {
@@ -21,47 +21,47 @@ public class MakeController : MonoBehaviour
     {
         if (slots[1].GetItemData() != null)
         {
-            ItemData item = GetRecipe(slots[0].GetItemData().itemName,
-                                      slots[1].GetItemData().itemName);
+            Item item = GetRecipe(slots[0].GetItemData().data.itemName,
+                                      slots[1].GetItemData().data.itemName);
             ShowCompletedItem(item);
         }
         if (slots[2].GetItemData() != null)
         {
-            ItemData item = GetRecipe(slots[0].GetItemData().itemName,
-                                      slots[1].GetItemData().itemName,
-                                      slots[2].GetItemData().itemName);
+            Item item = GetRecipe(slots[0].GetItemData().data.itemName,
+                                      slots[1].GetItemData().data.itemName,
+                                      slots[2].GetItemData().data.itemName);
             ShowCompletedItem(item);
         }
         if (slots[3].GetItemData() != null)
         {
-            ItemData item = GetRecipe(slots[0].GetItemData().itemName,
-                                        slots[1].GetItemData().itemName,
-                                        slots[2].GetItemData().itemName,
-                                        slots[3].GetItemData().itemName);
+            Item item = GetRecipe(slots[0].GetItemData().data.itemName,
+                                        slots[1].GetItemData().data.itemName,
+                                        slots[2].GetItemData().data.itemName,
+                                        slots[3].GetItemData().data.itemName);
             ShowCompletedItem(item);
         }
     }
-    ItemData GetRecipe(string item1, string item2)
+    Item GetRecipe(string item1, string item2)
     {
-        ItemData item = null;
+        Item item = null;
         CheckRecipe(item1, item2);
         return item;
     }
-    ItemData GetRecipe(string item1, string item2, string item3)
+    Item GetRecipe(string item1, string item2, string item3)
     {
-        ItemData item = null;
+        Item item = null;
 
         return item;
     }
-    ItemData GetRecipe(string item1, string item2, string item3, string item4)
+    Item GetRecipe(string item1, string item2, string item3, string item4)
     {
-        ItemData item = null;
+        Item item = null;
 
         return item;
     }
-    ItemData CheckRecipe(string itemName1, string itemName2 )
+    Item CheckRecipe(string itemName1, string itemName2 )
     {
-        ItemData itemData = null;
+        Item itemData = null;
         switch (itemName1)
         {
             case "Wood":
@@ -75,19 +75,19 @@ public class MakeController : MonoBehaviour
         }
         return itemData;
     }
-    ItemData GetItem(string itemName)
+    Item GetItem(string itemName)
     {
-        ItemData itemData = null;
+        Item itemData = null;
         foreach (var item in items)
         {
-            if (itemName == item.itemName)
+            if (itemName == item.data.itemName)
             {
                 itemData = item;
             }
         }
         return itemData;
     }
-    void ShowCompletedItem(ItemData itemData)
+    void ShowCompletedItem(Item itemData)
     {
         completedItem.SetItmeData(itemData);
     }
