@@ -113,7 +113,7 @@ public class Inventory : MonoBehaviour
 
             // 슬롯에 아이템 데이터 세팅 하기
 
-            slots[i].SetData(items[i]);
+            slots[i].SetItemData(items[i]);
         }
     }
 }
