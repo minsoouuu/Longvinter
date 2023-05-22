@@ -78,7 +78,7 @@ public class Inven : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            invenlist[0].SetData(sample);
+            //invenlist[0].SetData(sample);
         }
     }
     
