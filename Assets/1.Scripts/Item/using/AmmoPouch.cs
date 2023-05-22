@@ -16,5 +16,6 @@ public class AmmoPouch : Item
         data.itemName = "ammoPouch";
         data.itemType = (InvenItemType)1;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconAmmoPouch");
+        data.mk = 10;
     }
 }

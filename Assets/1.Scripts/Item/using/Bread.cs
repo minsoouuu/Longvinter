@@ -16,5 +16,6 @@ public class Bread : Item
         data.itemName = "bread";
         data.itemType = (InvenItemType)0;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconBread");
+        data.mk = 5;
     }
 }

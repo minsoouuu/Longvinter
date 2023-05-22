@@ -16,5 +16,6 @@ public class Tent : Item
         data.itemName = "tent";
         data.itemType = (InvenItemType)1;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconTent");
+        data.mk = 20;
     }
 }

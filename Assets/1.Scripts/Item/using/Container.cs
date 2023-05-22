@@ -16,5 +16,6 @@ public class Container : Item
         data.itemName = "container";
         data.itemType = (InvenItemType)0;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconContainer");
+        data.mk = 15;
     }
 }

@@ -16,5 +16,6 @@ public class Blackberry : Item
         data.itemName = "blackberry";
         data.itemType = (InvenItemType)2;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconBlackberry");
+        data.mk = 4;
     }
 }

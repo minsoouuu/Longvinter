@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InvenTabButton : MonoBehaviour
 {
 
-    [SerializeField] private Item[] itemData;
+    Inven inven;
 
     public Toggle backpackTab;
     public Toggle equipTab;
@@ -33,6 +33,13 @@ public class InvenTabButton : MonoBehaviour
             equip.SetActive(false);
             collection.SetActive(false);
             nowToggle = backpack.name;
+            for(int i = 0; i < inven.invenlist.Count; i++)
+            {
+                if (inven.prefab.nowType == (InvenItemType)2)
+                {
+                    //inven.invenlist[i].SetActive(false);
+                }
+            }
             //ItemData.InvenItemType.Backpack
         }
         else if (equipTab.isOn)

@@ -6,13 +6,22 @@ using UnityEngine.UI;
 public class Slot : MonoBehaviour
 {
     [SerializeField] private Image image;
+    public InvenItemType nowType;
 
     Item iData;
 
     public void SetData(Item data)
     {
         iData = data;
+        SetType();
         SetSprite();
+    }
+
+    
+    public void SetType()
+    {
+        this.nowType = iData.data.itemType;
+        
     }
 
     public void SetSprite()

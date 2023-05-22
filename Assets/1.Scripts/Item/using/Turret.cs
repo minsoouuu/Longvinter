@@ -16,5 +16,6 @@ public class Turret : Item
         data.itemName = "turret";
         data.itemType = (InvenItemType)0;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconTurret");
+        data.mk = 25;
     }
 }

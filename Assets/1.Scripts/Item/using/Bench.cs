@@ -16,5 +16,6 @@ public class Bench : Item
         data.itemName = "bench";
         data.itemType = (InvenItemType)0;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconBench");
+        data.mk = 12;
     }
 }

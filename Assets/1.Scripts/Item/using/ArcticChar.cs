@@ -16,5 +16,6 @@ public class ArcticChar : Item
         data.itemName = "arcticChar";
         data.itemType = (InvenItemType)2;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconArcticChar");
+        data.mk = 5;
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Inven : MonoBehaviour
 {
-    // 인벤토리 활성화 여부. true : 카메라 움직임 및 다른 입력 막기
+    // ???????? ?????? ????. true : ?????? ?????? ?? ???? ???? ????
     public static bool invectoryActivated = false;
 
-    [SerializeField] private Slot prefab;
+    [SerializeField] public Slot prefab;
     [SerializeField] private Item[] itemData;
     [SerializeField] private GameObject invenBG;
     [SerializeField] private Transform parent;
@@ -21,7 +21,7 @@ public class Inven : MonoBehaviour
 
     void Start()
     {
-        // 인벤토리창 가로 4개, 세로로 5줄 총 20개
+        // ?????????? ???? 4??, ?????? 5?? ?? 20??
         InvenX = 4;
         InvenY = 5;
         gameObject.SetActive(false);
@@ -33,7 +33,7 @@ public class Inven : MonoBehaviour
         KeyOpenInventory();
     }
 
-    // 인벤토리 뒤에 타일 생성
+    // ???????? ???? ???? ????
     public void CreateInven()
     {
         for(int i = 0; i < InvenX * InvenY; i++)
