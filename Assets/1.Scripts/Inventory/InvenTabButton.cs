@@ -37,10 +37,13 @@ public class InvenTabButton : MonoBehaviour
             {
                 if (inven.prefab.nowType == (InvenItemType)2)
                 {
-                    //inven.invenlist[i].SetActive(false);
+                    inven.invenlist[i].gameObject.SetActive(false);
+                }
+                if (inven.prefab.nowType == (InvenItemType)3)
+                {
+                    inven.invenlist[i].gameObject.SetActive(false);
                 }
             }
-            //ItemData.InvenItemType.Backpack
         }
         else if (equipTab.isOn)
         {
@@ -48,7 +51,17 @@ public class InvenTabButton : MonoBehaviour
             backpack.SetActive(false);
             collection.SetActive(false);
             nowToggle = equip.name;
-
+            for (int i = 0; i < inven.invenlist.Count; i++)
+            {
+                if (inven.prefab.nowType == (InvenItemType)1)
+                {
+                    inven.invenlist[i].gameObject.SetActive(false);
+                }
+                if (inven.prefab.nowType == (InvenItemType)3)
+                {
+                    inven.invenlist[i].gameObject.SetActive(false);
+                }
+            }
         }
         else if (collectionTab.isOn)
         {
@@ -56,7 +69,17 @@ public class InvenTabButton : MonoBehaviour
             backpack.SetActive(false);
             equip.SetActive(false);
             nowToggle = collection.name;
-
+            for (int i = 0; i < inven.invenlist.Count; i++)
+            {
+                if (inven.prefab.nowType == (InvenItemType)2)
+                {
+                    inven.invenlist[i].gameObject.SetActive(false);
+                }
+                if (inven.prefab.nowType == (InvenItemType)3)
+                {
+                    inven.invenlist[i].gameObject.SetActive(false);
+                }
+            }
         }
     }
     

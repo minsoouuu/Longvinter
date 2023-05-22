@@ -16,5 +16,6 @@ public class Ammo : Item
         data.itemName = "ammo";
         data.itemType = (InvenItemType)1;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconAmmo");
+        data.mk = 10;
     }
 }
