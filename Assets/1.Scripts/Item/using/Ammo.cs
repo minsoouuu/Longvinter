@@ -5,7 +5,6 @@ using UnityEngine;
 public class Ammo : Item
 {
     private string path = "Longvinter_Icons/Weapon/";
-
     
     public override void Action()
     {
@@ -15,10 +14,9 @@ public class Ammo : Item
     public override void Init()
     {
         data.itemName = "ammo";
-        data.itemType = (InvenItemType)1;
+        data.itemType = InvenItemType.Equipments;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconAmmo");
         data.mk = 10;
+        data.serialNum = 0;
     }
-
-    
 }

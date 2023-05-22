@@ -25,7 +25,8 @@ public class Inventory_alignement : MonoBehaviour
         int slot_index = 0;
         for (int i=0; i < inventory.slots.Count; i++)
         {
-
+            
+            slot_index++;
         }
     }
 }

@@ -14,8 +14,9 @@ public class AmmoPouch : Item
     public override void Init()
     {
         data.itemName = "ammoPouch";
-        data.itemType = (InvenItemType)1;
+        data.itemType = InvenItemType.Equipments;
         data.itemImage = Resources.Load<Sprite>(path + "T_IconAmmoPouch");
         data.mk = 10;
+        data.serialNum = 1;
     }
 }
