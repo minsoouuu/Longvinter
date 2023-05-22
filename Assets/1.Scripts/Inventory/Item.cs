@@ -4,9 +4,10 @@ using UnityEngine;
 
 public enum InvenItemType
 {
-    Backpack,       // ????
-    Equipment,      // ????
-    Collection      // ????
+    Equipments,      
+    Materials,      
+    Foods,
+    Plants
 }
 public struct Data
 {

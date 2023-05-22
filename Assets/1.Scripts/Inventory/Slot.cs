@@ -8,7 +8,7 @@ public class Slot : MonoBehaviour
     [SerializeField] private Image image;
     public InvenItemType nowType;
 
-    Item iData;
+    [HideInInspector] public Item iData;
 
     public void SetData(Item data)
     {
