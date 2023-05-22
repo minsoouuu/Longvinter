@@ -12,6 +12,9 @@ public class Inven : MonoBehaviour
     [SerializeField] private GameObject invenBG;
     [SerializeField] private Transform parent;
 
+    public Item sample;
+
+
     public List<Slot> invenlist = new List<Slot>();
 
     [HideInInspector] public int InvenX { get; set; }
@@ -31,6 +34,7 @@ public class Inven : MonoBehaviour
     void Update()
     {
         KeyOpenInventory();
+        Test();
     }
 
     // ???????? ???? ???? ????
@@ -70,5 +74,12 @@ public class Inven : MonoBehaviour
         invenBG.SetActive(false);
     }
 
+    private void Test()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            invenlist[0].SetData(sample);
+        }
+    }
     
 }

@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{9EEAE9F8-BA6F-39F8-3998-3F956E7BC7DE}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Scripts/Item/using/Ammo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Scripts/Inventory/InvenTabButton.cs">
     <Files>
-      <File FileName="Assets/1.Scripts/Inventory/Item.cs" Line="16" Column="19" />
-      <File FileName="Assets/1.Scripts/Inventory/Slot.cs" Line="9" Column="11" />
-      <File FileName="Assets/1.Scripts/Inventory/Inven.cs" Line="42" Column="31" />
-      <File FileName="Assets/1.Scripts/Inventory/InvenTabButton.cs" Line="9" Column="13" />
-      <File FileName="Assets/1.Scripts/Item/using/Ammo.cs" Line="18" Column="70" />
-      <File FileName="Assets/1.Scripts/Item/using/AmmoPouch.cs" Line="18" Column="75" />
+      <File FileName="Assets/1.Scripts/Inventory/Item.cs" Line="24" Column="16" />
+      <File FileName="Assets/1.Scripts/Inventory/Slot.cs" Line="29" Column="34" />
+      <File FileName="Assets/1.Scripts/Inventory/Inven.cs" Line="11" Column="5" />
+      <File FileName="Assets/1.Scripts/Inventory/InvenTabButton.cs" Line="15" Column="29" />
+      <File FileName="Assets/1.Scripts/Item/Anders.cs" Line="7" Column="53" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,13 +13,20 @@
           <Node name="Longvinter" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="1.Scripts" expanded="True">
-                <Node name="Inventory" expanded="True" />
+                <Node name="Inventory" expanded="True">
+                  <Node name="InvenTabButton.cs" selected="True" />
+                </Node>
                 <Node name="Item" expanded="True">
-                  <Node name="using" expanded="True">
-                    <Node name="Ammo.cs" selected="True" />
-                  </Node>
+                  <Node name="using" expanded="True" />
                 </Node>
                 <Node name="Json" expanded="True" />
+              </Node>
+              <Node name="com.unity.uiextensions" expanded="True">
+                <Node name="Runtime" expanded="True">
+                  <Node name="Scripts" expanded="True">
+                    <Node name="Effects" expanded="True" />
+                  </Node>
+                </Node>
               </Node>
               <Node name="VIRTI" expanded="True">
                 <Node name="VOXEL-Forniture-FREE" expanded="True">
