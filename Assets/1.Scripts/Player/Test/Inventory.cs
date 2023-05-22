@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using System.Linq;
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] Item item1;
+    [SerializeField] Item item2;
+
+
     [HideInInspector] public List<Item> equipments = new List<Item>();
     [HideInInspector] public List<Item> materials = new List<Item>();
     [HideInInspector] public List<Item> foods = new List<Item>();
@@ -24,7 +28,19 @@ public class Inventory : MonoBehaviour
         itemss.Add(plants);
 
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Item itemlll = Instantiate(item1);
+            SetItemData(itemlll);
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Item itemllllll = Instantiate(item2);
+            SetItemData(itemllllll);
+        }
+    }
     public void OnToggleSet(int index)
     {
         if (toggles[index].isOn)
@@ -35,6 +51,7 @@ public class Inventory : MonoBehaviour
 
     public void SetItemData(Item item)
     {
+
         switch (item.data.itemType)
         {
             case InvenItemType.Equipments:
@@ -52,6 +69,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
+                ShowItem(equipments);
                 break;
             case InvenItemType.Materials:
                 if (!materials.Contains(item))
@@ -68,6 +86,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
+                ShowItem(materials);
                 break;
             case InvenItemType.Foods:
 
@@ -85,6 +104,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
+                ShowItem(foods);
                 break;
             case InvenItemType.Plants:
                 if (!plants.Contains(item))
@@ -101,6 +121,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
+                ShowItem(plants);
                 break;
         }
     }
