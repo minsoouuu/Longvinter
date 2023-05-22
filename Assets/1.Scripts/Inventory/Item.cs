@@ -19,15 +19,20 @@ public struct Data
 
 public abstract class Item : MonoBehaviour
 {
+    public int Count
+    {
+        get;set;
+    }
     public Data data = new Data();
     private void Start()
     {
         Init();
+        Count = 0;
     }
 
     public abstract void Init();
     public abstract void Action();
-
+    
 
 }
 

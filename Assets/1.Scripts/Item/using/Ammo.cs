@@ -6,6 +6,7 @@ public class Ammo : Item
 {
     private string path = "Longvinter_Icons/Weapon/";
 
+    
     public override void Action()
     {
 
@@ -18,4 +19,6 @@ public class Ammo : Item
         data.itemImage = Resources.Load<Sprite>(path + "T_IconAmmo");
         data.mk = 10;
     }
+
+    
 }
