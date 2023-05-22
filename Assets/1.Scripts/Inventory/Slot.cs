@@ -16,7 +16,7 @@ public class Slot : MonoBehaviour
     public void SetItemData(Item item)
     {
         image.sprite = item.data.itemImage;
-        //countText.text = item.Count.ToString();
+        countText.text = item.Count.ToString();
         this.item = item;
     }
 

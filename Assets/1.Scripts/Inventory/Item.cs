@@ -24,10 +24,13 @@ public abstract class Item : MonoBehaviour
     {
         get;set;
     }
+    private void Awake()
+    {
+        Init();
+    }
     public Data data = new Data();
     private void Start()
     {
-        Init();
         Count = 0;
     }
 

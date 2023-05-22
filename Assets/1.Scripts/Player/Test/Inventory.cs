@@ -32,13 +32,13 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Item itemlll = Instantiate(item1);
-            SetItemData(itemlll);
+            item1.Init();
+            SetItemData(item1);
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            Item itemllllll = Instantiate(item2);
-            SetItemData(itemllllll);
+            item2.Init();
+            SetItemData(item2);
         }
     }
     public void OnToggleSet(int index)
@@ -51,7 +51,7 @@ public class Inventory : MonoBehaviour
 
     public void SetItemData(Item item)
     {
-
+        List<Item> curItems = new List<Item>();
         switch (item.data.itemType)
         {
             case InvenItemType.Equipments:
@@ -69,7 +69,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
-                ShowItem(equipments);
+                curItems = equipments.ToList();
                 break;
             case InvenItemType.Materials:
                 if (!materials.Contains(item))
@@ -86,7 +86,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
-                ShowItem(materials);
+                curItems = materials.ToList();
                 break;
             case InvenItemType.Foods:
 
@@ -104,7 +104,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
-                ShowItem(foods);
+                curItems = foods.ToList();
                 break;
             case InvenItemType.Plants:
                 if (!plants.Contains(item))
@@ -121,9 +121,11 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
-                ShowItem(plants);
+                curItems = plants.ToList();
                 break;
+
         }
+        ShowItem(curItems);
     }
 
     void ShowItem(List<Item> items)
