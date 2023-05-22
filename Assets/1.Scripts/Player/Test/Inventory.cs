@@ -9,38 +9,100 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public List<Item> materials = new List<Item>();
     [HideInInspector] public List<Item> foods = new List<Item>();
     [HideInInspector] public List<Item> plants = new List<Item>();
-    [HideInInspector] public List<Slot> slots;
 
+    List<List<Item>> itemss = new List<List<Item>>();
+
+    [SerializeField] private Toggle[] toggles;
+
+    public List<Slot> slots;
 
     private void Start()
     {
-        
+        itemss.Add(equipments);
+        itemss.Add(materials);
+        itemss.Add(foods);
+        itemss.Add(plants);
+
     }
 
-    public void OnToggleSet(Toggle toggle)
+    public void OnToggleSet(int index)
     {
-
+        if (toggles[index].isOn)
+        {
+            ShowItem(itemss[index]);
+        }
     }
 
     public void SetItemData(Item item)
     {
-        /*
         switch (item.data.itemType)
         {
             case InvenItemType.Equipments:
-                equipments.Add(item);
+                if (!equipments.Contains(item))
+                {
+                    equipments.Add(item);
+                }
+                else
+                {
+                    foreach (var it in equipments)
+                    {
+                        if (item.data.itemName == it.data.itemName)
+                        {
+                            it.Count += 1;
+                        }
+                    }
+                }
                 break;
             case InvenItemType.Materials:
-                materials.Add(item);
+                if (!materials.Contains(item))
+                {
+                    materials.Add(item);
+                }
+                else
+                {
+                    foreach (var it in materials)
+                    {
+                        if (item.data.itemName == it.data.itemName)
+                        {
+                            it.Count += 1;
+                        }
+                    }
+                }
                 break;
             case InvenItemType.Foods:
-                foods.Add(item);
+
+                if (!foods.Contains(item))
+                {
+                    foods.Add(item);
+                }
+                else
+                {
+                    foreach (var it in foods)
+                    {
+                        if (item.data.itemName == it.data.itemName)
+                        {
+                            it.Count += 1;
+                        }
+                    }
+                }
                 break;
-            case InvenItemType.plants:
-                plants.Add(item);
+            case InvenItemType.Plants:
+                if (!plants.Contains(item))
+                {
+                    plants.Add(item);
+                }
+                else
+                {
+                    foreach (var it in plants)
+                    {
+                        if (item.data.itemName == it.data.itemName)
+                        {
+                            it.Count += 1;
+                        }
+                    }
+                }
                 break;
         }
-        */
     }
 
     void ShowItem(List<Item> items)
@@ -48,8 +110,10 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             // 슬롯 아이템 셋팅 함수.
+
             // 슬롯에 아이템 데이터 세팅 하기
-            //slots[i]. = items[i];
+
+            slots[i].SetData(items[i]);
         }
     }
 }
