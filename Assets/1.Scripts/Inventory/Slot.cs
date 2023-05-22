@@ -2,30 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class Slot : MonoBehaviour
 {
-    [SerializeField] private Image image;
-    public InvenItemType nowType;
+    [SerializeField] TMP_Text countText;
+    Image image;
+    Item item;
 
-    [HideInInspector] public Item iData;
-
-    public void SetData(Item data)
+    private void Start()
     {
-        iData = data;
-        SetType();
-        SetSprite();
+        image = GetComponent<Image>();
+    }
+    public void SetItemData(Item item)
+    {
+        image.sprite = item.data.itemImage;
+        countText.text = item.Count.ToString();
+        this.item = item;
     }
 
-    
-    public void SetType()
+    public void DeleteItem()
     {
-        this.nowType = iData.data.itemType;
-        
-    }
+        if (item)
+        {
 
-    public void SetSprite()
-    {
-        this.image.sprite = iData.data.itemImage;
+        }
     }
 }
