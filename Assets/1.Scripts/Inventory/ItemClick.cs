@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class ItemClick : MonoBehaviour
 {
-    Inventory inventory = new Inventory();
-    Slot slot = new Slot();
-    [SerializeField] private Transform target = null;
+    Inventory inventory;
+    Slot slot;
     [SerializeField] private GameObject buttons;
     
     void Start()
@@ -25,13 +24,16 @@ public class ItemClick : MonoBehaviour
         //??? ???? ??? ? ???? ?? ???
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 pos = Input.mousePosition;
-            pos.z = Camera.main.farClipPlane;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if(Physics.Raycast(ray,out hit))
+            {
+                Debug.Log(hit.transform.gameObject.name);
+            }
+            GameObject showButtons = Instantiate(buttons, hit.transform);
+            showButtons.transform.position = hit.transform.position;
 
-            target.position = Camera.main.ScreenToWorldPoint(pos);
-            Debug.Log(target);
-
-            Instantiate(buttons, target);
+            //?? ??? ?? ?? ? ?? ?? destroy ?? ??
         }
     }
 
@@ -43,7 +45,8 @@ public class ItemClick : MonoBehaviour
 
     public void ItemUse()
     {
-        Debug.Log("???? ???????!");
+        slot.item.Action();
+        Debug.Log("???? ???????.");
         Destroy(buttons);
     }
   
