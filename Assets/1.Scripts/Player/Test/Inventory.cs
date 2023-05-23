@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
     private List<List<Item>> itemss = new List<List<Item>>();
 
     public List<Slot> slots;
-
+    private InvenItemType invenItemType = new InvenItemType();
 
     private int money;
     public int Money
@@ -53,10 +53,11 @@ public class Inventory : MonoBehaviour
         nullsprite = Resources.Load<Sprite>("HONETi/mobile_cartoon_GUI/GUI Elements/Textfield/text_background_big");
         moneyButton.onClick.AddListener(() => OnButtonDownMoneyEvent());
     }
-    private void Start()
+    void OnEnable()
     {
-        
+        OnToggleSet(0);
     }
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
@@ -73,7 +74,7 @@ public class Inventory : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            DeductionItem(item1);
+            Test(item1);
             Debug.Log("아이템 생성");
         }
     }
@@ -81,8 +82,9 @@ public class Inventory : MonoBehaviour
     {
         if (toggles[index].isOn)
         {
-            titleText.text = $"{(TitleType)(index)}";
             ShowItem(itemss[index]);
+            titleText.text = $"{(TitleType)(index)}";
+            invenItemType = (InvenItemType)(index);
         }
     }
 
@@ -165,6 +167,7 @@ public class Inventory : MonoBehaviour
                 curItems = plants.ToList();
                 break;
         }
+        ShowItem(curItems);
     }
 
     void OnButtonDownMoneyEvent()
@@ -188,14 +191,48 @@ public class Inventory : MonoBehaviour
     Slot GetSlot(Item item)
     {
         Slot slot = null;
-        for (int i = 0; i < slots.Count; i++)
+        if (invenItemType == item.data.itemType)
         {
-            if (slots[i].item.data.itemType == item.data.itemType)
+            for (int i = 0; i < slots.Count; i++)
             {
-                slot = slots[i];
+                if (slots[i].item.data.itemName == item.data.itemName)
+                {
+                    slot = slots[i];
+                }
             }
         }
         return slot;
+    }
+
+    public void Test(Item item)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].item.data.itemName == item.data.itemName)
+            {
+                slots[i].item.Count -= 1;
+                break;
+            }
+            else
+            {
+                for (int j = 0; j < itemss.Count; j++)
+                {
+                    foreach (var it in itemss[j])
+                    {
+                        if (it.data.itemName == item.data.itemName)
+                        {
+                            it.Count -= 1;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (slots[i].item.Count <= 0)
+            {
+                slots[i].DeleteItem(nullsprite);
+            }
+        }
+
     }
 
     public void DeductionItem(Item item)
@@ -208,13 +245,18 @@ public class Inventory : MonoBehaviour
                 {
                     if (it.data.itemName == item.data.itemName)
                     {
-                        it.Count -= 1;
+                        if (CheckSlotItem(item) == true)
+                        {
+                            GetSlot(it).item.Count -= 1;
+                        }
+                        else
+                        {
+                            it.Count -= 1;
+                        }
+
                         if (it.Count <= 0)
                         {
-                            if (CheckSlotItem(item) == true)
-                            {
-                                GetSlot(item).DeleteItem(nullsprite);
-                            }
+                            GetSlot(it).DeleteItem(nullsprite);
                         }
                     }
                 }
@@ -254,11 +296,11 @@ public class Inventory : MonoBehaviour
     }
     void ShowItem(List<Item> items)
     {
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < slots.Count; i++ )
         {
             if (slots[i].item != null)
             {
-                //slots[i].DeleteItem();
+                slots[i].DeleteItem(nullsprite);
             }
         }
         for (int i = 0; i < items.Count; i++)
