@@ -22,16 +22,30 @@ public class Inventory_alignement : MonoBehaviour
 
     public void OnclickAligne_Btn()
     {
-        inventory.slots.Sort(delegate (Slot a, Slot b)
+        for(int i = 0; i < SlotDataCount() - 1; i++)
         {
-            if(a.item != null || b.item != null)
+            if (inventory.slots[i].item.data.serialNum > inventory.slots[i + 1].item.data.serialNum)
             {
-                return a.item.data.serialNum < b.item.data.serialNum ? -1 : 1;
+                Item tmp;
+                tmp = inventory.slots[i].item;
+                
+                inventory.slots[i].item = inventory.slots[i + 1].item;
+                inventory.slots[i].SetItemData(inventory.slots[i].item);
+                
+                inventory.slots[i + 1].item = tmp;
+                inventory.slots[i+1].SetItemData(inventory.slots[i+1].item);
             }
-            else
-            {
-                return 0;
-            }
-        });
+        }
+    }
+
+    public int SlotDataCount()
+    {
+        int s_count = 0;
+        for(int i = 0; i < inventory.slots.Count; i++)
+        {
+            if (inventory.slots[i].item != null)
+                s_count++;
+        }
+        return s_count;
     }
 }
