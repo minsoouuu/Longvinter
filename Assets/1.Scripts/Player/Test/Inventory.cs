@@ -46,6 +46,7 @@ public class Inventory : MonoBehaviour
     }
     private void Awake()
     {
+        Money = 1000;
         itemss.Add(equipments);
         itemss.Add(materials);
         itemss.Add(foods);
