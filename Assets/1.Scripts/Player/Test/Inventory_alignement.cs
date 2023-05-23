@@ -11,7 +11,7 @@ public class Inventory_alignement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -22,11 +22,16 @@ public class Inventory_alignement : MonoBehaviour
 
     public void OnclickAligne_Btn()
     {
-        int slot_index = 0;
-        for (int i=0; i < inventory.slots.Count; i++)
+        inventory.slots.Sort(delegate (Slot a, Slot b)
         {
-            
-            slot_index++;
-        }
+            if(a.item != null || b.item != null)
+            {
+                return a.item.data.serialNum < b.item.data.serialNum ? -1 : 1;
+            }
+            else
+            {
+                return 0;
+            }
+        });
     }
 }
