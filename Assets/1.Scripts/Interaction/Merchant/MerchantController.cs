@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class MerchantController : MonoBehaviour
 {
-    [SerializeField] private GameObject b_itemlist;
+    [SerializeField] private Merchant b_itemlist;
     [SerializeField] private Transform b_parent;
-    [SerializeField] private GameObject s_itemlist;
+    [SerializeField] private Merchant s_itemlist;
     [SerializeField] private Transform s_parent;
+    [SerializeField] private List<Item> equipments_list = new List<Item>();
 
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +28,11 @@ public class MerchantController : MonoBehaviour
 
     void CreateMerchant_b_ItemList()
     {
-        for(int i = 0; i < 10; i++)
+        for (int i = 0; i < equipments_list.Count; i++)
         {
-            Instantiate(b_itemlist, b_parent);
+            Merchant gb = Instantiate(b_itemlist, b_parent);
+            equipments_list[i].Init();
+            gb.Setdata(equipments_list[i]);
         }
     }
     void CreateMerchant_s_ItemList()
@@ -39,8 +42,4 @@ public class MerchantController : MonoBehaviour
             Instantiate(s_itemlist, s_parent);
         }
     }
-
-    
-
-    
 }

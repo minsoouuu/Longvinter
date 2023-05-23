@@ -2,31 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Linq;
 
 public class Merchant : MonoBehaviour
 {
-    Slot slot = new Slot();
-    Sprite sprite;
-    Inven inven;
+    [SerializeField] Image image;
+    [SerializeField] TMP_Text mk;
     Item itemdata;
-    int money;
-
+    Inventory inven = new Inventory();
+    private void Start()
+    {
+        inven = Gamemanager.instance.inventory;
+    }
+   
     public void OnClickBuy()
     {
-        // slot.SetData(this.transform.GetChild(0).GetComponent<Image>().sprite = this.sprite);
-        // inven.Money(money, true);
+        itemdata.Init();
+        inven.SetItemData(itemdata);
+        inven.Money -= itemdata.data.mk;
     }
 
     public void OnClickSell()
     {
-        // slot.SetData(this.transform.GetChild(0).GetComponent<Image>().sprite = this.sprite);
-        // inven.Money(money, false);
+       
     }
 
-    void SetSprite(Item itemdata)
+    public void Setdata(Item itemdata)
     {
         this.itemdata = itemdata;
-        sprite = this.itemdata.data.itemImage;
+        image.sprite = itemdata.data.itemImage;
+        mk.text = itemdata.data.mk.ToString();
     }
     
 }

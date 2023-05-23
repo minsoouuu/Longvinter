@@ -67,7 +67,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8748583486240021652}
   - component: {fileID: 8748583486240021653}
   m_Layer: 5
-  m_Name: 'Image : money'
+  m_Name: 'Image : mk'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,6 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf89434c39cf6745800c7a1de65ed3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 8748583485641809861}
+  mk: {fileID: 8748583487639955349}
+  itemdata: {fileID: 0}
 --- !u!222 &8748583486534324686
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -300,7 +303,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8748583486818515035
 GameObject:
@@ -390,7 +393,7 @@ GameObject:
   - component: {fileID: 8748583487639955348}
   - component: {fileID: 8748583487639955349}
   m_Layer: 5
-  m_Name: 'Text (TMP) : money'
+  m_Name: 'Text (TMP) : mk'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,8 +416,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: -50, y: 0}
+  m_SizeDelta: {x: 90, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8748583487639955348
 CanvasRenderer:
@@ -471,10 +474,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.7
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1

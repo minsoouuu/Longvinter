@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8748583486240021652}
   - component: {fileID: 8748583486240021653}
   m_Layer: 5
-  m_Name: 'Image : money'
+  m_Name: 'Image : mk'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,6 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8748583486534324681}
+  - component: {fileID: 1140413863349049429}
   - component: {fileID: 8748583486534324686}
   - component: {fileID: 8748583486534324687}
   - component: {fileID: 230671744300627787}
@@ -195,6 +196,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1140413863349049429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8748583486534324682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf89434c39cf6745800c7a1de65ed3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 8748583485641809861}
+  mk: {fileID: 8748583487639955349}
 --- !u!222 &8748583486534324686
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -377,7 +392,7 @@ GameObject:
   - component: {fileID: 8748583487639955348}
   - component: {fileID: 8748583487639955349}
   m_Layer: 5
-  m_Name: 'Text (TMP) : money'
+  m_Name: 'Text (TMP) : mk'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,8 +415,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: -50, y: 0}
+  m_SizeDelta: {x: 90, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8748583487639955348
 CanvasRenderer:
@@ -458,10 +473,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.7
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
