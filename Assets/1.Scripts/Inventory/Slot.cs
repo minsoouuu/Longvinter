@@ -22,6 +22,12 @@ public class Slot : MonoBehaviour
 
     public void DeleteItem()
     {
+        this.item = null;
+        item.Count--;
+        if (item.Count == 0)
+        {
+            image.sprite = Resources.Load<Sprite>("HONETi/mobile_cartoon_GUI/GUI Elements/Textfield/text_background_big");
+        }
 
     }
 }

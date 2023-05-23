@@ -17,10 +17,10 @@ public class ItemClick : MonoBehaviour
     
     void Update()
     {
-        LeftClick();
+        LeftClick_Item();
     }
 
-    public void LeftClick()
+    public void LeftClick_Item()
     {
         //??? ???? ??? ? ???? ?? ???
         if (Input.GetMouseButtonDown(0))
