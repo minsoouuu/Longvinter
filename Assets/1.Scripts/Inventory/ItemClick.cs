@@ -39,7 +39,7 @@ public class ItemClick : MonoBehaviour
 
     public void ItemChuck()
     {
-        slot.DeleteItem();
+        //slot.DeleteItem();
         Destroy(buttons);
     }
 

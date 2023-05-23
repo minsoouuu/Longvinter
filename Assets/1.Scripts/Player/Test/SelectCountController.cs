@@ -27,11 +27,11 @@ public class SelectCountController : MonoBehaviour
         downButton.onClick.AddListener(() => OnButtonCountDown());
         Count = 0;
     }
-    void OnButtonCountUp()
+    public void OnButtonCountUp()
     {
         Count++;
     }
-    void OnButtonCountDown()
+    public void OnButtonCountDown()
     {
         Count--;
     }

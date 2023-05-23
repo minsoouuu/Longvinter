@@ -8,10 +8,10 @@ public class Inventory : MonoBehaviour
 {
     enum TitleType
     {
-        equipments,
-        materials,
-        foods,
-        plants
+        장비,
+        재료,
+        음식,
+        설치
     }
 
     [SerializeField] Item item1;
@@ -30,9 +30,9 @@ public class Inventory : MonoBehaviour
 
     [HideInInspector] public Sprite nullsprite;
     private List<List<Item>> itemss = new List<List<Item>>();
+
     public List<Slot> slots;
 
-    TitleType titleType = TitleType.equipments;
 
     private int money;
     public int Money
@@ -53,27 +53,36 @@ public class Inventory : MonoBehaviour
         nullsprite = Resources.Load<Sprite>("HONETi/mobile_cartoon_GUI/GUI Elements/Textfield/text_background_big");
         moneyButton.onClick.AddListener(() => OnButtonDownMoneyEvent());
     }
+    private void Start()
+    {
+        
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
             item1.Init();
             SetItemData(item1);
+            Debug.Log("아이템 생성");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
             item2.Init();
             SetItemData(item2);
+            Debug.Log("아이템 생성");
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            DeductionItem(item1);
+            Debug.Log("아이템 생성");
         }
     }
     public void OnToggleSet(int index)
     {
         if (toggles[index].isOn)
         {
-            titleType = (TitleType)(index);
-            titleText.text = titleType.ToString();
+            titleText.text = $"{(TitleType)(index)}";
             ShowItem(itemss[index]);
-            Debug.Log(titleType);
         }
     }
 
@@ -160,7 +169,33 @@ public class Inventory : MonoBehaviour
 
     void OnButtonDownMoneyEvent()
     {
+        // 돈 버리기
+    }
 
+    bool CheckSlotItem(Item item)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].item.data.itemType == item.data.itemType)
+            {
+                slots[i].DeleteItem(nullsprite);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Slot GetSlot(Item item)
+    {
+        Slot slot = null;
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].item.data.itemType == item.data.itemType)
+            {
+                slot = slots[i];
+            }
+        }
+        return slot;
     }
 
     public void DeductionItem(Item item)
@@ -169,13 +204,23 @@ public class Inventory : MonoBehaviour
         {
             for (int j = 0; j < itemss[i].Count; j++)
             {
-                if (itemss[i].Contains(item))
+                foreach (var it in itemss[i])
                 {
-
+                    if (it.data.itemName == item.data.itemName)
+                    {
+                        it.Count -= 1;
+                        if (it.Count <= 0)
+                        {
+                            if (CheckSlotItem(item) == true)
+                            {
+                                GetSlot(item).DeleteItem(nullsprite);
+                            }
+                        }
+                    }
                 }
             }
         }
-
+        return;
         List<Item> curItems = new List<Item>();
         switch (item.data.itemType)
         {

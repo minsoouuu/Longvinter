@@ -7,7 +7,7 @@ public  class Gamemanager : MonoBehaviour
     public static Gamemanager instance = null;
 
     public GameObject player;
-
+    public Inventory inventory;
     void Awake()
     {
         if (instance != null)
