@@ -19,15 +19,10 @@ public class Slot : MonoBehaviour
         countText.text = item.Count.ToString();
         this.item = item;
     }
-
-    public void DeleteItem()
+    public void DeleteItem(Sprite nullSprite)
     {
-        this.item = null;
-        item.Count--;
-        if (item.Count == 0)
-        {
-            image.sprite = Resources.Load<Sprite>("HONETi/mobile_cartoon_GUI/GUI Elements/Textfield/text_background_big");
-        }
-
+        item = null;
+        image.sprite = nullSprite;
+        countText.text = string.Empty;
     }
 }

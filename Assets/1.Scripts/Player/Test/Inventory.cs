@@ -3,30 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 public class Inventory : MonoBehaviour
 {
+    enum TitleType
+    {
+        equipments,
+        materials,
+        foods,
+        plants
+    }
+
     [SerializeField] Item item1;
     [SerializeField] Item item2;
-
 
     [HideInInspector] public List<Item> equipments = new List<Item>();
     [HideInInspector] public List<Item> materials = new List<Item>();
     [HideInInspector] public List<Item> foods = new List<Item>();
     [HideInInspector] public List<Item> plants = new List<Item>();
 
-    List<List<Item>> itemss = new List<List<Item>>();
-
+    [SerializeField] private SelectCountController scController;
+    [SerializeField] private Button moneyButton;
     [SerializeField] private Toggle[] toggles;
+    [SerializeField] private TMP_Text moneyText;
+    [SerializeField] private TMP_Text titleText;
 
+    [HideInInspector] public Sprite nullsprite;
+    private List<List<Item>> itemss = new List<List<Item>>();
     public List<Slot> slots;
 
-    private void Start()
+    TitleType titleType = TitleType.equipments;
+
+    private int money;
+    public int Money
+    {
+        get { return money; }
+        set
+        {
+            money = value;
+            moneyText.text = Money.ToString();
+        }
+    }
+    private void Awake()
     {
         itemss.Add(equipments);
         itemss.Add(materials);
         itemss.Add(foods);
         itemss.Add(plants);
-
+        nullsprite = Resources.Load<Sprite>("HONETi/mobile_cartoon_GUI/GUI Elements/Textfield/text_background_big");
+        moneyButton.onClick.AddListener(() => OnButtonDownMoneyEvent());
     }
     private void Update()
     {
@@ -45,8 +70,10 @@ public class Inventory : MonoBehaviour
     {
         if (toggles[index].isOn)
         {
-
-            Debug.Log(index);
+            titleType = (TitleType)(index);
+            titleText.text = titleType.ToString();
+            ShowItem(itemss[index]);
+            Debug.Log(titleType);
         }
     }
 
@@ -129,17 +156,68 @@ public class Inventory : MonoBehaviour
                 curItems = plants.ToList();
                 break;
         }
-        ShowItem(curItems);
     }
 
+    void OnButtonDownMoneyEvent()
+    {
+
+    }
+
+    public void DeductionItem(Item item)
+    {
+        for (int i = 0; i < itemss.Count; i++)
+        {
+            for (int j = 0; j < itemss[i].Count; j++)
+            {
+                if (itemss[i].Contains(item))
+                {
+
+                }
+            }
+        }
+
+        List<Item> curItems = new List<Item>();
+        switch (item.data.itemType)
+        {
+            case InvenItemType.Equipments:
+                curItems = equipments;
+                break;
+            case InvenItemType.Materials:
+                curItems = materials;
+                break;
+            case InvenItemType.Foods:
+                curItems = foods;
+                break;
+            case InvenItemType.Plants:
+                curItems = plants;
+                break;
+        }
+
+        foreach (var it in curItems)
+        {
+            if (!curItems.Contains(item))
+                return;
+            if (it.data.itemName == item.data.itemName)
+            {
+                it.Count -= 1;
+                if (it.Count <= 0)
+                {
+
+                }
+            }
+        }
+    }
     void ShowItem(List<Item> items)
     {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].item != null)
+            {
+                //slots[i].DeleteItem();
+            }
+        }
         for (int i = 0; i < items.Count; i++)
         {
-            // 슬롯 아이템 셋팅 함수.
-
-            // 슬롯에 아이템 데이터 세팅 하기
-
             slots[i].SetItemData(items[i]);
         }
     }
