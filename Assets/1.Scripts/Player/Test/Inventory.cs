@@ -45,7 +45,8 @@ public class Inventory : MonoBehaviour
     {
         if (toggles[index].isOn)
         {
-            ShowItem(itemss[index]);
+
+            Debug.Log(index);
         }
     }
 
@@ -66,10 +67,11 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count += 1;
+                            break;
                         }
                     }
                 }
-                curItems = equipments.ToList();
+                curItems = equipments;
                 break;
             case InvenItemType.Materials:
                 if (!materials.Contains(item))
@@ -83,10 +85,11 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count += 1;
+                            break;
                         }
                     }
                 }
-                curItems = materials.ToList();
+                curItems = materials;
                 break;
             case InvenItemType.Foods:
 
@@ -101,6 +104,7 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count += 1;
+                            break;
                         }
                     }
                 }
@@ -118,12 +122,12 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count += 1;
+                            break;  
                         }
                     }
                 }
                 curItems = plants.ToList();
                 break;
-
         }
         ShowItem(curItems);
     }

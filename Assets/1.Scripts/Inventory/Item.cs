@@ -20,18 +20,16 @@ public struct Data
 
 public abstract class Item : MonoBehaviour
 {
+    int count = 0;
     public int Count
     {
-        get;set;
-    }
-    private void Awake()
-    {
-        Init();
+        get { return count; }
+        set { count = value; }
     }
     public Data data = new Data();
     private void Start()
     {
-        Count = 0;
+
     }
 
     public abstract void Init();
