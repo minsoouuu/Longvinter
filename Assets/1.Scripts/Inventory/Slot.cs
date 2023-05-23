@@ -7,7 +7,7 @@ public class Slot : MonoBehaviour
 {
     [SerializeField] TMP_Text countText;
     Image image;
-    Item item;
+    [HideInInspector] public Item item;
 
     private void Start()
     {
