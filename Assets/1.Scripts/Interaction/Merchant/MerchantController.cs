@@ -90,6 +90,7 @@ public class MerchantController : MonoBehaviour
                         for (int j = temp_Item.Count - 1; j >= temp_Item.Count - inven.equipments.Count; j--)
                         {
                             temp_Item[j].gameObject.SetActive(false);
+                            Debug.Log(temp_Item[j]);
                         }
                     }
                 }
@@ -97,41 +98,35 @@ public class MerchantController : MonoBehaviour
         }
         else if (toggle == tg[1])
         {
-            if (inven.materials.Count == 0)
+            for (int i = 0; i < inven.materials.Count; i++)
             {
-                for (int k = 0; k < temp_Item.Count; k++)
+                if (merchant_slist.Contains(inven.materials[i]))
                 {
-                    temp_Item[k].gameObject.SetActive(false);
+                    continue;
                 }
-            }
-            else
-            {
-                for (int i = 0; i < inven.materials.Count; i++)
+                else
                 {
-                    if (merchant_slist.Contains(inven.materials[i]))
+                    if (temp_Item.Count < inven.materials.Count)
                     {
-                        continue;
+                        Merchant gb = Instantiate(s_itemlist, s_parent);
+                        gb.Setdata(inven.materials[i]);
+                        merchant_slist.Add(gb.itemdata);
+                        temp_Item.Add(gb);
+                    }
+                    else if (temp_Item.Count == inven.materials.Count)
+                    {
+                        foreach (var item in temp_Item)
+                        {
+                            item.Setdata(inven.materials[i]);
+                            merchant_slist.Add(item.itemdata);
+                        }
                     }
                     else
                     {
-                        if (temp_Item.Count < inven.materials.Count)
+                        for (int j = temp_Item.Count - 1; j >= temp_Item.Count - inven.materials.Count; j--)
                         {
-                            Merchant gb = Instantiate(s_itemlist, s_parent);
-                            gb.Setdata(inven.materials[i]);
-                            merchant_slist.Add(gb.itemdata);
-                            temp_Item.Add(gb);
-                        }
-                        else
-                        {
-                            foreach (var item in temp_Item)
-                            {
-                                item.Setdata(inven.materials[i]);
-                                merchant_slist.Add(item.itemdata);
-                            }
-                            for (int j = temp_Item.Count - 1; j >= temp_Item.Count - inven.materials.Count; j--)
-                            {
-                                temp_Item[j].gameObject.SetActive(false);
-                            }
+                            temp_Item[j].gameObject.SetActive(false);
+                            Debug.Log(temp_Item[j]);
                         }
                     }
                 }
