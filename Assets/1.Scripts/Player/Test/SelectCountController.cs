@@ -8,10 +8,13 @@ public class SelectCountController : MonoBehaviour
 {
     [SerializeField] private Button upButton;
     [SerializeField] private Button downButton;
+    [SerializeField] private Button okButton;
     [SerializeField] private TMP_Text countText;
 
-    int count = 0;
+    ValueType myType = new ValueType();
 
+    private int count = 0;
+    private int calcNum = 0;
     public int Count
     {
         get { return count; }
@@ -25,14 +28,55 @@ public class SelectCountController : MonoBehaviour
     {
         upButton.onClick.AddListener(() => OnButtonCountUp());
         downButton.onClick.AddListener(() => OnButtonCountDown());
+        okButton.onClick.AddListener(() => OnButtonOK());
         Count = 0;
     }
-    public void OnButtonCountUp()
+
+    private void OnEnable()
+    {
+        Count = 0;
+        calcNum = 0;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    void OnButtonCountUp()
     {
         Count++;
+        Debug.Log("증가");
     }
-    public void OnButtonCountDown()
+    void OnButtonCountDown()
     {
+        if (Count <= 0)
+            return;
+
         Count--;
+        Debug.Log("감소");
+    }
+    void OnButtonOK()
+    {
+        Action();
+        gameObject.SetActive(false);
+        Debug.Log("확인");
+    }
+    void Action()
+    {
+        if (myType == ValueType.Money)
+        {
+            Gamemanager.instance.inventory.Money -= Count;
+        }
+        else
+        {
+            //아이템 뺄때 
+            //Gamemanager.instance.inventory.itemss
+        }
+    }
+    public void SetValueType(ValueType valueType)
+    {
+        myType = valueType;
     }
 }
