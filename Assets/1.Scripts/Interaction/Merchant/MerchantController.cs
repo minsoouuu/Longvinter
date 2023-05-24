@@ -57,7 +57,7 @@ public class MerchantController : MonoBehaviour
     void Get_Inventory_Itemlist()
     {
         List<List<Item>> temp = new List<List<Item>>();
-        temp = inven.itemss.toList();
+        temp = inven.itemss.ToList();
         Inventory_list = temp;
     }
 }
