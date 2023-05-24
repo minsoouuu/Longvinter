@@ -9842,6 +9842,7 @@ MonoBehaviour:
   materials: []
   foods: []
   plants: []
+  nullsprite: {fileID: 0}
   scController: {fileID: 1448117149}
   moneyButton: {fileID: 2370481637134689968}
   toggles:
@@ -9851,7 +9852,6 @@ MonoBehaviour:
   - {fileID: 1387491757}
   moneyText: {fileID: 2370481635846719898}
   titleText: {fileID: 2370481637339495342}
-  nullsprite: {fileID: 0}
   slots:
   - {fileID: 592500269}
   - {fileID: 975668496}

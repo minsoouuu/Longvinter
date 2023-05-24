@@ -21,6 +21,8 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public List<Item> materials = new List<Item>();
     [HideInInspector] public List<Item> foods = new List<Item>();
     [HideInInspector] public List<Item> plants = new List<Item>();
+    [HideInInspector] public List<List<Item>> itemss = new List<List<Item>>();
+    [HideInInspector] public Sprite nullsprite;
 
     [SerializeField] private SelectCountController scController;
     [SerializeField] private Button moneyButton;
@@ -28,11 +30,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text titleText;
 
-    [HideInInspector] public Sprite nullsprite;
-    [HideInInspector] public List<List<Item>> itemss = new List<List<Item>>();
 
     public List<Slot> slots;
-    private InvenItemType invenItemType = new InvenItemType();
+    private InvenItemType curInvenType = new InvenItemType();
 
     private int money;
     public int Money
@@ -56,7 +56,11 @@ public class Inventory : MonoBehaviour
     }
     void OnEnable()
     {
-        OnToggleSet(0);
+        ShowItem(itemss[0]);
+        titleText.text = $"{(TitleType)(0)}";
+        curInvenType = (InvenItemType)(0);
+        toggles[0].isOn = true;
+        Debug.Log("켜짐");
     }
     
     private void Update()
@@ -64,18 +68,18 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             item1.Init();
-            SetItemData(item1);
+            AddItem(item1);
             Debug.Log("아이템 생성");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
             item2.Init();
-            SetItemData(item2);
+            AddItem(item2);
             Debug.Log("아이템 생성");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            Test(item1);
+            DeleteItem(item1);
         }
     }
     public void OnToggleSet(int index)
@@ -84,11 +88,11 @@ public class Inventory : MonoBehaviour
         {
             ShowItem(itemss[index]);
             titleText.text = $"{(TitleType)(index)}";
-            invenItemType = (InvenItemType)(index);
+            curInvenType = (InvenItemType)(index);
         }
     }
 
-    public void SetItemData(Item item)
+    public void AddItem(Item item)
     {
         List<Item> curItems = new List<Item>();
         switch (item.data.itemType)
@@ -169,131 +173,92 @@ public class Inventory : MonoBehaviour
         }
         ShowItem(curItems);
     }
-
-    void OnButtonDownMoneyEvent()
+    public void DeleteItem(Item item)
     {
-        // 돈 버리기
-    }
-
-    bool CheckSlotItem(Item item)
-    {
-        for (int i = 0; i < slots.Count; i++)
+        List<Item> curItems = new List<Item>();
+        switch (item.data.itemType)
         {
-            if (slots[i].item.data.itemType == item.data.itemType)
-            {
-                slots[i].DeleteItem(nullsprite);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    Slot GetSlot(Item item)
-    {
-        Slot slot = null;
-        if (invenItemType == item.data.itemType)
-        {
-            for (int i = 0; i < slots.Count; i++)
-            {
-                if (slots[i].item.data.itemName == item.data.itemName)
+            case InvenItemType.Equipments:
+                if (!equipments.Contains(item))
                 {
-                    slot = slots[i];
+                    equipments.Add(item);
                 }
-            }
-        }
-        return slot;
-    }
-
-    public void Test(Item item)
-    {
-        Debug.Log("아이템 삭제");
-        for (int i = 0; i < slots.Count; i++)
-        {
-            if (slots[i].item.data.itemName == item.data.itemName)
-            {
-                slots[i].item.Count -= 1;
-                break;
-            }
-            else
-            {
-                for (int j = 0; j < itemss.Count; j++)
+                else
                 {
-                    foreach (var it in itemss[j])
+                    foreach (var it in equipments)
                     {
-                        if (it.data.itemName == item.data.itemName)
+                        if (item.data.itemName == it.data.itemName)
                         {
                             it.Count -= 1;
                             break;
                         }
                     }
                 }
-            }
-            if (slots[i].item.Count <= 0)
-            {
-                slots[i].DeleteItem(nullsprite);
-            }
-        }
-    }
-
-    public void DeductionItem(Item item)
-    {
-        for (int i = 0; i < itemss.Count; i++)
-        {
-            for (int j = 0; j < itemss[i].Count; j++)
-            {
-                foreach (var it in itemss[i])
-                {
-                    if (it.data.itemName == item.data.itemName)
-                    {
-                        if (CheckSlotItem(item) == true)
-                        {
-                            GetSlot(it).item.Count -= 1;
-                        }
-                        else
-                        {
-                            it.Count -= 1;
-                        }
-
-                        if (it.Count <= 0)
-                        {
-                            GetSlot(it).DeleteItem(nullsprite);
-                        }
-                    }
-                }
-            }
-        }
-        return;
-        List<Item> curItems = new List<Item>();
-        switch (item.data.itemType)
-        {
-            case InvenItemType.Equipments:
                 curItems = equipments;
                 break;
             case InvenItemType.Materials:
+                if (!materials.Contains(item))
+                {
+                    materials.Add(item);
+                }
+                else
+                {
+                    foreach (var it in materials)
+                    {
+                        if (item.data.itemName == it.data.itemName)
+                        {
+                            it.Count -= 1;
+                            break;
+                        }
+                    }
+                }
                 curItems = materials;
                 break;
             case InvenItemType.Foods:
-                curItems = foods;
+
+                if (!foods.Contains(item))
+                {
+                    foods.Add(item);
+                }
+                else
+                {
+                    foreach (var it in foods)
+                    {
+                        if (item.data.itemName == it.data.itemName)
+                        {
+                            it.Count -= 1;
+                            break;
+                        }
+                    }
+                }
+                curItems = foods.ToList();
                 break;
             case InvenItemType.Plants:
-                curItems = plants;
+                if (!plants.Contains(item))
+                {
+                    plants.Add(item);
+                }
+                else
+                {
+                    foreach (var it in plants)
+                    {
+                        if (item.data.itemName == it.data.itemName)
+                        {
+                            it.Count -= 1;
+                            break;
+                        }
+                    }
+                }
+                curItems = plants.ToList();
                 break;
         }
-
-        foreach (var it in curItems)
-        {
-            if (!curItems.Contains(item))
-                return;
-            if (it.data.itemName == item.data.itemName)
-            {
-                it.Count -= 1;
-                if (it.Count <= 0)
-                {
-
-                }
-            }
-        }
+        ShowItem(curItems);
     }
+    void OnButtonDownMoneyEvent()
+    {
+        // 돈 버리기
+    }
+    
     void ShowItem(List<Item> items)
     {
         for (int i = 0; i < slots.Count; i++ )
