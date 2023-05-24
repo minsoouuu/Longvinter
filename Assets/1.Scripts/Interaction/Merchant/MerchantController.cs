@@ -44,15 +44,11 @@ public class MerchantController : MonoBehaviour
     }
     void CreateMerchant_s_ItemList()
     {
-        for (int i = 0; i < Inventory_list.Count; i++)
+        foreach (var item in Inventory_list)
         {
             Merchant gb = Instantiate(s_itemlist, s_parent);
-            foreach (var item in Inventory_list)
-            {
-                gb.Setdata(item);
-            }
+            gb.Setdata(item);
         }
-        Debug.Log(Inventory_list.Count);
     }
 
     void Get_Inventory_Itemlist()
