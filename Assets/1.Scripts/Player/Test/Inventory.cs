@@ -76,7 +76,6 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F3))
         {
             Test(item1);
-            Debug.Log("아이템 생성");
         }
     }
     public void OnToggleSet(int index)
@@ -207,6 +206,7 @@ public class Inventory : MonoBehaviour
 
     public void Test(Item item)
     {
+        Debug.Log("아이템 삭제");
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i].item.data.itemName == item.data.itemName)
@@ -233,7 +233,6 @@ public class Inventory : MonoBehaviour
                 slots[i].DeleteItem(nullsprite);
             }
         }
-
     }
 
     public void DeductionItem(Item item)

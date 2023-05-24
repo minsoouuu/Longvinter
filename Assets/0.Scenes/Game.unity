@@ -5715,14 +5715,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipeJson: {fileID: 4900000, guid: 7be4e816efe68cb4d8ff934280e0713f, type: 3}
-  equimentJson: {fileID: 4900000, guid: 915c456b9dcfed248ac1e330dbc61ce3, type: 3}
+  equipmentJson: {fileID: 4900000, guid: 915c456b9dcfed248ac1e330dbc61ce3, type: 3}
   materialJson: {fileID: 4900000, guid: fbcba7e6dbde37049b003a8bc82d840e, type: 3}
   foodJson: {fileID: 4900000, guid: 0a7828c214e3a63428059c7e819776b7, type: 3}
   plantJson: {fileID: 4900000, guid: 0bd5d01325f70594385969a73fc5d0fd, type: 3}
   recipeData:
     recipe: []
   equimentData:
-    equiments: []
+    equipments: []
   materialData:
     materials: []
   foodData:

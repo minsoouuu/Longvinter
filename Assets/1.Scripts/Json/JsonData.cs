@@ -6,13 +6,13 @@ public class JsonData : MonoBehaviour
 {
 
     [SerializeField] private TextAsset recipeJson;
-    [SerializeField] private TextAsset equimentJson;
+    [SerializeField] private TextAsset equipmentJson;
     [SerializeField] private TextAsset materialJson;
     [SerializeField] private TextAsset foodJson;
     [SerializeField] private TextAsset plantJson;
 
     public Recipe recipeData = new Recipe();
-    public Equiment equimentData = new Equiment();
+    public Equipment equimentData = new Equipment();
     public Material materialData = new Material();
     public Food foodData = new Food();
     public Plant plantData = new Plant();
@@ -30,7 +30,7 @@ public class JsonData : MonoBehaviour
         public List<RecipeJson> recipe = new List<RecipeJson>();
     }
     [Serializable]
-    public class EquimentJson
+    public class EquipmentJson
     {
         public string name;
         public string image;
@@ -39,9 +39,9 @@ public class JsonData : MonoBehaviour
         public int serial;
     }
     [Serializable]
-    public class Equiment
+    public class Equipment
     {
-        public List<EquimentJson> equiments = new List<EquimentJson>();
+        public List<EquipmentJson> equipments = new List<EquipmentJson>();
     }
     [Serializable]
     public class FoodJson
@@ -89,7 +89,7 @@ public class JsonData : MonoBehaviour
     private void Start()
     {
         recipeData = JsonUtility.FromJson<Recipe>(recipeJson.text);
-        equimentData = JsonUtility.FromJson<Equiment>(equimentJson.text);
+        equimentData = JsonUtility.FromJson<Equipment>(equipmentJson.text);
         foodData = JsonUtility.FromJson<Food>(foodJson.text);
         materialData = JsonUtility.FromJson<Material>(materialJson.text);
         plantData = JsonUtility.FromJson<Plant>(plantJson.text);
