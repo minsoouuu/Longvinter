@@ -11,7 +11,7 @@ public class MerchantController : MonoBehaviour
     [SerializeField] private Merchant s_itemlist;
     [SerializeField] private Transform s_parent;
     [SerializeField] private List<Item> equipments_list = new List<Item>();
-    List<List<Item>> Inventory_list = new List<List<Item>>();
+    List<Item> Inventory_list = new List<Item>();
     Inventory inven = new Inventory();
 
 
@@ -47,26 +47,31 @@ public class MerchantController : MonoBehaviour
         for (int i = 0; i < Inventory_list.Count; i++)
         {
             Merchant gb = Instantiate(s_itemlist, s_parent);
-            foreach (var item1 in Inventory_list)
+            foreach (var item in Inventory_list)
             {
-                foreach (var item in item1)
-                {
-                    gb.Setdata(item);
-                }
+                gb.Setdata(item);
             }
         }
+        Debug.Log(Inventory_list.Count);
     }
 
     void Get_Inventory_Itemlist()
     {
-        List<Item> temp = new List<Item>();
-        temp = inven.equipments.ToList();
-        Inventory_list.Add(temp);
-        temp = inven.foods.ToList();
-        Inventory_list.Add(temp);
-        temp = inven.materials.ToList();
-        Inventory_list.Add(temp);
-        temp = inven.plants.ToList();
-        Inventory_list.Add(temp);
+        foreach (var item in inven.equipments)
+        {
+            Inventory_list.Add(item);
+        }
+        foreach (var item in inven.foods)
+        {
+            Inventory_list.Add(item);
+        }
+        foreach (var item in inven.materials)
+        {
+            Inventory_list.Add(item);
+        }
+        foreach (var item in inven.plants)
+        {
+            Inventory_list.Add(item);
+        }
     }
 }
