@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public struct Data
+public enum InvenItemType
 {
-    public string itemName;
-    public InvenItemType itemType;
-    public Sprite itemImage; // ???????? ?????? ???? ?????? ??????
-    public int mk;
-    public int serialNum;
+    Equipments,
+    Materials,
+    Foods,
+    Plants
+}
+public struct Data_Json
+{
+    public string name;
+    public string image;
+    public string type;
+    public int price;
+    public int serial;
 }
 
-public abstract class Item : MonoBehaviour
+public abstract class Item1 : MonoBehaviour
 {
     int count = 0;
     public int Count
@@ -26,8 +32,5 @@ public abstract class Item : MonoBehaviour
 
     }
 
-    public abstract void Init();
     public abstract void Action();
 }
-
-

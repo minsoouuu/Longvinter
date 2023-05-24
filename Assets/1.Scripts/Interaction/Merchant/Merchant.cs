@@ -9,7 +9,7 @@ public class Merchant : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] TMP_Text mk;
-    Item itemdata;
+    [HideInInspector] public Item itemdata;
     Inventory inven = new Inventory();
     private void Start()
     {
@@ -19,13 +19,14 @@ public class Merchant : MonoBehaviour
     public void OnClickBuy()
     {
         itemdata.Init();
-        inven.SetItemData(itemdata);
+        inven.AddItem(itemdata);
         inven.Money -= itemdata.data.mk;
     }
 
     public void OnClickSell()
     {
-       
+        inven.DeleteItem(itemdata);
+        inven.Money += itemdata.data.mk;
     }
 
     public void Setdata(Item itemdata)
