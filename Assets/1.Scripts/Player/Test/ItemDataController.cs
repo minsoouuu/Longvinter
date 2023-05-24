@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class ItemDataController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<Item> equipments;
+    public List<Item> materilas;
+    public List<Item> foods;
+    public List<Item> plants;
+
+    private void Awake()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void ItemSetting(List<Item> items)
     {
-        
+        for (int i = 0; i < items.Count; i++)
+        {
+
+        }
     }
 }

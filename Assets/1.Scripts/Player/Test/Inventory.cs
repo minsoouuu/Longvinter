@@ -60,7 +60,6 @@ public class Inventory : MonoBehaviour
         titleText.text = $"{(TitleType)(0)}";
         curInvenType = (InvenItemType)(0);
         toggles[0].isOn = true;
-        Debug.Log("ÄÑÁü");
     }
     
     private void Update()
