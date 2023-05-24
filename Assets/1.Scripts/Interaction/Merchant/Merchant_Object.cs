@@ -5,6 +5,8 @@ using UnityEngine;
 public class Merchant_Object : MonoBehaviour
 {
     [SerializeField] private GameObject merchant;
+    [SerializeField] private GameObject inventory;
+
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKey(KeyCode.Space))
@@ -14,6 +16,7 @@ public class Merchant_Object : MonoBehaviour
             {
                 Debug.Log("true");
                 merchant.SetActive(true);
+                inventory.SetActive(true);
                 other.GetComponent<User>().enabled = false;
                 other.GetComponent<Animator>().enabled = false;
             }
