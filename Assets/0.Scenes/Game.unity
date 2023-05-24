@@ -5696,7 +5696,7 @@ GameObject:
   - component: {fileID: 768414149}
   - component: {fileID: 768414148}
   m_Layer: 0
-  m_Name: RecipeDataJson
+  m_Name: JsonDataController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5715,8 +5715,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipeJson: {fileID: 4900000, guid: 7be4e816efe68cb4d8ff934280e0713f, type: 3}
+  equimentJson: {fileID: 4900000, guid: 915c456b9dcfed248ac1e330dbc61ce3, type: 3}
+  materialJson: {fileID: 4900000, guid: fbcba7e6dbde37049b003a8bc82d840e, type: 3}
+  foodJson: {fileID: 4900000, guid: 0a7828c214e3a63428059c7e819776b7, type: 3}
+  plantJson: {fileID: 4900000, guid: 0bd5d01325f70594385969a73fc5d0fd, type: 3}
   recipeData:
     recipe: []
+  equimentData:
+    equiments: []
+  materialData:
+    materials: []
+  foodData:
+    foods: []
+  plantData:
+    plants: []
 --- !u!4 &768414149
 Transform:
   m_ObjectHideFlags: 0
@@ -5724,13 +5736,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 768414147}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 871506373}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &769866908
 GameObject:
@@ -7167,7 +7179,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 768414149}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7185,6 +7198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1824340905354079}
   inventory: {fileID: 1229793896}
+  jsonDataController: {fileID: 768414148}
 --- !u!1001 &901862609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11682,7 +11696,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473714235
 GameObject:

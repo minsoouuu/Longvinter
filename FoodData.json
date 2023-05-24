@@ -1,0 +1,18 @@
+{
+  "food": [
+    {
+      "name": "bread",
+      "image": "T_IconBread",
+      "price": "50",
+      "serial": 0,
+      "type": "Foods"
+    },
+    {
+      "name": "blackberryjam",
+      "image": "T_IconBlackBerryJam",
+      "price": "50",
+      "serial": 3,
+      "type": "Foods"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "plant": [
+    {
+      "name": "fence",
+      "image": "T_IconFenceGate",
+      "price": "180",
+      "serial": 0,
+      "type": "Plants"
+    },
+    {
+      "name": "bench",
+      "image": "T_IconBench",
+      "price": "300",
+      "serial": 1,
+      "type": "Plants"
+    }
+  ]
+}

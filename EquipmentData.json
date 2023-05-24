@@ -1,0 +1,18 @@
+{
+  "equipments": [
+    {
+      "name": "shotgun",
+      "image": "T_IconShotgun",
+      "price": "100",
+      "serial": 0,
+      "type": "Equipments"
+    },
+    {
+      "name": "ammo",
+      "image": "T_IconAmmo",
+      "price": "10",
+      "serial": 1,
+      "type": "Equipments"
+    }
+  ]
+}

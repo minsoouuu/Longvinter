@@ -1,0 +1,18 @@
+{
+  "material": [
+    {
+      "name": "blackberry",
+      "image": "T_IconBlackberry",
+      "price": "10",
+      "serial": 0,
+      "type": "Materials"
+    },
+    {
+      "name": "arcticChar",
+      "image": "T_IconArcticChar",
+      "price": "10",
+      "serial": 1,
+      "type": "Materials"
+    }
+  ]
+}

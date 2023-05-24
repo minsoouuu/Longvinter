@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
 
     [HideInInspector] public Sprite nullsprite;
-    private List<List<Item>> itemss = new List<List<Item>>();
+    [HideInInspector] public List<List<Item>> itemss = new List<List<Item>>();
 
     public List<Slot> slots;
     private InvenItemType invenItemType = new InvenItemType();
