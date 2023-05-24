@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ItemDataController : MonoBehaviour
 {
-    public List<Item> equipments;
-    public List<Item> materilas;
-    public List<Item> foods;
-    public List<Item> plants;
+    public List<Item1> equipments;
+    public List<Item1> materilas;
+    public List<Item1> foods;
+    public List<Item1> plants;
 
     private void Awake()
     {
