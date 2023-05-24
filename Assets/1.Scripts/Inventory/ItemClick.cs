@@ -1,23 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemClick : MonoBehaviour
 {
     Inventory inventory;
     Slot slot;
     [SerializeField] private GameObject buttons;
-    
-    void Start()
-    {
-        
-    }
 
     
     void Update()
     {
         LeftClick_Item();
     }
+
+   
 
     public void LeftClick_Item()
     {
