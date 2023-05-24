@@ -14,20 +14,23 @@ public class MerchantController : MonoBehaviour
     List<List<Item>> Inventory_list = new List<List<Item>>();
     Inventory inven = new Inventory();
 
-    
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        inven = Gamemanager.instance.inventory;
+        Get_Inventory_Itemlist();
         CreateMerchant_b_ItemList();
         CreateMerchant_s_ItemList();
+    }
+    // Start is called before the first frame update
+    void Awake()
+    {
+        inven = Gamemanager.instance.inventory;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Get_Inventory_Itemlist();
+        
     }
 
     void CreateMerchant_b_ItemList()
@@ -60,4 +63,6 @@ public class MerchantController : MonoBehaviour
         temp = inven.itemss.ToList();
         Inventory_list = temp;
     }
+
+   
 }
