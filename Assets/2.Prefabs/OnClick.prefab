@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7739627304836015070}
-  - component: {fileID: 7855588683130900443}
+  - component: {fileID: 4106032855333153852}
   m_Layer: 5
   m_Name: OnClick
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 420, y: 250}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7855588683130900443
+--- !u!114 &4106032855333153852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72913064b1af1de4d91103cdb1b97e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rt: {fileID: 7739627304836015070}
+  SlotRect: {fileID: 0}
 --- !u!1 &7739627304851156620
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +174,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7739627304851156623}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2493653366268059053, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
+        m_TargetAssemblyTypeName: ItemClick, Assembly-CSharp
+        m_MethodName: ItemChuck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7739627305262595304
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +308,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7739627305262595307}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2493653366268059053, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
+        m_TargetAssemblyTypeName: ItemClick, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7739627306077106772
 GameObject:
   m_ObjectHideFlags: 0

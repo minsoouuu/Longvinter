@@ -1,50 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ItemClick : MonoBehaviour
 {
-    Inventory inventory;
-    Slot slot;
+    private Inventory inventory;
+    private Item item;
+    private ItemPopUp popup;
     [SerializeField] private GameObject buttons;
 
+
+
+    public void OnClickItem(ItemPopUp slot)
+    {
+        GameObject showButtons = Instantiate(buttons, this.transform.position, Quaternion.identity);
+        showButtons.transform.SetParent(this.transform);
+        popup.SetRectPosition(slot.SlotRect);
+        //slot을 프리팹으로 만들면 되려나..
+
+        //다른 버튼 누르면 직전에 만든 건 destroy 구현 필요
+    }
+
     
-    void Update()
-    {
-        LeftClick_Item();
-    }
-
-   
-
-    public void LeftClick_Item()
-    {
-        //??? ???? ??? ? ???? ?? ???
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if(Physics.Raycast(ray,out hit))
-            {
-                Debug.Log(hit.transform.gameObject.name);
-            }
-            GameObject showButtons = Instantiate(buttons, hit.transform);
-            showButtons.transform.position = hit.transform.position;
-
-            //?? ??? ?? ?? ? ?? ?? destroy ?? ??
-        }
-    }
-
     public void ItemChuck()
     {
-        //slot.DeleteItem();
+        inventory.DeleteItem(item);
         Destroy(buttons);
     }
 
     public void ItemUse()
     {
-        slot.item.Action();
-        Debug.Log("???? ???????.");
+        item.Action();
+        Debug.Log("아이템을 사용했습니다.");
         Destroy(buttons);
     }
   

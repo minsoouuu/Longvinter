@@ -5,17 +5,15 @@ using UnityEngine.UI;
 
 public class ItemPopUp : MonoBehaviour
 {
-    private RectTransform rt;
+    public RectTransform rt;
+    public RectTransform SlotRect;
     private CanvasScaler canvasScaler;
 
 
     private void Awake()
     {
         Init();
-        Hide();
     }
-    public void Show() => gameObject.SetActive(true);
-    public void Hide() => gameObject.SetActive(false);
 
     private void Init()
     {
@@ -55,6 +53,6 @@ public class ItemPopUp : MonoBehaviour
         float slotWidth = slotRect.rect.width * ratio;
         float slotHeight = slotRect.rect.height * ratio;
 
-        rt.position = slotRect.position + new Vector3(slotWidth, slotHeight); 
+        rt.position = slotRect.position + new Vector3(slotWidth, -slotHeight);
     }
 }
