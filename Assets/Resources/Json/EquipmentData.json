@@ -1,7 +1,7 @@
 {
   "equipments": [
     {
-      "name": "shotgun",
+      "name": "gun",
       "image": "T_IconShotgun",
       "price": "100",
       "serial": 0,

@@ -31,7 +31,6 @@ public class SelectCountController : MonoBehaviour
         okButton.onClick.AddListener(() => OnButtonOK());
         Count = 0;
     }
-
     private void OnEnable()
     {
         Count = 0;
