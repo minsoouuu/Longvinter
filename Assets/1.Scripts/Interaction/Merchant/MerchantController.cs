@@ -59,10 +59,14 @@ public class MerchantController : MonoBehaviour
 
     void Get_Inventory_Itemlist()
     {
-        List<List<Item>> temp = new List<List<Item>>();
-        temp = inven.itemss.ToList();
-        Inventory_list = temp;
+        List<Item> temp = new List<Item>();
+        temp = inven.equipments.ToList();
+        Inventory_list.Add(temp);
+        temp = inven.foods.ToList();
+        Inventory_list.Add(temp);
+        temp = inven.materials.ToList();
+        Inventory_list.Add(temp);
+        temp = inven.plants.ToList();
+        Inventory_list.Add(temp);
     }
-
-   
 }
