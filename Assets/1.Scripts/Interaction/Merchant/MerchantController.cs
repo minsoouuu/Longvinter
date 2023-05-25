@@ -70,65 +70,10 @@ public class MerchantController : MonoBehaviour
                 }
                 else
                 {
-                    if (temp_Item.Count < inven.equipments.Count)
-                    {
-                        Merchant gb = Instantiate(s_itemlist, s_parent);
-                        gb.Setdata(inven.equipments[i]);
-                        merchant_slist.Add(gb.itemdata);
-                        temp_Item.Add(gb);
-                    }
-                    else if(temp_Item.Count == inven.equipments.Count)
-                    {
-                        foreach (var item in temp_Item)
-                        {
-                            item.Setdata(inven.equipments[i]);
-                            merchant_slist.Add(item.itemdata);
-                        }
-                    }
-                    else
-                    {
-                        for (int j = temp_Item.Count - 1; j >= temp_Item.Count - inven.equipments.Count; j--)
-                        {
-                            temp_Item[j].gameObject.SetActive(false);
-                            Debug.Log(temp_Item[j]);
-                        }
-                    }
-                }
-            }
-        }
-        else if (toggle == tg[1])
-        {
-            for (int i = 0; i < inven.materials.Count; i++)
-            {
-                if (merchant_slist.Contains(inven.materials[i]))
-                {
-                    continue;
-                }
-                else
-                {
-                    if (temp_Item.Count < inven.materials.Count)
-                    {
-                        Merchant gb = Instantiate(s_itemlist, s_parent);
-                        gb.Setdata(inven.materials[i]);
-                        merchant_slist.Add(gb.itemdata);
-                        temp_Item.Add(gb);
-                    }
-                    else if (temp_Item.Count == inven.materials.Count)
-                    {
-                        foreach (var item in temp_Item)
-                        {
-                            item.Setdata(inven.materials[i]);
-                            merchant_slist.Add(item.itemdata);
-                        }
-                    }
-                    else
-                    {
-                        for (int j = temp_Item.Count - 1; j >= temp_Item.Count - inven.materials.Count; j--)
-                        {
-                            temp_Item[j].gameObject.SetActive(false);
-                            Debug.Log(temp_Item[j]);
-                        }
-                    }
+                    Merchant gb = Instantiate(s_itemlist, s_parent);
+                    gb.Setdata(inven.equipments[i]);
+                    merchant_slist.Add(gb.itemdata);
+                    temp_Item.Add(gb);
                 }
             }
         }
@@ -150,9 +95,7 @@ public class MerchantController : MonoBehaviour
 
     public void OnClickToggle()
     {
-        Debug.Log(temp_Item.Count);
-        temp_Item.Clear();
-        Debug.Log(temp_Item.Count);
+
     }
 
     void Get_Inventory_Itemlist()
