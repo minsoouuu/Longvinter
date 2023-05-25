@@ -7,6 +7,9 @@ public class Merchant_Object : MonoBehaviour
     [SerializeField] private GameObject merchant;
     [SerializeField] private GameObject inventory;
 
+    private void Awake()
+    {
+    }
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKey(KeyCode.Space))

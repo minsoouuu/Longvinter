@@ -15,6 +15,7 @@ public class User : MonoBehaviour
         /// </summary>
         Direct
     }
+    public Inventory inven;
 
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
@@ -121,6 +122,10 @@ public class User : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inven.transform.GetChild(0).gameObject.SetActive(true);
+        }
         /*
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
         {
