@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class Slot : MonoBehaviour
+using UnityEngine.EventSystems;
+
+public class Slot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TMP_Text countText;
     Image image;
+    ItemPopUp popup;
     [HideInInspector] public Item item;
     [HideInInspector] public RectTransform rt;
 
     private void Start()
     {
         image = GetComponent<Image>();
+        rt = GetComponent<RectTransform>();
     }
     public void SetItemData(Item item)
     {
@@ -20,10 +24,29 @@ public class Slot : MonoBehaviour
         countText.text = item.Count.ToString();
         this.item = item;
     }
+    public void SetItemPopup(ItemPopUp popup)
+    {
+        this.popup = popup;
+    }
     public void DeleteItem(Sprite nullSprite)
     {
         item = null;
         image.sprite = nullSprite;
         countText.text = string.Empty;
     }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (item != null)
+            popup.ShowToolTip(rt.anchoredPosition);
+    }
+    /*
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (popup != null)
+        {
+            popup.HideToolTip();
+        }
+    }
+    */
 }

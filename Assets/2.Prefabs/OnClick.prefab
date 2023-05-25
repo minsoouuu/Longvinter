@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72913064b1af1de4d91103cdb1b97e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rt: {fileID: 7058814269237420808, guid: 52676ce106bcd4c14b6dd45c6f09e4d7, type: 3}
-  SlotRect: {fileID: 0}
+  popup: {fileID: 7739627304836015069}
+  parent: {fileID: 6814045121238539475, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
 --- !u!1 &7739627304851156620
 GameObject:
   m_ObjectHideFlags: 0

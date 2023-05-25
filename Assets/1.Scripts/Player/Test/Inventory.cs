@@ -37,6 +37,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private Button closeButton;
+    [SerializeField] private ItemPopUp popup;
 
     public List<Slot> slots;
     private InvenItemType curInvenType = new InvenItemType();
@@ -297,6 +298,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             slots[i].SetItemData(items[i]);
+            slots[i].SetItemPopup(popup);
         }
     }
     
