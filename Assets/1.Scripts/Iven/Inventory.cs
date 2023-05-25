@@ -23,7 +23,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Item item1;
     [SerializeField] private Item item2;
     [SerializeField] private Transform spawnPoint;
-    
 
     [HideInInspector] public List<Item> equipments = new List<Item>();
     [HideInInspector] public List<Item> materials = new List<Item>();
@@ -42,7 +41,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button aligne_Btn;
 
     public List<Slot> slots;
-    private InvenItemType curInvenType = new InvenItemType();
+    public InvenItemType curInvenType = new InvenItemType();
 
     private int money;
     public int Money
@@ -213,6 +212,10 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count -= 1;
+                            if (it.Count <= 0)
+                            {
+                                equipments.Remove(it);
+                            }
                             break;
                         }
                     }
@@ -231,6 +234,10 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count -= 1;
+                            if (it.Count <= 0)
+                            {
+                                materials.Remove(it);
+                            }
                             break;
                         }
                     }
@@ -250,6 +257,10 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count -= 1;
+                            if (it.Count <= 0)
+                            {
+                                foods.Remove(it);
+                            }
                             break;
                         }
                     }
@@ -268,6 +279,10 @@ public class Inventory : MonoBehaviour
                         if (item.data.itemName == it.data.itemName)
                         {
                             it.Count -= 1;
+                            if (it.Count <= 0)
+                            {
+                                plants.Remove(it);
+                            }
                             break;
                         }
                     }
@@ -275,6 +290,7 @@ public class Inventory : MonoBehaviour
                 curItems = plants.ToList();
                 break;
         }
+
         ShowItem(curItems);
     }
     void OnButtonDownMoneyEvent()
@@ -288,7 +304,6 @@ public class Inventory : MonoBehaviour
         }
         Debug.Log("?? ??????");
     }
-    
     void ShowItem(List<Item> items)
     {
         for (int i = 0; i < slots.Count; i++ )
@@ -306,20 +321,35 @@ public class Inventory : MonoBehaviour
     }
     public void OnclickAligne_Btn()
     {
+        List<Item> curitem = new List<Item>();
+        switch (curInvenType)
+        {
+            case InvenItemType.Equipments:
+                curitem = equipments;
+                break;
+            case InvenItemType.Foods:
+                curitem = foods;
+                break;
+            case InvenItemType.Materials:
+                curitem = materials;
+                break;
+            case InvenItemType.Plants:
+                curitem = plants;
+                break;
+        }
         for (int i = 0; i < SlotDataCount() - 1; i++)
         {
-            if (slots[i].item.data.serialNum > slots[i + 1].item.data.serialNum)
+            if (curitem[i].data.serialNum > curitem[i + 1].data.serialNum)
             {
                 Item tmp;
                 tmp = slots[i].item;
 
-                slots[i].item = slots[i + 1].item;
-                slots[i].SetItemData(slots[i].item);
+                curitem[i] = curitem[i + 1];
 
-                slots[i + 1].item = tmp;
-                slots[i + 1].SetItemData(slots[i + 1].item);
+                curitem[i + 1] = tmp;
             }
         }
+        ShowItem(curitem);
     }
     public int SlotDataCount()
     {
@@ -331,5 +361,4 @@ public class Inventory : MonoBehaviour
         }
         return s_count;
     }
-
 }
