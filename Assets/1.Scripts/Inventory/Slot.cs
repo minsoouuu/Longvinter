@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TMP_Text countText;
-    Image image;
-    ItemPopUp popup;
+    private Image image;
+    private ItemPopUp popup;
     [HideInInspector] public Item item;
     [HideInInspector] public RectTransform rt;
 
@@ -38,15 +38,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (item != null)
-            popup.ShowToolTip(rt.anchoredPosition);
+            popup.ShowTool(rt.anchoredPosition);
     }
-    /*
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (popup != null)
-        {
-            popup.HideToolTip();
-        }
-    }
-    */
 }

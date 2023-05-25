@@ -7,22 +7,24 @@ using UnityEngine.UI;
 public class ItemClick : MonoBehaviour
 {
     private Inventory inventory;
-    private Item item;
+    private ItemPopUp popup;
+    private Slot slot;
+    private Item1 item;
     [SerializeField] private GameObject buttons;
 
 
     
     public void ItemChuck()
     {
-        inventory.DeleteItem(item);
-        Destroy(buttons);
+        inventory.DeleteItem(slot.item);
+        popup.HideTool();
     }
 
     public void ItemUse()
     {
         item.Action();
         Debug.Log("아이템을 사용했습니다.");
-        Destroy(buttons);
+        popup.HideTool();
     }
   
 }

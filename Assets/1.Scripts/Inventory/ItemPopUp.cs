@@ -14,9 +14,9 @@ public class ItemPopUp : MonoBehaviour
     private void Start()
     {
         rt = GetComponent<RectTransform>();
-        HideToolTip();
+        HideTool();
     }
-    public void ShowToolTip(Vector2 pos)
+    public void ShowTool(Vector2 pos)
     {
         pos.x -= 170;
         pos.y += 275;
@@ -24,7 +24,7 @@ public class ItemPopUp : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void HideToolTip()
+    public void HideTool()
     {
         gameObject.SetActive(false);
     }
