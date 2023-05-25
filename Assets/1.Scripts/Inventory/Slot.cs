@@ -8,6 +8,7 @@ public class Slot : MonoBehaviour
     [SerializeField] TMP_Text countText;
     Image image;
     [HideInInspector] public Item item;
+    [HideInInspector] public RectTransform rt;
 
     private void Start()
     {

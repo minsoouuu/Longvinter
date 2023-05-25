@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ItemPopUp : MonoBehaviour
 {
     public RectTransform rt;
-    public RectTransform SlotRect;
     private CanvasScaler canvasScaler;
 
 
@@ -26,12 +25,12 @@ public class ItemPopUp : MonoBehaviour
 
     private void DisableAllChildrenRaycastTarget(Transform tr)
     {
-        // 본인이 Graphic(UI)를 상속하면 레이캐스트 타겟 해제
+        // ?????? Graphic(UI)?? ???????? ?????????? ???? ????
         tr.TryGetComponent(out Graphic gr);
         if (gr != null)
             gr.raycastTarget = false;
 
-        // 자식 없으면 종료
+        // ???? ?????? ????
         int childCount = tr.childCount;
         if (childCount == 0) return;
 
@@ -43,7 +42,7 @@ public class ItemPopUp : MonoBehaviour
 
     public void SetRectPosition(RectTransform slotRect)
     {
-        // 캔버스 스케일러에 따른 해상도 대응
+        // ?????? ?????????? ???? ?????? ????
         float wRatio = Screen.width / canvasScaler.referenceResolution.x;
         float hRatio = Screen.height / canvasScaler.referenceResolution.y;
         float ratio =

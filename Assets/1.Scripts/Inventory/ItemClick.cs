@@ -9,18 +9,20 @@ public class ItemClick : MonoBehaviour
     private Inventory inventory;
     private Item item;
     private ItemPopUp popup;
+    private Slot slot;
     [SerializeField] private GameObject buttons;
 
 
 
-    public void OnClickItem(ItemPopUp slot)
+    public void OnClickItem(Slot slot)
     {
         GameObject showButtons = Instantiate(buttons, this.transform.position, Quaternion.identity);
         showButtons.transform.SetParent(this.transform);
-        popup.SetRectPosition(slot.SlotRect);
-        //slot을 프리팹으로 만들면 되려나..
+        popup.SetRectPosition(slot.rt);
+        // Why null.....
+        //slot -> prefab -> Button
 
-        //다른 버튼 누르면 직전에 만든 건 destroy 구현 필요
+        //???? ???? ?????? ?????? ???? ?? destroy ???? ????
     }
 
     
@@ -33,7 +35,7 @@ public class ItemClick : MonoBehaviour
     public void ItemUse()
     {
         item.Action();
-        Debug.Log("아이템을 사용했습니다.");
+        Debug.Log("???????? ????????????.");
         Destroy(buttons);
     }
   

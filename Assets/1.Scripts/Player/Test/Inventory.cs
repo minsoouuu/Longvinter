@@ -14,10 +14,10 @@ public class Inventory : MonoBehaviour
 {
     enum TitleType
     {
-        장비,
-        재료,
-        음식,
-        설치
+        equipment,
+        material,
+        food,
+        plant
     }
 
     [SerializeField] private Item item1;
@@ -74,13 +74,13 @@ public class Inventory : MonoBehaviour
         {
             item1.Init();
             AddItem(item1);
-            Debug.Log("아이템 생성");
+            Debug.Log("?????? ????");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
             item2.Init();
             AddItem(item2);
-            Debug.Log("아이템 생성");
+            Debug.Log("?????? ????");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
@@ -282,7 +282,7 @@ public class Inventory : MonoBehaviour
             scController.SetValueType(ValueType.Money);
             scController.gameObject.SetActive(true);
         }
-        Debug.Log("돈 버리기");
+        Debug.Log("?? ??????");
     }
     
     void ShowItem(List<Item> items)
