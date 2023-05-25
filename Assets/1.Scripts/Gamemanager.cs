@@ -9,6 +9,7 @@ public  class Gamemanager : MonoBehaviour
     public GameObject player;
     public Inventory inventory;
     public JsonData jsonDataController;
+    public ObjectPoolSystem objectPool;
 
     void Awake()
     {
