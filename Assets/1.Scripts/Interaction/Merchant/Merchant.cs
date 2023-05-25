@@ -25,8 +25,23 @@ public class Merchant : MonoBehaviour
 
     public void OnClickSell()
     {
+        int count = 0;
+        List<Item> temp = new List<Item>();
+        temp = inven.equipments.ToList();
+        count = temp.Count;
         inven.DeleteItem(itemdata);
         inven.Money += itemdata.data.mk;
+        if(temp.Count != inven.equipments.Count)
+        {
+            for(int i = 0; i < temp.Count; i++)
+            {
+                Setdata(inven.equipments[i]);
+            }
+            for(int j = 0; j < Mathf.Abs(temp.Count - inven.equipments.Count); j++)
+            {
+                transform.parent.GetChild(j).gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Setdata(Item itemdata)
@@ -35,5 +50,6 @@ public class Merchant : MonoBehaviour
         image.sprite = itemdata.data.itemImage;
         mk.text = itemdata.data.mk.ToString();
     }
+    
     
 }

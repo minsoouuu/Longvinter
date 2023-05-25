@@ -20,8 +20,6 @@ public class MerchantController : MonoBehaviour
     List<Item> merchant_slist = new List<Item>();
     List<Item> Inventory_list = new List<Item>();
     Inventory inven = new Inventory();
-    List<Merchant> temp_Item = new List<Merchant>();
-
     private void OnEnable()
     {
         
@@ -38,7 +36,7 @@ public class MerchantController : MonoBehaviour
     {
         Close_Merchant();
         Get_Inventory_Itemlist();
-        CreateMerchant_s_ItemList(SetToggle());
+        CreateMerchant_s_ItemList();
     }
 
     void CreateMerchant_b_ItemList()
@@ -58,24 +56,39 @@ public class MerchantController : MonoBehaviour
             }
         }
     }
-    void CreateMerchant_s_ItemList(Toggle toggle)
+    void CreateMerchant_s_ItemList()
     {
-        if (toggle == tg[0])
+        for (int i = 0; i < inven.equipments.Count; i++)
         {
-            for (int i = 0; i < inven.equipments.Count; i++)
+            if (merchant_slist.Contains(inven.equipments[i]))
             {
-                if (merchant_slist.Contains(inven.equipments[i]))
-                {
-                    continue;
-                }
-                else
-                {
-                    Merchant gb = Instantiate(s_itemlist, s_parent);
-                    gb.Setdata(inven.equipments[i]);
-                    merchant_slist.Add(gb.itemdata);
-                    temp_Item.Add(gb);
-                }
+                continue;
             }
+            else
+            {
+                
+                Merchant gb = Instantiate(s_itemlist, s_parent);
+                gb.Setdata(inven.equipments[i]);
+                merchant_slist.Add(gb.itemdata);
+            }
+        }
+    }
+
+    void DeleteMerchant_s_ItemList()
+    {
+        List<Item> temp = new List<Item>();
+        temp = inven.equipments.ToList();
+        for (int i = 0; i < temp.Count; i++)
+        {
+            if (temp.Contains(merchant_slist[i]))
+            {
+                return;
+            }
+            else
+            {
+                Item mc = s_parent.GetChild(i).GetComponent<Merchant>().itemdata;
+            }
+            
         }
     }
 
@@ -95,7 +108,7 @@ public class MerchantController : MonoBehaviour
 
     public void OnClickToggle()
     {
-
+        
     }
 
     void Get_Inventory_Itemlist()
@@ -134,4 +147,6 @@ public class MerchantController : MonoBehaviour
             player.GetComponent<Animator>().enabled = true;
         }
     }
+
+    
 }
