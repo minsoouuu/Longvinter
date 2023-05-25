@@ -39,5 +39,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     {
         if (item != null)
             popup.ShowTool(rt.anchoredPosition);
+        
     }
+
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7739627304836015070}
   - component: {fileID: 4106032855333153852}
   m_Layer: 5
-  m_Name: OnClick
+  m_Name: InvenItemClick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

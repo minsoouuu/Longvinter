@@ -7,7 +7,6 @@ public class ItemPopUp : MonoBehaviour
 {
 
     [SerializeField] private GameObject popup;
-    [SerializeField] private Transform parent;
 
     private RectTransform rt;
 
