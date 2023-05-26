@@ -2,16 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public struct MonsterData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float hp;
+    public float speed;
+    public MonsterType monsterType;
+}
 
-    // Update is called once per frame
-    void Update()
+public abstract class Monster : MonoBehaviour
+{
+    public MonsterData monsterData = new MonsterData();
+
+    private float curHp = 0;
+
+    public float HP
+    {
+        get { return curHp; }
+        set { curHp = value; }
+    }
+    void Awake()
+    {
+        Initialize();
+    }
+    private void Start()
+    {
+        curHp = monsterData.hp;
+        Debug.Log("몬스터 생성");
+    }
+    public abstract void Initialize();
+
+    void DropItem()
     {
         
     }

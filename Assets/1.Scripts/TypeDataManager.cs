@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum ObjectType
 {
-    Slot,
+    BuySlot,
+    SellSlot
 }
 public enum ItemType
 {
+    Pocket,
     #region Equipment
+
     Gun,
     Ammo,
+
     #endregion
     #region Metarial
 
@@ -31,7 +35,7 @@ public enum ItemType
 }
 public enum MonsterType
 {
-    Test1,
+    Rat,
     Test2,
     Test3
 }

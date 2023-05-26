@@ -42,7 +42,7 @@ public class EnergyUI : MonoBehaviour
             {
                 user.HP -= 1f;
                 hp_delaytime = 0f;
-                Debug.Log(user.HP);
+                //Debug.Log(user.HP);
             }
             else
             {

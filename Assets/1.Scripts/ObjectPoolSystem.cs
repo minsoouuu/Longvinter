@@ -6,12 +6,12 @@ using System;
 
 public class ObjectPoolSystem : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> slotPrefabs;
+    [SerializeField] private List<Merchant> slotPrefabs;
     [SerializeField] private List<Item1> itemPrefabs;
     [SerializeField] private List<House> housePrefabs;
     [SerializeField] private List<Monster> monsterPrefabs;
 
-    private Dictionary<ObjectType, Queue<GameObject>> objectPools = new Dictionary<ObjectType, Queue<GameObject>>();
+    private Dictionary<ObjectType, Queue<Merchant>> objectPools = new Dictionary<ObjectType, Queue<Merchant>>();
     private Dictionary<ItemType, Queue<Item1>> itemPools = new Dictionary<ItemType, Queue<Item1>>();
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
@@ -37,7 +37,7 @@ public class ObjectPoolSystem : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        objectPools[(ObjectType)(j)] = new Queue<GameObject>();
+                        objectPools[(ObjectType)(j)] = new Queue<Merchant>();
                         break;
                     case 1:
                         itemPools[(ItemType)(j)] = new Queue<Item1>();
@@ -52,9 +52,9 @@ public class ObjectPoolSystem : MonoBehaviour
             }
         }
     }
-    public void ReturnObject(ObjectType objectType, GameObject obj)
+    public void ReturnObject(ObjectType objectType, Merchant obj)
     {
-        obj.SetActive(false);
+        obj.gameObject.SetActive(false);
         objectPools[objectType].Enqueue(obj);
     }
     public void ReturnObject(ItemType type, Item1 obj)
@@ -72,9 +72,9 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(false);
         housePools[type].Enqueue(obj);
     }
-    public GameObject GetObjectOfObjectPooling(ObjectType objectType)
+    public Merchant GetObjectOfObjectPooling(ObjectType objectType, bool a)
     {
-        GameObject obj = null;
+        Merchant obj = null;
 
         if (objectPools[objectType].Count != 0)
         {
@@ -82,9 +82,17 @@ public class ObjectPoolSystem : MonoBehaviour
         }
         else
         {
-            obj = Instantiate(slotPrefabs[0]);
+            if (a)
+            {
+                obj = Instantiate(slotPrefabs[0]);
+            }
+            else
+            {
+                obj = Instantiate(slotPrefabs[1]);
+            }
+            
         }
-        obj.SetActive(true);
+        obj.gameObject.SetActive(true);
         return obj;
     }
     public Monster GetObjectOfObjectPooling(MonsterType type)
@@ -97,8 +105,16 @@ public class ObjectPoolSystem : MonoBehaviour
         }
         else
         {
-        }
+            foreach (var monster in monsterPrefabs)
+            {
+                if (monster.monsterData.monsterType == type)
+                {
 
+                    obj = Instantiate(monster);
+                    break;
+                }
+            }
+        }
         obj.gameObject.SetActive(true);
         return obj;
     }

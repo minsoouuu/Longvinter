@@ -20,6 +20,9 @@ public class MerchantController : MonoBehaviour
     List<Item> merchant_slist = new List<Item>();
     List<Item> Inventory_list = new List<Item>();
     Inventory inven = new Inventory();
+
+    ObjectType myType = ObjectType.BuySlot;
+
     private void OnEnable()
     {
         
@@ -49,7 +52,9 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Merchant gb = Instantiate(b_itemlist, b_parent);
+                Merchant gb = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,true);
+                gb.transform.SetParent(b_parent);
+                //Merchant gb = Instantiate(b_itemlist, b_parent);
                 equipments_list[i].Init();
                 gb.Setdata(equipments_list[i]);
                 gb.mc = this;
@@ -67,8 +72,9 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                
-                Merchant gb = Instantiate(s_itemlist, s_parent);
+                Merchant gb = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,false);
+                gb.transform.SetParent(s_parent);
+                //Merchant gb = Instantiate(s_itemlist, s_parent);
                 gb.Setdata(inven.equipments[i]);
                 gb.mc = this;
                 merchant_slist.Add(gb.itemdata);
@@ -131,6 +137,11 @@ public class MerchantController : MonoBehaviour
         {
             Inventory_list.Add(item);
         }
+    }
+
+    public void HideSlot(Merchant slot)
+    {
+        Gamemanager.instance.objectPool.ReturnObject(myType,slot);
     }
 
     public void onClick_CloseBtn()

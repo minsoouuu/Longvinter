@@ -12,6 +12,7 @@ public class Merchant : MonoBehaviour
     [HideInInspector] public Item itemdata;
     Inventory inven = new Inventory();
     [HideInInspector] public MerchantController mc;
+
     private void Start()
     {
         inven = Gamemanager.instance.inventory;
@@ -59,7 +60,8 @@ public class Merchant : MonoBehaviour
             }
             for(int j = mc.s_parent.childCount - 1; j > inven.equipments.Count - 1; j--)
             {
-                mc.s_parent.transform.GetChild(j).gameObject.SetActive(false);
+                mc.HideSlot(this);
+                //mc.s_parent.transform.GetChild(j).gameObject.SetActive(false);
             }
         }
     }
