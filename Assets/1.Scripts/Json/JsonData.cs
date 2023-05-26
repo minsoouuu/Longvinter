@@ -32,7 +32,6 @@ public class JsonData : MonoBehaviour
     [Serializable]
     public class EquipmentJson
     {
-        public string name;
         public string image;
         public string type;
         public int price;
@@ -46,7 +45,6 @@ public class JsonData : MonoBehaviour
     [Serializable]
     public class FoodJson
     {
-        public string name;
         public string image;
         public string type;
         public int price;
@@ -60,7 +58,6 @@ public class JsonData : MonoBehaviour
     [Serializable]
     public class MaterialJson
     {
-        public string name;
         public string image;
         public string type;
         public int price;
@@ -74,7 +71,6 @@ public class JsonData : MonoBehaviour
     [Serializable]
     public class PlantJson
     {
-        public string name;
         public string image;
         public string type;
         public int price;
