@@ -9990,7 +9990,7 @@ GameObject:
   - component: {fileID: 1244773330}
   - component: {fileID: 1244773331}
   m_Layer: 0
-  m_Name: ItemDataController
+  m_Name: ItemDataSetController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

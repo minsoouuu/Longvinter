@@ -12,7 +12,7 @@ public class ObjectPoolSystem : MonoBehaviour
     [SerializeField] private List<Monster> monsterPrefabs;
 
     private Dictionary<ObjectType, Queue<Merchant>> objectPools = new Dictionary<ObjectType, Queue<Merchant>>();
-    private Dictionary<ItemType, Queue<Item1>> itemPools = new Dictionary<ItemType, Queue<Item1>>();
+    private Dictionary<ItemName, Queue<Item1>> itemPools = new Dictionary<ItemName, Queue<Item1>>();
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
 
@@ -26,7 +26,7 @@ public class ObjectPoolSystem : MonoBehaviour
         int[] typeCount = new int[]
         {
             Enum.GetValues(typeof(ObjectType)).Length,
-            Enum.GetValues(typeof(ItemType)).Length,
+            Enum.GetValues(typeof(ItemName)).Length,
             Enum.GetValues(typeof(MonsterType)).Length,
             Enum.GetValues(typeof(HouseType)).Length
         };
@@ -40,7 +40,7 @@ public class ObjectPoolSystem : MonoBehaviour
                         objectPools[(ObjectType)(j)] = new Queue<Merchant>();
                         break;
                     case 1:
-                        itemPools[(ItemType)(j)] = new Queue<Item1>();
+                        itemPools[(ItemName)(j)] = new Queue<Item1>();
                         break;
                     case 2:
                         monsterPools[(MonsterType)(j)] = new Queue<Monster>();
@@ -57,7 +57,7 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(false);
         objectPools[objectType].Enqueue(obj);
     }
-    public void ReturnObject(ItemType type, Item1 obj)
+    public void ReturnObject(ItemName type, Item1 obj)
     {
         obj.gameObject.SetActive(false);
         itemPools[type].Enqueue(obj);
@@ -118,7 +118,7 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
-    public Item1 GetObjectOfObjectPooling(ItemType type)
+    public Item1 GetObjectOfObjectPooling(ItemName type)
     {
         Item1 obj = null;
 

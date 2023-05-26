@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 public class JsonData : MonoBehaviour
 {
-
     [SerializeField] private TextAsset recipeJson;
     [SerializeField] private TextAsset equipmentJson;
     [SerializeField] private TextAsset materialJson;

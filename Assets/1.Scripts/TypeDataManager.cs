@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum InvenItemType
+{
+    Equipments,
+    Materials,
+    Foods,
+    Plants
+}
 public enum ObjectType
 {
     BuySlot,
     SellSlot
 }
-public enum ItemType
+public enum ItemName
 {
     Pocket,
     #region Equipment
