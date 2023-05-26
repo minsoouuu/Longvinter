@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IPointerClickHandler
+public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
 {
     [SerializeField] TMP_Text countText;
     private Image image;
@@ -38,8 +38,22 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (item != null)
+        {
             popup.ShowTool(rt.anchoredPosition);
+        }
         
     }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        
+        if (item != null)
+        {
+            if (popup.popup == true)
+            {
+                //만약 팝업이 켜진 상태라면 팝업 위까지 커서 영역 확대
+            }
+            popup.HideTool(rt.anchoredPosition);
+        }
+    }
 }

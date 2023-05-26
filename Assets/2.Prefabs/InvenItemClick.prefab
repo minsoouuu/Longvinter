@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 7739627304836015069}
-  parent: {fileID: 6814045121238539475, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
 --- !u!1 &7739627304851156620
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +174,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2493653366268059053, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
+      - m_Target: {fileID: 4871461482499168004, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
         m_TargetAssemblyTypeName: ItemClick, Assembly-CSharp
         m_MethodName: ItemChuck
         m_Mode: 1
@@ -309,7 +308,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2493653366268059053, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
+      - m_Target: {fileID: 4871461482499168004, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
         m_TargetAssemblyTypeName: ItemClick, Assembly-CSharp
         m_MethodName: ItemUse
         m_Mode: 1
