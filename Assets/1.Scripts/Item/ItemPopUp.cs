@@ -26,8 +26,11 @@ public class ItemPopUp : MonoBehaviour
 
     public void HideTool(Vector2 pos)
     {
+        if (popup == true)
+        {
+            //만약 팝업이 켜진 상태라면 팝업 위까지 커서 영역 확대
+        }
         gameObject.SetActive(false);
-        rt.anchoredPosition = pos;
     }
 
 }
