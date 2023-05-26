@@ -9,7 +9,7 @@ public class MerchantController : MonoBehaviour
     [SerializeField] private Merchant b_itemlist;
     [SerializeField] private Transform b_parent;
     [SerializeField] private Merchant s_itemlist;
-    [SerializeField] private Transform s_parent;
+    [HideInInspector] public Transform s_parent;
     [SerializeField] private List<Item> equipments_list = new List<Item>();
     [SerializeField] private Button close_btn;
     [SerializeField] private GameObject merchant;
@@ -52,11 +52,12 @@ public class MerchantController : MonoBehaviour
                 Merchant gb = Instantiate(b_itemlist, b_parent);
                 equipments_list[i].Init();
                 gb.Setdata(equipments_list[i]);
+                gb.mc = this;
                 merchant_blist.Add(gb.itemdata);
             }
         }
     }
-    void CreateMerchant_s_ItemList()
+    public void CreateMerchant_s_ItemList()
     {
         for (int i = 0; i < inven.equipments.Count; i++)
         {
@@ -69,6 +70,7 @@ public class MerchantController : MonoBehaviour
                 
                 Merchant gb = Instantiate(s_itemlist, s_parent);
                 gb.Setdata(inven.equipments[i]);
+                gb.mc = this;
                 merchant_slist.Add(gb.itemdata);
             }
         }
