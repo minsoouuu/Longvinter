@@ -1,18 +1,88 @@
 {
   "foods": [
     {
-      "name": "bread",
       "image": "T_IconBread",
-      "price": "50",
-      "serial": 0,
-      "type": "Foods"
+      "type": "Foods",
+      "price": "25",
+      "serial": 0
     },
     {
-      "name": "blackberryjam",
-      "image": "T_IconBlackBerryJam",
-      "price": "50",
-      "serial": 3,
-      "type": "Foods"
+      "image": "T_IconCake",
+      "type": "Foods",
+      "price": "25",
+      "serial": 1
+    },
+    {
+      "image": "T_IconCroissant",
+      "type": "Foods",
+      "price": "25",
+      "serial": 2
+    },
+    {
+      "image": "T_WaterCanister",
+      "type": "Foods",
+      "price": "25",
+      "serial": 3
+    },
+    {
+      "image": "T_IconEnergyDrink_01",
+      "type": "Foods",
+      "price": "25",
+      "serial": 4
+    },
+    {
+      "image": "T_IconHEatPack",
+      "type": "Foods",
+      "price": "25",
+      "serial": 5
+    },
+    {
+      "image": "T_IconSnackBar",
+      "type": "Foods",
+      "price": "25",
+      "serial": 6
+    },
+    {
+      "image": "T_IconChanterelle",
+      "type": "Foods",
+      "price": "25",
+      "serial": 7
+    },
+    {
+      "image": "T_IconBlackberryJam",
+      "type": "Foods",
+      "price": "25",
+      "serial": 8
+    },
+    {
+      "image": "T_IconCloudberryJam",
+      "type": "Foods",
+      "price": "25",
+      "serial": 9
+    },
+    {
+      "image": "T_IconRasberryJam",
+      "type": "Foods",
+      "price": "25",
+      "serial": 10
+    },
+    {
+      "image": "T_IconCookedPerch",
+      "type": "Foods",
+      "price": "30",
+      "serial": 11
+    },
+    {
+      "image": "T_IconCookedSalmonShark",
+      "type": "Foods",
+      "price": "40",
+      "serial": 12
+    },
+    {
+      "image": "T_IconCookedTuna",
+      "type": "Foods",
+      "price": "30",
+      "serial": 13
     }
   ]
 }

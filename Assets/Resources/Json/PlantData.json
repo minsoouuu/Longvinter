@@ -1,18 +1,88 @@
 {
   "plants": [
     {
-      "name": "fence",
       "image": "T_IconFenceGate",
-      "price": "180",
-      "serial": 0,
-      "type": "Plants"
+      "type": "Plants",
+      "price": "120",
+      "serial": 0
     },
     {
-      "name": "bench",
       "image": "T_IconBench",
-      "price": "300",
-      "serial": 1,
-      "type": "Plants"
+      "type": "Plants",
+      "price": "150",
+      "serial": 1
+    },
+    {
+      "image": "T_IconContainer",
+      "type": "Plants",
+      "price": "100",
+      "serial": 2
+    },
+    {
+      "image": "T_IconFirepit",
+      "type": "Plants",
+      "price": "120",
+      "serial": 3
+    },
+    {
+      "image": "T_IconTurret",
+      "type": "Plants",
+      "price": "200",
+      "serial": 4
+    },
+    {
+      "image": "T_IconVillageLampPost",
+      "type": "Plants",
+      "price": "200",
+      "serial": 5
+    },
+    {
+      "image": "T_IconWoodStool",
+      "type": "Plants",
+      "price": "150",
+      "serial": 6
+    },
+    {
+      "image": "T_IconKamiina",
+      "type": "Plants",
+      "price": "180",
+      "serial": 7
+    },
+    {
+      "image": "T_IconSauna",
+      "type": "Plants",
+      "price": "250",
+      "serial": 8
+    },
+    {
+      "image": "T_IconTent",
+      "type": "Plants",
+      "price": "200",
+      "serial": 9
+    },
+    {
+      "image": "T_IconTrimmedBush",
+      "type": "Plants",
+      "price": "150",
+      "serial": 10
+    },
+    {
+      "image": "T_IconVendor",
+      "type": "Plants",
+      "price": "250",
+      "serial": 11
+    },
+    {
+      "image": "T_IconLightBulb",
+      "type": "Plants",
+      "price": "80",
+      "serial": 12
+    },
+    {
+      "image": "T_IconPlaceholder",
+      "type": "Plants",
+      "price": "0",
+      "serial": 13
     }
   ]
 }

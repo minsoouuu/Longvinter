@@ -1,18 +1,94 @@
 {
   "materials": [
     {
-      "name": "blackberry",
       "image": "T_IconBlackberry",
+      "type": "Materials",
       "price": "10",
-      "serial": 0,
-      "type": "Materials"
+      "serial": 0
     },
     {
-      "name": "arcticChar",
-      "image": "T_IconArcticChar",
+      "image": "T_IconCludberry",
+      "type": "Materials",
       "price": "10",
-      "serial": 1,
-      "type": "Materials"
+      "serial": 1
+    },
+    {
+      "image": "T_IconRaspberry",
+      "type": "Materials",
+      "price": "10",
+      "serial": 2
+    },
+    {
+      "image": "T_IconSugarBag",
+      "type": "Materials",
+      "price": "25",
+      "serial": 3
+    },
+    {
+      "image": "T_IconSalt",
+      "type": "Materials",
+      "price": "25",
+      "serial": 4
+    },
+    {
+      "image": "T_IconPepper",
+      "type": "Materials",
+      "price": "25",
+      "serial": 5
+    },
+    {
+      "image": "T_IconPerch",
+      "type": "Materials",
+      "price": "15",
+      "serial": 6
+    },
+    {
+      "image": "T_IconSalmonShark",
+      "type": "Materials",
+      "price": "20",
+      "serial": 7
+    },
+    {
+      "image": "T_IconTuna",
+      "type": "Materials",
+      "price": "15",
+      "serial": 8
+    },
+    {
+      "image": "T_IconArcticChar",
+      "type": "Materials",
+      "price": "10",
+      "serial": 9
+    },
+    {
+      "image": "T_IconWood",
+      "type": "Materials",
+      "price": "5",
+      "serial": 10
+    },
+    {
+      "image": "T_IconPlanks",
+      "type": "Materials",
+      "price": "10",
+      "serial": 11
+    },
+    {
+      "image": "T_IconFuel",
+      "type": "Materials",
+      "price": "10",
+      "serial": 12
+    },
+    {
+      "image": "T_IconPeacock",
+      "type": "Materials",
+      "price": "20",
+      "serial": 13
+    },
+    {
+      "image": "T_IconHazelHenNormal",
+      "type": "Materials",
+      "price": "20",
+      "serial": 14
     }
   ]
 }
