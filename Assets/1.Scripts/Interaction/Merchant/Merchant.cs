@@ -35,7 +35,7 @@ public class Merchant : MonoBehaviour
                 }
             }
             mc.s_parent.transform.GetChild(i).gameObject.SetActive(true);
-            //mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
+            mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
         }
         for (int j = mc.s_parent.childCount - 1; j > inven.equipments.Count - 1; j--)
         {
@@ -55,12 +55,12 @@ public class Merchant : MonoBehaviour
         {
             for(int i = 0; i < inven.equipments.Count; i++)
             {
-                //mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
+                mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
             }
             for(int j = mc.s_parent.childCount - 1; j > inven.equipments.Count - 1; j--)
             {
                 mc.HideSlot(this);
-                //mc.s_parent.transform.GetChild(j).gameObject.SetActive(false);
+                mc.s_parent.transform.GetChild(j).gameObject.SetActive(false);
             }
         }
     }
@@ -68,7 +68,7 @@ public class Merchant : MonoBehaviour
     public void Setdata(Item itemdata)
     {
         this.itemdata = itemdata;
-        //image.sprite = itemdata.data.itemImage;
+        // image.sprite = itemdata.data;
         mk.text = itemdata.data.price.ToString();
     }
     
