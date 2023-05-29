@@ -5,7 +5,7 @@ using System;
 
 public struct ItemData
 {
-    public string image;
+    public Sprite image;
     public string type;
     public int price;
     public int serial;

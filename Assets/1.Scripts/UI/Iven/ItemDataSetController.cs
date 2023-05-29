@@ -25,7 +25,7 @@ public class ItemDataSetController : MonoBehaviour
             {
                 if (equipments[i].data.itemName.ToString() == jsonData.equimentData.equipments[j].type.ToString())
                 {
-                    equipments[i].data.image = jsonData.equimentData.equipments[j].image;
+                    //[i].data.image = jsonData.equimentData.equipments[j].image;
                     equipments[i].data.price = jsonData.equimentData.equipments[j].price;
                     equipments[i].data.serial =jsonData.equimentData.equipments[j].serial;
                     equipments[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.equimentData.equipments[j].type);
@@ -39,7 +39,7 @@ public class ItemDataSetController : MonoBehaviour
             {
                 if (materilas[i].data.itemName.ToString() == jsonData.materialData.materials[j].type.ToString())
                 {
-                    materilas[i].data.image = jsonData.materialData.materials[j].image;
+                    //materilas[i].data.image = jsonData.materialData.materials[j].image;
                     materilas[i].data.price = jsonData.materialData.materials[j].price;
                     materilas[i].data.serial = jsonData.materialData.materials[j].serial;
                     materilas[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.materialData.materials[j].type);
@@ -53,7 +53,7 @@ public class ItemDataSetController : MonoBehaviour
             {
                 if (foods[i].data.itemName.ToString() == jsonData.foodData.foods[j].type.ToString())
                 {
-                    foods[i].data.image = jsonData.foodData.foods[j].image;
+                    //foods[i].data.image = jsonData.foodData.foods[j].image;
                     foods[i].data.price = jsonData.foodData.foods[j].price;
                     foods[i].data.serial = jsonData.foodData.foods[j].serial;
                     foods[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.foodData.foods[j].type);
@@ -67,7 +67,7 @@ public class ItemDataSetController : MonoBehaviour
             {
                 if (plants[i].data.itemName.ToString() == jsonData.plantData.plants[j].type.ToString())
                 {
-                    plants[i].data.image = jsonData.plantData.plants[j].image;
+                    //plants[i].data.image = jsonData.plantData.plants[j].image;
                     plants[i].data.price = jsonData.plantData.plants[j].price;
                     plants[i].data.serial = jsonData.plantData.plants[j].serial;
                     plants[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.plantData.plants[j].type);
