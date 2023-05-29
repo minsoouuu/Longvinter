@@ -4,98 +4,102 @@
       "name": "Bread",
       "image": "T_IconBread",
       "type": "Foods",
-      "price": "25",
-      "serial": 0
+      "price": 25,
+      "serial": 0,
+      "stats" : 10
     },
     {
       "name": "Cake",
       "image": "T_IconCake",
       "type": "Foods",
-      "price": "25",
-      "serial": 1
+      "price": 25,
+      "serial": 1,
+      "stats": 30
     },
     {
       "name": "Croissant",
       "image": "T_IconCroissant",
       "type": "Foods",
-      "price": "25",
-      "serial": 2
+      "price": 25,
+      "serial": 2,
+      "stats": 30
     },
     {
       "name": "WaterCanister",
       "image": "T_WaterCanister",
       "type": "Foods",
-      "price": "25",
+      "price": 25,
       "serial": 3
     },
     {
       "name": "EnergyDrink",
       "image": "T_IconEnergyDrink_01",
       "type": "Foods",
-      "price": "25",
-      "serial": 4
+      "price": 25,
+      "serial": 4,
+      "stats": 30
     },
     {
       "name": "HeatPack",
       "image": "T_IconH EatPack",
       "type": "Foods",
-      "price": "25",
+      "price": 25,
       "serial": 5
     },
     {
       "name": "SnackBar",
       "image": "T_IconSnackBar",
       "type": "Foods",
-      "price": "25",
+      "price": 25,
       "serial": 6
     },
     {
       "name": "Chanterelle",
       "image": "T_IconChanterelle",
       "type": "Foods",
-      "price": "25",
+      "price": 25,
       "serial": 7
     },
     {
       "name": "BlackberryJam",
       "image": "T_IconBlackberryJam",
       "type": "Foods",
-      "price": "25",
+      "price": 25,
       "serial": 8
     },
     {
       "name": "CloudberryJam",
       "image": "T_IconCloudberryJam",
       "type": "Foods",
-      "price": "25",
+      "price": 25,
       "serial": 9
     },
     {
       "name": "RasberryJam",
       "image": "T_IconRasberryJam",
       "type": "Foods",
-      "price": "25",
+      "price": 25,
       "serial": 10
     },
     {
       "name": "CookedPerch",
       "image": "T_IconCookedPerch",
       "type": "Foods",
-      "price": "30",
+      "price": 30,
       "serial": 11
     },
     {
       "name": "CookedSalmonShark",
       "image": "T_IconCookedSalmonShark",
       "type": "Foods",
-      "price": "40",
+      "price": 40,
       "serial": 12
     },
     {
       "name": "CookedTuna",
       "image": "T_IconCookedTuna",
       "type": "Foods",
-      "price": "30",
+      "price": 30,
       "serial": 13
     }
   ]

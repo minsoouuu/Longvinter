@@ -22,6 +22,7 @@ public class JsonData : MonoBehaviour
         public string completeitem;
         public string material1;
         public string material2;
+        public string type;
     }
     [Serializable]
     public class Recipe

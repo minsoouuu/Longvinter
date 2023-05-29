@@ -4,98 +4,98 @@
       "name": "FenceGate",
       "image": "T_IconFenceGate",
       "type": "Plants",
-      "price": "120",
+      "price": 120,
       "serial": 0
     },
     {
       "name": "Bench",
       "image": "T_IconBench",
       "type": "Plants",
-      "price": "150",
+      "price": 150,
       "serial": 1
     },
     {
       "name": "Container",
       "image": "T_IconContainer",
       "type": "Plants",
-      "price": "100",
+      "price": 100,
       "serial": 2
     },
     {
       "name": "Firepit",
       "image": "T_IconFirepit",
       "type": "Plants",
-      "price": "120",
+      "price": 120,
       "serial": 3
     },
     {
       "name": "turret",
       "image": "T_IconTurret",
       "type": "Plants",
-      "price": "200",
+      "price": 200,
       "serial": 4
     },
     {
       "name": "VillageLampPost",
       "image": "T_IconVillageLampPost",
       "type": "Plants",
-      "price": "200",
+      "price": 200,
       "serial": 5
     },
     {
       "name": "WoodStool",
       "image": "T_IconWoodStool",
       "type": "Plants",
-      "price": "150",
+      "price": 150,
       "serial": 6
     },
     {
       "name": "Kamiina",
       "image": "T_IconKamiina",
       "type": "Plants",
-      "price": "180",
+      "price": 180,
       "serial": 7
     },
     {
       "name": "Sauna",
       "image": "T_IconSauna",
       "type": "Plants",
-      "price": "250",
+      "price": 250,
       "serial": 8
     },
     {
       "name": "Tent",
       "image": "T_IconTent",
       "type": "Plants",
-      "price": "200",
+      "price": 200,
       "serial": 9
     },
     {
       "name": "TrimmedBush",
       "image": "T_IconTrimmedBush",
       "type": "Plants",
-      "price": "150",
+      "price": 150,
       "serial": 10
     },
     {
       "name": "Vendor",
       "image": "T_IconVendor",
       "type": "Plants",
-      "price": "250",
+      "price": 250,
       "serial": 11
     },
     {
       "name": "LightBulb",
       "image": "T_IconLightBulb",
       "type": "Plants",
-      "price": "80",
+      "price": 80,
       "serial": 12
     },
     {
       "name": "Placeholer",
       "image": "T_IconPlaceholder",
       "type": "Plants",
-      "price": "0",
+      "price": 0,
       "serial": 13
     }
   ]
