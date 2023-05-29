@@ -81,4 +81,49 @@ public class ItemDataSetController : MonoBehaviour
         string path = "Longvinter_Icons";
         return Resources.Load<Sprite>(path + type.ToString() + name);
     }
+
+    public Item GetItem(ItemName name, InvenItemType type)
+    {
+        Item item = null;
+        switch (type)
+        {
+            case InvenItemType.Equipments:
+                for (int i = 0; i < equipments.Count; i++)
+                {
+                    if (equipments[i].data.itemName.ToString() == name.ToString())
+                    {
+                        item = equipments[i];
+                    }
+                }
+                break;
+            case InvenItemType.Materials:
+                for (int i = 0; i < materilas.Count; i++)
+                {
+                    if (materilas[i].data.itemName.ToString() == name.ToString())
+                    {
+                        item = materilas[i];
+                    }
+                }
+                break;
+            case InvenItemType.Foods:
+                for (int i = 0; i < foods.Count; i++)
+                {
+                    if (foods[i].data.itemName.ToString() == name.ToString())
+                    {
+                        item = foods[i];
+                    }
+                }
+                break;
+            case InvenItemType.Plants:
+                for (int i = 0; i < plants.Count; i++)
+                {
+                    if (plants[i].data.itemName.ToString() == name.ToString())
+                    {
+                        item = plants[i];
+                    }
+                }
+                break;
+        }
+        return item;
+    }
 }

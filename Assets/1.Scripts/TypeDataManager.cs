@@ -69,7 +69,7 @@ public enum ItemName
     Croissant,
     WaterCanister,
     EnergyDrink,
-    EatPack,
+    HeatPack,
     SnackBar,
     Chanterelle,
     BlackberryJam,

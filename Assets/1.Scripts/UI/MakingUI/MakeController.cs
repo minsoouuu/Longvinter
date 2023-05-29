@@ -28,17 +28,15 @@ public class MakeController : MonoBehaviour
         List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
         string complete = string.Empty;
-        /*
         for (int i = 0; i < slots.Length; i++)
         {
             if (i == 0)
             {
                 for (int j = 0; j < recipe.recipeData.recipe.Count; j++)
                 {
-                    if (slots[i].GetItemData().data.itemName == recipe.recipeData.recipe[j].material1)
+                    if (slots[i].GetItemData().data.itemName.ToString() == recipe.recipeData.recipe[j].material1)
                     {
                         recipes.Add(recipe.recipeData.recipe[j]);
-                        counter++;
                     }
                 }
             }
@@ -46,22 +44,20 @@ public class MakeController : MonoBehaviour
             {
                 for (int j = 0; j < recipes.Count; j++)
                 {
-                    if (slots[i].GetItemData().data.itemName == recipes[j].material2) 
+                    if (slots[i].GetItemData().data.itemName.ToString() == recipes[j].material2) 
                     {
                         complete = recipe.recipeData.recipe[j].completeitem;
                     }
                 }
             }
         }
-
-        foreach (var item in items)
+        for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
         {
-            if (item.itemName.ToString() == complete)
+            if (Gamemanager.instance.itemController.equipments[i].data.itemName.ToString() == complete)
             {
-                comPleteItem = item;
+
             }
         }
-        */
 
         recipes.Clear();
         complete = string.Empty;
@@ -72,29 +68,27 @@ public class MakeController : MonoBehaviour
 
     public void Make()
     {
-        /*
         if (slots[1].GetItemData() != null)
         {
-            Item item = GetRecipe(slots[0].GetItemData().data.itemName,
-                                  slots[1].GetItemData().data.itemName);
+            Item item = GetRecipe(slots[0].GetItemData().data.itemName.ToString(),
+                                  slots[1].GetItemData().data.itemName.ToString());
             ShowCompletedItem(item);
         }
         if (slots[2].GetItemData() != null)
         {
-            Item item = GetRecipe(slots[0].GetItemData().data.itemName,
-                                  slots[1].GetItemData().data.itemName,
-                                  slots[2].GetItemData().data.itemName);
+            Item item = GetRecipe(slots[0].GetItemData().data.itemName.ToString(),
+                                  slots[1].GetItemData().data.itemName.ToString(),
+                                  slots[2].GetItemData().data.itemName.ToString());
             ShowCompletedItem(item);
         }
         if (slots[3].GetItemData() != null)
         {
-            Item item = GetRecipe(slots[0].GetItemData().data.itemName,
-                                  slots[1].GetItemData().data.itemName,
-                                  slots[2].GetItemData().data.itemName,
-                                  slots[3].GetItemData().data.itemName);
+            Item item = GetRecipe(slots[0].GetItemData().data.itemName.ToString(),
+                                  slots[1].GetItemData().data.itemName.ToString(),
+                                  slots[2].GetItemData().data.itemName.ToString(),
+                                  slots[3].GetItemData().data.itemName.ToString());
             ShowCompletedItem(item);
         }
-        */
     }
     Item GetRecipe(string item1, string item2)
     {
@@ -134,15 +128,13 @@ public class MakeController : MonoBehaviour
     Item GetItem(string itemName)
     {
         Item itemData = null;
-        /*
         foreach (var item in items)
         {
-            if (itemName == item.itemName.ToString())
+            if (itemName == item.data.itemName.ToString())
             {
                 itemData = item;
             }
         }
-        */
         return itemData;
     }
     public void ShowCompletedItem(Item itemData)
