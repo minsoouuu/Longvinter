@@ -10,7 +10,7 @@ public struct ItemData
     public int price;
     public int serial;
     public ItemName itemName;
-    public InvenItemType invenItem;
+    public InvenItemType itemType;
 }
 
 public abstract class Item : MonoBehaviour

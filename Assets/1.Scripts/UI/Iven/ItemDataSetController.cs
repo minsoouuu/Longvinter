@@ -28,7 +28,7 @@ public class ItemDataSetController : MonoBehaviour
                     equipments[i].data.image = jsonData.equimentData.equipments[j].image;
                     equipments[i].data.price = jsonData.equimentData.equipments[j].price;
                     equipments[i].data.serial =jsonData.equimentData.equipments[j].serial;
-                    equipments[i].data.type = jsonData.equimentData.equipments[j].type.ToString();
+                    equipments[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.equimentData.equipments[j].type);
                     equipments[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.equimentData.equipments[j].type);
                 }
             }
@@ -42,7 +42,7 @@ public class ItemDataSetController : MonoBehaviour
                     materilas[i].data.image = jsonData.materialData.materials[j].image;
                     materilas[i].data.price = jsonData.materialData.materials[j].price;
                     materilas[i].data.serial = jsonData.materialData.materials[j].serial;
-                    materilas[i].data.type = jsonData.materialData.materials[j].type;
+                    materilas[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.materialData.materials[j].type);
                     materilas[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.materialData.materials[j].type);
                 }
             }
@@ -56,7 +56,7 @@ public class ItemDataSetController : MonoBehaviour
                     foods[i].data.image = jsonData.foodData.foods[j].image;
                     foods[i].data.price = jsonData.foodData.foods[j].price;
                     foods[i].data.serial = jsonData.foodData.foods[j].serial;
-                    foods[i].data.type = jsonData.foodData.foods[j].type.ToString();
+                    foods[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.foodData.foods[j].type);
                     equipments[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.foodData.foods[j].type);
                 }
             }
@@ -70,7 +70,7 @@ public class ItemDataSetController : MonoBehaviour
                     plants[i].data.image = jsonData.plantData.plants[j].image;
                     plants[i].data.price = jsonData.plantData.plants[j].price;
                     plants[i].data.serial = jsonData.plantData.plants[j].serial;
-                    plants[i].data.type = jsonData.plantData.plants[j].type;
+                    plants[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.plantData.plants[j].type);
                     plants[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.plantData.plants[j].type);
                 }
             }

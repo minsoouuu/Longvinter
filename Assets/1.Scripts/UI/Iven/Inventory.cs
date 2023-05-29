@@ -118,9 +118,8 @@ public class Inventory : MonoBehaviour
             return;
 
         List<Item> curItems = new List<Item>();
-        switch (item.data.itemName)
+        switch (item.data.itemType)
         {
-            /*
             case InvenItemType.Equipments:
                 if (!equipments.Contains(item))
                 {
@@ -194,7 +193,6 @@ public class Inventory : MonoBehaviour
                 }
                 curItems = plants.ToList();
                 break;
-            */
         }
         ShowItem(curItems);
     }
@@ -206,7 +204,7 @@ public class Inventory : MonoBehaviour
         }
         List<Item> curItems = new List<Item>();
 
-        switch (item.data.invenItem)
+        switch (item.data.itemType)
         {
             case InvenItemType.Equipments:
                 if (!equipments.Contains(item))
