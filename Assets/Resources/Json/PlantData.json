@@ -29,7 +29,7 @@
       "serial": 3
     },
     {
-      "name": "turret",
+      "name": "Turret",
       "image": "T_IconTurret",
       "type": "Plants",
       "price": 200,

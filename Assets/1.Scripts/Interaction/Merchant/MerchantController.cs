@@ -10,7 +10,7 @@ public class MerchantController : MonoBehaviour
     [SerializeField] private Transform b_parent;
     [SerializeField] private Merchant s_itemlist;
     [HideInInspector] public Transform s_parent;
-    [SerializeField] private List<Item> equipments_list = new List<Item>();
+    List<Item> equipments_list = new List<Item>();
     [SerializeField] private Button close_btn;
     [SerializeField] private GameObject merchant;
     [SerializeField] private User player;
@@ -32,6 +32,11 @@ public class MerchantController : MonoBehaviour
     void Start()
     {
         inven = Gamemanager.instance.inventory;
+        for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
+        {
+            // 아이템 데이터 생성순서 수정하기.
+            equipments_list.Add(Gamemanager.instance.itemController.equipments[i]);
+        }
     }
 
     // Update is called once per frame
@@ -52,12 +57,11 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Merchant gb = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,true);
-                gb.transform.SetParent(b_parent);
-                //Merchant gb = Instantiate(b_itemlist, b_parent);
-                gb.Setdata(equipments_list[i]);
-                gb.mc = this;
-                merchant_blist.Add(gb.itemdata);
+                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,true);
+                slot.transform.SetParent(b_parent);
+                slot.Setdata(equipments_list[i]);
+                slot.mc = this;
+                merchant_blist.Add(slot.itemdata);
             }
         }
     }
@@ -71,12 +75,11 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Merchant gb = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,false);
-                gb.transform.SetParent(s_parent);
-                //Merchant gb = Instantiate(s_itemlist, s_parent);
-                gb.Setdata(inven.equipments[i]);
-                gb.mc = this;
-                merchant_slist.Add(gb.itemdata);
+                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,false);
+                slot.transform.SetParent(s_parent);
+                slot.Setdata(inven.equipments[i]);
+                slot.mc = this;
+                merchant_slist.Add(slot.itemdata);
             }
         }
     }

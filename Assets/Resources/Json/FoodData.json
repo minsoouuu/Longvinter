@@ -73,8 +73,8 @@
       "stats": 30
     },
     {
-      "name": "RasberryJam",
-      "image": "T_IconRasberryJam",
+      "name": "RaspberryJam",
+      "image": "T_IconRaspberryJam",
       "type": "Foods",
       "price": 25,
       "serial": 9,

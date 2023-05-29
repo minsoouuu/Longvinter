@@ -18,8 +18,9 @@ public class MakingSlot : MonoBehaviour
     public void SetItmeData(Item itemdata)
     {
         this.itemData = itemdata;
-        //itemIcon.sprite = itemData.data.itemImage;
+        itemIcon.sprite = itemData.data.image;
         makeController.itemDatas.Add(itemData);
+        makeController.makingSlots.Add(this);
     }
     public Item GetItemData()
     {

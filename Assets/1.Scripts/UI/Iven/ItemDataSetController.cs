@@ -14,7 +14,21 @@ public class ItemDataSetController : MonoBehaviour
     public List<Item> materilas;
     public List<Item> foods;
     public List<Item> plants;
-
+  
+    private void Start()
+    {
+        SetData();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            foreach (var item in plants)
+            {
+                Debug.Log(item.data.itemName.ToString());
+            }
+        }
+    }
     void SetData()
     {
         JsonData jsonData = Gamemanager.instance.jsonDataController;
@@ -22,7 +36,7 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.equimentData.equipments.Count; j++)
             {
-                if (equipments[i].data.itemName.ToString() == jsonData.equimentData.equipments[j].name)
+                if (equipments[i].name == jsonData.equimentData.equipments[j].name)
                 {
                     equipments[i].data.price = jsonData.equimentData.equipments[j].price;
                     equipments[i].data.serial =jsonData.equimentData.equipments[j].serial;
@@ -36,7 +50,7 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.materialData.materials.Count; j++)
             {
-                if (materilas[i].data.itemName.ToString() == jsonData.materialData.materials[j].name)
+                if (materilas[i].name == jsonData.materialData.materials[j].name)
                 {
                     materilas[i].data.price = jsonData.materialData.materials[j].price;
                     materilas[i].data.serial = jsonData.materialData.materials[j].serial;
@@ -50,7 +64,7 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.foodData.foods.Count; j++)
             {
-                if (foods[i].data.itemName.ToString() == jsonData.foodData.foods[j].name)
+                if (foods[i].gameObject.name == jsonData.foodData.foods[j].name)
                 {
                     foods[i].data.price = jsonData.foodData.foods[j].price;
                     foods[i].data.serial = jsonData.foodData.foods[j].serial;
@@ -64,7 +78,7 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.plantData.plants.Count; j++)
             {
-                if (plants[i].data.itemName.ToString() == jsonData.plantData.plants[j].name)
+                if (plants[i].name == jsonData.plantData.plants[j].name)
                 {
                     plants[i].data.price = jsonData.plantData.plants[j].price;
                     plants[i].data.serial = jsonData.plantData.plants[j].serial;

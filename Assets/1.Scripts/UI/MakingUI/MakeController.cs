@@ -13,7 +13,7 @@ public class MakeController : MonoBehaviour
     [SerializeField] private JsonData recipe;
 
     [HideInInspector] public List<Item> itemDatas = new List<Item>();
-
+    [HideInInspector] public List<MakingSlot> makingSlots = new List<MakingSlot>();
     void Awake()
     {
         btn.onClick.AddListener(() => OnButtonDown());

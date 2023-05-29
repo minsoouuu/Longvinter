@@ -68,7 +68,7 @@ public class Merchant : MonoBehaviour
     public void Setdata(Item itemdata)
     {
         this.itemdata = itemdata;
-        // image.sprite = itemdata.data;
+        image.sprite = itemdata.data.image;
         mk.text = itemdata.data.price.ToString();
     }
     

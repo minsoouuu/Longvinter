@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 60449917020315616}
   - component: {fileID: 6274049467838465173}
   m_Layer: 0
-  m_Name: RasBerryJam
+  m_Name: RaspberryJam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1141766354477589361}
   - component: {fileID: 1359134039402254505}
   m_Layer: 0
-  m_Name: CloudBerry
+  m_Name: Cloudberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

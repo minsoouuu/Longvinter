@@ -16,7 +16,6 @@ public enum ObjectType
 }
 public enum ItemName
 {
-    Pocket,
     #region Equipment
     Ammo,
     AmmoPouch,
@@ -59,6 +58,7 @@ public enum ItemName
     Peacock,
     HazelHenNormal,
     Matches,
+    WaterCanister,
 
 
     #endregion
@@ -67,14 +67,13 @@ public enum ItemName
     Bread,
     Cake,
     Croissant,
-    WaterCanister,
     EnergyDrink,
     HeatPack,
     SnackBar,
     Chanterelle,
     BlackberryJam,
     CloudberryJam,
-    RasberryJam,
+    RaspberryJam,
     CookedPerch,
     CookedSalmonShark,
     CookedTuna,
@@ -86,7 +85,7 @@ public enum ItemName
     Bench,
     Container,
     Firepit,
-    turret,
+    Turret,
     VillageLampPost,
     WoodStool,
     Kamiina,
@@ -95,7 +94,7 @@ public enum ItemName
     TrimmedBush,
     Vendor,
     LightBulb,
-    Placeholer,
+    Placeholder,
 
 
     #endregion

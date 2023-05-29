@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 538353773335586431}
   - component: {fileID: 7767165350650983008}
   m_Layer: 0
-  m_Name: CloudBerryJam
+  m_Name: CloudberryJam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

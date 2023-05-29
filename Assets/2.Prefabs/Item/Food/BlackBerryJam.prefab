@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7021144339423843841}
   - component: {fileID: 8241507604224912405}
   m_Layer: 0
-  m_Name: BlackBerryJam
+  m_Name: BlackberryJam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
