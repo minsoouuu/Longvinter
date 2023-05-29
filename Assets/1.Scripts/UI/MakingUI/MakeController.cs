@@ -56,7 +56,7 @@ public class MakeController : MonoBehaviour
 
         foreach (var item in items)
         {
-            if (item.data.itemName == complete)
+            if (item.itemName.ToString() == complete)
             {
                 comPleteItem = item;
             }
@@ -133,7 +133,7 @@ public class MakeController : MonoBehaviour
         Item itemData = null;
         foreach (var item in items)
         {
-            if (itemName == item.data.itemName)
+            if (itemName == item.itemName.ToString())
             {
                 itemData = item;
             }

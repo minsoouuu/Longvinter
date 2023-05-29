@@ -10,15 +10,15 @@ public class MerchantController : MonoBehaviour
     [SerializeField] private Transform b_parent;
     [SerializeField] private Merchant s_itemlist;
     [HideInInspector] public Transform s_parent;
-    [SerializeField] private List<Item> equipments_list = new List<Item>();
+    [SerializeField] private List<Item1> equipments_list = new List<Item1>();
     [SerializeField] private Button close_btn;
     [SerializeField] private GameObject merchant;
     [SerializeField] private User player;
     [SerializeField] private Toggle[] tg;
 
-    List<Item> merchant_blist = new List<Item>();
-    List<Item> merchant_slist = new List<Item>();
-    List<Item> Inventory_list = new List<Item>();
+    List<Item1> merchant_blist = new List<Item1>();
+    List<Item1> merchant_slist = new List<Item1>();
+    List<Item1> Inventory_list = new List<Item1>();
     Inventory inven = new Inventory();
 
     ObjectType myType = ObjectType.BuySlot;
@@ -84,7 +84,7 @@ public class MerchantController : MonoBehaviour
 
     void DeleteMerchant_s_ItemList()
     {
-        List<Item> temp = new List<Item>();
+        List<Item1> temp = new List<Item1>();
         temp = inven.equipments.ToList();
         for (int i = 0; i < temp.Count; i++)
         {
@@ -94,7 +94,7 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Item mc = s_parent.GetChild(i).GetComponent<Merchant>().itemdata;
+                Item1 mc = s_parent.GetChild(i).GetComponent<Merchant>().itemdata;
             }
             
         }

@@ -9,7 +9,7 @@ public class Merchant : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] TMP_Text mk;
-    [HideInInspector] public Item itemdata;
+    [HideInInspector] public Item1 itemdata;
     Inventory inven = new Inventory();
     [HideInInspector] public MerchantController mc;
 
@@ -21,7 +21,7 @@ public class Merchant : MonoBehaviour
     public void OnClickBuy()
     {
         inven.Money -= itemdata.data.mk;
-        List<Item> temp = new List<Item>();
+        List<Item1> temp = new List<Item1>();
         inven.AddItem(itemdata);
         temp = inven.equipments.ToList();
         itemdata.Init();
@@ -47,7 +47,7 @@ public class Merchant : MonoBehaviour
     public void OnClickSell()
     {
         int count = 0;
-        List<Item> temp = new List<Item>();
+        List<Item1> temp = new List<Item1>();
         temp = inven.equipments.ToList();
         count = temp.Count;
         inven.DeleteItem(itemdata);
@@ -66,7 +66,7 @@ public class Merchant : MonoBehaviour
         }
     }
 
-    public void Setdata(Item itemdata)
+    public void Setdata(Item1 itemdata)
     {
         this.itemdata = itemdata;
         image.sprite = itemdata.data.itemImage;

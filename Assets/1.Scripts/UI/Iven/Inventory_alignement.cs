@@ -26,7 +26,7 @@ public class Inventory_alignement : MonoBehaviour
         {
             if (inventory.slots[i].item.data.serialNum > inventory.slots[i + 1].item.data.serialNum)
             {
-                Item tmp;
+                Item1 tmp;
                 tmp = inventory.slots[i].item;
                 
                 inventory.slots[i].item = inventory.slots[i + 1].item;

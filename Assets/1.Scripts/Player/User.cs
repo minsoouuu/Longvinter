@@ -124,7 +124,16 @@ public class User : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inven.transform.GetChild(0).gameObject.SetActive(true);
+            if (inven.invenIsOn == false)
+            {
+                inven.transform.GetChild(0).gameObject.SetActive(true);
+                inven.invenIsOn = true;
+            }
+            else
+            {
+                inven.transform.GetChild(0).gameObject.SetActive(false);
+                inven.invenIsOn = false;
+            }
         }
         /*
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))

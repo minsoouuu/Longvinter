@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
         plant
     }
 
-    [SerializeField] private Item item1;
+    [SerializeField] private Item Item;
     [SerializeField] private Item item2;
     [SerializeField] private Transform spawnPoint;
 
@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public List<Item> plants = new List<Item>();
     [HideInInspector] public List<List<Item>> itemss = new List<List<Item>>();
     [HideInInspector] public Sprite nullsprite;
+    [HideInInspector] public bool invenIsOn = false;
 
     [SerializeField] private SelectCountController scController;
     [SerializeField] private Button moneyButton;
@@ -69,31 +70,31 @@ public class Inventory : MonoBehaviour
     {
         SelectCountController select = Instantiate(scController, spawnPoint);
         select.gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);
         scController = select;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            item1.Init();
-            AddItem(item1);
+            AddItem(Item);
             Debug.Log("?????? ????");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            item2.Init();
             AddItem(item2);
             Debug.Log("?????? ????");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            DeleteItem(item1);
+            DeleteItem(Item);
         }
     }
 
     void OnButtonDownClose()
     {
         transform.GetChild(0).gameObject.SetActive(false);
+        invenIsOn = false;
     }
     void OpenInventorry()
     {
@@ -117,9 +118,9 @@ public class Inventory : MonoBehaviour
             return;
 
         List<Item> curItems = new List<Item>();
-        switch (item.data.itemType)
+        switch (item.data.type)
         {
-            case InvenItemType.Equipments:
+            case "Equipments":
                 if (!equipments.Contains(item))
                 {
                     equipments.Add(item);
@@ -128,7 +129,7 @@ public class Inventory : MonoBehaviour
                 {
                     foreach (var it in equipments)
                     {
-                        if (item.data.itemName == it.data.itemName)
+                        if (item.itemName.ToString() == it.data.type)
                         {
                             it.Count += 1;
                             break;

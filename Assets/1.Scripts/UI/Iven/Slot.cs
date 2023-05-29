@@ -10,7 +10,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     [SerializeField] TMP_Text countText;
     private Image image;
     private ItemPopUp popup;
-    [HideInInspector] public Item item;
+    [HideInInspector] public Item1 item;
     [HideInInspector] public RectTransform rt;
 
     private void Start()
@@ -18,7 +18,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
         image = GetComponent<Image>();
         rt = GetComponent<RectTransform>();
     }
-    public void SetItemData(Item item)
+    public void SetItemData(Item1 item)
     {
         image.sprite = item.data.itemImage;
         countText.text = item.Count.ToString();

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MakingSlot : MonoBehaviour
 {
     [SerializeField] private MakeController makeController;
-    private Item itemData = null;
+    private Item1 itemData = null;
     private Image itemIcon;
 
     public bool IsCheck { get; set; }
@@ -15,13 +15,13 @@ public class MakingSlot : MonoBehaviour
         itemIcon = GetComponent<Image>();
         IsCheck = true;
     }
-    public void SetItmeData(Item itemdata)
+    public void SetItmeData(Item1 itemdata)
     {
         this.itemData = itemdata;
         itemIcon.sprite = itemData.data.itemImage;
         makeController.itemDatas.Add(itemData);
     }
-    public Item GetItemData()
+    public Item1 GetItemData()
     {
         return itemData;
     }

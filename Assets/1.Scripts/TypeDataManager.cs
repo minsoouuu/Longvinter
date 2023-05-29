@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 public enum InvenItemType
 {
     Equipments,
@@ -20,17 +21,20 @@ public enum ItemName
 
     Gun,
     Ammo,
+    Rifle,
 
     #endregion
     #region Metarial
 
     Blackberry,
+    Wood,
 
     #endregion
     #region Food
 
     Bread,
     Blackberryjam,
+    Cake,
 
     #endregion
     #region Plant
@@ -52,4 +56,11 @@ public enum HouseType
     Test2,
     Test3,
     Test4
+}
+public static class EnumUtil<T>
+{
+    public static T Parse(string s)
+    {
+        return (T)Enum.Parse(typeof(T), s);
+    }
 }

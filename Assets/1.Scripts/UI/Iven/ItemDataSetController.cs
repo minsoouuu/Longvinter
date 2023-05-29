@@ -10,28 +10,26 @@ public class ItemDataSetController : MonoBehaviour
         Monster,
     }
 
-    public List<Item1> equipments;
-    public List<Item1> materilas;
-    public List<Item1> foods;
-    public List<Item1> plants;
+    public List<Item> equipments;
+    public List<Item> materilas;
+    public List<Item> foods;
+    public List<Item> plants;
 
-    void Start()
-    {
-        
-    }
     void SetData()
     {
+
         JsonData jsonData = Gamemanager.instance.jsonDataController;
         for (int i = 0; i < equipments.Count; i++)
         {
             for (int j = 0; j < jsonData.equimentData.equipments.Count; j++)
             {
-                if (equipments[i].itemType.ToString() == jsonData.equimentData.equipments[j].type.ToString())
+                if (equipments[i].data.itemName.ToString() == jsonData.equimentData.equipments[j].type.ToString())
                 {
                     equipments[i].data.image = jsonData.equimentData.equipments[j].image;
                     equipments[i].data.price = jsonData.equimentData.equipments[j].price;
                     equipments[i].data.serial =jsonData.equimentData.equipments[j].serial;
                     equipments[i].data.type = jsonData.equimentData.equipments[j].type.ToString();
+                    equipments[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.equimentData.equipments[j].type);
                 }
             }
         }
@@ -39,12 +37,13 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.materialData.materials.Count; j++)
             {
-                if (materilas[i].itemType.ToString() == jsonData.equimentData.equipments[j].type.ToString())
+                if (materilas[i].data.itemName.ToString() == jsonData.materialData.materials[j].type.ToString())
                 {
                     materilas[i].data.image = jsonData.materialData.materials[j].image;
                     materilas[i].data.price = jsonData.materialData.materials[j].price;
                     materilas[i].data.serial = jsonData.materialData.materials[j].serial;
                     materilas[i].data.type = jsonData.materialData.materials[j].type;
+                    materilas[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.materialData.materials[j].type);
                 }
             }
         }
@@ -52,12 +51,13 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.foodData.foods.Count; j++)
             {
-                if (foods[i].itemType.ToString() == jsonData.equimentData.equipments[j].type.ToString())
+                if (foods[i].data.itemName.ToString() == jsonData.foodData.foods[j].type.ToString())
                 {
                     foods[i].data.image = jsonData.foodData.foods[j].image;
                     foods[i].data.price = jsonData.foodData.foods[j].price;
                     foods[i].data.serial = jsonData.foodData.foods[j].serial;
                     foods[i].data.type = jsonData.foodData.foods[j].type.ToString();
+                    equipments[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.foodData.foods[j].type);
                 }
             }
         }
@@ -65,12 +65,13 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.plantData.plants.Count; j++)
             {
-                if (plants[i].itemType.ToString() == jsonData.equimentData.equipments[j].type.ToString())
+                if (plants[i].data.itemName.ToString() == jsonData.plantData.plants[j].type.ToString())
                 {
                     plants[i].data.image = jsonData.plantData.plants[j].image;
                     plants[i].data.price = jsonData.plantData.plants[j].price;
                     plants[i].data.serial = jsonData.plantData.plants[j].serial;
                     plants[i].data.type = jsonData.plantData.plants[j].type;
+                    plants[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.plantData.plants[j].type);
                 }
             }
         }

@@ -7,12 +7,12 @@ using System;
 public class ObjectPoolSystem : MonoBehaviour
 {
     [SerializeField] private List<Merchant> slotPrefabs;
-    [SerializeField] private List<Item1> itemPrefabs;
+    [SerializeField] private List<Item> itemPrefabs;
     [SerializeField] private List<House> housePrefabs;
     [SerializeField] private List<Monster> monsterPrefabs;
 
     private Dictionary<ObjectType, Queue<Merchant>> objectPools = new Dictionary<ObjectType, Queue<Merchant>>();
-    private Dictionary<ItemName, Queue<Item1>> itemPools = new Dictionary<ItemName, Queue<Item1>>();
+    private Dictionary<ItemName, Queue<Item>> itemPools = new Dictionary<ItemName, Queue<Item>>();
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
 
@@ -40,7 +40,7 @@ public class ObjectPoolSystem : MonoBehaviour
                         objectPools[(ObjectType)(j)] = new Queue<Merchant>();
                         break;
                     case 1:
-                        itemPools[(ItemName)(j)] = new Queue<Item1>();
+                        itemPools[(ItemName)(j)] = new Queue<Item>();
                         break;
                     case 2:
                         monsterPools[(MonsterType)(j)] = new Queue<Monster>();
@@ -57,7 +57,7 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(false);
         objectPools[objectType].Enqueue(obj);
     }
-    public void ReturnObject(ItemName type, Item1 obj)
+    public void ReturnObject(ItemName type, Item obj)
     {
         obj.gameObject.SetActive(false);
         itemPools[type].Enqueue(obj);
@@ -118,9 +118,9 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
-    public Item1 GetObjectOfObjectPooling(ItemName type)
+    public Item GetObjectOfObjectPooling(ItemName type)
     {
-        Item1 obj = null;
+        Item obj = null;
 
         if (itemPools[type].Count != 0)
         {
