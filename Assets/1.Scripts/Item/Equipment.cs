@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RasBerry : Item
+public class Equipment : Item
 {
-    public ItemName itemName = ItemName.Raspberry;
     public override void Action()
     {
-       Debug.Log(itemName);
+        
     }
 }

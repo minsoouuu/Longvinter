@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5134517275461334330}
-  - component: {fileID: 2326975669786463270}
   - component: {fileID: 4203751671635417290}
   - component: {fileID: 1106541343349390540}
   - component: {fileID: 4325816435729605282}
+  - component: {fileID: -2680847673635566400}
   m_Layer: 0
   m_Name: RasBerry
   m_TagString: Untagged
@@ -35,18 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2326975669786463270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517604899712381053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 806d428f96ee6c74bad72ff9d9c5a558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!33 &4203751671635417290
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -110,3 +98,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2680847673635566400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517604899712381053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f5d0c0383b1674b93c83a527c533c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

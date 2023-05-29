@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7145359606130344623}
   - component: {fileID: 8500889757469414714}
   - component: {fileID: 8389142688381373067}
+  - component: {fileID: -9185933464562785921}
   m_Layer: 0
   m_Name: WaterCanister
   m_TagString: Untagged
@@ -97,3 +98,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-9185933464562785921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296131473573877288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f5d0c0383b1674b93c83a527c533c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
