@@ -18,29 +18,85 @@ public enum ItemName
 {
     Pocket,
     #region Equipment
-
-    Gun,
     Ammo,
+    AmmoPouch,
+    FullAutoPistol,
+    SemiAutoPistol,
+    MoertnBurstRifle,
+    ModernRifle,
     Rifle,
+    SemiRifle,
+    Shotgun,
+    SMG,
+    Chainsaw,
+    FishingRod,
+    GPS,
+    Hat,
+    Gatchet,
+    GatCombat,
+    GatFarming,
+    KeycardStandart,
+    Map,
+    TelescopicReel,
+
 
     #endregion
     #region Metarial
 
     Blackberry,
+    Cloudberry,
+    Raspberry,
+    SugarBeet,
+    Salt,
+    Pepper,
+    Perch,
+    SalmonShark,
+    Tuna,
+    ArcticChar,
     Wood,
+    Planks,
+    Fuel,
+    Peacock,
+    HazelHenNormal,
+    Matches,
+
 
     #endregion
     #region Food
 
     Bread,
-    Blackberryjam,
     Cake,
+    Croissant,
+    WaterCanister,
+    EnergyDrink,
+    EatPack,
+    SnackBar,
+    Chanterelle,
+    BlackberryJam,
+    CloudberryJam,
+    RasberryJam,
+    CookedPerch,
+    CookedSalmonShark,
+    CookedTuna,
+
 
     #endregion
     #region Plant
-
-    Fence,
+    FenceGate,
     Bench,
+    Container,
+    Firepit,
+    turret,
+    VillageLampPost,
+    WoodStool,
+    Kamiina,
+    Sauna,
+    Tent,
+    TrimmedBush,
+    Vendor,
+    LightBulb,
+    Placeholer,
+
 
     #endregion
 }

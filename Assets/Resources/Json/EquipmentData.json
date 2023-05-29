@@ -43,84 +43,98 @@
       "serial": 5
     },
     {
+      "name": "Rifle",
       "Image": "T_IconRifle",
       "type": "Equipments",
       "price": "50",
       "serial": 6
     },
     {
+      "name": "SemiRifle",
       "image": "T_IconSemiRifle",
       "type": "Equipments",
       "price": "50",
       "serial": 7
     },
     {
+      "name": "Shotgun",
       "image": "T_IconShotgun",
       "type": "Equipments",
       "price": "50",
       "serial": 8
     },
     {
+      "name": "SMG",
       "image": "T_IconSMG",
       "type": "Equipments",
       "price": "50",
       "serial": 9
     },
     {
+      "name": "Chainsaw",
       "image": "T_IconChainsaw",
       "type": "Equipments",
       "price": "20",
       "serial": 10
     },
     {
+      "name": "FishingRod",
       "image": "T_IconFishingRod",
       "type": "Equipments",
       "price": "15",
       "serial": 11
     },
     {
+      "name": "GPS",
       "image": "T_IconGPS",
       "type": "Equipments",
       "price": "15",
       "serial": 12
     },
     {
+      "name": "Hat",
       "image": "T_IconHat",
       "type": "Equipments",
       "price": "10",
       "serial": 13
     },
     {
+      "name": "Gatchet",
       "image": "T_IconHatchet",
       "type": "Equipments",
       "price": "15",
       "serial": 14
     },
     {
+      "name": "GatCombat",
       "image": "T_IconHatCombat",
       "type": "Equipments",
       "price": "11",
       "serial": 15
     },
     {
+      "name": "GatFarming",
       "image": "T_IconHatFarming",
       "type": "Equipments",
       "price": "12",
       "serial": 16
     },
     {
+      "name": "KeycardStandart",
       "image": "T_IconKeycardStandart",
       "type": "Equipments",
       "price": "10",
       "serial": 17
     },
     {
+      "name": "Map",
       "image": "T_IconMap",
       "type": "Equipments",
       "price": "10",
       "serial": 18
     },
     {
+      "name": "TelescopicReel",
       "image": "T_IconTelescopicReel",
       "type": "Equipments",
       "price": "10",
