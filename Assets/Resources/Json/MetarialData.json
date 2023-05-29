@@ -7,7 +7,7 @@
       "serial": 0
     },
     {
-      "image": "T_IconCludberry",
+      "image": "T_IconCloudberry",
       "type": "Materials",
       "price": "10",
       "serial": 1
@@ -19,7 +19,7 @@
       "serial": 2
     },
     {
-      "image": "T_IconSugarBag",
+      "image": "T_IconSugar Beet",
       "type": "Materials",
       "price": "25",
       "serial": 3
@@ -86,6 +86,12 @@
     },
     {
       "image": "T_IconHazelHenNormal",
+      "type": "Materials",
+      "price": "20",
+      "serial": 14
+    },
+    {
+      "image": "T_Icon Matches",
       "type": "Materials",
       "price": "20",
       "serial": 14

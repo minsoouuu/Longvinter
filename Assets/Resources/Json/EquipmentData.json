@@ -19,25 +19,25 @@
       "serial": 2
     },
     {
-      "image": "T_IconModernBurstRifle",
+      "image": "T_IconSemiAutoPistol",
       "type": "Equipments",
       "price": "50",
       "serial": 3
     },
     {
-      "image": "T_IconModernRifie",
+      "image": "T_IconModernBurstRifle",
       "type": "Equipments",
       "price": "50",
       "serial": 4
     },
     {
-      "Image": "T_IconRifle",
+      "image": "T_IconModernRifie",
       "type": "Equipments",
       "price": "50",
       "serial": 5
     },
     {
-      "image": "T_IconSemiAutoPistol",
+      "Image": "T_IconRifle",
       "type": "Equipments",
       "price": "50",
       "serial": 6

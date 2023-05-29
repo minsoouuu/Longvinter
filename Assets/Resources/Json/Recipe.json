@@ -1,9 +1,49 @@
 {
   "recipe": [
     {
-      "completeitem": "fence",
-      "material1": "wood",
-      "material2": "wood"
+      "completeitem": "Cake",
+      "material1": "BlackberryJam",
+      "material2": "Bread "
+    },
+    {
+      "completeitem": "Cake",
+      "material1": "CloudberryJam",
+      "material2": "Bread"
+    },
+    {
+      "completeitem": "Cake",
+      "material1": "RasberryJam",
+      "material2": "Bread"
+    },
+    {
+      "completeitem": "Croissant",
+      "material1": "Bread",
+      "material2": "Salt"
+    },
+    {
+      "completeitem": "Croissant",
+      "material1": "Bread",
+      "material2": "Pepper"
+    },
+    {
+      "completeitem": "Croissant",
+      "material1": "Bread",
+      "material2": "Sugar Beet"
+    },
+    {
+      "completeitem": "BlackberryJam",
+      "material1": "BlackBerry",
+      "material2": "WaterCanister"
+    },
+    {
+      "completeitem": "CloudberryJam",
+      "material1": "CloudBerry",
+      "material2": "WaterCanister "
+    },
+    {
+      "completeitem": "RasberryJam",
+      "material1": "Rasberry",
+      "material2": "WaterCanister"
     }
   ]
 }
