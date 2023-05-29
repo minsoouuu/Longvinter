@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Bread : Item
 {
-    public ItemName itemName = ItemName.Bread;
     public override void Action()
     {
-        Debug.Log(itemName);
+
     }
 }

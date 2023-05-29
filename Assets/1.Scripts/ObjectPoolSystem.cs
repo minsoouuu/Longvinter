@@ -16,7 +16,6 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
 
-
     private void Awake()
     {
         DataSetting();
@@ -57,10 +56,10 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(false);
         objectPools[objectType].Enqueue(obj);
     }
-    public void ReturnObject(ItemName type, Item obj)
+    public void ReturnObject(ItemName name, Item obj)
     {
         obj.gameObject.SetActive(false);
-        itemPools[type].Enqueue(obj);
+        itemPools[name].Enqueue(obj);
     }
     public void ReturnObject(MonsterType type, Monster obj)
     {
@@ -118,20 +117,50 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
-    public Item GetObjectOfObjectPooling(ItemName type)
+    public Item GetObjectOfObjectPooling(InvenItemType itemType,ItemName name)
     {
         Item obj = null;
 
-        if (itemPools[type].Count != 0)
+        if (itemPools[name].Count != 0)
         {
-            obj = itemPools[type].Dequeue();
+            obj = itemPools[name].Dequeue();
+            obj.gameObject.SetActive(true);
         }
         else
         {
-        }
+            switch (itemType)
+            {
+                case InvenItemType.Equipments:
+                    obj = Instantiate(CreateItem(Gamemanager.instance.itemController.equipments, name));
+                    break;
 
-        obj.gameObject.SetActive(true);
+                case InvenItemType.Materials:
+                    obj = Instantiate(CreateItem(Gamemanager.instance.itemController.materilas, name));
+                    break;
+
+                case InvenItemType.Foods:
+                    obj = Instantiate(CreateItem(Gamemanager.instance.itemController.foods, name));
+                    break;
+
+                case InvenItemType.Plants:
+                    obj = Instantiate(CreateItem(Gamemanager.instance.itemController.plants, name));
+                    break;
+            }
+        }
         return obj;
+    }
+    Item CreateItem(List<Item> items, ItemName name)
+    {
+        Item item = null;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].data.itemName == name)
+            {
+                item = items[i];
+                break;
+            }
+        }
+        return item;
     }
     public House GetObjectOfObjectPooling(HouseType type)
     {

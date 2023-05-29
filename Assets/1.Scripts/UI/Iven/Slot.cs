@@ -20,7 +20,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     }
     public void SetItemData(Item item)
     {
-        //image.sprite = item.data.itemImage;
+        image.sprite = item.data.image;
         countText.text = item.Count.ToString();
         this.item = item;
     }

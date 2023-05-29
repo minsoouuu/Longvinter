@@ -10,6 +10,7 @@ public  class Gamemanager : MonoBehaviour
     public Inventory inventory;
     public JsonData jsonDataController;
     public ObjectPoolSystem objectPool;
+    public ItemDataSetController itemController;
 
     void Awake()
     {
