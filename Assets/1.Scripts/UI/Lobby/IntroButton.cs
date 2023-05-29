@@ -6,15 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class IntroButton : MonoBehaviour
 {
-    public GameObject SettingPanel;
+    public GameObject escPanel;
     
-    public void GameStart()
-    {
-        SceneManager.LoadScene("Game");
-    }
 
     public void Setting()
     {
-        SettingPanel.SetActive(true);
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            escPanel.SetActive(true);
+        }
     }
 }

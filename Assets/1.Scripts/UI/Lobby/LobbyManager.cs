@@ -8,7 +8,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private string gameVersion = "1";
     public Text connectionInfoText;
     public Button joinButton;
-
+    public GameObject setNick;
 
     void Start()
     {
@@ -17,18 +17,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void GameStart()
     {
+        setNick.SetActive(true);
         PhotonNetwork.ConnectUsingSettings();
         joinButton.interactable = false;
         connectionInfoText.text = "마스터 서버에 접속 중...";
     }
 
+    public void SetNickName()
+    {
+
+        PhotonNetwork.LoadLevel("Game");
+    }
 
     public override void OnConnectedToMaster()
     {
         joinButton.interactable = true;
         connectionInfoText.text = "온라인 : 마스터 서버와 연결";
-
-        PhotonNetwork.LoadLevel("Game");
     }
 
     public override void OnDisconnected(DisconnectCause cause)
