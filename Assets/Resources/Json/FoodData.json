@@ -25,18 +25,11 @@
       "stats": 30
     },
     {
-      "name": "WaterCanister",
-      "image": "T_WaterCanister",
-      "type": "Foods",
-      "price": 25,
-      "serial": 3
-    },
-    {
       "name": "EnergyDrink",
       "image": "T_IconEnergyDrink_01",
       "type": "Foods",
       "price": 25,
-      "serial": 4,
+      "serial": 3,
       "stats": 30
     },
     {
@@ -44,63 +37,72 @@
       "image": "T_IconH EatPack",
       "type": "Foods",
       "price": 25,
-      "serial": 5
+      "serial": 4,
+      "stats": 30
     },
     {
       "name": "SnackBar",
       "image": "T_IconSnackBar",
       "type": "Foods",
       "price": 25,
-      "serial": 6
+      "serial": 5,
+      "stats": 30
     },
     {
       "name": "Chanterelle",
       "image": "T_IconChanterelle",
       "type": "Foods",
       "price": 25,
-      "serial": 7
+      "serial": 6,
+      "stats": 30
     },
     {
       "name": "BlackberryJam",
       "image": "T_IconBlackberryJam",
       "type": "Foods",
       "price": 25,
-      "serial": 8
+      "serial": 7,
+      "stats": 30
     },
     {
       "name": "CloudberryJam",
       "image": "T_IconCloudberryJam",
       "type": "Foods",
       "price": 25,
-      "serial": 9
+      "serial": 8,
+      "stats": 30
     },
     {
       "name": "RasberryJam",
       "image": "T_IconRasberryJam",
       "type": "Foods",
       "price": 25,
-      "serial": 10
+      "serial": 9,
+      "stats": 30
     },
     {
       "name": "CookedPerch",
       "image": "T_IconCookedPerch",
       "type": "Foods",
       "price": 30,
-      "serial": 11
+      "serial": 10,
+      "stats": 30
     },
     {
       "name": "CookedSalmonShark",
       "image": "T_IconCookedSalmonShark",
       "type": "Foods",
       "price": 40,
-      "serial": 12
+      "serial": 11,
+      "stats": 30
     },
     {
       "name": "CookedTuna",
       "image": "T_IconCookedTuna",
       "type": "Foods",
       "price": 30,
-      "serial": 13
+      "serial": 12,
+      "stats": 30
     }
   ]
 }
