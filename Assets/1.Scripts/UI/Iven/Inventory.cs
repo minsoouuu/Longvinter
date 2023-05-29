@@ -118,9 +118,10 @@ public class Inventory : MonoBehaviour
             return;
 
         List<Item> curItems = new List<Item>();
-        switch (item.data.type)
+        switch (item.data.itemName)
         {
-            case "Equipments":
+            /*
+            case InvenItemType.Equipments:
                 if (!equipments.Contains(item))
                 {
                     equipments.Add(item);
@@ -129,7 +130,7 @@ public class Inventory : MonoBehaviour
                 {
                     foreach (var it in equipments)
                     {
-                        if (item.itemName.ToString() == it.data.type)
+                        if (item.data.itemName.ToString() == it.data.type)
                         {
                             it.Count += 1;
                             break;
@@ -193,6 +194,7 @@ public class Inventory : MonoBehaviour
                 }
                 curItems = plants.ToList();
                 break;
+            */
         }
         ShowItem(curItems);
     }
@@ -203,7 +205,8 @@ public class Inventory : MonoBehaviour
             return;
         }
         List<Item> curItems = new List<Item>();
-        switch (item.data.itemType)
+
+        switch (item.data.invenItem)
         {
             case InvenItemType.Equipments:
                 if (!equipments.Contains(item))
@@ -344,6 +347,7 @@ public class Inventory : MonoBehaviour
         }
         for (int i = 0; i < SlotDataCount() - 1; i++)
         {
+            /*
             if (curitem[i].data.serialNum > curitem[i + 1].data.serialNum)
             {
                 Item tmp;
@@ -353,6 +357,7 @@ public class Inventory : MonoBehaviour
 
                 curitem[i + 1] = tmp;
             }
+            */
         }
         ShowItem(curitem);
     }

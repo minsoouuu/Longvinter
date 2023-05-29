@@ -10,12 +10,14 @@ public struct ItemData
     public int price;
     public int serial;
     public ItemName itemName;
+    public InvenItemType invenItem;
 }
 
 public abstract class Item : MonoBehaviour
 {
     [HideInInspector] public Sprite Icon;
     public ItemData data = new ItemData();
+
 
     //private InvenItemType invenItem = InvenItemType.data.type;
     private int count = 0;

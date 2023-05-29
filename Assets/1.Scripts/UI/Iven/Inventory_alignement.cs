@@ -24,6 +24,7 @@ public class Inventory_alignement : MonoBehaviour
     {
         for(int i = 0; i < SlotDataCount() - 1; i++)
         {
+            /*
             if (inventory.slots[i].item.data.serialNum > inventory.slots[i + 1].item.data.serialNum)
             {
                 Item1 tmp;
@@ -35,6 +36,7 @@ public class Inventory_alignement : MonoBehaviour
                 inventory.slots[i + 1].item = tmp;
                 inventory.slots[i+1].SetItemData(inventory.slots[i+1].item);
             }
+            */
         }
     }
 

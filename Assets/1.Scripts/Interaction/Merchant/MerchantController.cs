@@ -10,15 +10,15 @@ public class MerchantController : MonoBehaviour
     [SerializeField] private Transform b_parent;
     [SerializeField] private Merchant s_itemlist;
     [HideInInspector] public Transform s_parent;
-    [SerializeField] private List<Item1> equipments_list = new List<Item1>();
+    [SerializeField] private List<Item> equipments_list = new List<Item>();
     [SerializeField] private Button close_btn;
     [SerializeField] private GameObject merchant;
     [SerializeField] private User player;
     [SerializeField] private Toggle[] tg;
 
-    List<Item1> merchant_blist = new List<Item1>();
-    List<Item1> merchant_slist = new List<Item1>();
-    List<Item1> Inventory_list = new List<Item1>();
+    List<Item> merchant_blist = new List<Item>();
+    List<Item> merchant_slist = new List<Item>();
+    List<Item> Inventory_list = new List<Item>();
     Inventory inven = new Inventory();
 
     ObjectType myType = ObjectType.BuySlot;
@@ -55,7 +55,6 @@ public class MerchantController : MonoBehaviour
                 Merchant gb = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,true);
                 gb.transform.SetParent(b_parent);
                 //Merchant gb = Instantiate(b_itemlist, b_parent);
-                equipments_list[i].Init();
                 gb.Setdata(equipments_list[i]);
                 gb.mc = this;
                 merchant_blist.Add(gb.itemdata);
@@ -84,7 +83,7 @@ public class MerchantController : MonoBehaviour
 
     void DeleteMerchant_s_ItemList()
     {
-        List<Item1> temp = new List<Item1>();
+        List<Item> temp = new List<Item>();
         temp = inven.equipments.ToList();
         for (int i = 0; i < temp.Count; i++)
         {
@@ -94,7 +93,7 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Item1 mc = s_parent.GetChild(i).GetComponent<Merchant>().itemdata;
+                Item mc = s_parent.GetChild(i).GetComponent<Merchant>().itemdata;
             }
             
         }

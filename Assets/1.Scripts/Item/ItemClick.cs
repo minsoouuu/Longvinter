@@ -9,7 +9,7 @@ public class ItemClick : MonoBehaviour
     private Inventory inventory;
     private ItemPopUp popup;
     private Slot slot;
-    private Item1 item;
+    private Item item;
     private RectTransform rt;
     [SerializeField] private GameObject buttons;
 

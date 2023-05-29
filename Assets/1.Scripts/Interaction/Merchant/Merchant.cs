@@ -9,7 +9,7 @@ public class Merchant : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] TMP_Text mk;
-    [HideInInspector] public Item1 itemdata;
+    [HideInInspector] public Item itemdata;
     Inventory inven = new Inventory();
     [HideInInspector] public MerchantController mc;
 
@@ -20,11 +20,10 @@ public class Merchant : MonoBehaviour
    
     public void OnClickBuy()
     {
-        inven.Money -= itemdata.data.mk;
-        List<Item1> temp = new List<Item1>();
+        inven.Money -= itemdata.data.price;
+        List<Item> temp = new List<Item>();
         inven.AddItem(itemdata);
         temp = inven.equipments.ToList();
-        itemdata.Init();
         for (int i = 0; i < inven.equipments.Count; i++)
         {   
             
@@ -36,7 +35,7 @@ public class Merchant : MonoBehaviour
                 }
             }
             mc.s_parent.transform.GetChild(i).gameObject.SetActive(true);
-            mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
+            //mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
         }
         for (int j = mc.s_parent.childCount - 1; j > inven.equipments.Count - 1; j--)
         {
@@ -47,16 +46,16 @@ public class Merchant : MonoBehaviour
     public void OnClickSell()
     {
         int count = 0;
-        List<Item1> temp = new List<Item1>();
+        List<Item> temp = new List<Item>();
         temp = inven.equipments.ToList();
         count = temp.Count;
         inven.DeleteItem(itemdata);
-        inven.Money += itemdata.data.mk;
+        inven.Money += itemdata.data.price;
         if(count != inven.equipments.Count)
         {
             for(int i = 0; i < inven.equipments.Count; i++)
             {
-                mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
+                //mc.s_parent.transform.GetChild(i).GetComponent<Merchant>().Setdata(inven.equipments[i]);
             }
             for(int j = mc.s_parent.childCount - 1; j > inven.equipments.Count - 1; j--)
             {
@@ -66,11 +65,11 @@ public class Merchant : MonoBehaviour
         }
     }
 
-    public void Setdata(Item1 itemdata)
+    public void Setdata(Item itemdata)
     {
         this.itemdata = itemdata;
-        image.sprite = itemdata.data.itemImage;
-        mk.text = itemdata.data.mk.ToString();
+        //image.sprite = itemdata.data.itemImage;
+        mk.text = itemdata.data.price.ToString();
     }
     
     

@@ -28,7 +28,7 @@ public class MakeController : MonoBehaviour
         List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
         string complete = string.Empty;
-
+        /*
         for (int i = 0; i < slots.Length; i++)
         {
             if (i == 0)
@@ -61,6 +61,7 @@ public class MakeController : MonoBehaviour
                 comPleteItem = item;
             }
         }
+        */
 
         recipes.Clear();
         complete = string.Empty;
@@ -71,6 +72,7 @@ public class MakeController : MonoBehaviour
 
     public void Make()
     {
+        /*
         if (slots[1].GetItemData() != null)
         {
             Item item = GetRecipe(slots[0].GetItemData().data.itemName,
@@ -92,6 +94,7 @@ public class MakeController : MonoBehaviour
                                   slots[3].GetItemData().data.itemName);
             ShowCompletedItem(item);
         }
+        */
     }
     Item GetRecipe(string item1, string item2)
     {
@@ -131,6 +134,7 @@ public class MakeController : MonoBehaviour
     Item GetItem(string itemName)
     {
         Item itemData = null;
+        /*
         foreach (var item in items)
         {
             if (itemName == item.itemName.ToString())
@@ -138,6 +142,7 @@ public class MakeController : MonoBehaviour
                 itemData = item;
             }
         }
+        */
         return itemData;
     }
     public void ShowCompletedItem(Item itemData)
