@@ -7318,6 +7318,7 @@ MonoBehaviour:
   inventory: {fileID: 1229793896}
   jsonDataController: {fileID: 768414148}
   objectPool: {fileID: 1619661839}
+  itemController: {fileID: 0}
 --- !u!1001 &901862609
 PrefabInstance:
   m_ObjectHideFlags: 0
