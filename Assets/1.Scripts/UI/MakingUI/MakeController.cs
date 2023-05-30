@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
-
+using System;
 public class MakeController : MonoBehaviour
 {
     [SerializeField] private List<MakingSlot> slots;
     [SerializeField] private MakingSlot completedItem;
     [SerializeField] private Button btn;
-    [SerializeField] private Item[] items;
-    [SerializeField] private JsonData recipe;
 
-    [HideInInspector] public List<Item> itemDatas = new List<Item>();
-    [HideInInspector] public List<MakingSlot> makingSlots = new List<MakingSlot>();
+    [HideInInspector] public List<Item> materials = new List<Item>();
 
-    private List<Item> comItems = new List<Item>();
     void Awake()
     {
         btn.onClick.AddListener(() => OnButtonDown());
@@ -31,33 +27,28 @@ public class MakeController : MonoBehaviour
                 break;
             }
         }
-        CheckItem();
-    }
-    void CheckItem()
-    {
-
     }
 
     Item GetCompleteItem(InvenItemType type, ItemName name)
     {
         Item item = null;
+        ItemDataSetController itemData = Gamemanager.instance.itemController;
+
         switch (type)
         {
             case InvenItemType.Equipments:
-                
+                item = test(itemData.equipments, name);
                 break;
             case InvenItemType.Materials:
-
+                item = test(itemData.materilas, name);
                 break;
             case InvenItemType.Plants:
-
+                item = test(itemData.plants, name);
                 break;
             case InvenItemType.Foods:
-
+                item = test(itemData.foods, name);
                 break;
-
         }
-
         return item;
     }
 
@@ -69,50 +60,43 @@ public class MakeController : MonoBehaviour
             if (list[i].data.itemName == name)
             {
                 item = list[i];
+                break;
             }
         }
         return item;
     }
-    Item ChekSlots()
+    Item CheckItem()
     {
         Item comPleteItem = null;
 
-        List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
+        List<JsonData.RecipeJson> recipes = Gamemanager.instance.jsonDataController.recipeData.recipe;
 
-        string complete = string.Empty;
-        for (int i = 0; i < slots.Count; i++)
+        List<JsonData.RecipeJson> comPletes = new List<JsonData.RecipeJson>();
+        ItemName itemName = new ItemName();
+        for (int i = 0; i < materials.Count; i++)
         {
-            if (i == 0)
+            for (int j = 0; j < recipes.Count; j++)
             {
-                for (int j = 0; j < recipe.recipeData.recipe.Count; j++)
+                if (i == 0)
                 {
-                    if (slots[i].GetItemData().data.itemName.ToString() == recipe.recipeData.recipe[j].material1)
+                    if (materials[i].data.itemName.ToString() == recipes[j].material1)
                     {
-                        recipes.Add(recipe.recipeData.recipe[j]);
+                        comPletes.Add(recipes[j]);
                     }
                 }
-            }
-            else if (i == 1)
-            {
-                for (int j = 0; j < recipes.Count; j++)
+                if (i == 1)
                 {
-                    if (slots[i].GetItemData().data.itemName.ToString() == recipes[j].material2) 
+                    for (int c = 0; c < comPletes.Count; c++)
                     {
-                        complete = recipe.recipeData.recipe[j].completeitem;
+                        if (materials[i].data.itemName.ToString() == comPletes[c].material2)
+                        {
+
+                        }
                     }
                 }
             }
         }
-        for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
-        {
-            if (Gamemanager.instance.itemController.equipments[i].data.itemName.ToString() == complete)
-            {
 
-            }
-        }
-
-        recipes.Clear();
-        complete = string.Empty;
 
         return comPleteItem;
     }
@@ -144,7 +128,6 @@ public class MakeController : MonoBehaviour
     Item GetRecipe(string item1, string item2)
     {
         Item item = null;
-        CheckRecipe(item1, item2);
         return item;
     }
     Item GetRecipe(string item1, string item2, string item3)
@@ -158,35 +141,6 @@ public class MakeController : MonoBehaviour
         Item item = null;
 
         return item;
-    }
-    Item CheckRecipe(string itemName1, string itemName2 )
-    {
-        Item itemData = null;
-        switch (itemName1)
-        {
-            case "Wood":
-                switch (itemName2)
-                {
-                    case "Wood":
-                        itemData = GetItem("Fance");
-                        break;
-                }
-                break;
-        }
-
-        return itemData;
-    }
-    Item GetItem(string itemName)
-    {
-        Item itemData = null;
-        foreach (var item in items)
-        {
-            if (itemName == item.data.itemName.ToString())
-            {
-                itemData = item;
-            }
-        }
-        return itemData;
     }
     public void ShowCompletedItem(Item itemData)
     {
