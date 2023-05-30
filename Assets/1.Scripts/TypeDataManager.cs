@@ -102,8 +102,10 @@ public enum ItemName
 public enum MonsterType
 {
     Rat,
-    Test2,
-    Test3
+    Gecko,
+    Colobus,
+    Taipan,
+    Sparrow
 }
 public enum HouseType
 {

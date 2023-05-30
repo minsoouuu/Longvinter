@@ -133,17 +133,13 @@ public class MerchantController : MonoBehaviour
         return index;
     }
 
-    public void OnClickToggle()
+    public void OnclickToggle(Toggle toggle)
     {
-        switch (num)
+        if (toggle.isOn)
         {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-                CreateMerchant_s_ItemList(num);
-                break;
+            CreateMerchant_s_ItemList(num);
         }
+        
     }
 
     public void HideSlot(Merchant slot)
