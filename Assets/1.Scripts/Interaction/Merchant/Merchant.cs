@@ -22,13 +22,21 @@ public class Merchant : MonoBehaviour
     {
         inven.AddItem(itemdata);
         inven.Money -= itemdata.data.price;
+        if(itemdata.Count == 0)
+        {
+            itemdata.Count += 1;
+            mc.CreateMerchant_s_ItemList(mc.num);
+        }
     }
 
     public void OnClickSell()
     {
         inven.DeleteItem(itemdata);
         inven.Money += itemdata.data.price;
-        Gamemanager.instance.objectPool.ReturnObject(mc.myTypeS, this);
+        if(itemdata.Count <= 0)
+        {
+            Gamemanager.instance.objectPool.ReturnObject(mc.myTypeS, this);
+        }
     }
 
     public void Setdata(Item itemdata)
