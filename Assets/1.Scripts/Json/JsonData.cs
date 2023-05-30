@@ -85,8 +85,7 @@ public class JsonData : MonoBehaviour
     {
         public List<PlantJson> plants = new List<PlantJson>();
     }
-
-    private void Start()
+    private void Awake()
     {
         recipeData = JsonUtility.FromJson<Recipe>(recipeJson.text);
         equimentData = JsonUtility.FromJson<Equipment>(equipmentJson.text);

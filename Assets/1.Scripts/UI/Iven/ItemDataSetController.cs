@@ -14,10 +14,11 @@ public class ItemDataSetController : MonoBehaviour
     public List<Item> materilas;
     public List<Item> foods;
     public List<Item> plants;
-  
-    private void Start()
+
+    private void Awake()
     {
         SetData();
+
     }
     void Update()
     {
@@ -25,7 +26,7 @@ public class ItemDataSetController : MonoBehaviour
         {
             foreach (var item in plants)
             {
-                Debug.Log(item.data.itemName.ToString());
+                Debug.Log(item.data.price);
             }
         }
     }

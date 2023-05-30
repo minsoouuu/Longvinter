@@ -19,23 +19,30 @@ public class MerchantController : MonoBehaviour
     List<Item> merchant_blist = new List<Item>();
     List<Item> merchant_slist = new List<Item>();
     List<Item> Inventory_list = new List<Item>();
-    Inventory inven = new Inventory();
+    Inventory inven;
 
     ObjectType myType = ObjectType.BuySlot;
 
     private void OnEnable()
     {
-        
         CreateMerchant_b_ItemList();
+       
     }
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("데이터 불러오기");
         inven = Gamemanager.instance.inventory;
-        for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
+        if (Gamemanager.instance.itemController.equipments.Count != 0)
         {
-            // 아이템 데이터 생성순서 수정하기.
-            equipments_list.Add(Gamemanager.instance.itemController.equipments[i]);
+            for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
+            {
+                equipments_list.Add(Gamemanager.instance.itemController.equipments[i]);
+            }
+        }
+        else
+        {
+            Debug.Log("데이터 없음");
         }
     }
 

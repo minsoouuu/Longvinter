@@ -19,9 +19,6 @@ public class Inventory : MonoBehaviour
         food,
         plant
     }
-
-    [SerializeField] private Item Item;
-    [SerializeField] private Item item2;
     [SerializeField] private Transform spawnPoint;
 
     [HideInInspector] public List<Item> equipments = new List<Item>();
@@ -77,17 +74,27 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            AddItem(Item);
-            Debug.Log("?????? ????");
+            int rand = Random.Range(0, Gamemanager.instance.itemController.equipments.Count);
+            AddItem(Gamemanager.instance.itemController.equipments[rand]);
+            Debug.Log("장비 아이템 추가");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            AddItem(item2);
-            Debug.Log("?????? ????");
+            int rand = Random.Range(0, Gamemanager.instance.itemController.materilas.Count);
+            AddItem(Gamemanager.instance.itemController.materilas[rand]);
+            Debug.Log("재료 아이템 추가");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            DeleteItem(Item);
+            int rand = Random.Range(0, Gamemanager.instance.itemController.foods.Count);
+            AddItem(Gamemanager.instance.itemController.foods[rand]);
+            Debug.Log("음식 아이템 추가");
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            int rand = Random.Range(0, Gamemanager.instance.itemController.plants.Count);
+            AddItem(Gamemanager.instance.itemController.plants[rand]);
+            Debug.Log("설치 아이템 추가");
         }
     }
 
