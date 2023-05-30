@@ -71,6 +71,8 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(false);
         housePools[type].Enqueue(obj);
     }
+
+    // true - Buy, false - Sell
     public Merchant GetObjectOfObjectPooling(ObjectType objectType, bool a)
     {
         Merchant obj = null;

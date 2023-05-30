@@ -17,12 +17,14 @@ public class MerchantController : MonoBehaviour
 
     List<Item> equipments_list = new List<Item>();
     List<Item> merchant_blist = new List<Item>();
-    List<Item> merchant_slist = new List<Item>();
+    [HideInInspector] public List<Item> merchant_slist = new List<Item>();
     List<Item> Inventory_list = new List<Item>();
     Inventory inven;
 
-    ObjectType myType = ObjectType.BuySlot;
-    int num = 0;
+    [HideInInspector] public List<Merchant> slot_list = new List<Merchant>(); 
+    [HideInInspector] public ObjectType myTypeB = ObjectType.BuySlot;
+    [HideInInspector] public ObjectType myTypeS = ObjectType.SellSlot;
+    [HideInInspector] public int num = 0;
 
     private void OnEnable()
     {
@@ -51,8 +53,7 @@ public class MerchantController : MonoBehaviour
     {
         num = SetToggle();
         Close_Merchant();
-        Get_Inventory_Itemlist();
-        CreateMerchant_s_ItemList(0);
+        CreateMerchant_s_ItemList(num);
     }
 
     void CreateMerchant_b_ItemList()
@@ -65,7 +66,8 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType, true);
+                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myTypeB, true);
+
                 slot.transform.SetParent(b_parent);
                 slot.Setdata(equipments_list[i]);
                 slot.mc = this;
@@ -99,15 +101,23 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType, false);
+                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myTypeS, false);
                 slot.transform.SetParent(s_parent);
-                slot.Setdata(inven.equipments[i]);
+                slot.Setdata(list[i]);
                 slot.mc = this;
                 merchant_slist.Add(slot.itemdata);
+                slot_list.Add(slot);
             }
         }
     }
 
+    public void SlotOFF()
+    {
+        for(int i = 0; i < slot_list.Count; i++)
+        {
+            Gamemanager.instance.objectPool.ReturnObject(myTypeS, slot_list[i]);
+        }
+    }
 
     int SetToggle()
     {
@@ -136,29 +146,9 @@ public class MerchantController : MonoBehaviour
         }
     }
 
-    void Get_Inventory_Itemlist()
-    {
-        foreach (var item in inven.equipments)
-        {
-            Inventory_list.Add(item);
-        }
-        foreach (var item in inven.foods)
-        {
-            Inventory_list.Add(item);
-        }
-        foreach (var item in inven.materials)
-        {
-            Inventory_list.Add(item);
-        }
-        foreach (var item in inven.plants)
-        {
-            Inventory_list.Add(item);
-        }
-    }
-
     public void HideSlot(Merchant slot)
     {
-        Gamemanager.instance.objectPool.ReturnObject(myType, slot);
+        Gamemanager.instance.objectPool.ReturnObject(myTypeS, slot);
     }
 
     public void onClick_CloseBtn()
