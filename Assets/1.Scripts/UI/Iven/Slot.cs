@@ -46,10 +46,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        
         if (item != null)
         {
-            popup.HideTool(rt.anchoredPosition);
+            if (popup == true)
+            {
+                //만약 팝업이 켜진 상태라면 팝업 위까지 커서 영역 확대해서 팝업 클릭 가능하도록 하기
+
+            }
+            popup.HideTool();
         }
     }
 }
