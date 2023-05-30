@@ -5,119 +5,136 @@
       "image": "T_IconBlackberry",
       "type": "Materials",
       "price": 10,
-      "serial": 0
+      "serial": 0,
+      "count": 1
     },
     {
       "name": "Cloudberry",
       "image": "T_IconCloudberry",
       "type": "Materials",
       "price": 10,
-      "serial": 1
+      "serial": 1,
+      "count": 1
     },
     {
       "name": "Raspberry",
       "image": "T_IconRaspberry",
       "type": "Materials",
       "price": 10,
-      "serial": 2
+      "serial": 2,
+      "count": 1
     },
     {
       "name": "SugarBeet",
       "image": "T_IconSugarBeet",
       "type": "Materials",
       "price": 25,
-      "serial": 3
+      "serial": 3,
+      "count": 1
     },
     {
       "name": "Salt",
       "image": "T_IconSalt",
       "type": "Materials",
       "price": 25,
-      "serial": 4
+      "serial": 4,
+      "count": 1
     },
     {
       "name": "Pepper",
       "image": "T_IconPepper",
       "type": "Materials",
       "price": 25,
-      "serial": 5
+      "serial": 5,
+      "count": 1
     },
     {
       "name": "Perch",
       "image": "T_IconPerch",
       "type": "Materials",
       "price": 15,
-      "serial": 6
+      "serial": 6,
+      "count": 1
     },
     {
       "name": "SalmonShark",
       "image": "T_IconSalmonShark",
       "type": "Materials",
       "price": 20,
-      "serial": 7
+      "serial": 7,
+      "count": 1
     },
     {
       "name": "Tuna",
       "image": "T_IconTuna",
       "type": "Materials",
       "price": 15,
-      "serial": 8
+      "serial": 8,
+      "count": 1
     },
     {
       "name": "ArcticChar",
       "image": "T_IconArcticChar",
       "type": "Materials",
       "price": 10,
-      "serial": 9
+      "serial": 9,
+      "count": 1
     },
     {
       "name": "Wood",
       "image": "T_IconWood",
       "type": "Materials",
       "price": 5,
-      "serial": 10
+      "serial": 10,
+      "count": 1
     },
     {
       "name": "Planks",
       "image": "T_IconPlanks",
       "type": "Materials",
       "price": 10,
-      "serial": 11
+      "serial": 11,
+      "count": 1
     },
     {
       "name": "Fuel",
       "image": "T_IconFuel",
       "type": "Materials",
       "price": 10,
-      "serial": 12
+      "serial": 12,
+      "count": 1
     },
     {
       "name": "Peacock",
       "image": "T_IconPeacock",
       "type": "Materials",
       "price": 20,
-      "serial": 13
+      "serial": 13,
+      "count": 1
     },
     {
       "name": "HazelHenNormal",
       "image": "T_IconHazelHenNormal",
       "type": "Materials",
       "price": 20,
-      "serial": 14
+      "serial": 14,
+      "count": 1
     },
     {
       "name": "Matches",
       "image": "T_Icon Matches",
       "type": "Materials",
       "price": 20,
-      "serial": 15
+      "serial": 15,
+      "count": 1
     },
     {
       "name": "WaterCanister",
       "image": "T_WaterCanister",
       "type": "Foods",
       "price": 25,
-      "serial": 16
+      "serial": 16,
+      "count": 1
     }
   ]
 }

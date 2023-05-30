@@ -5,140 +5,160 @@
       "image": "T_IconAmmo",
       "type": "Equipments",
       "price": 30,
-      "serial": 0
+      "serial": 0,
+      "count": 1
     },
     {
       "name": "AmmoPouch",
       "image": "T_IconAmmoPouch",
       "type": "Equipments",
       "price": 5,
-      "serial": 1
+      "serial": 1,
+      "count": 1
     },
     {
       "name": "FullAutoPistol",
       "image": "T_IconFullAutoPistol",
       "type": "Equipments",
       "price": 50,
-      "serial": 2
+      "serial": 2,
+      "count": 1
     },
     {
       "name": "SemiAutoPistol",
       "image": "T_IconSemiAutoPistol",
       "type": "Equipments",
       "price": 50,
-      "serial": 3
+      "serial": 3,
+      "count": 1
     },
     {
       "name": "MoertnBurstRifle",
       "image": "T_IconModernBurstRifle",
       "type": "Equipments",
       "price": 50,
-      "serial": 4
+      "serial": 4,
+      "count": 1
     },
     {
       "name": "ModernRifle",
       "image": "T_IconModernRifie",
       "type": "Equipments",
       "price": 50,
-      "serial": 5
+      "serial": 5,
+      "count": 1
     },
     {
       "name": "Rifle",
       "Image": "T_IconRifle",
       "type": "Equipments",
       "price": 50,
-      "serial": 6
+      "serial": 6,
+      "count": 1
     },
     {
       "name": "SemiRifle",
       "image": "T_IconSemiRifle",
       "type": "Equipments",
       "price": 50,
-      "serial": 7
+      "serial": 7,
+      "count": 1
     },
     {
       "name": "Shotgun",
       "image": "T_IconShotgun",
       "type": "Equipments",
       "price": 50,
-      "serial": 8
+      "serial": 8,
+      "count": 1
     },
     {
       "name": "SMG",
       "image": "T_IconSMG",
       "type": "Equipments",
       "price": 50,
-      "serial": 9
+      "serial": 9,
+      "count": 1
     },
     {
       "name": "Chainsaw",
       "image": "T_IconChainsaw",
       "type": "Equipments",
       "price": 20,
-      "serial": 10
+      "serial": 10,
+      "count": 1
     },
     {
       "name": "FishingRod",
       "image": "T_IconFishingRod",
       "type": "Equipments",
       "price": 15,
-      "serial": 11
+      "serial": 11,
+      "count": 1
     },
     {
       "name": "GPS",
       "image": "T_IconGPS",
       "type": "Equipments",
       "price": 15,
-      "serial": 12
+      "serial": 12,
+      "count": 1
     },
     {
       "name": "Hat",
       "image": "T_IconHat",
       "type": "Equipments",
       "price": 10,
-      "serial": 13
+      "serial": 13,
+      "count": 1
     },
     {
       "name": "Gatchet",
       "image": "T_IconHatchet",
       "type": "Equipments",
       "price": 15,
-      "serial": 14
+      "serial": 14,
+      "count": 1
     },
     {
       "name": "GatCombat",
       "image": "T_IconHatCombat",
       "type": "Equipments",
       "price": 11,
-      "serial": 15
+      "serial": 15,
+      "count": 1
     },
     {
       "name": "GatFarming",
       "image": "T_IconHatFarming",
       "type": "Equipments",
       "price": 12,
-      "serial": 16
+      "serial": 16,
+      "count": 1
     },
     {
       "name": "KeycardStandart",
       "image": "T_IconKeycardStandart",
       "type": "Equipments",
       "price": 10,
-      "serial": 17
+      "serial": 17,
+      "count": 1
     },
     {
       "name": "Map",
       "image": "T_IconMap",
       "type": "Equipments",
       "price": 10,
-      "serial": 18
+      "serial": 18,
+      "count": 1
     },
     {
       "name": "TelescopicReel",
       "image": "T_IconTelescopicReel",
       "type": "Equipments",
       "price": 10,
-      "serial": 19
+      "serial": 19,
+      "count": 1
     }
   ]
 }

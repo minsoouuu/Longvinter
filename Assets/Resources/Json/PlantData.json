@@ -5,98 +5,112 @@
       "image": "T_IconFenceGate",
       "type": "Plants",
       "price": 120,
-      "serial": 0
+      "serial": 0,
+      "count": 1
     },
     {
       "name": "Bench",
       "image": "T_IconBench",
       "type": "Plants",
       "price": 150,
-      "serial": 1
+      "serial": 1,
+      "count": 1
     },
     {
       "name": "Container",
       "image": "T_IconContainer",
       "type": "Plants",
       "price": 100,
-      "serial": 2
+      "serial": 2,
+      "count": 1
     },
     {
       "name": "Firepit",
       "image": "T_IconFirepit",
       "type": "Plants",
       "price": 120,
-      "serial": 3
+      "serial": 3,
+      "count": 1
     },
     {
       "name": "Turret",
       "image": "T_IconTurret",
       "type": "Plants",
       "price": 200,
-      "serial": 4
+      "serial": 4,
+      "count": 1
     },
     {
       "name": "VillageLampPost",
       "image": "T_IconVillageLampPost",
       "type": "Plants",
       "price": 200,
-      "serial": 5
+      "serial": 5,
+      "count": 1
     },
     {
       "name": "WoodStool",
       "image": "T_IconWoodStool",
       "type": "Plants",
       "price": 150,
-      "serial": 6
+      "serial": 6,
+      "count": 1
     },
     {
       "name": "Kamiina",
       "image": "T_IconKamiina",
       "type": "Plants",
       "price": 180,
-      "serial": 7
+      "serial": 7,
+      "count": 1
     },
     {
       "name": "Sauna",
       "image": "T_IconSauna",
       "type": "Plants",
       "price": 250,
-      "serial": 8
+      "serial": 8,
+      "count": 1
     },
     {
       "name": "Tent",
       "image": "T_IconTent",
       "type": "Plants",
       "price": 200,
-      "serial": 9
+      "serial": 9,
+      "count": 1
     },
     {
       "name": "TrimmedBush",
       "image": "T_IconTrimmedBush",
       "type": "Plants",
       "price": 150,
-      "serial": 10
+      "serial": 10,
+      "count": 1
     },
     {
       "name": "Vendor",
       "image": "T_IconVendor",
       "type": "Plants",
       "price": 250,
-      "serial": 11
+      "serial": 11,
+      "count": 1
     },
     {
       "name": "LightBulb",
       "image": "T_IconLightBulb",
       "type": "Plants",
       "price": 80,
-      "serial": 12
+      "serial": 12,
+      "count": 1
     },
     {
       "name": "Placeholder",
       "image": "T_IconPlaceholder",
       "type": "Plants",
       "price": 0,
-      "serial": 13
+      "serial": 13,
+      "count": 1
     }
   ]
 }
