@@ -38,14 +38,13 @@ public class MakeController : MonoBehaviour
 
     }
 
-    Item GetCompleteItem(InvenItemType type)
+    Item GetCompleteItem(InvenItemType type, ItemName name)
     {
         Item item = null;
-
         switch (type)
         {
             case InvenItemType.Equipments:
-
+                
                 break;
             case InvenItemType.Materials:
 
@@ -62,10 +61,21 @@ public class MakeController : MonoBehaviour
         return item;
     }
 
+    Item test(List<Item> list, ItemName name)
+    {
+        Item item = null;
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].data.itemName == name)
+            {
+                item = list[i];
+            }
+        }
+        return item;
+    }
     Item ChekSlots()
     {
         Item comPleteItem = null;
-        int counter = 0;
 
         List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
@@ -103,7 +113,6 @@ public class MakeController : MonoBehaviour
 
         recipes.Clear();
         complete = string.Empty;
-        counter = 0;
 
         return comPleteItem;
     }
