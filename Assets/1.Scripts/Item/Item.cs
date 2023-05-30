@@ -16,7 +16,7 @@ public abstract class Item : MonoBehaviour
 {
     public ItemData data = new ItemData();
 
-    private int count = 0;
+    private int count = 1;
     
     public int Count
     {

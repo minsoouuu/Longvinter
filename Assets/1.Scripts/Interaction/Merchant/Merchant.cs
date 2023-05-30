@@ -31,7 +31,7 @@ public class Merchant : MonoBehaviour
             {
                 for (int j = 0; j < inven.equipments.Count - mc.s_parent.childCount; j++)
                 {
-                    mc.CreateMerchant_s_ItemList();
+                    mc.CreateMerchant_s_ItemList(0);
                 }
             }
             mc.s_parent.transform.GetChild(i).gameObject.SetActive(true);
@@ -39,7 +39,7 @@ public class Merchant : MonoBehaviour
         }
         for (int j = mc.s_parent.childCount - 1; j > inven.equipments.Count - 1; j--)
         {
-            mc.CreateMerchant_s_ItemList();
+            mc.CreateMerchant_s_ItemList(0);
         }
     }
 

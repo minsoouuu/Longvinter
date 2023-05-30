@@ -10,26 +10,26 @@ public class MerchantController : MonoBehaviour
     [SerializeField] private Transform b_parent;
     [SerializeField] private Merchant s_itemlist;
     [HideInInspector] public Transform s_parent;
-    List<Item> equipments_list = new List<Item>();
     [SerializeField] private Button close_btn;
     [SerializeField] private GameObject merchant;
     [SerializeField] private User player;
     [SerializeField] private Toggle[] tg;
 
+    List<Item> equipments_list = new List<Item>();
     List<Item> merchant_blist = new List<Item>();
     List<Item> merchant_slist = new List<Item>();
     List<Item> Inventory_list = new List<Item>();
     Inventory inven;
 
     ObjectType myType = ObjectType.BuySlot;
+    int num = 0;
 
     private void OnEnable()
     {
         CreateMerchant_b_ItemList();
-       
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Debug.Log("데이터 불러오기");
         inven = Gamemanager.instance.inventory;
@@ -49,9 +49,10 @@ public class MerchantController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        num = SetToggle();
         Close_Merchant();
         Get_Inventory_Itemlist();
-        CreateMerchant_s_ItemList();
+        CreateMerchant_s_ItemList(0);
     }
 
     void CreateMerchant_b_ItemList()
@@ -64,7 +65,7 @@ public class MerchantController : MonoBehaviour
             }
             else
             {
-                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,true);
+                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType, true);
                 slot.transform.SetParent(b_parent);
                 slot.Setdata(equipments_list[i]);
                 slot.mc = this;
@@ -72,17 +73,33 @@ public class MerchantController : MonoBehaviour
             }
         }
     }
-    public void CreateMerchant_s_ItemList()
+    public void CreateMerchant_s_ItemList(int num)
     {
-        for (int i = 0; i < inven.equipments.Count; i++)
+        List<Item> list = new List<Item>();
+        switch (num)
         {
-            if (merchant_slist.Contains(inven.equipments[i]))
+            case 0:
+                list = inven.equipments.ToList();
+                break;
+            case 1:
+                list = inven.materials.ToList();
+                break;
+            case 2:
+                list = inven.foods.ToList();
+                break;
+            case 3:
+                list = inven.plants.ToList();
+                break;
+        }
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (merchant_slist.Contains(list[i]))
             {
                 continue;
             }
             else
             {
-                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType,false);
+                Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myType, false);
                 slot.transform.SetParent(s_parent);
                 slot.Setdata(inven.equipments[i]);
                 slot.mc = this;
@@ -91,28 +108,11 @@ public class MerchantController : MonoBehaviour
         }
     }
 
-    void DeleteMerchant_s_ItemList()
-    {
-        List<Item> temp = new List<Item>();
-        temp = inven.equipments.ToList();
-        for (int i = 0; i < temp.Count; i++)
-        {
-            if (temp.Contains(merchant_slist[i]))
-            {
-                return;
-            }
-            else
-            {
-                Item mc = s_parent.GetChild(i).GetComponent<Merchant>().itemdata;
-            }
-            
-        }
-    }
 
-    Toggle SetToggle()
+    int SetToggle()
     {
         int index = 0;
-        for(int i = 0; i < tg.Length; i++)
+        for (int i = 0; i < tg.Length; i++)
         {
             if (tg[i].isOn)
             {
@@ -120,12 +120,20 @@ public class MerchantController : MonoBehaviour
                 break;
             }
         }
-        return tg[index];
+        return index;
     }
 
     public void OnClickToggle()
     {
-        
+        switch (num)
+        {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                CreateMerchant_s_ItemList(num);
+                break;
+        }
     }
 
     void Get_Inventory_Itemlist()
@@ -150,7 +158,7 @@ public class MerchantController : MonoBehaviour
 
     public void HideSlot(Merchant slot)
     {
-        Gamemanager.instance.objectPool.ReturnObject(myType,slot);
+        Gamemanager.instance.objectPool.ReturnObject(myType, slot);
     }
 
     public void onClick_CloseBtn()
@@ -170,5 +178,5 @@ public class MerchantController : MonoBehaviour
         }
     }
 
-    
+
 }
