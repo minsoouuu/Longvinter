@@ -136,7 +136,7 @@ public class Inventory : MonoBehaviour
                 {
                     foreach (var it in equipments)
                     {
-                        if (item.data.itemName.ToString() == it.data.type)
+                        if (item.data.itemName == it.data.itemName)
                         {
                             it.Count += 1;
                             break;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MakeController : MonoBehaviour
 {
-    [SerializeField] private MakingSlot[] slots;
+    [SerializeField] private List<MakingSlot> slots;
     [SerializeField] private MakingSlot completedItem;
     [SerializeField] private Button btn;
     [SerializeField] private Item[] items;
@@ -14,11 +14,53 @@ public class MakeController : MonoBehaviour
 
     [HideInInspector] public List<Item> itemDatas = new List<Item>();
     [HideInInspector] public List<MakingSlot> makingSlots = new List<MakingSlot>();
+
+    private List<Item> comItems = new List<Item>();
     void Awake()
     {
         btn.onClick.AddListener(() => OnButtonDown());
     }
 
+    public void ShowSlot(Item item)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.ItemData == null)
+            {
+                slot.ItemData = item;
+                break;
+            }
+        }
+        CheckItem();
+    }
+    void CheckItem()
+    {
+
+    }
+
+    Item GetCompleteItem(InvenItemType type)
+    {
+        Item item = null;
+
+        switch (type)
+        {
+            case InvenItemType.Equipments:
+
+                break;
+            case InvenItemType.Materials:
+
+                break;
+            case InvenItemType.Plants:
+
+                break;
+            case InvenItemType.Foods:
+
+                break;
+
+        }
+
+        return item;
+    }
 
     Item ChekSlots()
     {
@@ -28,7 +70,7 @@ public class MakeController : MonoBehaviour
         List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
         string complete = string.Empty;
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Count; i++)
         {
             if (i == 0)
             {
@@ -139,7 +181,7 @@ public class MakeController : MonoBehaviour
     }
     public void ShowCompletedItem(Item itemData)
     {
-        completedItem.SetItmeData(itemData);
+
     }
     public void OnButtonDown()
     {

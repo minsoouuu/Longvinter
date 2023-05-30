@@ -5,29 +5,40 @@ using UnityEngine.UI;
 public class MakingSlot : MonoBehaviour
 {
     [SerializeField] private MakeController makeController;
-    private Item itemData = null;
+    [SerializeField] private Sprite nullSprite;
     private Image itemIcon;
-
     public bool IsCheck { get; set; }
+
+    public Item ItemData
+    {
+        get { return ItemData; }
+        set
+        {
+            ItemData = value;
+            if (ItemData != null)
+            {
+                itemIcon.sprite = value.data.image;
+                makeController.makingSlots.Add(this);
+            }
+            else
+            {
+                itemIcon.sprite = nullSprite;
+                makeController.makingSlots.Remove(this);
+            }
+        }
+    }
 
     void Awake()
     {
         itemIcon = GetComponent<Image>();
         IsCheck = true;
     }
-    public void SetItmeData(Item itemdata)
-    {
-        this.itemData = itemdata;
-        itemIcon.sprite = itemData.data.image;
-        makeController.itemDatas.Add(itemData);
-        makeController.makingSlots.Add(this);
-    }
     public Item GetItemData()
     {
-        return itemData;
+        return ItemData;
     }
     public void DeleteItemData()
     {
-        itemData = null;
+        ItemData = null;
     }
 }
