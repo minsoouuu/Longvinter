@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5378088719130902709}
-  - component: {fileID: 5378088719130902710}
+  - component: {fileID: 1826653286}
   m_Layer: 5
   m_Name: MakeController
   m_TagString: Untagged
@@ -115,7 +115,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5378088719130902710
+--- !u!114 &1826653286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,20 +124,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5378088719130902708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f04ff8adfb0926345a5f5cce8efc8767, type: 3}
+  m_Script: {fileID: 11500000, guid: f4533cf68c4d9724682b0f18c0f8b941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots:
+  makingSlots:
   - {fileID: 5378088719979193911}
   - {fileID: 5378088719844925613}
   - {fileID: 5378088720519931281}
   - {fileID: 5378088720282538999}
-  completedItem: {fileID: 5378088720281638177}
-  btn: {fileID: 5378088720684715699}
+  comPleteSlot: {fileID: 5378088720281638177}
+  button: {fileID: 5378088720684715699}
   items: []
-  recipe: {fileID: 0}
-  itemDatas: []
-  makingSlots: []
 --- !u!1 &5378088719144452817
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +570,7 @@ GameObject:
   - component: {fileID: 5378088719844925612}
   - component: {fileID: 5378088719844925611}
   m_Layer: 5
-  m_Name: "\uC7AC\uB8CC::BG"
+  m_Name: "\uC7AC\uB8CC::BG1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e489cdff67c174999cff84a6c6b5cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  makeController: {fileID: 0}
+  makeController: {fileID: 1826653286}
   nullSprite: {fileID: 21300000, guid: 8bc4f9b91225eef498692a6b17905e5a, type: 3}
 --- !u!222 &5378088719844925612
 CanvasRenderer:
@@ -665,7 +662,7 @@ GameObject:
   - component: {fileID: 5378088719979193910}
   - component: {fileID: 5378088719979193909}
   m_Layer: 5
-  m_Name: "\uC7AC\uB8CC::BG"
+  m_Name: "\uC7AC\uB8CC::BG0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,7 +701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e489cdff67c174999cff84a6c6b5cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  makeController: {fileID: 0}
+  makeController: {fileID: 1826653286}
   nullSprite: {fileID: 21300000, guid: 8bc4f9b91225eef498692a6b17905e5a, type: 3}
 --- !u!222 &5378088719979193910
 CanvasRenderer:
@@ -1068,7 +1065,7 @@ GameObject:
   - component: {fileID: 5378088720282538998}
   - component: {fileID: 5378088720282538997}
   m_Layer: 5
-  m_Name: "\uC7AC\uB8CC::BG"
+  m_Name: "\uC7AC\uB8CC::BG3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1107,7 +1104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e489cdff67c174999cff84a6c6b5cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  makeController: {fileID: 0}
+  makeController: {fileID: 1826653286}
   nullSprite: {fileID: 21300000, guid: 8bc4f9b91225eef498692a6b17905e5a, type: 3}
 --- !u!222 &5378088720282538998
 CanvasRenderer:
@@ -1236,7 +1233,7 @@ GameObject:
   - component: {fileID: 5378088720519931280}
   - component: {fileID: 5378088720519931295}
   m_Layer: 5
-  m_Name: "\uC7AC\uB8CC::BG"
+  m_Name: "\uC7AC\uB8CC::BG2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1275,7 +1272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e489cdff67c174999cff84a6c6b5cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  makeController: {fileID: 0}
+  makeController: {fileID: 1826653286}
   nullSprite: {fileID: 21300000, guid: 8bc4f9b91225eef498692a6b17905e5a, type: 3}
 --- !u!222 &5378088720519931280
 CanvasRenderer:

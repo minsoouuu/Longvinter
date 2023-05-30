@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ItemDataSetController : MonoBehaviour
 {
@@ -14,11 +15,10 @@ public class ItemDataSetController : MonoBehaviour
     public List<Item> materilas;
     public List<Item> foods;
     public List<Item> plants;
-
-    private void Awake()
+    public Dictionary<ItemName, List<ItemName>> recipes = new Dictionary<ItemName, List<ItemName>>();
+    private void Start()
     {
         SetData();
-
     }
     void Update()
     {
@@ -88,6 +88,14 @@ public class ItemDataSetController : MonoBehaviour
                     plants[i].data.image = GetSpriteInAssets(EnumUtil<InvenItemType>.Parse(jsonData.plantData.plants[j].type), jsonData.plantData.plants[j].image);
                 }
             }
+        }
+        for (int i = 0; i < Gamemanager.instance.jsonDataController.recipeData.recipe.Count; i++)
+        {
+            recipes[Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].completeitem)] = new List<ItemName>();
+            recipes[Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].completeitem)].
+                Add(Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].material1));
+            recipes[Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].completeitem)].
+                Add(Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].material2));
         }
     }
     // 스프라이트 가져오기.

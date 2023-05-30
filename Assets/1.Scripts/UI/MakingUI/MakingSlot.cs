@@ -4,41 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MakingSlot : MonoBehaviour
 {
-    [SerializeField] private MakeController makeController;
+    [SerializeField] private MakingController makeController;
     [SerializeField] private Sprite nullSprite;
     private Image itemIcon;
-    public bool IsCheck { get; set; }
-
+    private Item item = null;
     public Item ItemData
     {
-        get { return ItemData; }
+        get { return item; }
         set
         {
-            ItemData = value;
-            if (ItemData != null)
+            item = value;
+            Debug.Log($"{gameObject.name}:{value}");
+            if (item != null)
             {
                 itemIcon.sprite = value.data.image;
-                //makeController.makingSlots.Add(this);
+                makeController.items.Add(ItemData);
             }
             else
             {
                 itemIcon.sprite = nullSprite;
-               // makeController.makingSlots.Remove(this);
+                makeController.items.Remove(ItemData);
             }
+            Debug.Log(makeController.items.Count);
         }
     }
-
     void Awake()
     {
-        itemIcon = GetComponent<Image>();
-        IsCheck = true;
-    }
-    public Item GetItemData()
-    {
-        return ItemData;
-    }
-    public void DeleteItemData()
-    {
-        ItemData = null;
+        itemIcon = transform.GetChild(0).GetComponent<Image>();
     }
 }

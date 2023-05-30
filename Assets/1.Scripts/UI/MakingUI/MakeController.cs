@@ -12,11 +12,45 @@ public class MakeController : MonoBehaviour
 
     [HideInInspector] public List<Item> materials = new List<Item>();
 
+    void test()
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            for (int j = 0; j < Gamemanager.instance.itemController.recipes.Count; j++)
+            {
+                //if(Gamemanager.instance.itemController.recipes[j].Contains(slots[i].ItemData.data.itemName))
+                //아이템 비교
+            }
+        }
+        
+    }
     void Awake()
     {
         btn.onClick.AddListener(() => OnButtonDown());
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            for (int i = 0; i < Gamemanager.instance.itemController.materilas.Count; i++)
+            {
+                if (Gamemanager.instance.itemController.materilas[i].data.itemName.ToString() == "Pepper")
+                {
+                    slots[0].ItemData = Gamemanager.instance.itemController.materilas[i];
+                }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            for (int i = 0; i < Gamemanager.instance.itemController.foods.Count; i++)
+            {
+                if (Gamemanager.instance.itemController.foods[i].data.itemName.ToString() == "Bread")
+                {
+                    slots[0].ItemData = Gamemanager.instance.itemController.foods[i];
+                }
+            }
+        }
+    }
     public void ShowSlot(Item item)
     {
         foreach (var slot in slots)
@@ -30,54 +64,60 @@ public class MakeController : MonoBehaviour
     }
     public void ShowCompletedItem()
     {
-
+        Item item = null;
+        for (int i = 0; i < Gamemanager.instance.jsonDataController.recipeData.recipe.Count; i++)
+        {
+            if (Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].completeitem) == GetCheckItemName())
+            {
+                item = GetCompleteItem(Enum.Parse<InvenItemType>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].type), GetCheckItemName());
+            }
+        }
+        completedItem.ItemData = item;
     }
-    // 뽑아올 아이템 이름 넣어주기
+    // 1.뽑아올 아이템 이름을 넣어서
     Item GetCompleteItem(InvenItemType type, ItemName name)
     {
+        ItemDataSetController itemCont = Gamemanager.instance.itemController;
+
+        List<Item> curItems = new List<Item>();
+
         Item item = null;
-        ItemDataSetController itemData = Gamemanager.instance.itemController;
 
         switch (type)
         {
             case InvenItemType.Equipments:
-                item = test(itemData.equipments, name);
+                curItems = itemCont.equipments.ToList();
                 break;
+
             case InvenItemType.Materials:
-                item = test(itemData.materilas, name);
+                curItems = itemCont.materilas.ToList();
                 break;
+
             case InvenItemType.Plants:
-                item = test(itemData.plants, name);
+                curItems = itemCont.plants.ToList();
                 break;
+
             case InvenItemType.Foods:
-                item = test(itemData.foods, name);
+                curItems = itemCont.foods.ToList();
                 break;
         }
-        return item;
-    }
-    // 데이터 입혀진 아이템 뽑아오기
-    Item test(List<Item> list, ItemName name)
-    {
-        Item item = null;
-        for (int i = 0; i < list.Count; i++)
+
+        for (int i = 0; i < curItems.Count; i++)
         {
-            if (list[i].data.itemName == name)
+            if (curItems[i].data.itemName == name)
             {
-                item = list[i];
+                item = curItems[i];
                 break;
             }
         }
         return item;
     }
     // 레시피의 완성품 이름 가져오기
-    Item CheckItem()
+    ItemName GetCheckItemName()
     {
-        Item comPleteItem = null;
-
-        List<JsonData.RecipeJson> recipes = Gamemanager.instance.jsonDataController.recipeData.recipe;
-
-        List<JsonData.RecipeJson> comPletes = new List<JsonData.RecipeJson>();
         ItemName itemName = new ItemName();
+        List<JsonData.RecipeJson> recipes = Gamemanager.instance.jsonDataController.recipeData.recipe;
+        List<JsonData.RecipeJson> comPletes = new List<JsonData.RecipeJson>();
         for (int i = 0; i < materials.Count; i++)
         {
             for (int j = 0; j < recipes.Count; j++)
@@ -101,16 +141,24 @@ public class MakeController : MonoBehaviour
                 }
             }
         }
-        return comPleteItem;
+        return itemName;
     }
     
     public void OnButtonDown()
     {
-        if (completedItem.GetItemData() != null)
+        if (completedItem.ItemData != null)
         {
             // 제작하고 인벤에 있는 제작재료 차감.
+            for (int i = 0; i < materials.Count; i++)
+            {
+                Gamemanager.instance.player.inven.DeleteItem(materials[i]);
+            }
             // 제작대에 있는 데이터 초기화.
-            //
+            for (int i = 0; i < slots.Count; i++)
+            {
+                slots[i].ItemData = null;
+            }
+            Gamemanager.instance.player.inven.AddItem(completedItem.ItemData);
         }
     }
 }
