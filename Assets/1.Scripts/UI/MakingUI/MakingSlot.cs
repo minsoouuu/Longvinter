@@ -18,12 +18,12 @@ public class MakingSlot : MonoBehaviour
             if (ItemData != null)
             {
                 itemIcon.sprite = value.data.image;
-                makeController.makingSlots.Add(this);
+                //makeController.makingSlots.Add(this);
             }
             else
             {
                 itemIcon.sprite = nullSprite;
-                makeController.makingSlots.Remove(this);
+               // makeController.makingSlots.Remove(this);
             }
         }
     }

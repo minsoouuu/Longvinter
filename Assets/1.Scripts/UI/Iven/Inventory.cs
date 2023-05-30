@@ -201,14 +201,13 @@ public class Inventory : MonoBehaviour
                 curItems = plants.ToList();
                 break;
         }
-        ShowItem(curItems);
+        if (curInvenType == curItems[0].data.itemType)
+        {
+            ShowItem(curItems);
+        }
     }
     public void DeleteItem(Item item)
     {
-        if (item.Count <= 0)
-        {
-            return;
-        }
         List<Item> curItems = new List<Item>();
 
         switch (item.data.itemType)

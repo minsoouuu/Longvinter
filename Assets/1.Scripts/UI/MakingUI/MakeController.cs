@@ -28,7 +28,11 @@ public class MakeController : MonoBehaviour
             }
         }
     }
+    public void ShowCompletedItem()
+    {
 
+    }
+    // 뽑아올 아이템 이름 넣어주기
     Item GetCompleteItem(InvenItemType type, ItemName name)
     {
         Item item = null;
@@ -51,7 +55,7 @@ public class MakeController : MonoBehaviour
         }
         return item;
     }
-
+    // 데이터 입혀진 아이템 뽑아오기
     Item test(List<Item> list, ItemName name)
     {
         Item item = null;
@@ -65,6 +69,7 @@ public class MakeController : MonoBehaviour
         }
         return item;
     }
+    // 레시피의 완성품 이름 가져오기
     Item CheckItem()
     {
         Item comPleteItem = null;
@@ -90,62 +95,15 @@ public class MakeController : MonoBehaviour
                     {
                         if (materials[i].data.itemName.ToString() == comPletes[c].material2)
                         {
-
+                            itemName = Enum.Parse<ItemName>(comPletes[c].completeitem); 
                         }
                     }
                 }
             }
         }
-
-
         return comPleteItem;
     }
-
-    public void Make()
-    {
-        if (slots[1].GetItemData() != null)
-        {
-            Item item = GetRecipe(slots[0].GetItemData().data.itemName.ToString(),
-                                  slots[1].GetItemData().data.itemName.ToString());
-            ShowCompletedItem(item);
-        }
-        if (slots[2].GetItemData() != null)
-        {
-            Item item = GetRecipe(slots[0].GetItemData().data.itemName.ToString(),
-                                  slots[1].GetItemData().data.itemName.ToString(),
-                                  slots[2].GetItemData().data.itemName.ToString());
-            ShowCompletedItem(item);
-        }
-        if (slots[3].GetItemData() != null)
-        {
-            Item item = GetRecipe(slots[0].GetItemData().data.itemName.ToString(),
-                                  slots[1].GetItemData().data.itemName.ToString(),
-                                  slots[2].GetItemData().data.itemName.ToString(),
-                                  slots[3].GetItemData().data.itemName.ToString());
-            ShowCompletedItem(item);
-        }
-    }
-    Item GetRecipe(string item1, string item2)
-    {
-        Item item = null;
-        return item;
-    }
-    Item GetRecipe(string item1, string item2, string item3)
-    {
-        Item item = null;
-
-        return item;
-    }
-    Item GetRecipe(string item1, string item2, string item3, string item4)
-    {
-        Item item = null;
-
-        return item;
-    }
-    public void ShowCompletedItem(Item itemData)
-    {
-
-    }
+    
     public void OnButtonDown()
     {
         if (completedItem.GetItemData() != null)
