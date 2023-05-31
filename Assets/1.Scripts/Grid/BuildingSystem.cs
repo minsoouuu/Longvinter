@@ -65,6 +65,8 @@ public class BuildingSystem : MonoBehaviour
             {
                 selectedObject.Place();
                 Vector3Int startpos = gridLayout.WorldToCell(selectedObject.GetStartPosition());
+                Debug.Log(startpos);
+                Debug.Log(selectedObject.Size);
                 TakenArea(startpos, selectedObject.Size);
 
                 Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
