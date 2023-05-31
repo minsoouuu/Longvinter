@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemClick : MonoBehaviour
 {
     private Inventory inventory;
-    private ItemPopUp popup;
+    private InvenItemClick popup;
     private Slot slot;
     private Item item;
 

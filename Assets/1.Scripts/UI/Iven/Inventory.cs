@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private Button closeButton;
-    [SerializeField] private ItemPopUp popup;
+    [SerializeField] private InvenItemClick popup;
     [SerializeField] private Button aligne_Btn;
 
     public List<Slot> slots;

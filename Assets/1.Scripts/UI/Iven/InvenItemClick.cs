@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPopUp : MonoBehaviour
+public class InvenItemClick : MonoBehaviour
 {
     [SerializeField] public GameObject popup;
 
@@ -13,12 +13,14 @@ public class ItemPopUp : MonoBehaviour
         rt = GetComponent<RectTransform>();
         HideTool();
     }
+
     public void ShowTool(Vector2 pos)
     {
         pos.x -= 170;
         pos.y += 275;
         rt.anchoredPosition = pos;
         gameObject.SetActive(true);
+
     }
 
     public void HideTool()

@@ -5,18 +5,20 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
+public class Slot : MonoBehaviour
 {
     [SerializeField] TMP_Text countText;
-    private Image image;
-    private ItemPopUp popup;
     [HideInInspector] public Item item;
     [HideInInspector] public RectTransform rt;
+    public Toggle slot;
+    private Image image;
+    private InvenItemClick popup;
 
     private void Start()
     {
         image = GetComponent<Image>();
         rt = GetComponent<RectTransform>();
+        slot.onValueChanged.AddListener(delegate { ToggleOnOff(); });
     }
     public void SetItemData(Item item)
     {
@@ -24,7 +26,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
         countText.text = item.Count.ToString();
         this.item = item;
     }
-    public void SetItemPopup(ItemPopUp popup)
+    public void SetItemPopup(InvenItemClick popup)
     {
         this.popup = popup;
     }
@@ -35,25 +37,21 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
         countText.text = string.Empty;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void ToggleOnOff()
     {
-        if (item != null)
+        if (slot.isOn)
         {
-            popup.ShowTool(rt.anchoredPosition);
+            if (item != null)
+            {
+                popup.ShowTool(rt.anchoredPosition);
+            }
+        }
+        else if (!slot.isOn)
+        {
+            popup.HideTool();
         }
         
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (item != null)
-        {
-            if (popup == true)
-            {
-                //만약 팝업이 켜진 상태라면 팝업 위까지 커서 영역 확대해서 팝업 클릭 가능하도록 하기
-
-            }
-            popup.HideTool();
-        }
-    }
+    
 }
