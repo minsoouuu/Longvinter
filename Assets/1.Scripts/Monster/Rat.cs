@@ -10,4 +10,24 @@ public class Rat : Monster
         monsterData.speed = 5f;
         monsterData.monsterType = MonsterType.Rat;
     }
+
+    public override void AreaCircle()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void DropItem()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void MonsterDie()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Runaway()
+    {
+        throw new System.NotImplementedException();
+    }
 }
