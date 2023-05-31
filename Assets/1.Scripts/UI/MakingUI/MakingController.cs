@@ -31,7 +31,25 @@ public class MakingController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             makingSlots[1].ItemData = Gamemanager.instance.itemController.GetItem(ItemName.Bread, InvenItemType.Foods);
-            CheckSlot();
+            Test();
+        }
+    }
+
+    void Test()
+    {
+        ItemDataSetController dataSetCont = Gamemanager.instance.itemController;
+        if (items.Count < 2)
+            return;
+
+        foreach (var key in dataSetCont.recipes.Keys)
+        {
+            if (dataSetCont.recipes[key].Contains(makingSlots[0].ItemData.data.itemName) &&
+                 dataSetCont.recipes[key].Contains(makingSlots[1].ItemData.data.itemName))
+            {
+                comPleteSlot.ItemData = Gamemanager.instance.itemController.GetItem(key);
+                Debug.Log(Gamemanager.instance.itemController.GetItem(key).name);
+                break;
+            }
         }
     }
     void CheckSlot()

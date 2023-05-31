@@ -18,9 +18,8 @@ public class ItemClick : MonoBehaviour
 
     public void ItemUse()
     {
-        item.Action();
+        item.Use();
         Debug.Log("아이템을 사용했습니다.");
         popup.HideTool();
     }
-  
 }

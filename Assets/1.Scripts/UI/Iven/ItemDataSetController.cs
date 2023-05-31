@@ -92,8 +92,10 @@ public class ItemDataSetController : MonoBehaviour
         for (int i = 0; i < Gamemanager.instance.jsonDataController.recipeData.recipe.Count; i++)
         {
             recipes[Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].completeitem)] = new List<ItemName>();
+
             recipes[Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].completeitem)].
                 Add(Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].material1));
+
             recipes[Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].completeitem)].
                 Add(Enum.Parse<ItemName>(Gamemanager.instance.jsonDataController.recipeData.recipe[i].material2));
         }
@@ -104,7 +106,28 @@ public class ItemDataSetController : MonoBehaviour
         string path = "Longvinter_Icons";
         return Resources.Load<Sprite>(path + type.ToString() + name);
     }
+    public Item GetItem(ItemName name)
+    {
+        Item item = null;
+        List<List<Item>> items = new List<List<Item>>();
+        items.Add(equipments);
+        items.Add(materilas);
+        items.Add(foods);
+        items.Add(plants);
 
+        for (int i = 0; i < items.Count; i++)
+        {
+            for (int j = 0; j < items[i].Count; j++)
+            {
+                if (items[i][j].data.itemName == name)
+                {
+                    item = items[i][j];
+                }
+            }
+        }
+        return item;
+
+    }
     public Item GetItem(ItemName name, InvenItemType type)
     {
         Item item = null;

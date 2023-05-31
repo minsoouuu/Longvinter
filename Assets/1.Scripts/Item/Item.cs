@@ -23,5 +23,5 @@ public abstract class Item : MonoBehaviour
         get { return count; }
         set { count = value; }
     }
-    public abstract void Action();
+    public abstract void Use();
 }

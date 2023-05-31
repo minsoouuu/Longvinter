@@ -35,6 +35,7 @@ public class JsonData : MonoBehaviour
         public string name;
         public string image;
         public string type;
+        public int count;
         public int price;
         public int serial;
     }
@@ -49,6 +50,7 @@ public class JsonData : MonoBehaviour
         public string name;
         public string image;
         public string type;
+        public int count;
         public int price;
         public int serial;
     }
@@ -63,6 +65,7 @@ public class JsonData : MonoBehaviour
         public string name;
         public string image;
         public string type;
+        public int count;
         public int price;
         public int serial;
     }
@@ -77,6 +80,7 @@ public class JsonData : MonoBehaviour
         public string name;
         public string image;
         public string type;
+        public int count;
         public int price;
         public int serial;
     }

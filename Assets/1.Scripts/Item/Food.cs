@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Food : Item
 {
-    public override void Action()
+    public override void Use()
     {
 
     }
