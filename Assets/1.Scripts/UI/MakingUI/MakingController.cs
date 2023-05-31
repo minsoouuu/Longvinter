@@ -43,8 +43,7 @@ public class MakingController : MonoBehaviour
 
         foreach (var key in dataSetCont.recipes.Keys)
         {
-            if (dataSetCont.recipes[key].Contains(makingSlots[0].ItemData.data.itemName) &&
-                 dataSetCont.recipes[key].Contains(makingSlots[1].ItemData.data.itemName))
+            if (dataSetCont.recipes[key].Contains(makingSlots[0].ItemData.data.itemName) && dataSetCont.recipes[key].Contains(makingSlots[1].ItemData.data.itemName))
             {
                 comPleteSlot.ItemData = Gamemanager.instance.itemController.GetItem(key);
                 Debug.Log(Gamemanager.instance.itemController.GetItem(key).name);
@@ -89,6 +88,10 @@ public class MakingController : MonoBehaviour
     void OnButtonDown()
     {
         Gamemanager.instance.player.inven.AddItem(comPleteSlot.ItemData);
+        for (int i = 0; i < makingSlots.Length; i++)
+        {
+
+        }
         SlotDataReset();
     }
     void SlotDataReset()

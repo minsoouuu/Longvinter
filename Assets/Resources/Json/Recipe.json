@@ -14,7 +14,7 @@
     },
     {
       "completeitem": "Cake",
-      "material1": "RasberryJam",
+      "material1": "RaspberryJam",
       "material2": "Bread",
       "type": "Foods"
     },
@@ -33,24 +33,24 @@
     {
       "completeitem": "Croissant",
       "material1": "Bread",
-      "material2": "Sugar Beet",
+      "material2": "SugarBeet",
       "type": "Foods"
     },
     {
       "completeitem": "BlackberryJam",
-      "material1": "BlackBerry",
+      "material1": "Blackberry",
       "material2": "WaterCanister",
       "type": "Foods"
     },
     {
       "completeitem": "CloudberryJam",
-      "material1": "CloudBerry",
+      "material1": "Cloudberry",
       "material2": "WaterCanister ",
       "type": "Foods"
     },
     {
-      "completeitem": "RasberryJam",
-      "material1": "Rasberry",
+      "completeitem": "RaspberryJam",
+      "material1": "Raspberry",
       "material2": "WaterCanister",
       "type": "Foods"
     }

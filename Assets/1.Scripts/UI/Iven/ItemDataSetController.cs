@@ -131,6 +131,7 @@ public class ItemDataSetController : MonoBehaviour
                 }
             }
         }
+        Debug.Log(item.data.itemName);
         return item;
 
     }

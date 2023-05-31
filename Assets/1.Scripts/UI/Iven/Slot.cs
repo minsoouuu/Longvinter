@@ -23,7 +23,7 @@ public class Slot : MonoBehaviour
     public void SetItemData(Item item)
     {
         image.sprite = item.data.image;
-        countText.text = item.Count.ToString();
+        countText.text = item.data.count.ToString();
         this.item = item;
     }
     public void SetItemPopup(InvenItemClick popup)

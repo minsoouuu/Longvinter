@@ -19,11 +19,13 @@ public class MakingSlot : MonoBehaviour
             {
                 itemIcon.sprite = value.data.image;
                 makeController.items.Add(ItemData);
+                Debug.Log("아이템 이미지 변환");
             }
             else
             {
                 itemIcon.sprite = nullSprite;
                 makeController.items.Remove(ItemData);
+                Debug.Log("초기화");
             }
             Debug.Log(makeController.items.Count);
         }
