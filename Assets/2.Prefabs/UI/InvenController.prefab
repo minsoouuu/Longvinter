@@ -456,7 +456,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 1315457601132877378}
-  parent: {fileID: 0}
 --- !u!1 &1315457601150376723
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,8 +907,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4223311743587875017}
   m_HandleRect: {fileID: 4223311743587875018}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.76
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 3
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1124,6 +1123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4223311744684902326}
   - component: {fileID: 4223311744684902325}
+  - component: {fileID: 8380962385579520846}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1169,7 +1169,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 750}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4223311744684902325
 MonoBehaviour:
@@ -1195,6 +1195,20 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 4
+--- !u!114 &8380962385579520846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223311744684902327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &4943690818775892824
 GameObject:
   m_ObjectHideFlags: 0
@@ -4198,14 +4212,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbbb95bcde67f541aa1fb34ff3d455f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item1: {fileID: -6099599338186816702, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
-  item2: {fileID: -8887452731064186799, guid: 260ff1508afea5241b6511d8fbe92201, type: 3}
   spawnPoint: {fileID: 0}
   equipments: []
   materials: []
   foods: []
   plants: []
   nullsprite: {fileID: 0}
+  invenIsOn: 0
   scController: {fileID: 1536031499427644830, guid: bc2e07ce205ad2b459cc19932a6b9515, type: 3}
   moneyButton: {fileID: 6470682887318959656}
   toggles:
@@ -4239,6 +4252,7 @@ MonoBehaviour:
   - {fileID: 8730755302494286839}
   - {fileID: 8730755303862027292}
   - {fileID: 8730755303648939525}
+  curInvenType: 0
 --- !u!114 &4871461482499168004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4251,7 +4265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b45ef2301cf4d1bac084b7150c406c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons: {fileID: 7739627304836015069, guid: 0520a59de910046f6bdee956e0bcb862, type: 3}
 --- !u!1 &8730755302179727513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4347,6 +4360,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302400816650}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755302179727519
 Canvas:
   m_ObjectHideFlags: 0
@@ -4617,6 +4631,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302650589289}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755302264419432
 Canvas:
   m_ObjectHideFlags: 0
@@ -5374,6 +5389,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302787665294}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755302494286825
 Canvas:
   m_ObjectHideFlags: 0
@@ -5781,6 +5797,7 @@ MonoBehaviour:
   countText: {fileID: 8730755303205331826}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755302642041186
 Canvas:
   m_ObjectHideFlags: 0
@@ -6399,6 +6416,7 @@ MonoBehaviour:
   countText: {fileID: 8730755303674363116}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755302790916458
 Canvas:
   m_ObjectHideFlags: 0
@@ -6669,6 +6687,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302440057490}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755302952086062
 Canvas:
   m_ObjectHideFlags: 0
@@ -6802,6 +6821,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302443949853}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755302978802698
 Canvas:
   m_ObjectHideFlags: 0
@@ -6935,6 +6955,7 @@ MonoBehaviour:
   countText: {fileID: 8730755303212787795}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303013763857
 Canvas:
   m_ObjectHideFlags: 0
@@ -7342,6 +7363,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302889144901}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303230542349
 Canvas:
   m_ObjectHideFlags: 0
@@ -7475,6 +7497,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302581185134}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303305464217
 Canvas:
   m_ObjectHideFlags: 0
@@ -7608,6 +7631,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302102292690}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303483643274
 Canvas:
   m_ObjectHideFlags: 0
@@ -7741,6 +7765,7 @@ MonoBehaviour:
   countText: {fileID: 8730755301953018877}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303580913285
 Canvas:
   m_ObjectHideFlags: 0
@@ -7874,6 +7899,7 @@ MonoBehaviour:
   countText: {fileID: 8730755303868545028}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303648939578
 Canvas:
   m_ObjectHideFlags: 0
@@ -8007,6 +8033,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302575097171}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303673588598
 Canvas:
   m_ObjectHideFlags: 0
@@ -8277,6 +8304,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302252394544}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303683710430
 Canvas:
   m_ObjectHideFlags: 0
@@ -8410,6 +8438,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302472551702}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303691310557
 Canvas:
   m_ObjectHideFlags: 0
@@ -8543,6 +8572,7 @@ MonoBehaviour:
   countText: {fileID: 8730755301860043475}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303706045596
 Canvas:
   m_ObjectHideFlags: 0
@@ -8676,6 +8706,7 @@ MonoBehaviour:
   countText: {fileID: 8730755301919772491}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303862027294
 Canvas:
   m_ObjectHideFlags: 0
@@ -8946,6 +8977,7 @@ MonoBehaviour:
   countText: {fileID: 8730755301939120293}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303873692239
 Canvas:
   m_ObjectHideFlags: 0
@@ -9079,6 +9111,7 @@ MonoBehaviour:
   countText: {fileID: 8730755302750546811}
   item: {fileID: 0}
   rt: {fileID: 0}
+  slot: {fileID: 0}
 --- !u!223 &8730755303877330615
 Canvas:
   m_ObjectHideFlags: 0

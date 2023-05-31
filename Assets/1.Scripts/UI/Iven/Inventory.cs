@@ -121,8 +121,11 @@ public class Inventory : MonoBehaviour
     }
     public void AddItem(Item item)
     {
-        if (slots[slots.Count -1].item != null)
+        if (slots[slots.Count - 1].item != null)
+        {
+            Debug.Log("아이템 공간 부족");
             return;
+        }
 
         List<Item> curItems = new List<Item>();
         switch (item.data.itemType)
@@ -138,7 +141,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count += 1;
+                            it.data.count += 1;
                             break;
                         }
                     }
@@ -156,7 +159,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count += 1;
+                            it.data.count += 1;
                             break;
                         }
                     }
@@ -175,7 +178,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count += 1;
+                            it.data.count += 1;
                             break;
                         }
                     }
@@ -193,7 +196,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count += 1;
+                            it.data.count += 1;
                             break;  
                         }
                     }
@@ -223,8 +226,8 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count -= 1;
-                            if (it.Count <= 0)
+                            it.data.count -= 1;
+                            if (it.data.count <= 0)
                             {
                                 equipments.Remove(it);
                             }
@@ -245,8 +248,8 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count -= 1;
-                            if (it.Count <= 0)
+                            it.data.count -= 1;
+                            if (it.data.count <= 0)
                             {
                                 materials.Remove(it);
                             }
@@ -268,8 +271,8 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count -= 1;
-                            if (it.Count <= 0)
+                            it.data.count -= 1;
+                            if (it.data.count <= 0)
                             {
                                 foods.Remove(it);
                             }
@@ -290,8 +293,8 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.Count -= 1;
-                            if (it.Count <= 0)
+                            it.data.count -= 1;
+                            if (it.data.count <= 0)
                             {
                                 plants.Remove(it);
                             }
