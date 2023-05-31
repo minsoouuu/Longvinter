@@ -6,6 +6,9 @@ public class MakingSlot : MonoBehaviour
 {
     [SerializeField] private MakingController makeController;
     [SerializeField] private Sprite nullSprite;
+    [SerializeField] private Button slotButton;
+
+
     private Image itemIcon;
     private Item item = null;
     public Item ItemData
@@ -33,5 +36,21 @@ public class MakingSlot : MonoBehaviour
     void Awake()
     {
         itemIcon = transform.GetChild(0).GetComponent<Image>();
+        if (slotButton != null)
+        {
+            slotButton.onClick.AddListener(() => OnMouseButtonDown());
+        }
+    }
+    private void Update()
+    {
+        
+    }
+
+    void OnMouseButtonDown()
+    {
+        Debug.Log("Å¬¸¯");
+        if (ItemData == null)
+            return;
+        ItemData = null;
     }
 }

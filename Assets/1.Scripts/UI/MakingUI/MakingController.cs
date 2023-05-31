@@ -19,7 +19,7 @@ public class MakingController : MonoBehaviour
     private void Start()
     {
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
-        button.onClick.AddListener(() => OnButtonDown());
+        button.onClick.AddListener(() => OnButtonDownComplete());
     }
 
     private void Update()
@@ -85,13 +85,21 @@ public class MakingController : MonoBehaviour
         comPleteSlot.ItemData = Gamemanager.instance.itemController.GetItem(comName, type);
         Debug.Log(Gamemanager.instance.itemController.GetItem(comName, type).name);
     }
-    void OnButtonDown()
+    void OnButtonDownComplete()
     {
+        if (comPleteSlot.ItemData == null)
+            return;
         Gamemanager.instance.player.inven.AddItem(comPleteSlot.ItemData);
         for (int i = 0; i < makingSlots.Length; i++)
         {
-
+            if (makingSlots[i].ItemData != null)
+            {
+                Gamemanager.instance.player.inven.DeleteItem(makingSlots[i].ItemData);
+                makingSlots[i].ItemData = null;
+            }
         }
+        Gamemanager.instance.player.inven.DeleteItem(comPleteSlot.ItemData);
+        comPleteSlot.ItemData = null;
         SlotDataReset();
     }
     void SlotDataReset()
