@@ -8,14 +8,14 @@ using System.Linq;
 
 public class MakingController : MonoBehaviour
 {
-    [SerializeField] private MakingSlot[] makingSlots;
-    [SerializeField] private MakingSlot comPleteSlot;
+    [SerializeField] private MaterialSlot[] MaterialSlot;
     [SerializeField] private Button button;
 
-    [HideInInspector] public List<Item> items = new List<Item>();
-
+    [HideInInspector] public List<ItemName> items = new List<ItemName>();
     List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
+
+    public CompleteSlot completeSlot;
     private void Start()
     {
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
@@ -37,11 +37,12 @@ public class MakingController : MonoBehaviour
     }
     public void SetSlotData(Item item)
     {
-        for (int i = 0; i < makingSlots.Length; i++)
+        for (int i = 0; i < MaterialSlot.Length; i++)
         {
-            if (makingSlots[i].ItemData == null)
+            if (MaterialSlot[i].ItemData == null)
             {
-                makingSlots[i].ItemData = item;
+                MaterialSlot[i].ItemData = item;
+                break;
             }
         }
         if (items.Count >= 2)
@@ -52,45 +53,54 @@ public class MakingController : MonoBehaviour
     }
     void CheckSlot()
     {
-
         ItemDataSetController dataSetCont = Gamemanager.instance.itemController;
 
+        int count = 0;
         foreach (var key in dataSetCont.recipes.Keys)
         {
             //Debug.Log($"{key} : {dataSetCont.recipes[key][0]} , {dataSetCont.recipes[key][1]}");
-            if (dataSetCont.recipes[key].Contains(makingSlots[0].ItemData.data.itemName) && dataSetCont.recipes[key].Contains(makingSlots[1].ItemData.data.itemName))
+            
+            if (items.Contains(dataSetCont.recipes[key][count]))
             {
-                comPleteSlot.ItemData = Gamemanager.instance.itemController.GetItem(key);
-                Debug.Log(Gamemanager.instance.itemController.GetItem(key).name);
-                Debug.Log(comPleteSlot.ItemData.data.itemName);
-                break;
+                count++;
+                if (items.Contains(dataSetCont.recipes[key][count]))
+                {
+                    completeSlot.ItemData = Gamemanager.instance.itemController.GetItem(key);
+                    Debug.Log(Gamemanager.instance.itemController.GetItem(key).name);
+                    break;
+                }
+                else
+                {
+                    SlotDataReset();
+                }
             }
         }
     }
     void OnButtonDownComplete()
     {
-        if (comPleteSlot.ItemData == null)
+        Debug.Log("완성");
+        if (completeSlot.ItemData == null)
             return;
-        Gamemanager.instance.player.inven.AddItem(comPleteSlot.ItemData);
-        for (int i = 0; i < makingSlots.Length; i++)
+        // 인벤에 재료 추가
+        //Gamemanager.instance.player.inven.AddItem(completeSlot.ItemData);
+        for (int i = 0; i < MaterialSlot.Length; i++)
         {
-            if (makingSlots[i].ItemData != null)
+            if (MaterialSlot[i].ItemData != null)
             {
-                Gamemanager.instance.player.inven.DeleteItem(makingSlots[i].ItemData);
-                makingSlots[i].ItemData = null;
+                // 인벤에서 재료 차감
+                //Gamemanager.instance.player.inven.DeleteItem(MaterialSlot[i].ItemData);
             }
         }
-        Gamemanager.instance.player.inven.DeleteItem(comPleteSlot.ItemData);
-        comPleteSlot.ItemData = null;
         SlotDataReset();
     }
     void SlotDataReset()
     {
-        for (int i = 0; i < makingSlots.Length; i++)
+        items.Clear();
+        for (int i = 0; i < MaterialSlot.Length; i++)
         {
-            makingSlots[i].ItemData = null;
+            MaterialSlot[i].ItemData = null;
         }
-        comPleteSlot.ItemData = null;
+        completeSlot.ItemData = null;
     }
 
 
@@ -102,22 +112,22 @@ public class MakingController : MonoBehaviour
         List<JsonData.RecipeJson> curRecipe = new List<JsonData.RecipeJson>();
         ItemName comName = new ItemName();
         InvenItemType type = new InvenItemType();
-        for (int i = 0; i < makingSlots.Length; i++)
+        for (int i = 0; i < MaterialSlot.Length; i++)
         {
-            if (makingSlots[i].ItemData == null)
+            if (MaterialSlot[i].ItemData == null)
                 return;
             for (int j = 0; j < recipes.Count; j++)
             {
                 if (i == 0)
                 {
-                    if (makingSlots[i].ItemData.data.itemName.ToString() == recipes[j].material1)
+                    if (MaterialSlot[i].ItemData.data.itemName.ToString() == recipes[j].material1)
                     {
                         curRecipe.Add(recipes[j]);
                     }
                 }
                 if (i == 1)
                 {
-                    if (makingSlots[i].ItemData.data.itemName.ToString() == curRecipe[j].material2)
+                    if (MaterialSlot[i].ItemData.data.itemName.ToString() == curRecipe[j].material2)
                     {
                         comName = Enum.Parse<ItemName>(curRecipe[j].completeitem);
                         type = Enum.Parse<InvenItemType>(curRecipe[j].type);
@@ -125,9 +135,7 @@ public class MakingController : MonoBehaviour
                 }
             }
         }
-        comPleteSlot.ItemData = Gamemanager.instance.itemController.GetItem(comName, type);
+        completeSlot.ItemData = Gamemanager.instance.itemController.GetItem(comName, type);
         Debug.Log(Gamemanager.instance.itemController.GetItem(comName, type).name);
     }
-    
-   
 }

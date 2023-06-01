@@ -6,8 +6,8 @@ using UnityEngine.UI;
 using System;
 public class MakeController : MonoBehaviour
 {
-    [SerializeField] private List<MakingSlot> slots;
-    [SerializeField] private MakingSlot completedItem;
+    [SerializeField] private List<MaterialSlot> slots;
+    [SerializeField] private CompleteSlot completedItem;
     [SerializeField] private Button btn;
 
     [HideInInspector] public List<Item> materials = new List<Item>();

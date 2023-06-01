@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class MakingSlot : MonoBehaviour
+public class MaterialSlot : MonoBehaviour
 {
     [SerializeField] private MakingController makeController;
     [SerializeField] private Sprite nullSprite;
@@ -20,19 +20,14 @@ public class MakingSlot : MonoBehaviour
             if (ItemData != null)
             {
                 itemIcon.sprite = item.data.image;
-                makeController.items.Add(ItemData);
+                makeController.items.Add(ItemData.data.itemName);
             }
             else
             {
                 itemIcon.sprite = nullSprite;
-                if (makeController.items.Contains(ItemData))
-                {
-                    makeController.items.Remove(ItemData);
-                }
             }
         }
     }
-
     void Awake()
     {
         itemIcon = transform.GetChild(0).GetComponent<Image>();
@@ -46,6 +41,14 @@ public class MakingSlot : MonoBehaviour
         Debug.Log("Å¬¸¯");
         if (ItemData == null)
             return;
-        ItemData = null;
+        if (makeController.items.Contains(ItemData.data.itemName))
+        {
+            makeController.items.Remove(ItemData.data.itemName);
+            ItemData = null;
+            if (makeController.completeSlot.ItemData != null)
+            {
+                makeController.completeSlot.ItemData = null;
+            }
+        }
     }
 }
