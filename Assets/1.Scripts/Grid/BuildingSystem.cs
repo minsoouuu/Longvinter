@@ -11,22 +11,26 @@ public class BuildingSystem : MonoBehaviour
     public Grid grid;
     public Tilemap mainTilemap;
     public TileBase takenTile;
+    public User player;
 
     public HandlingObject prefab;
     PlaceableObject selectedObject;
 
 
+    // takenTile 저장
     static TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
     {
-        TileBase[] array = new TileBase[(area.size.x + 1) * (area.size.y + 1)];
+        TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
         int count = 0;
 
         foreach (var item in area.allPositionsWithin)
         {
             Vector3Int pos = new Vector3Int(item.x, item.y, 0);
+            Debug.Log(pos);
             array[count] = tilemap.GetTile(pos);
             count++;
         }
+        
         return array;
     }
     private void Awake()
@@ -37,7 +41,7 @@ public class BuildingSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = player.GetComponent<User>();
     }
 
     // Update is called once per frame
@@ -45,13 +49,13 @@ public class BuildingSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if(selectedObject != null)
+            
+            if (selectedObject != null)
             {
                 Destroy(selectedObject.gameObject);
                 selectedObject = null;
             }
             InitWithObject(prefab);
-            Debug.Log(selectedObject);
         }
 
         if (!selectedObject)
@@ -65,8 +69,6 @@ public class BuildingSystem : MonoBehaviour
             {
                 selectedObject.Place();
                 Vector3Int startpos = gridLayout.WorldToCell(selectedObject.GetStartPosition());
-                Debug.Log(startpos);
-                Debug.Log(selectedObject.Size);
                 TakenArea(startpos, selectedObject.Size);
 
                 Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
@@ -74,7 +76,7 @@ public class BuildingSystem : MonoBehaviour
             }
             else
             {
-                Destroy(selectedObject.gameObject);
+                Debug.Log("겹친다 다른 곳으로 가라");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
@@ -85,11 +87,13 @@ public class BuildingSystem : MonoBehaviour
 
     public void InitWithObject(HandlingObject building)
     {
-        Vector3 pos = SnapCoordinateToGrid(Vector3.zero);
+        Vector3 playerpos= new Vector3(player.transform.position.x, 0, player.transform.position.z - 3f);
+        Vector3 pos = SnapCoordinateToGrid(playerpos);
 
         HandlingObject obj = Instantiate(building, pos, Quaternion.identity) as HandlingObject;
         selectedObject = obj.GetComponent<PlaceableObject>();
-        
+
+
     }
 
     public Vector3 SnapCoordinateToGrid(Vector3 pos)
@@ -103,10 +107,11 @@ public class BuildingSystem : MonoBehaviour
     {
         BoundsInt area = new BoundsInt();
         area.position = gridLayout.WorldToCell(ob.GetStartPosition());
+        // Debug.Log(area.position);
         area.size = ob.Size;
+        //Debug.Log(area.size);
 
         TileBase[] baseArray = GetTileBlock(area, mainTilemap);
-
         foreach (var b in baseArray)
         {
             //b에 takenTile가 있다면???
@@ -120,6 +125,6 @@ public class BuildingSystem : MonoBehaviour
 
     public void TakenArea(Vector3Int startpos, Vector3Int size)
     {
-        mainTilemap.BoxFill(startpos, takenTile, startpos.x, startpos.y, startpos.x + size.x, startpos.y + size.y);
+        mainTilemap.BoxFill(startpos, takenTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
     }
 }

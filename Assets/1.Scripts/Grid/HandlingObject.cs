@@ -6,6 +6,7 @@ public class HandlingObject : MonoBehaviour
 {
     Vector3 offset;
 
+
     private void OnMouseDown()
     {
         offset = transform.position - ClickObject();

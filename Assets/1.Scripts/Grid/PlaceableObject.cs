@@ -15,12 +15,15 @@ public class PlaceableObject : MonoBehaviour
         CalculateTileSize();
     }
 
+    public virtual void Preview()
+    {
+        HandlingObject drag = gameObject.GetComponent<HandlingObject>();
+        VertexLocalPosition();
+        Placed = false;
+    }
     public virtual void Place()
     {
         HandlingObject drag = gameObject.GetComponent<HandlingObject>();
-        Destroy(drag);
-
-        Placed = true;
     }
 
     //위치를 Vertex에 넣는 함수
@@ -43,16 +46,16 @@ public class PlaceableObject : MonoBehaviour
         for (int i = 0; i < verticesInt.Length; i++)
         {
             Vector3 worldpos = transform.TransformPoint(vertices[i]);
-            Debug.Log(worldpos);
+            //Debug.Log(worldpos);
             //타일맵 기준
             verticesInt[i] = BuildingSystem.b_instance.gridLayout.WorldToCell(worldpos);
-            Debug.Log(verticesInt[i]);
+            //Debug.Log(verticesInt[i]);
         }
 
         int x = Mathf.Abs((verticesInt[0] - verticesInt[2]).x);
         //Debug.Log(x);
         int y = Mathf.Abs((verticesInt[1] - verticesInt[3]).y); //?
-        Size = new Vector3Int(x, y, 1);
+        Size = new Vector3Int(x + 1, y + 1, 1);
         //Debug.Log(Size);
     }
 
