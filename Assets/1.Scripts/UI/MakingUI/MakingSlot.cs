@@ -17,22 +17,22 @@ public class MakingSlot : MonoBehaviour
         set
         {
             item = value;
-            Debug.Log($"{gameObject.name}:{value}");
-            if (item != null)
+            if (ItemData != null)
             {
-                itemIcon.sprite = value.data.image;
+                itemIcon.sprite = item.data.image;
                 makeController.items.Add(ItemData);
-                Debug.Log("아이템 이미지 변환");
             }
             else
             {
                 itemIcon.sprite = nullSprite;
-                makeController.items.Remove(ItemData);
-                Debug.Log("초기화");
+                if (makeController.items.Contains(ItemData))
+                {
+                    makeController.items.Remove(ItemData);
+                }
             }
-            Debug.Log(makeController.items.Count);
         }
     }
+
     void Awake()
     {
         itemIcon = transform.GetChild(0).GetComponent<Image>();
@@ -41,11 +41,6 @@ public class MakingSlot : MonoBehaviour
             slotButton.onClick.AddListener(() => OnMouseButtonDown());
         }
     }
-    private void Update()
-    {
-        
-    }
-
     void OnMouseButtonDown()
     {
         Debug.Log("클릭");

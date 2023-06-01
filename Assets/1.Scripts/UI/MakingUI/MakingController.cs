@@ -20,38 +20,82 @@ public class MakingController : MonoBehaviour
     {
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
         button.onClick.AddListener(() => OnButtonDownComplete());
+        Debug.Log(items.Count);
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            makingSlots[0].ItemData = Gamemanager.instance.itemController.GetItem(ItemName.Salt, InvenItemType.Materials);
+            SetSlotData(Gamemanager.instance.itemController.GetItem(ItemName.SugarBeet, InvenItemType.Materials));
+            Debug.Log("¼³ÅÁ Ãß°¡");
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
-            makingSlots[1].ItemData = Gamemanager.instance.itemController.GetItem(ItemName.Bread, InvenItemType.Foods);
-            Test();
+            SetSlotData(Gamemanager.instance.itemController.GetItem(ItemName.Bread, InvenItemType.Foods));
+            Debug.Log("»§ Ãß°¡");
         }
     }
-
-    void Test()
+    public void SetSlotData(Item item)
     {
+        for (int i = 0; i < makingSlots.Length; i++)
+        {
+            if (makingSlots[i].ItemData == null)
+            {
+                makingSlots[i].ItemData = item;
+            }
+        }
+        if (items.Count >= 2)
+        {
+            Debug.Log("¿Ï¼ºÇ°");
+            CheckSlot();
+        }
+    }
+    void CheckSlot()
+    {
+
         ItemDataSetController dataSetCont = Gamemanager.instance.itemController;
-        if (items.Count < 2)
-            return;
 
         foreach (var key in dataSetCont.recipes.Keys)
         {
+            //Debug.Log($"{key} : {dataSetCont.recipes[key][0]} , {dataSetCont.recipes[key][1]}");
             if (dataSetCont.recipes[key].Contains(makingSlots[0].ItemData.data.itemName) && dataSetCont.recipes[key].Contains(makingSlots[1].ItemData.data.itemName))
             {
                 comPleteSlot.ItemData = Gamemanager.instance.itemController.GetItem(key);
                 Debug.Log(Gamemanager.instance.itemController.GetItem(key).name);
+                Debug.Log(comPleteSlot.ItemData.data.itemName);
                 break;
             }
         }
     }
-    void CheckSlot()
+    void OnButtonDownComplete()
+    {
+        if (comPleteSlot.ItemData == null)
+            return;
+        Gamemanager.instance.player.inven.AddItem(comPleteSlot.ItemData);
+        for (int i = 0; i < makingSlots.Length; i++)
+        {
+            if (makingSlots[i].ItemData != null)
+            {
+                Gamemanager.instance.player.inven.DeleteItem(makingSlots[i].ItemData);
+                makingSlots[i].ItemData = null;
+            }
+        }
+        Gamemanager.instance.player.inven.DeleteItem(comPleteSlot.ItemData);
+        comPleteSlot.ItemData = null;
+        SlotDataReset();
+    }
+    void SlotDataReset()
+    {
+        for (int i = 0; i < makingSlots.Length; i++)
+        {
+            makingSlots[i].ItemData = null;
+        }
+        comPleteSlot.ItemData = null;
+    }
+
+
+    // Test .... 
+    void Test()
     {
         if (items.Count < 2)
             return;
@@ -81,33 +125,9 @@ public class MakingController : MonoBehaviour
                 }
             }
         }
-
         comPleteSlot.ItemData = Gamemanager.instance.itemController.GetItem(comName, type);
         Debug.Log(Gamemanager.instance.itemController.GetItem(comName, type).name);
     }
-    void OnButtonDownComplete()
-    {
-        if (comPleteSlot.ItemData == null)
-            return;
-        Gamemanager.instance.player.inven.AddItem(comPleteSlot.ItemData);
-        for (int i = 0; i < makingSlots.Length; i++)
-        {
-            if (makingSlots[i].ItemData != null)
-            {
-                Gamemanager.instance.player.inven.DeleteItem(makingSlots[i].ItemData);
-                makingSlots[i].ItemData = null;
-            }
-        }
-        Gamemanager.instance.player.inven.DeleteItem(comPleteSlot.ItemData);
-        comPleteSlot.ItemData = null;
-        SlotDataReset();
-    }
-    void SlotDataReset()
-    {
-        for (int i = 0; i < makingSlots.Length; i++)
-        {
-            makingSlots[i].ItemData = null;
-        }
-        comPleteSlot.ItemData = null;
-    }
+    
+   
 }
