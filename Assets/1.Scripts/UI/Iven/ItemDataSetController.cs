@@ -109,8 +109,8 @@ public class ItemDataSetController : MonoBehaviour
     // 스프라이트 가져오기.
     Sprite GetSpriteInAssets(InvenItemType type, string name)
     {
-        string path = "Longvinter_Icons";
-        return Resources.Load<Sprite>(path + type.ToString() + name);
+        string path = $"Longvinter_Icons/{type}/{name}";
+        return Resources.Load<Sprite>(path);
     }
     public Item GetItem(ItemName name)
     {

@@ -121,12 +121,13 @@ public class Inventory : MonoBehaviour
     }
     public void AddItem(Item item)
     {
+        /*
         if (slots[slots.Count - 1].item != null)
         {
             Debug.Log("아이템 공간 부족");
             return;
         }
-
+        */
         List<Item> curItems = new List<Item>();
         switch (item.data.itemType)
         {
@@ -321,6 +322,7 @@ public class Inventory : MonoBehaviour
     }
     void ShowItem(List<Item> items)
     {
+        /*
         for (int i = 0; i < slots.Count; i++ )
         {
             if (slots[i].item != null)
@@ -333,6 +335,7 @@ public class Inventory : MonoBehaviour
             slots[i].SetItemData(items[i]);
             slots[i].SetItemPopup(popup);
         }
+        */
     }
     public void OnclickAligne_Btn()
     {
@@ -373,8 +376,8 @@ public class Inventory : MonoBehaviour
         int s_count = 0;
         for (int i = 0; i < slots.Count; i++)
         {
-            if (slots[i].item != null)
-                s_count++;
+            //if (slots[i].item != null)
+            //    s_count++;
         }
         return s_count;
     }

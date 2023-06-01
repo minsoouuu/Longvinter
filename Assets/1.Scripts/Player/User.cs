@@ -16,6 +16,7 @@ public class User : MonoBehaviour
         Direct
     }
     public Inventory inven;
+    public InventoryManager im;
 
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;

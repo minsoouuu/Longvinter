@@ -45,8 +45,8 @@ public class Inventory_alignement : MonoBehaviour
         int s_count = 0;
         for(int i = 0; i < inventory.slots.Count; i++)
         {
-            if (inventory.slots[i].item != null)
-                s_count++;
+            //if (inventory.slots[i].item != null)
+             //   s_count++;
         }
         return s_count;
     }

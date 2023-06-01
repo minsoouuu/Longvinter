@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour
 {
+    /* 코드 재정의
     [SerializeField] TMP_Text countText;
     [HideInInspector] public Item item;
     [HideInInspector] public RectTransform rt;
@@ -36,22 +37,63 @@ public class Slot : MonoBehaviour
         image.sprite = nullSprite;
         countText.text = string.Empty;
     }
-
     public void ToggleOnOff()
     {
         if (slot.isOn)
-        {
             if (item != null)
-            {
                 popup.ShowTool(rt.anchoredPosition);
-            }
-        }
         else if (!slot.isOn)
-        {
             popup.HideTool();
-        }
-        
+    }
+    */
+
+    [SerializeField] private TMP_Text cntTxt;
+    [SerializeField] private Image icon;
+    [SerializeField] private Sprite emptySprite;
+
+    [HideInInspector] public Item item = null;
+
+    public SlotPopup popup;
+    
+    public Slot SetData(Item item)
+    {
+        this.item = item;
+
+        return this;
     }
 
-    
+    /// <summary>
+    /// 아이템을 추가 시킬수 있는 함수
+    /// </summary>
+    public void Add()
+    {
+        cntTxt.text = item.data.count.ToString();
+        icon.sprite = item.data.image;
+    }
+
+    /// <summary>
+    /// 아이템을 아무것도 없는 상태로 만드는 함수
+    /// </summary>
+    public void Empty()
+    {
+        item = null;
+        icon.sprite = emptySprite;
+        cntTxt.text = string.Empty;
+    }
+
+    /// <summary>
+    /// 아이템사용후 남은 갯수 ?
+    /// </summary>
+    public void Delete()
+    {
+        item = null;
+        icon.sprite = emptySprite;
+        cntTxt.text = string.Empty;
+    }
+
+    public void OnPopup()
+    {
+        Gamemanager.instance.player.im.SlotPopupAllOff();
+        popup.Enable(true);
+    }
 }
