@@ -7,7 +7,9 @@ public class Colobus : Monster
     public override void Initialize()
     {
         monsterData.hp = 100f;
-        monsterData.maxSpeed = 5f;
+        monsterData.walkSpeed = 3f;
+        monsterData.runSpeed = 5f;
+        monsterData.turningSpeed = 3f;
         monsterData.monsterType = MonsterType.Colobus;
     }
 
@@ -21,13 +23,4 @@ public class Colobus : Monster
         throw new System.NotImplementedException();
     }
 
-    public override void MonsterDie()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Runaway()
-    {
-        throw new System.NotImplementedException();
-    }
 }

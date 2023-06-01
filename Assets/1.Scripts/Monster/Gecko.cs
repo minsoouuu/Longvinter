@@ -7,9 +7,11 @@ public class Gecko : Monster
     public override void Initialize()
     {
         monsterData.hp = 100f;
-        monsterData.maxSpeed = 3f;
+        monsterData.walkSpeed = 3f;
+        monsterData.runSpeed = 5f;
+        monsterData.turningSpeed = 3f;
         monsterData.monsterType = MonsterType.Gecko;
-    }
+}
 
     public override void AreaCircle()
     {
@@ -17,16 +19,6 @@ public class Gecko : Monster
     }
 
     public override void DropItem()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void MonsterDie()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Runaway()
     {
         throw new System.NotImplementedException();
     }
