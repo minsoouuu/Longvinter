@@ -18,7 +18,7 @@ public class BuildingSystem : MonoBehaviour
 
     static TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
     {
-        TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
+        TileBase[] array = new TileBase[(area.size.x + 1) * (area.size.y + 1)];
         int count = 0;
 
         foreach (var item in area.allPositionsWithin)

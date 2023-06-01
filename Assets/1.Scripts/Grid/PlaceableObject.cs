@@ -43,17 +43,17 @@ public class PlaceableObject : MonoBehaviour
         for (int i = 0; i < verticesInt.Length; i++)
         {
             Vector3 worldpos = transform.TransformPoint(vertices[i]);
-            //Debug.Log(worldpos);
+            Debug.Log(worldpos);
             //Å¸ÀÏ¸Ê ±âÁØ
             verticesInt[i] = BuildingSystem.b_instance.gridLayout.WorldToCell(worldpos);
-            //Debug.Log(verticesInt[i]);
+            Debug.Log(verticesInt[i]);
         }
 
-        int x = (int)Mathf.Abs((verticesInt[2] - verticesInt[0]).x);
-        Debug.Log(x);
-        int y = (int)Mathf.Abs((verticesInt[2] - verticesInt[0]).y); //?
+        int x = Mathf.Abs((verticesInt[0] - verticesInt[2]).x);
+        //Debug.Log(x);
+        int y = Mathf.Abs((verticesInt[1] - verticesInt[3]).y); //?
         Size = new Vector3Int(x, y, 1);
-        Debug.Log(Size);
+        //Debug.Log(Size);
     }
 
     public Vector3 GetStartPosition()
