@@ -11,7 +11,7 @@ public class SlotPopup : MonoBehaviour
     }
 
     /// <summary>
-    /// ÆË¾÷ ²ô°í ÄÑ±â
+    /// íŒì—… ë„ê³  ì¼œê¸°
     /// </summary>
     public void Enable(bool isShow)
     {
@@ -19,7 +19,7 @@ public class SlotPopup : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹ö¸®±â
+    /// ë²„ë¦¬ê¸°
     /// </summary>
     public void OnDrop()
     {
@@ -27,7 +27,7 @@ public class SlotPopup : MonoBehaviour
     }
 
     /// <summary>
-    /// »ç¿ëÇÏ±â
+    /// ì‚¬ìš©í•˜ê¸°
     /// </summary>
     public void OnUse()
     {

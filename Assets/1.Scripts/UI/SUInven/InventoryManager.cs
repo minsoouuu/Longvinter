@@ -28,7 +28,7 @@ public class InventoryManager : MonoBehaviour
         itemDic.Add(TitleType.Food, new List<Item>());
         itemDic.Add(TitleType.Plant, new List<Item>());
 
-        // ½½·ÔÀÌ ´Ã¾ù³¯ °æ¿ì¸¦ ´ëºñÇØ ÄÚµå·Î ÀÛ¼º
+        // ìŠ¬ë¡¯ì´ ëŠ˜ì—‡ë‚  ê²½ìš°ë¥¼ ëŒ€ë¹„í•´ ì½”ë“œë¡œ ì‘ì„±
         if (slots.Count == 0)
         {
             for (int i = 0; i < slotParent.childCount; i++)
@@ -45,30 +45,30 @@ public class InventoryManager : MonoBehaviour
         {
             int rand = Random.Range(0, 2);
             AddItem(ic.equipments[rand]);
-            Debug.Log("Àåºñ ¾ÆÀÌÅÛ Ãß°¡");
+            Debug.Log("ì¥ë¹„ ì•„ì´í…œ ì¶”ê°€");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
             int rand = Random.Range(0, ic.materilas.Count);
             AddItem(ic.materilas[rand]);
-            Debug.Log("Àç·á ¾ÆÀÌÅÛ Ãß°¡");
+            Debug.Log("ì¬ë£Œ ì•„ì´í…œ ì¶”ê°€");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
             int rand = Random.Range(0, ic.foods.Count);
             AddItem(ic.foods[rand]);
-            Debug.Log("À½½Ä ¾ÆÀÌÅÛ Ãß°¡");
+            Debug.Log("ìŒì‹ ì•„ì´í…œ ì¶”ê°€");
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
             int rand = Random.Range(0, ic.plants.Count);
             AddItem(ic.plants[rand]);
-            Debug.Log("¼³Ä¡ ¾ÆÀÌÅÛ Ãß°¡");
+            Debug.Log("ì„¤ì¹˜ ì•„ì´í…œ ì¶”ê°€");
         }
     }
 
     /// <summary>
-    /// ÇØ´ç Åä±Û ¾ÆÀÌÅÛÀ» Ã£¾Æ ÀÎº¥Åä¸® ¾ÆÀÌÅÛ º¯°æ
+    /// í•´ë‹¹ í† ê¸€ ì•„ì´í…œì„ ì°¾ì•„ ì¸ë²¤í† ë¦¬ ì•„ì´í…œ ë³€ê²½
     /// </summary>
     public void OnTabChange(Toggle toggle)
     {
@@ -96,7 +96,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾ÆÀÌÅÛ Ãß°¡
+    /// ì•„ì´í…œ ì¶”ê°€
     /// </summary>
     /// <param name="item"></param>
     public void AddItem(Item item)
@@ -122,7 +122,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // ºó½½·Ô Ã£±â
+        // ë¹ˆìŠ¬ë¡¯ ì°¾ê¸°
         foreach (var slot in slots)
         {
             if(slot.item == item || slot.item == null)
@@ -134,7 +134,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀÎº¥Åä¸®°¡ °¡Áö°í ÀÖ´Â ½½·Ôµé ÀüºÎ ºóÈ­¸éÀ¸·Î
+    /// ì¸ë²¤í† ë¦¬ê°€ ê°€ì§€ê³  ìˆëŠ” ìŠ¬ë¡¯ë“¤ ì „ë¶€ ë¹ˆí™”ë©´ìœ¼ë¡œ
     /// </summary>
     void SlotClear()
     {
@@ -145,7 +145,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÅÇ ¼±ÅÃ½Ã ÇØ´çÅÇ¿¡ °ü·ÃµÈ ¾ÆÀÌÅÛ º¸¿©ÁÜ.
+    /// íƒ­ ì„ íƒì‹œ í•´ë‹¹íƒ­ì— ê´€ë ¨ëœ ì•„ì´í…œ ë³´ì—¬ì¤Œ.
     /// </summary>
     void SlotChangeItem(TitleType tapType)
     {
@@ -166,7 +166,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ½½·Ô¿¡ ÄÑÁ® ÀÖ´Â ÆË¾÷À» ÀüºÎ ²ö´Ù.
+    /// ìŠ¬ë¡¯ì— ì¼œì ¸ ìˆëŠ” íŒì—…ì„ ì „ë¶€ ëˆë‹¤.
     /// </summary>
     public void SlotPopupAllOff()
     {

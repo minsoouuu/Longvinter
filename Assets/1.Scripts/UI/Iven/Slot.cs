@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour
 {
-    /* ÄÚµå ÀçÁ¤ÀÇ
+    /* ì½”ë“œ ì¬ì •ì˜
     [SerializeField] TMP_Text countText;
     [HideInInspector] public Item item;
     [HideInInspector] public RectTransform rt;
@@ -63,7 +63,7 @@ public class Slot : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾ÆÀÌÅÛÀ» Ãß°¡ ½ÃÅ³¼ö ÀÖ´Â ÇÔ¼ö
+    /// ì•„ì´í…œì„ ì¶”ê°€ ì‹œí‚¬ìˆ˜ ìˆëŠ” í•¨ìˆ˜
     /// </summary>
     public void Add()
     {
@@ -72,7 +72,7 @@ public class Slot : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾ÆÀÌÅÛÀ» ¾Æ¹«°Íµµ ¾ø´Â »óÅÂ·Î ¸¸µå´Â ÇÔ¼ö
+    /// ì•„ì´í…œì„ ì•„ë¬´ê²ƒë„ ì—†ëŠ” ìƒíƒœë¡œ ë§Œë“œëŠ” í•¨ìˆ˜
     /// </summary>
     public void Empty()
     {
@@ -82,7 +82,7 @@ public class Slot : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾ÆÀÌÅÛ»ç¿ëÈÄ ³²Àº °¹¼ö ?
+    /// ì•„ì´í…œì‚¬ìš©í›„ ë‚¨ì€ ê°¯ìˆ˜ ?
     /// </summary>
     public void Delete()
     {
