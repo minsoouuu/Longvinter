@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public struct MonsterData
 {
+    public float maxSpeed;
     public float hp;
-    public float speed;
+    public Vector3 velocity;
     public MonsterType monsterType;
 }
 
 public abstract class Monster : MonoBehaviour
 {
     public MonsterData monsterData = new MonsterData();
-
     private float curHp = 0;
 
     public float HP
@@ -29,6 +30,8 @@ public abstract class Monster : MonoBehaviour
         curHp = monsterData.hp;
         Debug.Log("몬스터 생성");
     }
+
+
     public abstract void Initialize();
     public virtual void AreaCircle()
     {
