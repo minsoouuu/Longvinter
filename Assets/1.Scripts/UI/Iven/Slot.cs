@@ -46,7 +46,7 @@ public class Slot : MonoBehaviour
             popup.HideTool();
     }
     */
-
+    [SerializeField] private GameObject cntTextBG;
     [SerializeField] private TMP_Text cntTxt;
     [SerializeField] private Image icon;
     [SerializeField] private Sprite emptySprite;
@@ -72,7 +72,18 @@ public class Slot : MonoBehaviour
     {
         if(item != null)
         {
-            cntTxt.text = item.data.count.ToString();
+            // 아이템 갯수가 2개 이상일때만 숫자 표시
+            if (item.data.count > 1)
+            {
+                cntTextBG.SetActive(true);
+                cntTxt.text = item.data.count.ToString();
+            }
+            else
+            {
+                cntTextBG.SetActive(false);
+                cntTxt.text = string.Empty;
+            }
+
             icon.sprite = item.data.image;
 
             if(item.data.count <= 0)
@@ -95,12 +106,33 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void OnDelete()
     {
+        if(item.data.count - 1 <= 0)
+            popup.Enable(false);
+
         mgr.ADItem(item, false);
     }
 
+    /// <summary>
+    /// 아이템 슬롯 팝업
+    /// </summary>
     public void OnPopup()
     {
-        Gamemanager.instance.player.im.SlotPopupAllOff();
-        popup.Enable(true);
+        FindObjectOfType<InventoryManager>().SlotPopupAllOff();
+
+        // 아이템이 아무것도 없을때는 무반응
+        if(item != null)
+        {
+            // TODO : 테스트 코드
+            MakingController mc = FindObjectOfType<MakingController>();
+            // 제작대가 켜져 있을경우
+            if (mc != null && mc.Ison)
+            {
+                mc.SetSlotData(item);
+            }
+            else
+            {
+                popup.Enable(true);
+            }
+        }
     }
 }

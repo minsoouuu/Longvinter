@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    
-    public enum TitleType
+    enum TitleType
     {
         Equipment,
         Material,
@@ -16,6 +15,8 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private Transform slotParent;
     [SerializeField] private Toggle[] toggles;
+
+    [SerializeField] private TMPro.TMP_Text title;
 
     private Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
     private List<Slot> slots = new List<Slot>();
@@ -39,6 +40,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         curToggle = toggles[0];
+        title.text = GetTitleString(toggles[0].name);
     }
 
     private void Update()
@@ -56,11 +58,16 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("재료 아이템 추가");
             int rand = Random.Range(0, ic.materilas.Count);
             ADItem(isAdd: true, item: ic.materilas[rand]);
-            */
+            
 
             Debug.Log("장비 아이템 추가");
             int rand = Random.Range(0, ic.equipments.Count);
             ADItem(isAdd: false, item: ic.equipments[rand]);
+            */
+
+            MakingController mc = FindObjectOfType<MakingController>();
+            mc.Ison = !mc.Ison;
+            Debug.Log(mc.Ison ? "제작대 On" : "제작대 Off");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
@@ -81,6 +88,7 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     public void OnTabChange(Toggle toggle)
     {
+        // 카테고리에 맞게 해당 아이템들을 보여준다.
         foreach (Toggle t in toggles)
         {
             if(t == toggle && toggle.isOn)
@@ -88,6 +96,8 @@ public class InventoryManager : MonoBehaviour
                 curToggle = t;
                 SlotClear();
                 SlotChangeItem(EnumUtil<TitleType>.Parse(t.name));
+
+                title.text = GetTitleString(t.name);
                 break;
             }
         }
@@ -138,7 +148,7 @@ public class InventoryManager : MonoBehaviour
     {
         TitleType key = GetTitleType(item);
 
-        if (!itemDic[key].Contains(item))
+        if (!itemDic[key].Contains(item) && isAdd)
         {
             // 인벤토리 공간 체크
             bool isAddCheck = false;
@@ -165,6 +175,7 @@ public class InventoryManager : MonoBehaviour
         {
             foreach (var dicItem in itemDic[key])
             {
+                Debug.Log($"Item Name Check : {item.data.itemName}, {dicItem.data.itemName}");
                 if (item.data.itemName == dicItem.data.itemName)
                 {
                     if(isAdd)
@@ -172,7 +183,7 @@ public class InventoryManager : MonoBehaviour
                     else
                     {
                         dicItem.data.count--;
-                        if (dicItem.data.count <= 0)
+                        if (dicItem.data.count < 0)
                             DeleteData(dicItem);
                     }
                     break;
@@ -186,7 +197,12 @@ public class InventoryManager : MonoBehaviour
         {
             foreach (var slot in slots)
             {
-                if (slot.item == item || slot.item == null)
+                if (isAdd && slot.item == null)
+                {
+                    slot.SetData(item, this).SetUI();
+                    break;
+                }
+                else if(slot.item != null && slot.item == item)
                 {
                     slot.SetData(item, this).SetUI();
                     break;
@@ -247,5 +263,13 @@ public class InventoryManager : MonoBehaviour
                      item.data.itemType == InvenItemType.Materials ? TitleType.Material :
                      item.data.itemType == InvenItemType.Foods ? TitleType.Food :
                      item.data.itemType == InvenItemType.Plants ? TitleType.Plant : TitleType.Equipment;
+    }
+
+    string GetTitleString(string toggleName)
+    {
+        return toggleName.Equals("Equipment") ? "장비" :
+                     toggleName.Equals("Material") ? "재료" :
+                     toggleName.Equals("Food") ? "음식" :
+                     toggleName.Equals("Plant") ? "설치 재료" : "타이틀 에러";
     }
 }
