@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+public enum PopType
+{
+    ToastPopUp,
+}
 public enum InvenItemType
 {
     Equipments,
@@ -12,7 +16,8 @@ public enum InvenItemType
 public enum ObjectType
 {
     BuySlot,
-    SellSlot
+    SellSlot,
+    ToastPopUp
 }
 public enum ItemName
 {

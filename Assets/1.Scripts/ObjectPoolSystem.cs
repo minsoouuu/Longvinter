@@ -15,6 +15,7 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<ItemName, Queue<Item>> itemPools = new Dictionary<ItemName, Queue<Item>>();
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
+    private Dictionary<PopType, Queue<ToastPopUp>> popPools = new Dictionary<PopType, Queue<ToastPopUp>>();
 
     private void Awake()
     {
@@ -27,7 +28,8 @@ public class ObjectPoolSystem : MonoBehaviour
             Enum.GetValues(typeof(ObjectType)).Length,
             Enum.GetValues(typeof(ItemName)).Length,
             Enum.GetValues(typeof(MonsterType)).Length,
-            Enum.GetValues(typeof(HouseType)).Length
+            Enum.GetValues(typeof(HouseType)).Length,
+            Enum.GetValues(typeof(PopType)).Length
         };
         for (int i = 0; i < typeCount.Length; i++)
         {
@@ -46,6 +48,9 @@ public class ObjectPoolSystem : MonoBehaviour
                         break;
                     case 3:
                         housePools[(HouseType)(j)] = new Queue<House>();
+                        break;
+                    case 4:
+                        popPools[(PopType)(j)] = new Queue<ToastPopUp>();
                         break;
                 }
             }
@@ -70,6 +75,12 @@ public class ObjectPoolSystem : MonoBehaviour
     {
         obj.gameObject.SetActive(false);
         housePools[type].Enqueue(obj);
+    }
+    public void ReturnObject(PopType type, ToastPopUp obj)
+    {
+        obj.gameObject.SetActive(false);
+        popPools[type].Enqueue(obj);
+        obj.transform.SetParent(transform);
     }
 
     // true - Buy, false - Sell
@@ -96,6 +107,24 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
+    public ToastPopUp GetObjectOfObjectPooling(PopType type)
+    {
+        ToastPopUp obj = null;
+
+        if (popPools[type].Count != 0)
+        {
+            obj = popPools[type].Dequeue();
+        }
+        else
+        {
+            string path = $"PopupPrefabs/{type}";
+            ToastPopUp toastPopUp = Resources.Load<ToastPopUp>(path);
+            obj = Instantiate(toastPopUp);
+        }
+        obj.gameObject.SetActive(true);
+        return obj;
+    }
+
     public Monster GetObjectOfObjectPooling(MonsterType type)
     {
         Monster obj = null;

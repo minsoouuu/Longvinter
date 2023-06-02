@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class ToastPopUp : MonoBehaviour
 {
     [SerializeField] private TMP_Text commnetText;
 
-    private List<IEnumerator> popUps = new List<IEnumerator>();
-    private RectTransform popUprect;
+    private Transform popUprect;
     private string comment;
     private float popUpMoveSpeed = 10f;
     public string Comment
@@ -18,35 +18,40 @@ public class ToastPopUp : MonoBehaviour
         set
         {
             comment = value;
-            commnetText.text = Comment;
+            commnetText.text = $"{value} È¹µæ ! ";
         }
     }
     private void Awake()
     {
-        popUprect = GetComponent<RectTransform>();
+        popUprect = transform.GetChild(0).GetComponent<Transform>();
     }
-    private void Start()
+
+    public void ToastPopStart()
     {
-        StartCoroutine("PopUpMove");
-
-        if (popUps.Count > 1)
-        {
-            foreach (IEnumerator pop in popUps)
-            {
-
-            }
-        }
+        ToastPopUpManager.toastmanager.co = StartCoroutine(PopUpMove());
     }
     IEnumerator PopUpMove()
     {
-        while (true)
+        Sequence sequence = DOTween.Sequence();
+        if (popUprect.position.y == 50)
         {
-            if (popUprect.anchoredPosition.y >= 100)
-            {
-                yield break;
-            }
-            popUprect.anchoredPosition += Vector2.up * popUpMoveSpeed;
-            yield return new WaitForSeconds(0.1f);
+            Debug.Log("³»·Á°¡");
+            yield return new WaitForSeconds(2f);
+            StartCoroutine(PopDownMove());
+            yield break;
         }
+        sequence.Append(popUprect.DOMoveY(50, 2, true));
+        //popUprect.position += Vector3.up * popUpMoveSpeed;
+    }
+    IEnumerator PopDownMove()
+    {
+        Sequence sequence = DOTween.Sequence();
+        if (popUprect.position.y == -50)
+        {
+            Gamemanager.instance.objectPool.ReturnObject(PopType.ToastPopUp, this);
+            ToastPopUpManager.toastmanager.co = null;
+            yield break;
+        }
+        sequence.Append(popUprect.DOMoveY(-50, 2, true));
     }
 }

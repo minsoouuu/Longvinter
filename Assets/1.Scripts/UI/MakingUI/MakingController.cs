@@ -15,7 +15,7 @@ public class MakingController : MonoBehaviour
     List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
     public CompleteSlot completeSlot;
-    public bool Ison { get; set; }
+    public bool IsOn { get; set; }
     private void Start()
     {
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
