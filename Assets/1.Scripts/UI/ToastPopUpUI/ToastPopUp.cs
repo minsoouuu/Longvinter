@@ -8,10 +8,10 @@ using DG.Tweening;
 public class ToastPopUp : MonoBehaviour
 {
     [SerializeField] private TMP_Text commnetText;
+    [HideInInspector] public Coroutine coroutine;
 
-    private Transform popUprect;
+    private RectTransform popUprect;
     private string comment;
-    private float popUpMoveSpeed = 10f;
     public string Comment
     {
         get { return comment; }
@@ -23,35 +23,37 @@ public class ToastPopUp : MonoBehaviour
     }
     private void Awake()
     {
-        popUprect = transform.GetChild(0).GetComponent<Transform>();
+        popUprect = transform.GetChild(0).GetComponent<RectTransform>();
     }
-
     public void ToastPopStart()
     {
-        ToastPopUpManager.toastmanager.co = StartCoroutine(PopUpMove());
+        ToastPopUpManager.toastmanager.coroutines.Add(this);
+        coroutine = StartCoroutine(PopUpMove(1,50));
+        StartCoroutine(PopUpHide());
     }
-    IEnumerator PopUpMove()
+    /// <summary>
+    /// 처음 움직일땐 1초 , 추가로 움직일땐 0초 (시작 대기시간)
+    /// </summary>
+    /// <param name="waitngTime"></param> 
+    /// <param name="maxPos"></param>
+    /// <returns></returns>
+    public IEnumerator PopUpMove(float waitngTime = 0, float maxPos = 0)
     {
         Sequence sequence = DOTween.Sequence();
-        if (popUprect.position.y == 50)
-        {
-            Debug.Log("내려가");
-            yield return new WaitForSeconds(2f);
-            StartCoroutine(PopDownMove());
-            yield break;
-        }
-        sequence.Append(popUprect.DOMoveY(50, 2, true));
-        //popUprect.position += Vector3.up * popUpMoveSpeed;
+
+        yield return new WaitForSeconds(waitngTime);
+        sequence.Append(popUprect.DOAnchorPosY(maxPos, 2, true));
     }
-    IEnumerator PopDownMove()
+    public IEnumerator PopUpHide()
     {
         Sequence sequence = DOTween.Sequence();
-        if (popUprect.position.y == -50)
-        {
-            Gamemanager.instance.objectPool.ReturnObject(PopType.ToastPopUp, this);
-            ToastPopUpManager.toastmanager.co = null;
-            yield break;
-        }
-        sequence.Append(popUprect.DOMoveY(-50, 2, true));
+
+        yield return new WaitForSeconds(3f);
+        sequence.Append(popUprect.GetComponent<Image>().DOFade(1 / 255f, 3));
+        sequence.Append(commnetText.DOFade(1 / 255f, 3));
+
+        yield return new WaitForSeconds(6f);
+        Gamemanager.instance.objectPool.ReturnObject(PopType.ToastPopUp, this);
+        ToastPopUpManager.toastmanager.coroutines.Remove(this);
     }
 }

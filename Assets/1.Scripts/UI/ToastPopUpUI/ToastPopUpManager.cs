@@ -8,7 +8,7 @@ public class ToastPopUpManager : MonoBehaviour
 
     [SerializeField] private Transform popParent;
 
-    [HideInInspector] public Coroutine co = null;
+    [HideInInspector] public List<ToastPopUp> coroutines = new List<ToastPopUp>();
     ToastPopUp toastPopUp;
 
     private void Awake()
@@ -26,20 +26,22 @@ public class ToastPopUpManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            PopUpCommentSet("Áø±ÔÇü");
+            PopUpCommentSet("***");
         }
     }
-
-
     public void PopUpCommentSet(string comment)
     {
-        if (co == null)
+        if (coroutines.Count <= 0)
         {
             SetPopUpData(comment);
         }
         else
         {
-            SetPopUpData(comment);
+            for (int i = 0; i < coroutines.Count; i++)
+            {
+                coroutines[i].StopCoroutine(coroutines[i].coroutine);
+                coroutines[i].StartCoroutine(coroutines[i].PopUpMove(0,(50 * (coroutines.Count - i))));
+            }
         }
     }
     void SetPopUpData(string comment)
