@@ -14,8 +14,8 @@ public class MakingController : MonoBehaviour
     [HideInInspector] public List<ItemName> items = new List<ItemName>();
     List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
-
     public CompleteSlot completeSlot;
+    public bool Ison { get; set; }
     private void Start()
     {
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
@@ -102,7 +102,6 @@ public class MakingController : MonoBehaviour
         }
         completeSlot.ItemData = null;
     }
-
 
     // Test .... 
     void Test()
