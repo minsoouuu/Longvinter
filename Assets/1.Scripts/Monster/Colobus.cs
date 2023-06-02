@@ -7,8 +7,7 @@ public class Colobus : Monster
     public override void Initialize()
     {
         monsterData.hp = 100f;
-        monsterData.walkSpeed = 3f;
-        monsterData.runSpeed = 5f;
+        monsterData.speed = 3f;
         monsterData.turningSpeed = 3f;
         monsterData.monsterType = MonsterType.Colobus;
     }

@@ -7,8 +7,7 @@ public class Taipan : Monster
     public override void Initialize()
     {
         monsterData.hp = 100f;
-        monsterData.walkSpeed = 4f;
-        monsterData.runSpeed = 7f;
+        monsterData.speed = 4f;
         monsterData.turningSpeed = 3f;
         monsterData.monsterType = MonsterType.Taipan;
     }

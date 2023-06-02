@@ -7,8 +7,7 @@ public class Rat : Monster
     public override void Initialize()
     {
         monsterData.hp = 100f; 
-        monsterData.walkSpeed = 5f;
-        monsterData.runSpeed = 8f;
+        monsterData.speed = 5f;
         monsterData.turningSpeed = 3f;
         monsterData.monsterType = MonsterType.Rat;
     }

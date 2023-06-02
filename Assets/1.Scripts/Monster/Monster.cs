@@ -5,10 +5,8 @@ using UnityEngine.AI;
 
 public struct MonsterData
 {
-    public float walkSpeed;
-    public float runSpeed;
+    public float speed;
     public float turningSpeed;
-    public float applySpeed;
     public float hp;
     public Vector3 destination;
     public Vector3 direction;
@@ -18,23 +16,24 @@ public struct MonsterData
 public abstract class Monster : MonoBehaviour
 {
     public MonsterData monsterData = new MonsterData();
+    MonsterAction monsterAction = new MonsterAction();
     private float curHp = 0;
     protected NavMeshAgent nav;
 
-    protected bool isIdle;
-    protected bool isWalking;
-    protected bool isRunning;
-    protected bool isDead;
+    protected enum MonsterAction
+    {
+        isIdle,
+        isWalking,
+        isRunning,
+        isDead
+    }
 
-
-    [SerializeField] protected float walkTime;
     [SerializeField] protected float waitTime;
-    [SerializeField] protected float runTime;
     protected float currentTime;
 
     [SerializeField] protected Animator anim;
     [SerializeField] protected Rigidbody rigid;
-    [SerializeField] protected BoxCollider boxCol;
+    [SerializeField] protected CapsuleCollider boxCol;
 
     public float HP
     {
@@ -47,62 +46,89 @@ public abstract class Monster : MonoBehaviour
     }
     private void Start()
     {
+        nav = GetComponent<NavMeshAgent>();
         curHp = monsterData.hp;
         currentTime = waitTime;
-        isIdle = true;
+        monsterAction = MonsterAction.isIdle;
         Debug.Log("¸ó½ºÅÍ »ý¼º");
     }
 
     protected void Update()
     {
-        if (!isDead)
+        if (monsterAction != MonsterAction.isDead) 
         {
             Move();
-            Rotation();
+            ElapseTime();
         }
     }
+
     public abstract void Initialize();
 
     protected virtual void Move()
     {
-        if (isWalking || isRunning)
+        if (monsterAction == MonsterAction.isWalking || monsterAction == MonsterAction.isRunning) 
         {
-            rigid.MovePosition(transform.position + transform.forward * monsterData.applySpeed * Time.deltaTime);
+            nav.SetDestination(transform.position + monsterData.destination * 5f);
+            // rigid.MovePosition(transform.position + transform.forward * monsterData.applySpeed * Time.deltaTime);
         }
     }
 
     protected virtual void Rotation()
     {
-        if (isWalking || isRunning)
+        if (monsterAction == MonsterAction.isWalking || monsterAction == MonsterAction.isRunning)
         {
             Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, new Vector3(0f, monsterData.direction.y, 0f), monsterData.turningSpeed);
             rigid.MoveRotation(Quaternion.Euler(_rotation));
         }
     }
+
+    protected void ElapseTime()
+    {
+        if (monsterAction == MonsterAction.isIdle)
+        {
+            currentTime -= Time.deltaTime;
+            if (currentTime <= 0) 
+                ReSet();
+        }
+    }
+
+    protected virtual void ReSet() 
+    {
+        monsterAction = MonsterAction.isIdle;
+
+        nav.ResetPath();
+
+        monsterAction = MonsterAction.isWalking;
+        anim.SetTrigger("Walking");
+        monsterAction = MonsterAction.isRunning;
+        anim.SetTrigger("Running");
+        nav.speed = monsterData.speed;
+
+        monsterData.destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(0.5f, 1f));
+    }
     protected void Walk() 
     {
-        currentTime = walkTime;
-        isWalking = true;
-        anim.SetBool("Walking", isWalking);
-        monsterData.applySpeed = monsterData.walkSpeed;
+        monsterAction = MonsterAction.isWalking;
+        anim.SetTrigger("Walking");
+        nav.speed = monsterData.speed;
         Debug.Log("°È±â");
     }
 
     protected virtual void Runaway(Vector3 _targetPos)
     {
-        monsterData.direction = Quaternion.LookRotation(transform.position - _targetPos).eulerAngles;
+        monsterData.destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
 
-        currentTime = runTime;
-        isWalking = false;
-        isRunning = true;
-        monsterData.applySpeed = monsterData.runSpeed;
-        anim.SetBool("Running", isRunning);
+
+        monsterAction = MonsterAction.isRunning;
+        nav.speed = monsterData.speed;
+
+        anim.SetTrigger("Running");
         Debug.Log("µµ¸Á");
     }
 
     public virtual void Damage(int _dmg, Vector3 _targetPos)
     {
-        if (!isDead)
+        if (monsterAction == MonsterAction.isDead) 
         {
             monsterData.hp -= _dmg;
 
@@ -113,19 +139,14 @@ public abstract class Monster : MonoBehaviour
             }
 
             anim.SetTrigger("Hurt");
-            if (!isDead)
-            {
-                Runaway(_targetPos);
-            }
+            Runaway(_targetPos);
         }
     }
 
     protected void MonsterDie()
     {
-        
-        isWalking = false;
-        isRunning = false;
-        isDead = true;
+
+        monsterAction = MonsterAction.isDead;
 
         anim.SetTrigger("Dead");
     }
