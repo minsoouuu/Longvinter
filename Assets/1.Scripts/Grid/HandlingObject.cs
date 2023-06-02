@@ -6,7 +6,12 @@ public class HandlingObject : MonoBehaviour
 {
     Vector3 offset;
 
-
+    private void Start()
+    {
+        Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(BuildingSystem.b_instance.selectedObject.GetStartPosition());
+        BuildingSystem.b_instance.DeleteArea();
+        BuildingSystem.b_instance.TakenArea(startpos, BuildingSystem.b_instance.selectedObject.Size);
+    }
     private void OnMouseDown()
     {
         offset = transform.position - ClickObject();
@@ -17,6 +22,9 @@ public class HandlingObject : MonoBehaviour
         Vector3 pos = ClickObject() + offset;
 
         transform.position = BuildingSystem.b_instance.SnapCoordinateToGrid(pos);
+        Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(BuildingSystem.b_instance.selectedObject.GetStartPosition());
+        BuildingSystem.b_instance.DeleteArea();
+        BuildingSystem.b_instance.TakenArea(startpos, BuildingSystem.b_instance.selectedObject.Size);
     }
 
     private Vector3 ClickObject()

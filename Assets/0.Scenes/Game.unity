@@ -17849,8 +17849,10 @@ MonoBehaviour:
   grid: {fileID: 1156896064}
   mainTilemap: {fileID: 439055597}
   takenTile: {fileID: 11400000, guid: c27d8562fe79e0d47addc40b0be08e99, type: 2}
+  resultTile: {fileID: 11400000, guid: 16427e4714e21734788397a957c32bb0, type: 2}
   player: {fileID: 136606663771484876}
   prefab: {fileID: 1023820478902118137, guid: fd114630aa9a63b4791817033f1ca05d, type: 3}
+  selectedObject: {fileID: 0}
 --- !u!156049354 &1156896064
 Grid:
   m_ObjectHideFlags: 0

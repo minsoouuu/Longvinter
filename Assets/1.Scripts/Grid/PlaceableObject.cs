@@ -11,19 +11,16 @@ public class PlaceableObject : MonoBehaviour
     
     private void Start()
     {
+        Debug.Log(Placed);
         VertexLocalPosition();
         CalculateTileSize();
     }
 
-    public virtual void Preview()
+    public void Place()
     {
         HandlingObject drag = gameObject.GetComponent<HandlingObject>();
-        VertexLocalPosition();
-        Placed = false;
-    }
-    public virtual void Place()
-    {
-        HandlingObject drag = gameObject.GetComponent<HandlingObject>();
+        Destroy(drag);
+        Placed = true;
     }
 
     //위치를 Vertex에 넣는 함수

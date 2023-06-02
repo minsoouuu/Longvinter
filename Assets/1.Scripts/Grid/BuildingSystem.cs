@@ -11,10 +11,11 @@ public class BuildingSystem : MonoBehaviour
     public Grid grid;
     public Tilemap mainTilemap;
     public TileBase takenTile;
+    public TileBase resultTile;
     public User player;
 
     public HandlingObject prefab;
-    PlaceableObject selectedObject;
+    [HideInInspector] public PlaceableObject selectedObject;
 
 
     // takenTile 저장
@@ -49,13 +50,8 @@ public class BuildingSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            
-            if (selectedObject != null)
-            {
-                Destroy(selectedObject.gameObject);
-                selectedObject = null;
-            }
-            InitWithObject(prefab);
+
+            Create_prefab();
         }
 
         if (!selectedObject)
@@ -70,13 +66,14 @@ public class BuildingSystem : MonoBehaviour
                 selectedObject.Place();
                 Vector3Int startpos = gridLayout.WorldToCell(selectedObject.GetStartPosition());
                 TakenArea(startpos, selectedObject.Size);
-
+                PlantArea(startpos, selectedObject.Size);
+                DeleteArea();
                 Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
                 selectedObject = null;
             }
             else
             {
-                Debug.Log("겹친다 다른 곳으로 가라");
+                Debug.Log("겹친다");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
@@ -87,13 +84,11 @@ public class BuildingSystem : MonoBehaviour
 
     public void InitWithObject(HandlingObject building)
     {
-        Vector3 playerpos= new Vector3(player.transform.position.x, 0, player.transform.position.z - 3f);
+        Vector3 playerpos = new Vector3(player.transform.position.x, 0, player.transform.position.z + 2f);
         Vector3 pos = SnapCoordinateToGrid(playerpos);
 
-        HandlingObject obj = Instantiate(building, pos, Quaternion.identity) as HandlingObject;
+        HandlingObject obj = Instantiate(building, pos, Quaternion.identity);
         selectedObject = obj.GetComponent<PlaceableObject>();
-
-
     }
 
     public Vector3 SnapCoordinateToGrid(Vector3 pos)
@@ -115,7 +110,7 @@ public class BuildingSystem : MonoBehaviour
         foreach (var b in baseArray)
         {
             //b에 takenTile가 있다면???
-            if (b == takenTile)
+            if (b == resultTile)
             {
                 return false;
             }
@@ -125,6 +120,24 @@ public class BuildingSystem : MonoBehaviour
 
     public void TakenArea(Vector3Int startpos, Vector3Int size)
     {
-        mainTilemap.BoxFill(startpos, takenTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
+        mainTilemap.EditorPreviewBoxFill(startpos, takenTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
+    }
+
+    public void PlantArea(Vector3Int startpos, Vector3Int size)
+    {
+        mainTilemap.BoxFill(startpos, resultTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
+    }
+    public void DeleteArea()
+    {
+        mainTilemap.ClearAllEditorPreviewTiles();
+    }
+    public void Create_prefab()
+    {
+        if (selectedObject != null)
+        {
+            Destroy(selectedObject.gameObject);
+            selectedObject = null;
+        }
+        InitWithObject(prefab);
     }
 }
