@@ -18,8 +18,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Toggle[] toggles;
 
     private Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
+    private List<Slot> slots = new List<Slot>();
 
-    List<Slot> slots = new List<Slot>();
+    private Toggle curToggle = null;
 
     void Start()
     {
@@ -36,6 +37,8 @@ public class InventoryManager : MonoBehaviour
                 slots.Add(slotParent.GetChild(i).GetComponent<Slot>());
             }
         }
+
+        curToggle = toggles[0];
     }
 
     private void Update()
@@ -43,27 +46,33 @@ public class InventoryManager : MonoBehaviour
         ItemDataSetController ic = Gamemanager.instance.itemController;
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            int rand = Random.Range(0, 2);
-            AddItem(ic.equipments[rand]);
             Debug.Log("장비 아이템 추가");
+            int rand = Random.Range(0, ic.equipments.Count);
+            ADItem(isAdd: true, item: ic.equipments[rand]);
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            int rand = Random.Range(0, ic.materilas.Count);
-            AddItem(ic.materilas[rand]);
+            /*
             Debug.Log("재료 아이템 추가");
+            int rand = Random.Range(0, ic.materilas.Count);
+            ADItem(isAdd: true, item: ic.materilas[rand]);
+            */
+
+            Debug.Log("장비 아이템 추가");
+            int rand = Random.Range(0, ic.equipments.Count);
+            ADItem(isAdd: false, item: ic.equipments[rand]);
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            int rand = Random.Range(0, ic.foods.Count);
-            AddItem(ic.foods[rand]);
             Debug.Log("음식 아이템 추가");
+            int rand = Random.Range(0, ic.foods.Count);
+            ADItem(isAdd: true, item: ic.foods[rand]);
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            int rand = Random.Range(0, ic.plants.Count);
-            AddItem(ic.plants[rand]);
             Debug.Log("설치 아이템 추가");
+            int rand = Random.Range(0, ic.plants.Count);
+            ADItem(isAdd: true, item:ic.plants[rand]);
         }
     }
 
@@ -72,42 +81,84 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     public void OnTabChange(Toggle toggle)
     {
-        Toggle curToggle = null;
-        foreach (Toggle item in toggles)
+        foreach (Toggle t in toggles)
         {
-            if(item == toggle && toggle.isOn)
+            if(t == toggle && toggle.isOn)
             {
-                curToggle = item;
+                curToggle = t;
                 SlotClear();
-                SlotChangeItem(EnumUtil<TitleType>.Parse(item.name));
+                SlotChangeItem(EnumUtil<TitleType>.Parse(t.name));
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 해당 탭에서만 정렬
+    /// </summary>
+    public void OnSort()
+    {
+        TitleType curKey = TitleType.Equipment;
+        for (int i = 0; i < toggles.Length; i++)
+        {
+            if(curToggle == toggles[i])
+            {
+                curKey = (TitleType)i;
+                itemDic[curKey].Sort((a, b) => a.data.serial.CompareTo(b.data.serial));
                 break;
             }
         }
 
-        if(curToggle != null)
+        int count = 0;
+        foreach (var item in itemDic[curKey])
         {
-
+            slots[count].Empty();
+            slots[count].item = item;
+            count++;
         }
-    }
-
-    public void OnSort()
-    {
-
+            
+        foreach (var slot in slots)
+            slot.SetUI();
     }
 
     /// <summary>
-    /// 아이템 추가
+    /// 슬롯에서 삭제 시킬시 메인도 함께 지워야 한다. 
     /// </summary>
-    /// <param name="item"></param>
-    public void AddItem(Item item)
+    public void DeleteData(Item item)
     {
-        TitleType key = item.data.itemType == InvenItemType.Equipments ? TitleType.Equipment :
-                     item.data.itemType == InvenItemType.Materials ? TitleType.Material :
-                     item.data.itemType == InvenItemType.Foods ? TitleType.Food :
-                     item.data.itemType == InvenItemType.Plants ? TitleType.Plant : TitleType.Equipment;
+        itemDic[GetTitleType(item)].Remove(item);
+    }
 
-        if(!itemDic[key].Contains(item))
+    /// <summary>
+    /// 아아템 변경
+    /// </summary>
+    /// <param name="item"> 데이터 </param>
+    /// <param name="isAdd"> 추가 할지, 삭제 할지 </param>
+    public void ADItem(Item item, bool isAdd)
+    {
+        TitleType key = GetTitleType(item);
+
+        if (!itemDic[key].Contains(item))
         {
+            // 인벤토리 공간 체크
+            bool isAddCheck = false;
+
+            foreach (var slot in slots)
+            {
+                if(slot.item == null)
+                {
+                    isAddCheck = true;
+                    break;
+                }
+            }
+
+            if (!isAddCheck)
+            {
+                // 팝업 (인벤토리가 부족하여 습득하지 못했습니다.)
+                Debug.Log("인벤토리 공간이 부족으로 습득실패");
+                return;
+            }
+
             itemDic[key].Add(item);
         }
         else
@@ -116,19 +167,30 @@ public class InventoryManager : MonoBehaviour
             {
                 if (item.data.itemName == dicItem.data.itemName)
                 {
-                    dicItem.data.count += 1;
+                    if(isAdd)
+                        dicItem.data.count++;
+                    else
+                    {
+                        dicItem.data.count--;
+                        if (dicItem.data.count <= 0)
+                            DeleteData(dicItem);
+                    }
                     break;
                 }
             }
         }
 
-        // 빈슬롯 찾기
-        foreach (var slot in slots)
+        // 현재 선택된 토글 아이템만 사용자에게 보여주기
+        // 아이템을 추가 했는지 안했는지 체크
+        if(curToggle != null && EnumUtil<TitleType>.Parse(curToggle.name) == key)
         {
-            if(slot.item == item || slot.item == null)
+            foreach (var slot in slots)
             {
-                slot.SetData(item).Add();
-                break;
+                if (slot.item == item || slot.item == null)
+                {
+                    slot.SetData(item, this).SetUI();
+                    break;
+                }
             }
         }
     }
@@ -157,7 +219,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     if (slot.item == null)
                     {
-                        slot.SetData(itemDic[tapType][i]).Add();
+                        slot.SetData(itemDic[tapType][i], this).SetUI();
                         break;
                     }
                 }
@@ -177,5 +239,13 @@ public class InventoryManager : MonoBehaviour
                 item.popup.Enable(false);
             }
         }
+    }
+
+    TitleType GetTitleType(Item item)
+    {
+        return item.data.itemType == InvenItemType.Equipments ? TitleType.Equipment :
+                     item.data.itemType == InvenItemType.Materials ? TitleType.Material :
+                     item.data.itemType == InvenItemType.Foods ? TitleType.Food :
+                     item.data.itemType == InvenItemType.Plants ? TitleType.Plant : TitleType.Equipment;
     }
 }

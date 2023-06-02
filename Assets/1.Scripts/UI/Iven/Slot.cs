@@ -54,10 +54,13 @@ public class Slot : MonoBehaviour
     [HideInInspector] public Item item = null;
 
     public SlotPopup popup;
+
+    private InventoryManager mgr;
     
-    public Slot SetData(Item item)
+    public Slot SetData(Item item, InventoryManager mgr)
     {
         this.item = item;
+        this.mgr = mgr;
 
         return this;
     }
@@ -65,10 +68,16 @@ public class Slot : MonoBehaviour
     /// <summary>
     /// 아이템을 추가 시킬수 있는 함수
     /// </summary>
-    public void Add()
+    public void SetUI()
     {
-        cntTxt.text = item.data.count.ToString();
-        icon.sprite = item.data.image;
+        if(item != null)
+        {
+            cntTxt.text = item.data.count.ToString();
+            icon.sprite = item.data.image;
+
+            if(item.data.count <= 0)
+                Empty();
+        }
     }
 
     /// <summary>
@@ -82,13 +91,11 @@ public class Slot : MonoBehaviour
     }
 
     /// <summary>
-    /// 아이템사용후 남은 갯수 ?
+    /// 아이템사용 1개씩 버리기 버튼
     /// </summary>
-    public void Delete()
+    public void OnDelete()
     {
-        item = null;
-        icon.sprite = emptySprite;
-        cntTxt.text = string.Empty;
+        mgr.ADItem(item, false);
     }
 
     public void OnPopup()
