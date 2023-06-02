@@ -9,7 +9,7 @@ public class FishingController : MonoBehaviour
     [SerializeField] private RectTransform handleRT;
     [SerializeField] private RectTransform backRT;
 
-    private float handleSpeed = 100f;
+    private float handleSpeed = 1000f;
 
     bool isTurn = true;
     Vector2 maxPos;
@@ -22,9 +22,8 @@ public class FishingController : MonoBehaviour
     {
         if (isTurn)
         {
-            if (handleRT.anchoredPosition.x * 0.5f <= maxPos.x)
+            if (handleRT.anchoredPosition.x <= maxPos.x)
             {
-                handleRT.pivot = new Vector2(1, 0.5f);
                 handleRT.localPosition += Vector3.right * Time.deltaTime * handleSpeed;
             }
             else
