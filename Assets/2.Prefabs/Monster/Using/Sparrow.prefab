@@ -493,12 +493,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dabd57750b48f5498a74c30c2516261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkTime: 5
   waitTime: 1
-  runTime: 5
   anim: {fileID: 5866666021909216657, guid: 34f30712d30697648b80843f9e09934c, type: 3}
-  rigid: {fileID: 0}
-  boxCol: {fileID: 0}
+  rigid: {fileID: 4921464495955469261}
+  boxCol: {fileID: 6788538757290762320}
 --- !u!205 &6788538757290762321
 LODGroup:
   m_ObjectHideFlags: 0

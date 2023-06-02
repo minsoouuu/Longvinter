@@ -109,8 +109,8 @@ public abstract class Monster : MonoBehaviour
     protected void Walk() 
     {
         monsterAction = MonsterAction.isWalking;
-        anim.SetTrigger("Walking");
         nav.speed = monsterData.speed;
+        anim.SetTrigger("Walking");
         Debug.Log("°È±â");
     }
 
@@ -118,10 +118,8 @@ public abstract class Monster : MonoBehaviour
     {
         monsterData.destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
 
-
         monsterAction = MonsterAction.isRunning;
         nav.speed = monsterData.speed;
-
         anim.SetTrigger("Running");
         Debug.Log("µµ¸Á");
     }
@@ -149,6 +147,7 @@ public abstract class Monster : MonoBehaviour
         monsterAction = MonsterAction.isDead;
 
         anim.SetTrigger("Dead");
+        DropItem();
     }
 
     public virtual void AreaCircle()
