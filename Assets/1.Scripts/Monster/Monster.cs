@@ -145,8 +145,9 @@ public abstract class Monster : MonoBehaviour
     {
 
         monsterAction = MonsterAction.isDead;
-
         anim.SetTrigger("Dead");
+        MonsterSpawnController._instance.MonsterCount--;
+        Destroy(this.gameObject); 
         DropItem();
     }
 

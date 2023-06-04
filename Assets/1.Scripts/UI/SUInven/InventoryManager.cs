@@ -66,8 +66,8 @@ public class InventoryManager : MonoBehaviour
             */
 
             MakingController mc = FindObjectOfType<MakingController>();
-            mc.Ison = !mc.Ison;
-            Debug.Log(mc.Ison ? "제작대 On" : "제작대 Off");
+            //mc.Ison = !mc.Ison;
+            //Debug.Log(mc.Ison ? "제작대 On" : "제작대 Off");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {

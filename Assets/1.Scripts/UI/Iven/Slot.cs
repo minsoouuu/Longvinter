@@ -125,7 +125,7 @@ public class Slot : MonoBehaviour
             // TODO : 테스트 코드
             MakingController mc = FindObjectOfType<MakingController>();
             // 제작대가 켜져 있을경우
-            if (mc != null && mc.Ison)
+            /* if (mc != null && mc.Ison)
             {
                 mc.SetSlotData(item);
             }
@@ -133,6 +133,7 @@ public class Slot : MonoBehaviour
             {
                 popup.Enable(true);
             }
+            */
         }
     }
 }
