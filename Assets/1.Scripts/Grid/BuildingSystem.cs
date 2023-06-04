@@ -18,7 +18,7 @@ public class BuildingSystem : MonoBehaviour
     [HideInInspector] public PlaceableObject selectedObject;
 
 
-    // takenTile 저장
+    // 타일맵 생성
     static TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
     {
         TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
@@ -65,7 +65,11 @@ public class BuildingSystem : MonoBehaviour
             {
                 selectedObject.Place();
                 Vector3Int startpos = gridLayout.WorldToCell(selectedObject.GetStartPosition());
+
+                // 타일 미리보기
                 TakenArea(startpos, selectedObject.Size);
+
+                // 타일 색칠하기
                 PlantArea(startpos, selectedObject.Size);
                 DeleteArea();
                 Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
@@ -82,6 +86,7 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
+    // Prefab 생성
     public void InitWithObject(HandlingObject building)
     {
         Vector3 playerpos = new Vector3(player.transform.position.x, 0, player.transform.position.z + 2f);
@@ -91,6 +96,8 @@ public class BuildingSystem : MonoBehaviour
         selectedObject = obj.GetComponent<PlaceableObject>();
     }
 
+
+    // Cell좌표로 포지션 변경
     public Vector3 SnapCoordinateToGrid(Vector3 pos)
     {
         Vector3Int cellPos = gridLayout.WorldToCell(pos);
@@ -118,19 +125,25 @@ public class BuildingSystem : MonoBehaviour
         return true;
     }
 
+    // 타일 미리보기
     public void TakenArea(Vector3Int startpos, Vector3Int size)
     {
         mainTilemap.EditorPreviewBoxFill(startpos, takenTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
     }
 
+    // 타일 색칠하기
     public void PlantArea(Vector3Int startpos, Vector3Int size)
     {
         mainTilemap.BoxFill(startpos, resultTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
     }
+
+    // 미리보기 타일 지우기
     public void DeleteArea()
     {
         mainTilemap.ClearAllEditorPreviewTiles();
     }
+
+
     public void Create_prefab()
     {
         if (selectedObject != null)

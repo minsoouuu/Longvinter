@@ -17,6 +17,7 @@ public class HandlingObject : MonoBehaviour
         offset = transform.position - ClickObject();
     }
 
+    // 마우스 드래그로 오브젝트 움직이기
     private void OnMouseDrag()
     {
         Vector3 pos = ClickObject() + offset;
@@ -27,6 +28,7 @@ public class HandlingObject : MonoBehaviour
         BuildingSystem.b_instance.TakenArea(startpos, BuildingSystem.b_instance.selectedObject.Size);
     }
 
+    // 마우스 클릭
     private Vector3 ClickObject()
     {
         RaycastHit hit;

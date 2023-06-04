@@ -16,6 +16,7 @@ public class PlaceableObject : MonoBehaviour
         CalculateTileSize();
     }
 
+    // 오브젝트 설치
     public void Place()
     {
         HandlingObject drag = gameObject.GetComponent<HandlingObject>();
@@ -56,6 +57,7 @@ public class PlaceableObject : MonoBehaviour
         //Debug.Log(Size);
     }
 
+    // 색칠할 Cell 시작 포지션 설정
     public Vector3 GetStartPosition()
     {
         return transform.TransformPoint(vertices[0]);
