@@ -13375,7 +13375,6 @@ MonoBehaviour:
   - {fileID: -722818703434692779, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
   spawnTime: 5
   MonsterCount: 0
-  isSpawn: 
 --- !u!1 &1057447781
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,20 +6,13 @@ using UnityEngine.AI;
 public struct MonsterData
 {
     public float speed;
-    public float turningSpeed;
     public float hp;
-    public Vector3 destination;
     public Vector3 direction;
     public MonsterType monsterType;
 }
 
 public abstract class Monster : MonoBehaviour
 {
-    public MonsterData monsterData = new MonsterData();
-    MonsterAction monsterAction = new MonsterAction();
-    private float curHp = 0;
-    protected NavMeshAgent nav;
-
     protected enum MonsterAction
     {
         isIdle,
@@ -28,12 +21,21 @@ public abstract class Monster : MonoBehaviour
         isDead
     }
 
-    [SerializeField] protected float waitTime;
-    protected float currentTime;
+    protected float currentTime = 1;
 
+    public MonsterData monsterData = new MonsterData();
+    MonsterAction monsterAction = new MonsterAction();
+    private Player thePlayer;
+    private Vector3 destination;
+    private float curHp = 0;
+
+    [SerializeField] protected NavMeshAgent nav;
     [SerializeField] protected Animator anim;
     [SerializeField] protected Rigidbody rigid;
-    [SerializeField] protected CapsuleCollider boxCol;
+
+    [SerializeField] private float viewAngle;  // 시야 각도 (130도)
+    [SerializeField] private float viewDistance; // 시야 거리 (10미터)
+    [SerializeField] private LayerMask targetMask;  // 타겟 마스크(플레이어)
 
     public float HP
     {
@@ -46,48 +48,78 @@ public abstract class Monster : MonoBehaviour
     }
     private void Start()
     {
-        nav = GetComponent<NavMeshAgent>();
+        thePlayer = FindObjectOfType<Player>();
+        this.nav = this.GetComponent<NavMeshAgent>();
+        this.rigid = this.GetComponent<Rigidbody>();
+        this.anim = this.GetComponent<Animator>();
         curHp = monsterData.hp;
-        currentTime = waitTime;
         monsterAction = MonsterAction.isIdle;
         Debug.Log("몬스터 생성");
     }
 
     protected void Update()
     {
-        if (monsterAction != MonsterAction.isDead) 
+        if (monsterAction != MonsterAction.isDead)
         {
             Move();
+            View();
             ElapseTime();
+        }
+        else if (View())
+        {
+            Runaway(thePlayer.transform.position);
         }
     }
 
     public abstract void Initialize();
 
+    public bool View()
+    {
+        Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
+
+        for (int i = 0; i < _target.Length; i++)
+        {
+            Transform _targetTf = _target[i].transform;
+            if (_targetTf.name == "Player")
+            {
+                Vector3 _direction = (_targetTf.position - transform.position).normalized;
+                float _angle = Vector3.Angle(_direction, transform.forward);
+
+                if (_angle < viewAngle * 0.5f)
+                {
+                    RaycastHit _hit;
+                    if (Physics.Raycast(transform.position + transform.up, _direction, out _hit, viewDistance))
+                    {
+                        if (_hit.transform.name == "Player")
+                        {
+                            Debug.Log("플레이어가 시야 내에 있습니다.");
+                            Debug.DrawRay(transform.position + transform.up, _direction, Color.blue);
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     protected virtual void Move()
     {
         if (monsterAction == MonsterAction.isWalking || monsterAction == MonsterAction.isRunning) 
         {
-            nav.SetDestination(transform.position + monsterData.destination * 5f);
+            nav.SetDestination(transform.position + destination * 5f);
             // rigid.MovePosition(transform.position + transform.forward * monsterData.applySpeed * Time.deltaTime);
         }
     }
 
-    protected virtual void Rotation()
-    {
-        if (monsterAction == MonsterAction.isWalking || monsterAction == MonsterAction.isRunning)
-        {
-            Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, new Vector3(0f, monsterData.direction.y, 0f), monsterData.turningSpeed);
-            rigid.MoveRotation(Quaternion.Euler(_rotation));
-        }
-    }
 
     protected void ElapseTime()
     {
         if (monsterAction == MonsterAction.isIdle)
         {
             currentTime -= Time.deltaTime;
-            if (currentTime <= 0) 
+            if (currentTime <= 0 && monsterAction != MonsterAction.isRunning)
                 ReSet();
         }
     }
@@ -95,17 +127,13 @@ public abstract class Monster : MonoBehaviour
     protected virtual void ReSet() 
     {
         monsterAction = MonsterAction.isIdle;
-
         nav.ResetPath();
 
-        monsterAction = MonsterAction.isWalking;
-        anim.SetTrigger("Walking");
-        monsterAction = MonsterAction.isRunning;
-        anim.SetTrigger("Running");
         nav.speed = monsterData.speed;
-
-        monsterData.destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(0.5f, 1f));
+        destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(0.5f, 1f));
+        Walk();
     }
+
     protected void Walk() 
     {
         monsterAction = MonsterAction.isWalking;
@@ -116,7 +144,7 @@ public abstract class Monster : MonoBehaviour
 
     protected virtual void Runaway(Vector3 _targetPos)
     {
-        monsterData.destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
+        destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
 
         monsterAction = MonsterAction.isRunning;
         nav.speed = monsterData.speed;
@@ -126,7 +154,7 @@ public abstract class Monster : MonoBehaviour
 
     public virtual void Damage(int _dmg, Vector3 _targetPos)
     {
-        if (monsterAction == MonsterAction.isDead) 
+        if (monsterAction != MonsterAction.isDead) 
         {
             monsterData.hp -= _dmg;
 
@@ -151,10 +179,6 @@ public abstract class Monster : MonoBehaviour
         DropItem();
     }
 
-    public virtual void AreaCircle()
-    {
-
-    }
     public virtual void DropItem()
     {
 

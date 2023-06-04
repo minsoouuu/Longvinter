@@ -628,10 +628,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7b97a026cd88b408f2226a2dffbff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 1
+  nav: {fileID: 7130266124024379936}
   anim: {fileID: 5866666021909216657, guid: b7b20bc931c427e46a8b1918db64e552, type: 3}
   rigid: {fileID: 1112728291069613138}
-  boxCol: {fileID: 302309173221418746}
+  viewAngle: 130
+  viewDistance: 10
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!205 &1148682066818756815
 LODGroup:
   m_ObjectHideFlags: 0
@@ -703,7 +707,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0
+  m_BaseOffset: -0.2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &1112728291069613138
