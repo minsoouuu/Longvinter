@@ -4,42 +4,42 @@ using UnityEngine;
 using DG.Tweening;
 public class ToastPopUpManager : MonoBehaviour
 {
-    public static ToastPopUpManager toastmanager = null;
+    public static ToastPopUpManager instance = null;
 
     [SerializeField] private Transform popParent;
 
     [HideInInspector] public List<ToastPopUp> popUps = new List<ToastPopUp>();
-    [HideInInspector] public List<DOTween> sequences = new List<DOTween>();
-    ToastPopUp toastPopUp;
+    PopUp toastPopUp;
 
     private void Awake()
     {
-        if (toastmanager != null)
+        if (instance != null)
         {
             Destroy(this);
         }
         else
         {
-            toastmanager = this;
+            instance = this;
         }
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            PopUpCommentSet("***");
+            PopUpCheck("***");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
         }
     }
-    public void PopUpCommentSet(string comment)
+    public void PopUpCheck(string comment)
     {
         if (popUps.Count > 0)
         {
             for (int i = 0; i < popUps.Count; i++)
             {
-                popUps[i].Test((50 * (i + 1)));
+                popUps[i].StopDoTween();
+                popUps[i].ReMove();
             }
         }
         else
@@ -51,7 +51,6 @@ public class ToastPopUpManager : MonoBehaviour
     {
         toastPopUp = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.ToastPopUp);
         toastPopUp.transform.SetParent(popParent);
-        toastPopUp.Comment = comment;
-        toastPopUp.Test();
+        toastPopUp.SetComment(comment);
     }
 }

@@ -5,6 +5,8 @@ using System;
 public enum PopType
 {
     ToastPopUp,
+    TwoButtonPopUp,
+    OneButtonPopUp,
 }
 public enum InvenItemType
 {

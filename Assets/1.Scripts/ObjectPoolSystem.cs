@@ -15,7 +15,7 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<ItemName, Queue<Item>> itemPools = new Dictionary<ItemName, Queue<Item>>();
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
-    private Dictionary<PopType, Queue<ToastPopUp>> popPools = new Dictionary<PopType, Queue<ToastPopUp>>();
+    private Dictionary<PopType, Queue<PopUp>> popPools = new Dictionary<PopType, Queue<PopUp>>();
 
     private void Awake()
     {
@@ -50,7 +50,7 @@ public class ObjectPoolSystem : MonoBehaviour
                         housePools[(HouseType)(j)] = new Queue<House>();
                         break;
                     case 4:
-                        popPools[(PopType)(j)] = new Queue<ToastPopUp>();
+                        popPools[(PopType)(j)] = new Queue<PopUp>();
                         break;
                 }
             }
@@ -76,7 +76,7 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(false);
         housePools[type].Enqueue(obj);
     }
-    public void ReturnObject(PopType type, ToastPopUp obj)
+    public void ReturnObject(PopType type, PopUp obj)
     {
         obj.gameObject.SetActive(false);
         popPools[type].Enqueue(obj);
@@ -107,10 +107,9 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
-    public ToastPopUp GetObjectOfObjectPooling(PopType type)
+    public PopUp GetObjectOfObjectPooling(PopType type)
     {
-        ToastPopUp obj = null;
-
+        PopUp obj = null;
         if (popPools[type].Count != 0)
         {
             obj = popPools[type].Dequeue();
@@ -118,7 +117,7 @@ public class ObjectPoolSystem : MonoBehaviour
         else
         {
             string path = $"PopupPrefabs/{type}";
-            ToastPopUp toastPopUp = Resources.Load<ToastPopUp>(path);
+            PopUp toastPopUp = Resources.Load<PopUp>(path);
             obj = Instantiate(toastPopUp);
         }
         obj.gameObject.SetActive(true);
