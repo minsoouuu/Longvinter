@@ -10,7 +10,7 @@ public class Merchant : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] TMP_Text mk;
     [HideInInspector] public Item itemdata;
-    Inventory inven = new Inventory();
+    InventoryManager inven = new InventoryManager();
     [HideInInspector] public MerchantController mc;
 
     private void Start()
@@ -20,15 +20,15 @@ public class Merchant : MonoBehaviour
    
     public void OnClickBuy()
     {
-        inven.AddItem(itemdata);
-        inven.Money -= itemdata.data.price;
+        inven.ADItem(itemdata, true);
+        //inven. -= itemdata.data.price;
         mc.CreateMerchant_s_ItemList(mc.num);
     }
 
     public void OnClickSell()
     {
-        inven.DeleteItem(itemdata);
-        inven.Money += itemdata.data.price;
+        inven.ADItem(itemdata, false);
+        //inven.Money += itemdata.data.price;
         if(itemdata.Count <= 0)
         {
             Gamemanager.instance.objectPool.ReturnObject(mc.myTypeS, this);

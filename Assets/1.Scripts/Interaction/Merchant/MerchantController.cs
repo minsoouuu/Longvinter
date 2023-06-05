@@ -19,7 +19,7 @@ public class MerchantController : MonoBehaviour
     List<Item> merchant_blist = new List<Item>();
     [HideInInspector] public List<Item> merchant_slist = new List<Item>();
     List<Item> Inventory_list = new List<Item>();
-    Inventory inven;
+    InventoryManager inven;
 
     [HideInInspector] public List<Merchant> slot_list = new List<Merchant>(); 
     [HideInInspector] public ObjectType myTypeB = ObjectType.BuySlot;
@@ -81,16 +81,16 @@ public class MerchantController : MonoBehaviour
         switch (num)
         {
             case 0:
-                list = inven.equipments.ToList();
+                list = inven.itemDic[InventoryManager.TitleType.Equipment].ToList();
                 break;
             case 1:
-                list = inven.materials.ToList();
+                list = inven.itemDic[InventoryManager.TitleType.Material].ToList();
                 break;
             case 2:
-                list = inven.foods.ToList();
+                inven.itemDic[InventoryManager.TitleType.Food].ToList();
                 break;
             case 3:
-                list = inven.plants.ToList();
+                inven.itemDic[InventoryManager.TitleType.Plant].ToList();
                 break;
         }
         for (int i = 0; i < list.Count; i++)

@@ -7,7 +7,7 @@ public  class Gamemanager : MonoBehaviour
     public static Gamemanager instance = null;
 
     public User player;
-    public Inventory inventory;
+    public InventoryManager inventory;
     public JsonData jsonDataController;
     public ObjectPoolSystem objectPool;
     public ItemDataSetController itemController;

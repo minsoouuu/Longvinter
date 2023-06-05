@@ -6,22 +6,26 @@ public class Merchant_Object : MonoBehaviour
 {
     [SerializeField] private GameObject merchant;
     [SerializeField] private GameObject inventory;
+    [SerializeField] private User user;
 
-    private void Awake()
+    float dis;
+    private void Update()
     {
+        Interaction_Merchant();
+        Debug.Log(dis);
     }
-    private void OnTriggerStay(Collider other)
+
+    public void Interaction_Merchant()
     {
-        if (Input.GetKey(KeyCode.Space))
+        dis = Vector3.Distance(this.transform.position, user.transform.position);
+        if (dis < 2f)
         {
-            Debug.Log("space");
-            if (other.GetComponent<User>())
+            if (Input.GetKey(KeyCode.Space))
             {
-                Debug.Log("true");
                 merchant.SetActive(true);
                 inventory.SetActive(true);
-                other.GetComponent<User>().enabled = false;
-                other.GetComponent<Animator>().enabled = false;
+                user.GetComponent<User>().enabled = false;
+                user.GetComponent<Animator>().enabled = false;
             }
         }
     }

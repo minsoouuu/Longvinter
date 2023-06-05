@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    enum TitleType
+    public enum TitleType
     {
         Equipment,
         Material,
@@ -18,7 +18,7 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private TMPro.TMP_Text title;
 
-    private Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
+    [HideInInspector] public Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
     private List<Slot> slots = new List<Slot>();
 
     private Toggle curToggle = null;

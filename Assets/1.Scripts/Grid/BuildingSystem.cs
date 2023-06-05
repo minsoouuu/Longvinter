@@ -13,9 +13,9 @@ public class BuildingSystem : MonoBehaviour
     public TileBase takenTile;
     public TileBase resultTile;
     public User player;
-    public TreeScript tree;
+    public MaterialScript[] tree_rock;
 
-    public HandlingObject prefab;
+    public HandlingObject[] prefab;
     [HideInInspector] public PlaceableObject selectedObject;
 
 
@@ -28,7 +28,6 @@ public class BuildingSystem : MonoBehaviour
         foreach (var item in area.allPositionsWithin)
         {
             Vector3Int pos = new Vector3Int(item.x, item.y, 0);
-            Debug.Log(pos);
             array[count] = tilemap.GetTile(pos);
             count++;
         }
@@ -44,6 +43,7 @@ public class BuildingSystem : MonoBehaviour
     void Start()
     {
         player = player.GetComponent<User>();
+        PlantTree();
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class BuildingSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
 
-            Create_prefab();
+            Create_prefab(0);
         }
 
         if (!selectedObject)
@@ -84,6 +84,10 @@ public class BuildingSystem : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             Destroy(selectedObject.gameObject);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            selectedObject.Rotate();
         }
     }
 
@@ -145,13 +149,23 @@ public class BuildingSystem : MonoBehaviour
     }
 
 
-    public void Create_prefab()
+    public void Create_prefab(int num)
     {
         if (selectedObject != null)
         {
             Destroy(selectedObject.gameObject);
             selectedObject = null;
         }
-        InitWithObject(prefab);
+        InitWithObject(prefab[num]);
     }
+
+    public void PlantTree()
+    {
+        foreach (var item in tree_rock)
+        {
+            Vector3Int startpos = gridLayout.WorldToCell(item.GetStartPosition());
+            PlantArea(startpos, item.Size);
+        }
+    }
+
 }

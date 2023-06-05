@@ -35,8 +35,10 @@ public class MonsterSpawnController : MonoBehaviour
         MonsterCount++;
         //Instantiate(monsters[Random.Range(0, monsters.Count)], spawnPoints[ranNum])
 
+        /*
         int a =Enum.GetValues(typeof(Monster)).Length;
         Gamemanager.instance.objectPool.GetObjectOfObjectPooling(monsters[UnityEngine.Random.Range(0, a)].monsterData.monsterType);
         Debug.Log(monsters[UnityEngine.Random.Range(0, monsters.Count)].monsterData.monsterType);
+        */
     }
 }

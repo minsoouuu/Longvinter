@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeScript : MonoBehaviour
+public class MaterialScript : MonoBehaviour
 {
     public Vector3Int Size { get; private set; }
     private Vector3[] vertices;

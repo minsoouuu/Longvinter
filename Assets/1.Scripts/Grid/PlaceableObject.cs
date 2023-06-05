@@ -11,7 +11,6 @@ public class PlaceableObject : MonoBehaviour
     
     private void Start()
     {
-        Debug.Log(Placed);
         VertexLocalPosition();
         CalculateTileSize();
     }
@@ -44,22 +43,37 @@ public class PlaceableObject : MonoBehaviour
         for (int i = 0; i < verticesInt.Length; i++)
         {
             Vector3 worldpos = transform.TransformPoint(vertices[i]);
-            //Debug.Log(worldpos);
+            
             //타일맵 기준
             verticesInt[i] = BuildingSystem.b_instance.gridLayout.WorldToCell(worldpos);
-            //Debug.Log(verticesInt[i]);
         }
 
         int x = Mathf.Abs((verticesInt[0] - verticesInt[2]).x);
-        //Debug.Log(x);
         int y = Mathf.Abs((verticesInt[1] - verticesInt[3]).y); //?
         Size = new Vector3Int(x + 1, y + 1, 1);
-        //Debug.Log(Size);
     }
 
     // 색칠할 Cell 시작 포지션 설정
     public Vector3 GetStartPosition()
     {
         return transform.TransformPoint(vertices[0]);
+    }
+
+    public void Rotate()
+    {
+        //기존 회전값에 행렬을 곱함
+        transform.Rotate(new Vector3(0, 90, 0));
+        //90도 회전이라 x는 y, y는 x로 바뀜
+        Size = new Vector3Int(Size.y, Size.x, 1);
+
+        Vector3[] changeVertices = new Vector3[vertices.Length];
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            //vertices값을 한칸식 올림
+            changeVertices[i] = vertices[(i + 1) % vertices.Length];
+        }
+
+        vertices = changeVertices;
     }
 }

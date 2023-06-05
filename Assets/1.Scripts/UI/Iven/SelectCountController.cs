@@ -66,7 +66,7 @@ public class SelectCountController : MonoBehaviour
     {
         if (myType == ValueType.Money)
         {
-            Gamemanager.instance.inventory.Money -= Count;
+            //Gamemanager.instance.inventory.Money -= Count;
         }
         else
         {
