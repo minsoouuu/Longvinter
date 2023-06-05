@@ -13,13 +13,14 @@ public class BuildingSystem : MonoBehaviour
     public TileBase takenTile;
     public TileBase resultTile;
     public User player;
+    public TreeScript tree;
 
     public HandlingObject prefab;
     [HideInInspector] public PlaceableObject selectedObject;
 
 
     // Å¸ÀÏ¸Ê »ý¼º
-    static TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
+    public TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
     {
         TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
         int count = 0;
