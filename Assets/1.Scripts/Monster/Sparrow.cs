@@ -7,7 +7,7 @@ public class Sparrow : Monster
     public override void Initialize()
     {
         monsterData.hp = 100f; 
-        monsterData.speed = 2f;
+        monsterData.speed = 1.5f;
         monsterData.monsterType = MonsterType.Sparrow;
     }
 

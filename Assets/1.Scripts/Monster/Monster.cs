@@ -23,8 +23,8 @@ public abstract class Monster : MonoBehaviour
 
     public MonsterData monsterData = new MonsterData();
     private MonsterAction monsterAction = new MonsterAction();
-    public Player thePlayer;
     private Vector3 destination;
+    private User thePlayer;
     private float curHp = 0;
     protected float currentTime = 1;
 
@@ -46,7 +46,7 @@ public abstract class Monster : MonoBehaviour
     }
     private void Start()
     {
-        thePlayer = FindObjectOfType<Player>();
+        thePlayer = FindObjectOfType<User>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         curHp = monsterData.hp;
@@ -64,7 +64,7 @@ public abstract class Monster : MonoBehaviour
         }
         if (View())
         {
-            Runaway(thePlayer.transform.position);  // 위치 왜 못 잡아???????
+            Runaway(thePlayer.transform.position);
         }
 
     }
@@ -78,10 +78,10 @@ public abstract class Monster : MonoBehaviour
 
         for (int i = 0; i < _target.Length; i++)
         {
-            Transform _targetTf = _target[i].transform;
-            if (_targetTf.name == "Player")
+            Transform _targetTrans = _target[i].transform;
+            if (_targetTrans.name == "Player")
             {
-                Vector3 _direction = (_targetTf.position - transform.position).normalized;
+                Vector3 _direction = (_targetTrans.position - transform.position).normalized;
                 float _angle = Vector3.Angle(_direction, transform.forward);
 
                 if (_angle < viewAngle * 0.5f)
@@ -119,21 +119,21 @@ public abstract class Monster : MonoBehaviour
         if (monsterAction == MonsterAction.isIdle)
         {
             currentTime -= Time.deltaTime;
-            if (currentTime <= 0 && monsterAction != MonsterAction.isWalking && monsterAction != MonsterAction.isRunning)
+            if (currentTime <= 0 && monsterAction != MonsterAction.isRunning)
                 ReSet();
         }
     }
 
-    // 랜덤 도착지 설정
+    // 랜덤 도착지 설정 
     protected virtual void ReSet() 
     {
         monsterAction = MonsterAction.isIdle;
         nav.ResetPath();
-        destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(0.5f, 1f));
+        destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(-0.5f, 1f));
         Walk();
     }
 
-    // 몬스터 걷기(랜덤 영역 돌아다니게 하기)
+    // 몬스터 걷기(랜덤 영역 돌아다니게 하기) 
     protected void Walk() 
     {
         monsterAction = MonsterAction.isWalking;
