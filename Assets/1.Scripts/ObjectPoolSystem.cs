@@ -124,7 +124,6 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
-
     public Monster GetObjectOfObjectPooling(MonsterType type)
     {
         Monster obj = null;
@@ -135,15 +134,9 @@ public class ObjectPoolSystem : MonoBehaviour
         }
         else
         {
-            foreach (var monster in monsterPrefabs)
-            {
-                if (monster.monsterData.monsterType == type)
-                {
-
-                    obj = Instantiate(monster);
-                    break;
-                }
-            }
+            string path = $"Monster/{type}";
+            Monster monster = Resources.Load<Monster>(path);
+            obj = Instantiate(monster);
         }
         obj.gameObject.SetActive(true);
         return obj;
