@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MonsterSpawnController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class MonsterSpawnController : MonoBehaviour
     [SerializeField] private float spawnTime = 5f;
     
     public int MonsterCount = 0;
-    private int maxCount = 15;
+    private int maxCount = 25;
     private float curTime;
 
     public static MonsterSpawnController _instance;
@@ -22,21 +23,20 @@ public class MonsterSpawnController : MonoBehaviour
     {
         if (curTime >= spawnTime && MonsterCount < maxCount)
         {
-            Debug.Log("스폰 매니저");
-            int x = Random.Range(0, spawnPoints.Length);
+            int x = UnityEngine.Random.Range(0, monsters.Count);
             SpawnMonster(x);
         }
         curTime += Time.deltaTime;
     }
 
-    public void SpawnMonster(int ranNum)
+    public void SpawnMonster(int ranNum)    //영역마다 5마리씩 스폰
     {
         curTime = 0;
         MonsterCount++;
-        Instantiate(monsters[Random.Range(0, monsters.Count)], spawnPoints[ranNum]);
+        //Instantiate(monsters[Random.Range(0, monsters.Count)], spawnPoints[ranNum])
 
-        //Monster monster = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(monsters[Random.Range(0, monsters.Count)].monsterData.monsterType);
-        //monster.transform.SetParent(spawnPoints[ranNum]);
-        //monster.transform.position = Gamemanager.instance.player.transform.position;
+        int a =Enum.GetValues(typeof(Monster)).Length;
+        Gamemanager.instance.objectPool.GetObjectOfObjectPooling(monsters[UnityEngine.Random.Range(0, a)].monsterData.monsterType);
+        Debug.Log(monsters[UnityEngine.Random.Range(0, monsters.Count)].monsterData.monsterType);
     }
 }

@@ -15,10 +15,10 @@ public abstract class Monster : MonoBehaviour
 {
     protected enum MonsterAction
     {
-        isIdle,
-        isWalking,
-        isRunning,
-        isDead
+        IsIdle,
+        IsWalking,
+        IsRunning,
+        IsDead
     }
 
     public MonsterData monsterData = new MonsterData();
@@ -50,13 +50,13 @@ public abstract class Monster : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         curHp = monsterData.hp;
-        monsterAction = MonsterAction.isIdle;
+        monsterAction = MonsterAction.IsIdle;
         Debug.Log("몬스터 생성");
     }
 
     protected void Update()
     {
-        if (monsterAction != MonsterAction.isDead)
+        if (monsterAction != MonsterAction.IsDead)
         {
             ElapseTime();
             Move();
@@ -91,7 +91,7 @@ public abstract class Monster : MonoBehaviour
                     {
                         if (_hit.transform.name == "Player")
                         {
-                            Debug.Log("플레이어가 시야 내에 있습니다.");
+                            //Debug.Log("플레이어가 시야 내에 있습니다.");
                             Debug.DrawRay(transform.position + transform.up, _direction, Color.blue);
 
                             return true;
@@ -106,7 +106,7 @@ public abstract class Monster : MonoBehaviour
     // 몬스터 출발
     protected virtual void Move()
     {
-        if (monsterAction == MonsterAction.isWalking || monsterAction == MonsterAction.isRunning) 
+        if (monsterAction == MonsterAction.IsWalking || monsterAction == MonsterAction.IsRunning) 
         {
             nav.SetDestination(transform.position + destination * 5f);
             // rigid.MovePosition(transform.position + transform.forward * monsterData.applySpeed * Time.deltaTime);
@@ -116,18 +116,18 @@ public abstract class Monster : MonoBehaviour
     // 도착하고 나서 잠시 멈추기
     protected void ElapseTime()
     {
-        if (monsterAction == MonsterAction.isIdle)
+        if (monsterAction == MonsterAction.IsIdle)
         {
             currentTime -= Time.deltaTime;
-            if (currentTime <= 0 && monsterAction != MonsterAction.isRunning)
+            if (currentTime <= 0 && monsterAction != MonsterAction.IsRunning)
                 ReSet();
         }
     }
 
-    // 랜덤 도착지 설정 
+    // 랜덤 도착지 설정
     protected virtual void ReSet() 
     {
-        monsterAction = MonsterAction.isIdle;
+        monsterAction = MonsterAction.IsIdle;
         nav.ResetPath();
         destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(-0.5f, 1f));
         Walk();
@@ -136,7 +136,7 @@ public abstract class Monster : MonoBehaviour
     // 몬스터 걷기(랜덤 영역 돌아다니게 하기) 
     protected void Walk() 
     {
-        monsterAction = MonsterAction.isWalking;
+        monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Walking");
         Debug.Log("걷기");
@@ -147,16 +147,16 @@ public abstract class Monster : MonoBehaviour
     {
         destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
 
-        monsterAction = MonsterAction.isRunning;
+        monsterAction = MonsterAction.IsRunning;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Running");
-        Debug.Log("도망");
+        //Debug.Log("도망");
     }
 
     // 몬스터 공격 당함 (플레이어 공격 함수와 연동 필요)
     public virtual void Damage(int _dmg, Vector3 _targetPos)
     {
-        if (monsterAction != MonsterAction.isDead) 
+        if (monsterAction != MonsterAction.IsDead) 
         {
             monsterData.hp -= _dmg;
 
@@ -175,51 +175,21 @@ public abstract class Monster : MonoBehaviour
     protected void MonsterDie()
     {
         nav.enabled = false;
-        monsterAction = MonsterAction.isDead;
+        monsterAction = MonsterAction.IsDead;
         anim.SetTrigger("Dead");
-        MonsterSpawnController._instance.MonsterCount--;
+        //MonsterSpawnController._instance.MonsterCount--;
 
         Destroy(gameObject, 4);
         DropItem();
     }
 
-    // 몬스터 죽으면 아이템 드랍
+    // 몬스터 죽으면 아이템 생성
     public virtual void DropItem()     
     {
         Choose(new float[3] { 10f, 10f, 80f });     //장비 10%, 요리 10%, 재료 80%
         float Choose(float[] probs)
         {
-            float total = 0;
-            foreach(float elem in probs)
-            {
-                total += elem;
-            }
-            float randomPoint = Random.value * total;
-
-            for(int i = 0; i < probs.Length; i++)
-            {
-                if (randomPoint < probs[i])
-                {
-                    switch (i)
-                    {
-                        case 0:
-
-                            break;
-                        case 1:
-
-                            break;
-                        case 2:
-
-                            break; 
-
-                    }
-                    return i;
-                }
-                else
-                {
-                    randomPoint -= probs[i];
-                }
-            }
+            // 몬스터에 따라 다른 아이템 드랍
             return probs.Length - 1;
         }
     }
