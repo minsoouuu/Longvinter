@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class ToastPopUpManager : MonoBehaviour
 {
     public static ToastPopUpManager toastmanager = null;
 
     [SerializeField] private Transform popParent;
 
-    [HideInInspector] public List<ToastPopUp> coroutines = new List<ToastPopUp>();
+    [HideInInspector] public List<ToastPopUp> popUps = new List<ToastPopUp>();
+    [HideInInspector] public List<DOTween> sequences = new List<DOTween>();
     ToastPopUp toastPopUp;
 
     private void Awake()
@@ -28,20 +29,22 @@ public class ToastPopUpManager : MonoBehaviour
         {
             PopUpCommentSet("***");
         }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+        }
     }
     public void PopUpCommentSet(string comment)
     {
-        if (coroutines.Count <= 0)
+        if (popUps.Count > 0)
         {
-            SetPopUpData(comment);
+            for (int i = 0; i < popUps.Count; i++)
+            {
+                popUps[i].Test((50 * (i + 1)));
+            }
         }
         else
         {
-            for (int i = 0; i < coroutines.Count; i++)
-            {
-                coroutines[i].StopCoroutine(coroutines[i].coroutine);
-                coroutines[i].StartCoroutine(coroutines[i].PopUpMove(0,(50 * (coroutines.Count - i))));
-            }
+            SetPopUpData(comment);
         }
     }
     void SetPopUpData(string comment)
@@ -49,6 +52,6 @@ public class ToastPopUpManager : MonoBehaviour
         toastPopUp = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.ToastPopUp);
         toastPopUp.transform.SetParent(popParent);
         toastPopUp.Comment = comment;
-        toastPopUp.ToastPopStart();
+        toastPopUp.Test();
     }
 }
