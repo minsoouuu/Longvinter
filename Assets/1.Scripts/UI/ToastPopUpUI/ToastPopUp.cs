@@ -31,6 +31,13 @@ public class ToastPopUp : MonoBehaviour
         coroutine = StartCoroutine(PopUpMove(1,50));
         StartCoroutine(PopUpHide());
     }
+
+    public void Test(float yPos)
+    {
+        float maxPos = yPos;
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(popUprect.DOAnchorPosY(maxPos, 2, true));
+    }
     /// <summary>
     /// 처음 움직일땐 1초 , 추가로 움직일땐 0초 (시작 대기시간)
     /// </summary>
