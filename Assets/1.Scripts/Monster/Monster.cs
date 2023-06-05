@@ -21,17 +21,15 @@ public abstract class Monster : MonoBehaviour
         isDead
     }
 
-    protected float currentTime = 1;
-
     public MonsterData monsterData = new MonsterData();
-    MonsterAction monsterAction = new MonsterAction();
-    private Player thePlayer;
+    private MonsterAction monsterAction = new MonsterAction();
+    public Player thePlayer;
     private Vector3 destination;
     private float curHp = 0;
+    protected float currentTime = 1;
 
     [SerializeField] protected NavMeshAgent nav;
     [SerializeField] protected Animator anim;
-    [SerializeField] protected Rigidbody rigid;
 
     [SerializeField] private float viewAngle;  // 시야 각도 (130도)
     [SerializeField] private float viewDistance; // 시야 거리 (10미터)
@@ -49,9 +47,8 @@ public abstract class Monster : MonoBehaviour
     private void Start()
     {
         thePlayer = FindObjectOfType<Player>();
-        this.nav = this.GetComponent<NavMeshAgent>();
-        this.rigid = this.GetComponent<Rigidbody>();
-        this.anim = this.GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
         curHp = monsterData.hp;
         monsterAction = MonsterAction.isIdle;
         Debug.Log("몬스터 생성");
@@ -61,18 +58,20 @@ public abstract class Monster : MonoBehaviour
     {
         if (monsterAction != MonsterAction.isDead)
         {
+            ElapseTime();
             Move();
             View();
-            ElapseTime();
         }
-        else if (View())
+        if (View())
         {
-            Runaway(thePlayer.transform.position);
+            Runaway(thePlayer.transform.position);  // 위치 왜 못 잡아???????
         }
+
     }
 
     public abstract void Initialize();
 
+    // 몬스터 시야에 플레이어(레이어)가 잡히는 지 검사
     public bool View()
     {
         Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
@@ -104,6 +103,7 @@ public abstract class Monster : MonoBehaviour
         return false;
     }
 
+    // 몬스터 출발
     protected virtual void Move()
     {
         if (monsterAction == MonsterAction.isWalking || monsterAction == MonsterAction.isRunning) 
@@ -113,27 +113,27 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
-
+    // 도착하고 나서 잠시 멈추기
     protected void ElapseTime()
     {
         if (monsterAction == MonsterAction.isIdle)
         {
             currentTime -= Time.deltaTime;
-            if (currentTime <= 0 && monsterAction != MonsterAction.isRunning)
+            if (currentTime <= 0 && monsterAction != MonsterAction.isWalking && monsterAction != MonsterAction.isRunning)
                 ReSet();
         }
     }
 
+    // 랜덤 도착지 설정
     protected virtual void ReSet() 
     {
         monsterAction = MonsterAction.isIdle;
         nav.ResetPath();
-
-        nav.speed = monsterData.speed;
         destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(0.5f, 1f));
         Walk();
     }
 
+    // 몬스터 걷기(랜덤 영역 돌아다니게 하기)
     protected void Walk() 
     {
         monsterAction = MonsterAction.isWalking;
@@ -142,6 +142,7 @@ public abstract class Monster : MonoBehaviour
         Debug.Log("걷기");
     }
 
+    // 몬스터 도망(플레이어 보면!! -> View())
     protected virtual void Runaway(Vector3 _targetPos)
     {
         destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
@@ -152,6 +153,7 @@ public abstract class Monster : MonoBehaviour
         Debug.Log("도망");
     }
 
+    // 몬스터 공격 당함 (플레이어 공격 함수와 연동 필요)
     public virtual void Damage(int _dmg, Vector3 _targetPos)
     {
         if (monsterAction != MonsterAction.isDead) 
@@ -169,19 +171,57 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
+    // 몬스터 Die
     protected void MonsterDie()
     {
-
+        nav.enabled = false;
         monsterAction = MonsterAction.isDead;
         anim.SetTrigger("Dead");
         MonsterSpawnController._instance.MonsterCount--;
-        Destroy(this.gameObject); 
+
+        Destroy(gameObject, 4);
         DropItem();
     }
 
-    public virtual void DropItem()
+    // 몬스터 죽으면 아이템 드랍
+    public virtual void DropItem()     
     {
+        Choose(new float[3] { 10f, 10f, 80f });     //장비 10%, 요리 10%, 재료 80%
+        float Choose(float[] probs)
+        {
+            float total = 0;
+            foreach(float elem in probs)
+            {
+                total += elem;
+            }
+            float randomPoint = Random.value * total;
 
+            for(int i = 0; i < probs.Length; i++)
+            {
+                if (randomPoint < probs[i])
+                {
+                    switch (i)
+                    {
+                        case 0:
+
+                            break;
+                        case 1:
+
+                            break;
+                        case 2:
+
+                            break; 
+
+                    }
+                    return i;
+                }
+                else
+                {
+                    randomPoint -= probs[i];
+                }
+            }
+            return probs.Length - 1;
+        }
     }
 
 

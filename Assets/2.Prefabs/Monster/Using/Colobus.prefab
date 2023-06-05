@@ -630,7 +630,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nav: {fileID: 7130266124024379936}
   anim: {fileID: 5866666021909216657, guid: b7b20bc931c427e46a8b1918db64e552, type: 3}
-  rigid: {fileID: 1112728291069613138}
   viewAngle: 130
   viewDistance: 10
   targetMask:
