@@ -12,10 +12,12 @@ public class BuildingSystem : MonoBehaviour
     public Tilemap mainTilemap;
     public TileBase takenTile;
     public TileBase resultTile;
+    public TileBase originalTile;
     public User player;
     public MaterialScript[] tree_rock;
 
     public HandlingObject[] prefab;
+    public Transform parent;
     [HideInInspector] public PlaceableObject selectedObject;
 
 
@@ -49,6 +51,7 @@ public class BuildingSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ClearTile();
         if (Input.GetKeyDown(KeyCode.Q))
         {
 
@@ -65,26 +68,30 @@ public class BuildingSystem : MonoBehaviour
             if (CheckTile(selectedObject))
             {
                 selectedObject.Place();
+                parent.GetChild(0).GetComponent<HandlingObject>().SetPlaced();
                 Vector3Int startpos = gridLayout.WorldToCell(selectedObject.GetStartPosition());
 
                 // 타일 미리보기
                 TakenArea(startpos, selectedObject.Size);
 
                 // 타일 색칠하기
-                PlantArea(startpos, selectedObject.Size);
+                PlantArea(startpos, selectedObject.Size, resultTile);
                 DeleteArea();
-                Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
+                //Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
                 selectedObject = null;
             }
             else
             {
                 Debug.Log("겹친다");
             }
+
+            
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             Destroy(selectedObject.gameObject);
         }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             selectedObject.Rotate();
@@ -98,6 +105,7 @@ public class BuildingSystem : MonoBehaviour
         Vector3 pos = SnapCoordinateToGrid(playerpos);
 
         HandlingObject obj = Instantiate(building, pos, Quaternion.identity);
+        obj.transform.SetParent(parent);
         selectedObject = obj.GetComponent<PlaceableObject>();
     }
 
@@ -137,16 +145,19 @@ public class BuildingSystem : MonoBehaviour
     }
 
     // 타일 색칠하기
-    public void PlantArea(Vector3Int startpos, Vector3Int size)
+    public void PlantArea(Vector3Int startpos, Vector3Int size, TileBase tilebase)
     {
-        mainTilemap.BoxFill(startpos, resultTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
+        mainTilemap.BoxFill(startpos, tilebase, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
     }
+
 
     // 미리보기 타일 지우기
     public void DeleteArea()
     {
         mainTilemap.ClearAllEditorPreviewTiles();
     }
+
+    
 
 
     public void Create_prefab(int num)
@@ -164,8 +175,26 @@ public class BuildingSystem : MonoBehaviour
         foreach (var item in tree_rock)
         {
             Vector3Int startpos = gridLayout.WorldToCell(item.GetStartPosition());
-            PlantArea(startpos, item.Size);
+            PlantArea(startpos, item.Size, resultTile);
         }
     }
 
+    public void ClearTile()
+    {
+        foreach (var item in tree_rock)
+        {
+            if (!item.enabled)
+            {
+                Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
+                // 타일 색칠하기
+                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile);
+            }
+            else
+            {   
+                Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
+                // 타일 색칠하기
+                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.resultTile);
+            }
+        }
+    }
 }

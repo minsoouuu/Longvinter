@@ -15,11 +15,12 @@ public class PlaceableObject : MonoBehaviour
         CalculateTileSize();
     }
 
+
     // 오브젝트 설치
     public void Place()
     {
         HandlingObject drag = gameObject.GetComponent<HandlingObject>();
-        Destroy(drag);
+        //Destroy(drag);
         Placed = true;
     }
 
@@ -75,5 +76,13 @@ public class PlaceableObject : MonoBehaviour
         }
 
         vertices = changeVertices;
+    }
+
+    public void OnDestroy()
+    {
+        Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(this.GetStartPosition());
+
+        // 타일 색칠하기
+        BuildingSystem.b_instance.PlantArea(startpos, this.Size, BuildingSystem.b_instance.originalTile);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class HandlingObject : MonoBehaviour
 {
     Vector3 offset;
+    public bool PlacedH { get; private set; }
 
     private void Start()
     {
@@ -12,20 +13,41 @@ public class HandlingObject : MonoBehaviour
         BuildingSystem.b_instance.DeleteArea();
         BuildingSystem.b_instance.TakenArea(startpos, BuildingSystem.b_instance.selectedObject.Size);
     }
+
+    public void SetPlaced()
+    {
+        PlacedH = true;
+    }
+    
     private void OnMouseDown()
     {
-        offset = transform.position - ClickObject();
+        if (PlacedH)
+        {
+            Debug.Log("true");
+        }
+        else
+        {
+            offset = transform.position - ClickObject();
+            Debug.Log("false");
+        }
     }
 
     // 마우스 드래그로 오브젝트 움직이기
     private void OnMouseDrag()
     {
-        Vector3 pos = ClickObject() + offset;
+        if (!PlacedH)
+        {
+            Vector3 pos = ClickObject() + offset;
 
-        transform.position = BuildingSystem.b_instance.SnapCoordinateToGrid(pos);
-        Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(BuildingSystem.b_instance.selectedObject.GetStartPosition());
-        BuildingSystem.b_instance.DeleteArea();
-        BuildingSystem.b_instance.TakenArea(startpos, BuildingSystem.b_instance.selectedObject.Size);
+            transform.position = BuildingSystem.b_instance.SnapCoordinateToGrid(pos);
+            Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(BuildingSystem.b_instance.selectedObject.GetStartPosition());
+            BuildingSystem.b_instance.DeleteArea();
+            BuildingSystem.b_instance.TakenArea(startpos, BuildingSystem.b_instance.selectedObject.Size);
+        }
+        else
+        {
+            return;
+        }
     }
 
     // 마우스 클릭

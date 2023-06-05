@@ -11,7 +11,9 @@ public class MaterialScript : MonoBehaviour
     {
         VertexLocalPosition();
         CalculateTileSize();
+        //DeleteTile();
     }
+    
     public void VertexLocalPosition()
     {
         BoxCollider box = gameObject.GetComponent<BoxCollider>();
@@ -49,4 +51,42 @@ public class MaterialScript : MonoBehaviour
     {
         return transform.TransformPoint(vertices[0]);
     }
+    /*
+    public void OnDestroy()
+    {
+        Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(this.GetStartPosition());
+
+        // 타일 색칠하기
+        BuildingSystem.b_instance.PlantArea(startpos, this.Size, BuildingSystem.b_instance.originalTile);
+    }
+    
+    
+    public void OnDisable()
+    {
+        Debug.Log("enable");    
+        Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(this.GetStartPosition());
+        // 타일 색칠하기
+        BuildingSystem.b_instance.PlantArea(startpos, this.Size, BuildingSystem.b_instance.originalTile);
+    }
+    
+    public void DeleteTile()
+    {
+        if (!this.enabled)
+        {
+            Debug.Log("enable");
+            Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(this.GetStartPosition());
+
+            // 타일 색칠하기
+            BuildingSystem.b_instance.PlantArea(startpos, this.Size, BuildingSystem.b_instance.originalTile);
+        }
+    }
+    
+    public void OnEnable()
+    {
+        Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(this.GetStartPosition());
+
+        // 타일 색칠하기
+        BuildingSystem.b_instance.PlantArea(startpos, this.Size, BuildingSystem.b_instance.originalTile);
+    }
+    */
 }

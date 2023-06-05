@@ -12,7 +12,6 @@ public class Merchant_Object : MonoBehaviour
     private void Update()
     {
         Interaction_Merchant();
-        Debug.Log(dis);
     }
 
     public void Interaction_Merchant()
