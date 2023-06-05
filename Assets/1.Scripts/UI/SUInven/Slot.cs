@@ -7,45 +7,6 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour
 {
-    /* 코드 재정의
-    [SerializeField] TMP_Text countText;
-    [HideInInspector] public Item item;
-    [HideInInspector] public RectTransform rt;
-    public Toggle slot;
-    private Image image;
-    private InvenItemClick popup;
-
-    private void Start()
-    {
-        image = GetComponent<Image>();
-        rt = GetComponent<RectTransform>();
-        slot.onValueChanged.AddListener(delegate { ToggleOnOff(); });
-    }
-    public void SetItemData(Item item)
-    {
-        image.sprite = item.data.image;
-        countText.text = item.data.count.ToString();
-        this.item = item;
-    }
-    public void SetItemPopup(InvenItemClick popup)
-    {
-        this.popup = popup;
-    }
-    public void DeleteItem(Sprite nullSprite)
-    {
-        item = null;
-        image.sprite = nullSprite;
-        countText.text = string.Empty;
-    }
-    public void ToggleOnOff()
-    {
-        if (slot.isOn)
-            if (item != null)
-                popup.ShowTool(rt.anchoredPosition);
-        else if (!slot.isOn)
-            popup.HideTool();
-    }
-    */
     [SerializeField] private GameObject cntTextBG;
     [SerializeField] private TMP_Text cntTxt;
     [SerializeField] private Image icon;
@@ -99,6 +60,7 @@ public class Slot : MonoBehaviour
         item = null;
         icon.sprite = emptySprite;
         cntTxt.text = string.Empty;
+        cntTextBG.SetActive(false);
     }
 
     /// <summary>
@@ -110,6 +72,14 @@ public class Slot : MonoBehaviour
             popup.Enable(false);
 
         mgr.ADItem(item, false);
+    }
+
+    /// <summary>
+    /// 아이템 사용하기
+    /// </summary>
+    public void OnUse()
+    {
+
     }
 
     /// <summary>
@@ -134,6 +104,7 @@ public class Slot : MonoBehaviour
                 popup.Enable(true);
             }
             */
+            popup.Enable(true);
         }
     }
 }

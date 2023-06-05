@@ -101,6 +101,8 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
+
+        SlotPopupAllOff();
     }
 
     /// <summary>
@@ -152,7 +154,6 @@ public class InventoryManager : MonoBehaviour
         {
             // 인벤토리 공간 체크
             bool isAddCheck = false;
-
             foreach (var slot in slots)
             {
                 if(slot.item == null)
@@ -183,7 +184,7 @@ public class InventoryManager : MonoBehaviour
                     else
                     {
                         dicItem.data.count--;
-                        if (dicItem.data.count < 0)
+                        if (dicItem.data.count <= 0)
                             DeleteData(dicItem);
                     }
                     break;
