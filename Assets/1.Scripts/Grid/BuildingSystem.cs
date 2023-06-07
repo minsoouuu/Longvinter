@@ -19,6 +19,7 @@ public class BuildingSystem : MonoBehaviour
     public HandlingObject[] prefab;
     public Transform parent;
     [HideInInspector] public PlaceableObject selectedObject;
+    List<PlaceableObject> prefab_list = new List<PlaceableObject>();
 
 
     // 타일맵 생성
@@ -107,6 +108,7 @@ public class BuildingSystem : MonoBehaviour
         HandlingObject obj = Instantiate(building, pos, Quaternion.identity);
         obj.transform.SetParent(parent);
         selectedObject = obj.GetComponent<PlaceableObject>();
+        prefab_list.Add(selectedObject);
     }
 
 
@@ -194,6 +196,16 @@ public class BuildingSystem : MonoBehaviour
                 Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
                 // 타일 색칠하기
                 BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.resultTile);
+            }
+        }
+
+        foreach (var item in prefab_list)
+        {
+            if (!item.enabled)
+            {
+                Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
+                // 타일 색칠하기
+                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile);
             }
         }
     }
