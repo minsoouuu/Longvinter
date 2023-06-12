@@ -28,4 +28,12 @@ public class PocketSlot : MonoBehaviour
     {
         nullSprite = Resources.Load<Sprite>("Longvinter_Icons/Gradient");
     }
+    private void OnMouseDown()
+    {
+        if (Item == null)
+            return;
+
+        Gamemanager.instance.player.im.ADItem(Item, true);
+        Item = null;
+    }
 }

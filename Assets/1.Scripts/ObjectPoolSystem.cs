@@ -16,7 +16,9 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
     private Dictionary<PopType, Queue<PopUp>> popPools = new Dictionary<PopType, Queue<PopUp>>();
-    private Queue<FishingController> fishingPolls = new Queue<FishingController>();
+    private Queue<FishingController> fishingPools = new Queue<FishingController>();
+    private Queue<PocketController> pocketPools = new Queue<PocketController>();
+
     private void Awake()
     {
         DataSetting();
@@ -86,7 +88,13 @@ public class ObjectPoolSystem : MonoBehaviour
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
-        fishingPolls.Enqueue(obj);
+        fishingPools.Enqueue(obj);
+    }
+    public void ReturnObject(PocketController obj)
+    {
+        obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
+        pocketPools.Enqueue(obj);
     }
 
     // true - Buy, false - Sell
@@ -117,9 +125,9 @@ public class ObjectPoolSystem : MonoBehaviour
     {
         FishingController obj = null;
 
-        if (fishingPolls.Count != 0)
+        if (fishingPools.Count != 0)
         {
-            obj = fishingPolls.Dequeue();
+            obj = fishingPools.Dequeue();
         }
         else
         {
@@ -130,6 +138,26 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
+    // 포켓 풀링 *****************
+    /*
+    public PocketController GetObjectOfObjectPooling(string name)
+    {
+        PocketController obj = null;
+
+        if (fishingPools.Count != 0)
+        {
+            obj = pocketPools.Dequeue();
+        }
+        else
+        {
+            string path = $"Fishing/{name}";
+            PocketController fishing = Resources.Load<PocketController>(path);
+            obj = Instantiate(fishing);
+        }
+        obj.gameObject.SetActive(true);
+        return obj;
+    }
+    */
     public PopUp GetObjectOfObjectPooling(PopType type)
     {
         PopUp obj = null;
@@ -219,7 +247,6 @@ public class ObjectPoolSystem : MonoBehaviour
         else
         {
         }
-
         obj.gameObject.SetActive(true);
         return obj;
     }

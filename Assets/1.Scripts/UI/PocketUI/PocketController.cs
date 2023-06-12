@@ -8,6 +8,10 @@ public class PocketController : MonoBehaviour
     [SerializeField] private List<PocketSlot> pocketSlots;
     [SerializeField] private Button escButton;
 
+    private void Start()
+    {
+        escButton.onClick.AddListener(() => OnButtonDown());
+    }
     public void AddItem(Item item)
     {
         for (int i = 0; i < pocketSlots.Count; i++)
@@ -18,5 +22,9 @@ public class PocketController : MonoBehaviour
                 break;
             }
         }
+    }
+    void OnButtonDown()
+    {
+        // 풀링 반환
     }
 }
