@@ -8,6 +8,7 @@ public class OneButtonPopUp : PopUp
 {
     [SerializeField] private Button okButton;
     [SerializeField] private TMP_Text text;
+
     public UnityAction Action { get; set; }
     public override void SetComment(string comment)
     {
@@ -26,8 +27,8 @@ public class OneButtonPopUp : PopUp
         if (Action != null)
         {
             Action();
+            Action = null;
         }
-        Action = null;
         base.ReturnObject();
     }
 }

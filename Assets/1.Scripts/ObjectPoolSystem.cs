@@ -16,7 +16,7 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
     private Dictionary<PopType, Queue<PopUp>> popPools = new Dictionary<PopType, Queue<PopUp>>();
-
+    private Queue<FishingController> fishingPolls = new Queue<FishingController>();
     private void Awake()
     {
         DataSetting();
@@ -82,6 +82,12 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.transform.SetParent(transform);
         popPools[type].Enqueue(obj);
     }
+    public void ReturnObject(FishingController obj)
+    {
+        obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
+        fishingPolls.Enqueue(obj);
+    }
 
     // true - Buy, false - Sell
     public Merchant GetObjectOfObjectPooling(ObjectType objectType, bool a)
@@ -103,6 +109,23 @@ public class ObjectPoolSystem : MonoBehaviour
                 obj = Instantiate(slotPrefabs[1]);
             }
             
+        }
+        obj.gameObject.SetActive(true);
+        return obj;
+    }
+    public FishingController GetObjectOfObjectPooling(string name)
+    {
+        FishingController obj = null;
+
+        if (fishingPolls.Count != 0)
+        {
+            obj = fishingPolls.Dequeue();
+        }
+        else
+        {
+            string path = $"Fishing/{name}";
+            FishingController fishing = Resources.Load<FishingController>(path);
+            obj = Instantiate(fishing);
         }
         obj.gameObject.SetActive(true);
         return obj;
