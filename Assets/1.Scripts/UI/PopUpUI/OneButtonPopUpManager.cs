@@ -16,7 +16,6 @@ public class OneButtonPopUpManager : MonoBehaviour
             instance = this;
         }
     }
-
     public void SetComment(string commnet)
     {
 

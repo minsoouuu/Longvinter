@@ -12,19 +12,25 @@ public class ToastPopUp : PopUp
     private Coroutine coroutine;
     private Image popImage;
     private RectTransform popUprect;
-    private string comment;
-    private int count = 1;
 
     [HideInInspector] public Sequence sequence;
 
     private void OnEnable()
     {
-        sequence.Restart();
+        if (!ToastPopUpManager.instance.popUps.Contains(this))
+        {
+            ToastPopUpManager.instance.popUps.Add(this);
+        }
+        sequence.Append(popUprect.DOAnchorPosY(50, 1, true));
         coroutine = StartCoroutine(PopUpHide());
     }
     private void OnDisable()
     {
-        //sequence.onPause();
+        popImage.color = new Color(1, 1, 1, 1);
+        commnetText.color = new Color(0, 0, 0, 1);
+        popUprect.anchoredPosition = new Vector2(200, -50);
+        ToastPopUpManager.instance.popUps.Remove(this);
+        Debug.Log(ToastPopUpManager.instance.popUps.Count);
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
@@ -34,44 +40,32 @@ public class ToastPopUp : PopUp
     {
         popUprect = transform.GetChild(0).GetComponent<RectTransform>();
         popImage = transform.GetChild(0).GetComponent<Image>();
-
         sequence = DOTween.Sequence();
-        sequence.SetAutoKill(false);
-        sequence.OnStart(() => { ToastPopUpManager.instance.popUps.Add(this);});
-        sequence.Append(popUprect.DOAnchorPosY(50, 2, true));
+        sequence.Append(popUprect.DOAnchorPosY(50, 1, true));
+        coroutine = StartCoroutine(PopUpHide());
     }
     protected override void Initailize()
     {
         mypopType = PopType.ToastPopUp;
     }
-    public void StopDoTween()
+    public void Move(float finishPos)
     {
-        DOTween.Kill(this);
-    }
-    public void ReMove()
-    {
-        //count++;
-        sequence.Append(popUprect.DOAnchorPosY(100, 2, true));
+        sequence.Append(popUprect.DOAnchorPosY((popUprect.anchoredPosition.y + finishPos), 1, true));
     }
     IEnumerator PopUpHide()
     {
         yield return new WaitForSeconds(5f);
         Sequence hideSequence = DOTween.Sequence();
         hideSequence.Append(popImage.DOFade(1f / 255f, 2));
-        hideSequence.Append(commnetText.DOFade(1f / 255f, 0.5f));
-        hideSequence.
-            OnComplete(() =>
-            {
-                popImage.color = new Color(1, 1, 1, 1);
-                commnetText.color = new Color(0, 0, 0, 1);
-                popUprect.anchoredPosition = new Vector2(200, -50);
-                Comment = string.Empty;
-                count = 1;
-                ToastPopUpManager.instance.popUps.Remove(this);
-                base.ReturnObject();
-            });
+        hideSequence.Append(commnetText.DOFade(1f / 255f, 2));
+        yield return new WaitForSeconds(7f);
+        ResetData();
     }
-
+    void ResetData()
+    {
+        Comment = string.Empty;
+        base.ReturnObject();
+    }
     public override void SetComment(string comment)
     {
         commnetText.text = comment;

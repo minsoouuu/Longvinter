@@ -15,15 +15,14 @@ public abstract class PopUp : MonoBehaviour
             comment = value;
         }
     }
+    private void Awake()
+    {
+        Initailize();
+    }
     protected abstract void Initailize();
     public abstract void SetComment(string comment);
-    protected virtual void GetObject()
-    {
-        Gamemanager.instance.objectPool.GetObjectOfObjectPooling(mypopType);
-    }
-    protected virtual void ReturnObject()
+    public virtual void ReturnObject()
     {
         Gamemanager.instance.objectPool.ReturnObject(mypopType, this);
     }
-
 }

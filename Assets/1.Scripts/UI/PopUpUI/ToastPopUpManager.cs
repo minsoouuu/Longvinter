@@ -9,6 +9,7 @@ public class ToastPopUpManager : MonoBehaviour
     [SerializeField] private Transform popParent;
 
     [HideInInspector] public List<ToastPopUp> popUps = new List<ToastPopUp>();
+
     PopUp toastPopUp;
 
     private void Awake()
@@ -22,32 +23,18 @@ public class ToastPopUpManager : MonoBehaviour
             instance = this;
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            PopUpCheck("***");
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-        }
-    }
-    public void PopUpCheck(string comment)
+    public void Setcomment(string comment)
     {
         if (popUps.Count > 0)
         {
             for (int i = 0; i < popUps.Count; i++)
             {
-                popUps[i].StopDoTween();
-                popUps[i].ReMove();
+                popUps[i].Move(100);
             }
         }
-        else
-        {
-            SetPopUpData(comment);
-        }
+        CreatePopUp(comment);
     }
-    void SetPopUpData(string comment)
+    void CreatePopUp(string comment)
     {
         toastPopUp = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.ToastPopUp);
         toastPopUp.transform.SetParent(popParent);

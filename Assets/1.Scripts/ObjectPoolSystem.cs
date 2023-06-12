@@ -79,8 +79,8 @@ public class ObjectPoolSystem : MonoBehaviour
     public void ReturnObject(PopType type, PopUp obj)
     {
         obj.gameObject.SetActive(false);
-        popPools[type].Enqueue(obj);
         obj.transform.SetParent(transform);
+        popPools[type].Enqueue(obj);
     }
 
     // true - Buy, false - Sell
