@@ -32,10 +32,7 @@ public class HandlingObject : MonoBehaviour
         }
     }
     
-    private void OnMouseExit()
-    {
-        this.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
-    }
+    
     
     // 마우스 드래그로 오브젝트 움직이기
     private void OnMouseDrag()

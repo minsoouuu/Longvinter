@@ -14,7 +14,7 @@ public class BuildingSystem : MonoBehaviour
     public TileBase resultTile;
     public TileBase originalTile;
     public User player;
-    public MaterialScript[] tree_rock;
+    public List<MaterialScript> tree_rock;
 
     public HandlingObject[] prefab;
     public Transform parent;
@@ -52,7 +52,7 @@ public class BuildingSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ClearTile();
+        
         if (Input.GetKeyDown(KeyCode.Q))
         {
 
@@ -190,12 +190,6 @@ public class BuildingSystem : MonoBehaviour
                 Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
                 // 타일 색칠하기
                 BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile);
-            }
-            else
-            {   
-                Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
-                // 타일 색칠하기
-                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.resultTile);
             }
         }
     }

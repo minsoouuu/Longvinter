@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MaterialScript : MonoBehaviour
 {
     public enum Kind
     {
         Tree,
-        Rock
+        Rock,
+        Merchant
     }
     public Vector3Int Size { get; private set; }
     private Vector3[] vertices;
     [SerializeField] private Kind kind;
     [SerializeField] private User user;
+    public RespawnController rc;
+
+
     // Start is called before the first frame update
     public void Awake()
     {
@@ -69,15 +74,49 @@ public class MaterialScript : MonoBehaviour
 
     public void Collecting()
     {
-        float dis = Vector3.Distance(transform.position, user.transform.position);
-        Debug.Log(dis);
-        if(dis < 2f)
+        if (kind == Kind.Tree)
         {
-            if (kind == Kind.Tree)
+            float dis = Vector3.Distance(transform.position, user.transform.position);
+            if (dis < 2f)
             {
                 user.ShowImage();
+                if (Input.GetKey(KeyCode.E))
+                {
+                    user.interactionImage.GetComponent<Image>().fillAmount += Time.deltaTime;
+                }
+                if (user.interactionImage.GetComponent<Image>().fillAmount >= 1)
+                {
+                    user.CloseImage();
+                    user.interactionImage.GetComponent<Image>().fillAmount = 0;
+                    rc.gb.Add(gameObject);
+                    rc.respawn_Time = 0f;
+                    gameObject.SetActive(false);
+                }
             }
         }
-        
+        else if(kind == Kind.Rock)
+        {
+            float dis = Vector3.Distance(transform.position, user.transform.position);
+            if (dis < 2f)
+            {
+                user.ShowImage();
+                if (Input.GetKey(KeyCode.E))
+                {
+                    user.interactionImage.GetComponent<Image>().fillAmount += Time.deltaTime;
+                }
+                if (user.interactionImage.GetComponent<Image>().fillAmount >= 1)
+                {
+                    user.CloseImage();
+                    user.interactionImage.GetComponent<Image>().fillAmount = 0;
+                    Destroy(gameObject);
+                }
+            }
+        }
+    }
+
+    public void OnDestroy()
+    {
+        BuildingSystem.b_instance.ClearTile();
+        BuildingSystem.b_instance.tree_rock.Remove(this);
     }
 }

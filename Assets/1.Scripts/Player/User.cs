@@ -47,7 +47,7 @@ public class User : MonoBehaviour
 
     private List<Collider> m_collisions = new List<Collider>();
 
-    [SerializeField] private Image interactionImage;
+    public Image interactionImage;
 
 
     private float curHp = 100f;
@@ -140,6 +140,7 @@ public class User : MonoBehaviour
                 inven.invenIsOn = false;
             }
         }
+        
         /*
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
         {
@@ -258,18 +259,6 @@ public class User : MonoBehaviour
     public void ShowImage()
     {
         interactionImage.gameObject.SetActive(true);
-        float fa = 0;
-        float faTime = 0;
-        faTime += Time.deltaTime;
-        if(faTime < 2f)
-        {
-            fa += 0.1f;
-        }
-        else
-        {
-            faTime = 0;
-        }
-        interactionImage.GetComponent<Image>().fillAmount = fa;
     }
 
     public void CloseImage()
