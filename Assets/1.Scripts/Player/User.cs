@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class User : MonoBehaviour
 {
@@ -45,6 +46,9 @@ public class User : MonoBehaviour
     private bool m_isGrounded;
 
     private List<Collider> m_collisions = new List<Collider>();
+
+    [SerializeField] private Image interactionImage;
+
 
     private float curHp = 100f;
     [HideInInspector] public float maxHp = 100f;
@@ -249,5 +253,27 @@ public class User : MonoBehaviour
         {
             m_animator.SetTrigger("Jump");
         }
+    }
+
+    public void ShowImage()
+    {
+        interactionImage.gameObject.SetActive(true);
+        float fa = 0;
+        float faTime = 0;
+        faTime += Time.deltaTime;
+        if(faTime < 2f)
+        {
+            fa += 0.1f;
+        }
+        else
+        {
+            faTime = 0;
+        }
+        interactionImage.GetComponent<Image>().fillAmount = fa;
+    }
+
+    public void CloseImage()
+    {
+        interactionImage.gameObject.SetActive(false);
     }
 }

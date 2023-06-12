@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class MaterialScript : MonoBehaviour
 {
+    public enum Kind
+    {
+        Tree,
+        Rock
+    }
     public Vector3Int Size { get; private set; }
     private Vector3[] vertices;
+    [SerializeField] private Kind kind;
+    [SerializeField] private User user;
     // Start is called before the first frame update
-    private void Start()
+    public void Awake()
     {
         VertexLocalPosition();
+    }
+
+    public void Start()
+    {
         CalculateTileSize();
     }
-    
+
+    public void Update()
+    {
+        Collecting();
+    }
+
     public void VertexLocalPosition()
     {
         BoxCollider box = gameObject.GetComponent<BoxCollider>();
@@ -49,5 +65,19 @@ public class MaterialScript : MonoBehaviour
     public Vector3 GetStartPosition()
     {
         return transform.TransformPoint(vertices[0]);
+    }
+
+    public void Collecting()
+    {
+        float dis = Vector3.Distance(transform.position, user.transform.position);
+        Debug.Log(dis);
+        if(dis < 2f)
+        {
+            if (kind == Kind.Tree)
+            {
+                user.ShowImage();
+            }
+        }
+        
     }
 }

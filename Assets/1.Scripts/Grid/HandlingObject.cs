@@ -23,7 +23,7 @@ public class HandlingObject : MonoBehaviour
     {
         if (PlacedH)
         {
-            Debug.Log("true");
+            this.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
@@ -31,7 +31,12 @@ public class HandlingObject : MonoBehaviour
             Debug.Log("false");
         }
     }
-
+    
+    private void OnMouseExit()
+    {
+        this.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
+    }
+    
     // 마우스 드래그로 오브젝트 움직이기
     private void OnMouseDrag()
     {
@@ -65,5 +70,10 @@ public class HandlingObject : MonoBehaviour
             }
         }
         return Vector3.zero;
+    }
+
+    public void OnClick()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -198,15 +198,5 @@ public class BuildingSystem : MonoBehaviour
                 BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.resultTile);
             }
         }
-
-        foreach (var item in prefab_list)
-        {
-            if (!item.enabled)
-            {
-                Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
-                // 타일 색칠하기
-                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile);
-            }
-        }
     }
 }
