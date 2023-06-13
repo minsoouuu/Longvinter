@@ -29,16 +29,11 @@ public class MonsterSpawnController : MonoBehaviour
         curTime += Time.deltaTime;
     }
 
-    public void SpawnMonster(int ranNum)    //영역마다 5마리씩 스폰
+    public void SpawnMonster(int ranNum)    //???????? 5?????? ????
     {
-        curTime = 0;
-        MonsterCount++;
-        //Instantiate(monsters[Random.Range(0, monsters.Count)], spawnPoints[ranNum])
-
-        /*
         int a =Enum.GetValues(typeof(Monster)).Length;
         Gamemanager.instance.objectPool.GetObjectOfObjectPooling(monsters[UnityEngine.Random.Range(0, a)].monsterData.monsterType);
         Debug.Log(monsters[UnityEngine.Random.Range(0, monsters.Count)].monsterData.monsterType);
-        */
+     
     }
 }

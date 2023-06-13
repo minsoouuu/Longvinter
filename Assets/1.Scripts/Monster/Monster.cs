@@ -20,9 +20,10 @@ public abstract class Monster : MonoBehaviour
         IsRunning,
         IsDead
     }
-
+    public Vector3 pos;
     public MonsterData monsterData = new MonsterData();
     private MonsterAction monsterAction = new MonsterAction();
+    private MonsterType monstertype = new MonsterType();
     private Vector3 destination;
     private User thePlayer;
     private float curHp = 0;
@@ -31,9 +32,10 @@ public abstract class Monster : MonoBehaviour
     [SerializeField] protected NavMeshAgent nav;
     [SerializeField] protected Animator anim;
 
-    [SerializeField] private float viewAngle;  // 시야 각도 (130도)
-    [SerializeField] private float viewDistance; // 시야 거리 (10미터)
-    [SerializeField] private LayerMask targetMask;  // 타겟 마스크(플레이어)
+    [SerializeField] private float viewAngle;  // ???? ???? (130??)
+    [SerializeField] private float viewDistance; // ???? ???? (10????)
+    [SerializeField] private LayerMask targetMask;  // ???? ??????(????????)
+    
 
     public float HP
     {
@@ -51,14 +53,13 @@ public abstract class Monster : MonoBehaviour
         anim = GetComponent<Animator>();
         curHp = monsterData.hp;
         monsterAction = MonsterAction.IsIdle;
-        Debug.Log("몬스터 생성");
+        Debug.Log("?????? ????");
     }
 
     protected void Update()
     {
         if (monsterAction != MonsterAction.IsDead)
         {
-            ElapseTime();
             Move();
             View();
         }
@@ -71,7 +72,7 @@ public abstract class Monster : MonoBehaviour
 
     public abstract void Initialize();
 
-    // 몬스터 시야에 플레이어(레이어)가 잡히는 지 검사
+    // ?????? ?????? ????????(??????)?? ?????? ?? ????
     public bool View()
     {
         Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
@@ -91,7 +92,7 @@ public abstract class Monster : MonoBehaviour
                     {
                         if (_hit.transform.name == "Player")
                         {
-                            //Debug.Log("플레이어가 시야 내에 있습니다.");
+                            //Debug.Log("?????????? ???? ???? ????????.");
                             Debug.DrawRay(transform.position + transform.up, _direction, Color.blue);
 
                             return true;
@@ -103,17 +104,47 @@ public abstract class Monster : MonoBehaviour
         return false;
     }
 
-    // 몬스터 출발
+    IEnumerator Roaming()
+    {
+        pos = new Vector3();
+        pos.x = Random.Range(-3f, 3f);
+        pos.z = Random.Range(-3f, 3f);
+
+        monsterAction = MonsterAction.IsWalking;
+        while (true)
+        {
+            var dir = (pos - this.transform.position).normalized;
+            this.transform.LookAt(pos);
+            this.transform.position += dir * monsterData.speed * Time.deltaTime;
+
+            float distance = Vector3.Distance(transform.position, pos);
+            if(distance<=0.1f)
+            {
+                monsterAction = MonsterAction.IsIdle;
+                yield return new WaitForSeconds(Random.Range(1f, 3f));
+                pos.x = Random.Range(-3f, 3f);
+                pos.z = Random.Range(-3f, 3f);
+                monsterAction = MonsterAction.IsWalking;
+            }
+            yield return null;
+        }
+    }
+
+    // ?????? ????
     protected virtual void Move()
     {
+        StartCoroutine(Roaming());
+        /*
         if (monsterAction == MonsterAction.IsWalking || monsterAction == MonsterAction.IsRunning) 
         {
             nav.SetDestination(transform.position + destination * 5f);
             // rigid.MovePosition(transform.position + transform.forward * monsterData.applySpeed * Time.deltaTime);
         }
+        */
     }
 
-    // 도착하고 나서 잠시 멈추기
+    /*
+    // ???????? ???? ???? ??????
     protected void ElapseTime()
     {
         if (monsterAction == MonsterAction.IsIdle)
@@ -123,8 +154,9 @@ public abstract class Monster : MonoBehaviour
                 ReSet();
         }
     }
+    */
 
-    // 랜덤 도착지 설정
+    // ???? ?????? ????
     protected virtual void ReSet() 
     {
         monsterAction = MonsterAction.IsIdle;
@@ -133,16 +165,16 @@ public abstract class Monster : MonoBehaviour
         Walk();
     }
 
-    // 몬스터 걷기(랜덤 영역 돌아다니게 하기) 
+    // ?????? ????(???? ???? ?????????? ????) 
     protected void Walk() 
     {
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Walking");
-        Debug.Log("걷기");
+        Debug.Log("????");
     }
 
-    // 몬스터 도망(플레이어 보면!! -> View())
+    // ?????? ????(???????? ????!! -> View())
     protected virtual void Runaway(Vector3 _targetPos)
     {
         destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
@@ -150,10 +182,10 @@ public abstract class Monster : MonoBehaviour
         monsterAction = MonsterAction.IsRunning;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Running");
-        //Debug.Log("도망");
+        //Debug.Log("????");
     }
 
-    // 몬스터 공격 당함 (플레이어 공격 함수와 연동 필요)
+    // ?????? ???? ???? (???????? ???? ?????? ???? ????)
     public virtual void Damage(int _dmg, Vector3 _targetPos)
     {
         if (monsterAction != MonsterAction.IsDead) 
@@ -171,7 +203,7 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
-    // 몬스터 Die
+    // ?????? Die
     protected void MonsterDie()
     {
         nav.enabled = false;
@@ -183,13 +215,13 @@ public abstract class Monster : MonoBehaviour
         DropItem();
     }
 
-    // 몬스터 죽으면 아이템 생성
+    // ?????? ?????? ?????? ????
     public virtual void DropItem()     
     {
-        Choose(new float[3] { 10f, 10f, 80f });     //장비 10%, 요리 10%, 재료 80%
+        Choose(new float[3] { 10f, 10f, 80f });     //???? 10%, ???? 10%, ???? 80%
         float Choose(float[] probs)
         {
-            // 몬스터에 따라 다른 아이템 드랍
+            // ???????? ???? ???? ?????? ????
             return probs.Length - 1;
         }
     }
