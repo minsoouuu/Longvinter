@@ -9,7 +9,8 @@ public class MaterialScript : MonoBehaviour
     {
         Tree,
         Rock,
-        Merchant
+        Merchant,
+        Plant
     }
     public Vector3Int Size { get; private set; }
     private Vector3[] vertices;
