@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class FishingManager : MonoBehaviour
 {
@@ -43,5 +44,8 @@ public class FishingManager : MonoBehaviour
             isin = false;
             popUp.gameObject.SetActive(false);
         }
+
+        
+        
     }
 }

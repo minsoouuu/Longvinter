@@ -22,6 +22,7 @@ public class ObjectPoolSystem : MonoBehaviour
     private void Awake()
     {
         DataSetting();
+
     }
     void DataSetting()
     {
@@ -138,26 +139,24 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
-    // 포켓 풀링 *****************
-    /*
-    public PocketController GetObjectOfObjectPooling(string name)
+    // 포켓 생성갯수를 정해주기 위한 int 인자값 나중에.....
+    public PocketController GetObjectOfObjectPooling(int num)
     {
         PocketController obj = null;
 
-        if (fishingPools.Count != 0)
+        if (pocketPools.Count != 0)
         {
             obj = pocketPools.Dequeue();
         }
         else
         {
-            string path = $"Fishing/{name}";
-            PocketController fishing = Resources.Load<PocketController>(path);
-            obj = Instantiate(fishing);
+            string path = $"Pocket/PocketPrefab";
+            PocketController pocket = Resources.Load<PocketController>(path);
+            obj = Instantiate(pocket);
         }
         obj.gameObject.SetActive(true);
         return obj;
     }
-    */
     public PopUp GetObjectOfObjectPooling(PopType type)
     {
         PopUp obj = null;
