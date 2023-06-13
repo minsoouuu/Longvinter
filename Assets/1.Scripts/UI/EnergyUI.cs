@@ -46,7 +46,7 @@ public class EnergyUI : MonoBehaviour
             }
             else
             {
-                Debug.Log("Game Over");
+
             }
         }
     }
