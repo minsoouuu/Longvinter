@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 0
   user: {fileID: 0}
+  rc: {fileID: 0}
 --- !u!33 &33975429888307356
 MeshFilter:
   m_ObjectHideFlags: 0
