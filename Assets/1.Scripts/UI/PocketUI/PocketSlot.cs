@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class PocketSlot : MonoBehaviour
 {
     [SerializeField] private Image icon;
+    [SerializeField] private Button button;
     private Sprite nullSprite;
-    private Item item;
+    private Item item = null;
     public Item Item
     {
         get { return item; }
@@ -17,6 +18,7 @@ public class PocketSlot : MonoBehaviour
             if (item != null)
             {
                 icon.sprite = Item.data.image;
+                Debug.Log($"{gameObject.name}:{Item.data.itemName}");
             }
             else
             {
@@ -27,12 +29,13 @@ public class PocketSlot : MonoBehaviour
     void Start()
     {
         nullSprite = Resources.Load<Sprite>("Longvinter_Icons/Gradient");
+        button.onClick.AddListener(() => OnButtonDown());
     }
-    private void OnMouseDown()
+    public void OnButtonDown()
     {
         if (Item == null)
             return;
-
+        Debug.Log($"{gameObject.name}:Å¬¸¯");
         Gamemanager.instance.player.im.ADItem(Item, true);
         Item = null;
     }

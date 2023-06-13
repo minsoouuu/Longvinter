@@ -15,20 +15,34 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private Transform slotParent;
     [SerializeField] private Toggle[] toggles;
-
+    [SerializeField] private Button moneySendButton;
     [SerializeField] private TMPro.TMP_Text title;
+    [SerializeField] private TMPro.TMP_Text moneyText;
+    [SerializeField] private GameObject countUI;
 
     [HideInInspector] public Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
     private List<Slot> slots = new List<Slot>();
 
     private Toggle curToggle = null;
 
+    int money = 0;
+    public int Money
+    {
+        get { return money; }
+        set
+        {
+            money = value;
+            moneyText.text = money.ToString();
+        }
+    }
     void Start()
     {
         itemDic.Add(TitleType.Equipment, new List<Item>());
         itemDic.Add(TitleType.Material, new List<Item>());
         itemDic.Add(TitleType.Food, new List<Item>());
         itemDic.Add(TitleType.Plant, new List<Item>());
+
+        moneySendButton.onClick.AddListener(() => OnButtonDownMoneySend());
 
         // 슬롯이 늘엇날 경우를 대비해 코드로 작성
         if (slots.Count == 0)
@@ -256,6 +270,10 @@ public class InventoryManager : MonoBehaviour
                 item.popup.Enable(false);
             }
         }
+    }
+    void OnButtonDownMoneySend()
+    {
+        countUI.gameObject.SetActive(true);
     }
 
     TitleType GetTitleType(Item item)

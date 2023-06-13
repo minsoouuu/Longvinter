@@ -10,12 +10,14 @@ public class MakingController : MonoBehaviour
 {
     [SerializeField] private MaterialSlot[] MaterialSlot;
     [SerializeField] private Button button;
+    [SerializeField] private GameObject interUI;
 
     [HideInInspector] public List<ItemName> items = new List<ItemName>();
     List<JsonData.RecipeJson> recipes = new List<JsonData.RecipeJson>();
 
     public CompleteSlot completeSlot;
     public bool IsOn { get; set; }
+
     private void Start()
     {
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
@@ -34,6 +36,25 @@ public class MakingController : MonoBehaviour
             SetSlotData(Gamemanager.instance.itemController.GetItem(ItemName.Bread, InvenItemType.Foods));
             Debug.Log("»§ Ãß°¡");
         }
+
+        float dis = Vector3.Distance(transform.position, Gamemanager.instance.player.transform.position);
+        
+        if (dis <= 0.5f)
+        {
+            interUI.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                IsOn = true;
+            }
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            interUI.SetActive(false);
+            IsOn = false;
+        }
+
     }
     public void SetSlotData(Item item)
     {

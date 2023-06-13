@@ -79,7 +79,9 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void OnUse()
     {
-
+        item.Use();
+        popup.Enable(false);
+        mgr.ADItem(item, false);
     }
 
     /// <summary>
@@ -87,7 +89,7 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void OnPopup()
     {
-        FindObjectOfType<InventoryManager>().SlotPopupAllOff();
+        mgr.SlotPopupAllOff();
 
         // 아이템이 아무것도 없을때는 무반응
         if(item != null)

@@ -315,7 +315,6 @@ public class Inventory : MonoBehaviour
         if (!scController.gameObject.activeSelf)
         {
             scController.transform.position = moneyPos - new Vector3(0, 10, 0);
-            scController.SetValueType(ValueType.Money);
             scController.gameObject.SetActive(true);
         }
         Debug.Log("?? ??????");

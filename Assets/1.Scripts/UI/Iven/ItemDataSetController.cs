@@ -132,7 +132,6 @@ public class ItemDataSetController : MonoBehaviour
             }
         }
         return item;
-
     }
     public Item GetItem(ItemName name, InvenItemType type)
     {
