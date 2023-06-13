@@ -9,6 +9,7 @@ public struct MonsterData
     public float hp;
     public Vector3 direction;
     public MonsterType monsterType;
+
 }
 
 public abstract class Monster : MonoBehaviour
@@ -22,7 +23,6 @@ public abstract class Monster : MonoBehaviour
     }
     public Vector3 pos;
     public MonsterData monsterData = new MonsterData();
-    public MonsterType monstertype = new MonsterType();
     private MonsterAction monsterAction = new MonsterAction();
     private Vector3 destination;
     private User thePlayer;
@@ -32,9 +32,9 @@ public abstract class Monster : MonoBehaviour
     [SerializeField] protected NavMeshAgent nav;
     [SerializeField] protected Animator anim;
 
-    [SerializeField] private float viewAngle;  // ???? ???? (130??)
-    [SerializeField] private float viewDistance; // ???? ???? (10????)
-    [SerializeField] private LayerMask targetMask;  // ???? ??????(????????)
+    [SerializeField] private float viewAngle;
+    [SerializeField] private float viewDistance; 
+    [SerializeField] private LayerMask targetMask;
     
 
     public float HP
@@ -71,7 +71,7 @@ public abstract class Monster : MonoBehaviour
 
     public abstract void Initialize();
 
-    // ?????? ?????? ????????(??????)?? ?????? ?? ????
+    // If hit by or close to the player, they will runaway.
     public bool View()
     {
         Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
@@ -104,8 +104,8 @@ public abstract class Monster : MonoBehaviour
 
     IEnumerator Roaming()
     {
-        destination.x = Random.Range(-90f, 90f);
-        destination.z = Random.Range(-90f, 90f);
+        destination.x = Random.Range(-3f, 3f);
+        destination.z = Random.Range(-3f, 3f);
         
         Walk();
         while (true)
@@ -117,15 +117,12 @@ public abstract class Monster : MonoBehaviour
             {
                 monsterAction = MonsterAction.IsIdle;
                 yield return new WaitForSeconds(Random.Range(1f, 3f));
-                destination.x = Random.Range(-90f, 90f);
-                destination.z = Random.Range(-90f, 90f);
-                Walk();
+                ReSet();
             }
             yield return null;
         }
     }
 
-    // ?????? ????
     protected virtual void Move()
     {
         StartCoroutine(Roaming());
@@ -137,21 +134,7 @@ public abstract class Monster : MonoBehaviour
         }
         */
     }
-
-    /*
-    // ???????? ???? ???? ??????
-    protected void ElapseTime()
-    {
-        if (monsterAction == MonsterAction.IsIdle)
-        {
-            currentTime -= Time.deltaTime;
-            if (currentTime <= 0 && monsterAction != MonsterAction.IsRunning)
-                ReSet();
-        }
-    }
     
-
-    // ???? ?????? ????
     protected virtual void ReSet() 
     {
         monsterAction = MonsterAction.IsIdle;
@@ -159,18 +142,16 @@ public abstract class Monster : MonoBehaviour
         destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(-0.5f, 1f));
         Walk();
     }
-    */
 
-    // ?????? ????(???? ???? ?????????? ????) 
     protected void Walk() 
     {
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Walking");
-        Debug.Log("Walk");
+        //Debug.Log("Walk");
     }
 
-    // ?????? ????(???????? ????!! -> View())
+
     protected virtual void Runaway(Vector3 _targetPos)
     {
         destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
@@ -181,7 +162,7 @@ public abstract class Monster : MonoBehaviour
         Debug.Log("Runaway");
     }
 
-    // ?????? ???? ???? (???????? ???? ?????? ???? ????)
+    
     public virtual void Damage(int _dmg, Vector3 _targetPos)
     {
         if (monsterAction != MonsterAction.IsDead) 
@@ -199,27 +180,23 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
-    // ?????? Die
     protected void MonsterDie()
     {
         nav.enabled = false;
         monsterAction = MonsterAction.IsDead;
         anim.SetTrigger("Dead");
-        //MonsterSpawnController._instance.MonsterCount--;
 
-        Destroy(gameObject, 4);
+        HP = monsterData.hp;
+        Gamemanager.instance.objectPool.ReturnObject(monsterData.monsterType, this);
+        MonsterSpawnController._instance.monsterCount--;
         DropItem();
     }
 
     // ?????? ?????? ?????? ????
     public virtual void DropItem()     
     {
-        Choose(new float[3] { 10f, 10f, 80f });     //???? 10%, ???? 10%, ???? 80%
-        float Choose(float[] probs)
-        {
-            // ???????? ???? ???? ?????? ????
-            return probs.Length - 1;
-        }
+        // Monster name -> Monster Item (2~3)
+        // PocketController.AddItem
     }
 
 
