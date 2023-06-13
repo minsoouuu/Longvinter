@@ -14,6 +14,6 @@ public class Taipan : Monster
 
     public override void DropItem()
     {
-        throw new System.NotImplementedException();
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[5]);
     }
 }

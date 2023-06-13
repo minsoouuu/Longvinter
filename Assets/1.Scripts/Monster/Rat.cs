@@ -13,6 +13,8 @@ public class Rat : Monster
 
     public override void DropItem()
     {
-        throw new System.NotImplementedException();
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[0]);
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[1]);
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[0]);
     }
 }

@@ -9,7 +9,6 @@ public struct MonsterData
     public float hp;
     public Vector3 direction;
     public MonsterType monsterType;
-
 }
 
 public abstract class Monster : MonoBehaviour
@@ -21,6 +20,8 @@ public abstract class Monster : MonoBehaviour
         IsRunning,
         IsDead
     }
+
+    public PocketController pocketcontrol;
     public Vector3 pos;
     public MonsterData monsterData = new MonsterData();
     private MonsterAction monsterAction = new MonsterAction();
@@ -36,16 +37,17 @@ public abstract class Monster : MonoBehaviour
     [SerializeField] private float viewDistance; 
     [SerializeField] private LayerMask targetMask;
     
-
     public float HP
     {
         get { return curHp; }
         set { curHp = value; }
     }
+
     void Awake()
     {
         Initialize();
     }
+
     private void Start()
     {
         thePlayer = FindObjectOfType<User>();
@@ -66,7 +68,6 @@ public abstract class Monster : MonoBehaviour
         {
             Runaway(thePlayer.transform.position);
         }
-
     }
 
     public abstract void Initialize();
@@ -148,9 +149,7 @@ public abstract class Monster : MonoBehaviour
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Walking");
-        //Debug.Log("Walk");
     }
-
 
     protected virtual void Runaway(Vector3 _targetPos)
     {
@@ -162,7 +161,6 @@ public abstract class Monster : MonoBehaviour
         Debug.Log("Runaway");
     }
 
-    
     public virtual void Damage(int _dmg, Vector3 _targetPos)
     {
         if (monsterAction != MonsterAction.IsDead) 
@@ -192,12 +190,29 @@ public abstract class Monster : MonoBehaviour
         DropItem();
     }
 
-    // ?????? ?????? ?????? ????
     public virtual void DropItem()     
     {
-        // Monster name -> Monster Item (2~3)
-        // PocketController.AddItem
-    }
+        /*
+        switch (monsterData.monsterType)
+        {
+            case MonsterType.Colobus:
+                pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[0]);
+                break;
+            case MonsterType.Gecko:
 
+                break;
+            case MonsterType.Rat:
+
+                break;
+            case MonsterType.Sparrow:
+
+                break;
+            case MonsterType.Taipan:
+
+                break;
+
+        }
+        */
+    }
 
 }

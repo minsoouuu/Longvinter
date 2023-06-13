@@ -13,6 +13,6 @@ public class Gecko : Monster
 
     public override void DropItem()
     {
-        throw new System.NotImplementedException();
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[3]);
     }
 }

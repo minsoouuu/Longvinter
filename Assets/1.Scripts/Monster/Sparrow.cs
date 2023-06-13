@@ -13,7 +13,10 @@ public class Sparrow : Monster
 
     public override void DropItem()
     {
-        throw new System.NotImplementedException();
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[4]);
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[5]);
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[3]);
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[4]);
     }
 
 }

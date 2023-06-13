@@ -14,7 +14,9 @@ public class Colobus : Monster
 
     public override void DropItem()
     {
-        throw new System.NotImplementedException();
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[2]);
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[1]);
+        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[2]);
     }
 
 }
