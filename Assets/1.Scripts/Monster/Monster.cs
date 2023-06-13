@@ -22,8 +22,8 @@ public abstract class Monster : MonoBehaviour
     }
     public Vector3 pos;
     public MonsterData monsterData = new MonsterData();
+    public MonsterType monstertype = new MonsterType();
     private MonsterAction monsterAction = new MonsterAction();
-    private MonsterType monstertype = new MonsterType();
     private Vector3 destination;
     private User thePlayer;
     private float curHp = 0;
@@ -53,7 +53,6 @@ public abstract class Monster : MonoBehaviour
         anim = GetComponent<Animator>();
         curHp = monsterData.hp;
         monsterAction = MonsterAction.IsIdle;
-        Debug.Log("?????? ????");
     }
 
     protected void Update()
@@ -92,7 +91,6 @@ public abstract class Monster : MonoBehaviour
                     {
                         if (_hit.transform.name == "Player")
                         {
-                            //Debug.Log("?????????? ???? ???? ????????.");
                             Debug.DrawRay(transform.position + transform.up, _direction, Color.blue);
 
                             return true;
@@ -106,25 +104,22 @@ public abstract class Monster : MonoBehaviour
 
     IEnumerator Roaming()
     {
-        pos = new Vector3();
-        pos.x = Random.Range(-3f, 3f);
-        pos.z = Random.Range(-3f, 3f);
-
-        monsterAction = MonsterAction.IsWalking;
+        destination.x = Random.Range(-90f, 90f);
+        destination.z = Random.Range(-90f, 90f);
+        
+        Walk();
         while (true)
         {
-            var dir = (pos - this.transform.position).normalized;
-            this.transform.LookAt(pos);
-            this.transform.position += dir * monsterData.speed * Time.deltaTime;
+            nav.SetDestination(transform.position + destination * 5f);
 
-            float distance = Vector3.Distance(transform.position, pos);
-            if(distance<=0.1f)
+            float distance = Vector3.Distance(transform.position, destination);
+            if (distance <= 0.1f)
             {
                 monsterAction = MonsterAction.IsIdle;
                 yield return new WaitForSeconds(Random.Range(1f, 3f));
-                pos.x = Random.Range(-3f, 3f);
-                pos.z = Random.Range(-3f, 3f);
-                monsterAction = MonsterAction.IsWalking;
+                destination.x = Random.Range(-90f, 90f);
+                destination.z = Random.Range(-90f, 90f);
+                Walk();
             }
             yield return null;
         }
@@ -154,7 +149,7 @@ public abstract class Monster : MonoBehaviour
                 ReSet();
         }
     }
-    */
+    
 
     // ???? ?????? ????
     protected virtual void ReSet() 
@@ -164,6 +159,7 @@ public abstract class Monster : MonoBehaviour
         destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(-0.5f, 1f));
         Walk();
     }
+    */
 
     // ?????? ????(???? ???? ?????????? ????) 
     protected void Walk() 
@@ -171,7 +167,7 @@ public abstract class Monster : MonoBehaviour
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Walking");
-        Debug.Log("????");
+        Debug.Log("Walk");
     }
 
     // ?????? ????(???????? ????!! -> View())
@@ -182,7 +178,7 @@ public abstract class Monster : MonoBehaviour
         monsterAction = MonsterAction.IsRunning;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Running");
-        //Debug.Log("????");
+        Debug.Log("Runaway");
     }
 
     // ?????? ???? ???? (???????? ???? ?????? ???? ????)

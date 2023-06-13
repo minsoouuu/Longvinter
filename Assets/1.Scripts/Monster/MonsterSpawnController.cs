@@ -9,7 +9,7 @@ public class MonsterSpawnController : MonoBehaviour
     [SerializeField] private List<Monster> monsters;
     [SerializeField] private float spawnTime = 5f;
     
-    public int MonsterCount = 0;
+    public int monsterCount = 0;
     private int maxCount = 25;
     private float curTime;
 
@@ -21,9 +21,9 @@ public class MonsterSpawnController : MonoBehaviour
     }
     private void Update()
     {
-        if (curTime >= spawnTime && MonsterCount < maxCount)
+        if (curTime >= spawnTime && monsterCount < maxCount)
         {
-            int x = UnityEngine.Random.Range(0, monsters.Count);
+            int x = UnityEngine.Random.Range(0, spawnPoints.Length);
             SpawnMonster(x);
         }
         curTime += Time.deltaTime;
@@ -31,9 +31,12 @@ public class MonsterSpawnController : MonoBehaviour
 
     public void SpawnMonster(int ranNum)    //???????? 5?????? ????
     {
-        int a =Enum.GetValues(typeof(Monster)).Length;
-        Gamemanager.instance.objectPool.GetObjectOfObjectPooling(monsters[UnityEngine.Random.Range(0, a)].monsterData.monsterType);
-        Debug.Log(monsters[UnityEngine.Random.Range(0, monsters.Count)].monsterData.monsterType);
-     
+        curTime = 0;
+        monsterCount++;
+        Instantiate(monsters[UnityEngine.Random.Range(0, monsters.Count)], spawnPoints[ranNum]);
+        // Gamemanager.instance.objectPool.GetObjectOfObjectPooling(monsters[UnityEngine.Random.Range(0, monsters.Count)].monsterData.monsterType);
+        // monsters[].transform.SetParent(spawnPoints[ranNum]);
+        // monsters[].transform.position = Gamemanager.instance.player.transform.position;
+        // Debug.Log(monsters[UnityEngine.Random.Range(0, monsters.Count)].monsterData.monsterType);
     }
 }
