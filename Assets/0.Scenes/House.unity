@@ -432,10 +432,6 @@ MonoBehaviour:
   slotPrefabs:
   - {fileID: -738530078829217955, guid: cec4150bdb02f79449e57edd41baed27, type: 3}
   - {fileID: 1140413863349049429, guid: 16685a16ca07f034ca6207d69c2b5e86, type: 3}
-  itemPrefabs: []
-  housePrefabs: []
-  monsterPrefabs:
-  - {fileID: -1931481559780924432, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
 --- !u!4 &107447514
 Transform:
   m_ObjectHideFlags: 0
@@ -1046,7 +1042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &398421428
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1387,7 +1383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89935783c1fc03744bbaec3152a7c094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inven: {fileID: 0}
   im: {fileID: 0}
   m_moveSpeed: 2
   m_turnSpeed: 200
@@ -2728,6 +2723,7 @@ GameObject:
   - component: {fileID: 945444671}
   - component: {fileID: 945444670}
   - component: {fileID: 945444669}
+  - component: {fileID: 945444672}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2793,14 +2789,26 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945444668}
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 7, z: -5}
+  m_LocalRotation: {x: 0.39024904, y: 0, z: 0, w: 0.9207093}
+  m_LocalPosition: {x: 0, y: 5.45, z: -6.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45.94, y: 0, z: 0}
+--- !u!114 &945444672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945444668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0815afa4e440d474eb3ad2e06061b911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1014113577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,8 +3793,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1416298248}
   - component: {fileID: 1416298247}
+  - component: {fileID: 1416298250}
+  - component: {fileID: 1416298249}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3852,13 +3862,40 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416298246}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -4.7}
+  m_LocalPosition: {x: 0, y: -0.452, z: -4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1416298249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416298246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5c396feed3b58459fdb36c835e3c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intertaction_img: {fileID: 398421427}
+--- !u!136 &1416298250
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416298246}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.0000002
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1527148573
 GameObject:
   m_ObjectHideFlags: 0
@@ -4427,6 +4464,7 @@ MonoBehaviour:
   player: {fileID: 489974145}
   tree_rock: []
   prefab:
+  - {fileID: 2043245098134848198, guid: d9519744d1189d5468a77273d65292bd, type: 3}
   - {fileID: 1023820478902118137, guid: fd114630aa9a63b4791817033f1ca05d, type: 3}
   parent: {fileID: 408240850}
   selectedObject: {fileID: 0}

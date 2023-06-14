@@ -52,12 +52,6 @@ public class BuildingSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-
-            Create_prefab(0);
-        }
 
         if (!selectedObject)
         {
@@ -162,18 +156,30 @@ public class BuildingSystem : MonoBehaviour
     
 
 
-    public void Create_prefab(int num)
+    public void Create_prefab(string name)
     {
         if (selectedObject != null)
         {
             Destroy(selectedObject.gameObject);
             selectedObject = null;
         }
-        InitWithObject(prefab[num]);
+        switch (name)
+        {
+            case "FenceGate":
+                InitWithObject(prefab[0]);
+                break;
+            case "Tent":
+                InitWithObject(prefab[1]);
+                break;
+        }
     }
 
     public void PlantTree()
     {
+        if(tree_rock.Count == 0)
+        {
+            return;
+        }
         foreach (var item in tree_rock)
         {
             Vector3Int startpos = gridLayout.WorldToCell(item.GetStartPosition());

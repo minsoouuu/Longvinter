@@ -15,10 +15,6 @@ public class PlaceableObject : MonoBehaviour
         CalculateTileSize();
     }
 
-    public void Update()
-    {
-        
-    }
 
     // 오브젝트 설치
     public void Place()
