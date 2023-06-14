@@ -22,7 +22,7 @@ public abstract class Monster : MonoBehaviour
 
     public Vector3 pos;
     public List<Transform> wayPoints;
-    public int nextIdx;
+    public int nextIdx = 0;
     public MonsterData monsterData = new MonsterData();
     [HideInInspector] public MonsterAction monsterAction = new MonsterAction();
     private Vector3 destination;
@@ -52,15 +52,13 @@ public abstract class Monster : MonoBehaviour
         }
         
     }
+
     private void OnEnable()
     {
-        nav.isStopped = false;
-        nav.destination = wayPoints[nextIdx].position;
+        nav.enabled = true;
+        Move();
     }
-    private void OnDisable()
-    {
-        nav.isStopped = true;
-    }
+
     void Awake()
     {
         Initialize();
@@ -80,18 +78,15 @@ public abstract class Monster : MonoBehaviour
         if (group != null)
         {
             group.GetComponentsInChildren<Transform>(wayPoints);
-            wayPoints.RemoveAt(0);
         }
 
-        MoveWayPoint();
         Move();
     }
 
     protected void Update()
     {
-        if (nav.remainingDistance <= 0.5f && monsterAction != MonsterAction.IsDead) 
+        if (nav.velocity.sqrMagnitude >= 0.2f * 0.2f && nav.remainingDistance <= 0.5f && monsterAction != MonsterAction.IsDead) 
         {
-            Walk();
             Move();
             View();
         }
@@ -137,37 +132,32 @@ public abstract class Monster : MonoBehaviour
 
 
 
-    protected virtual void Move()
+    protected void Move()
     {
+        Walk();
+
         if (monsterAction == MonsterAction.IsWalking)
         {
             nextIdx = Random.Range(0, wayPoints.Count);
-            MoveWayPoint();
+
+            if (nav.isPathStale)
+            {
+                return;
+            }
+
+            nav.destination = wayPoints[nextIdx].position;
             // nav.SetDestination(transform.position + destination * 5f);}
         }
     }
 
-    private void MoveWayPoint()
-    {
-        if (nav.isPathStale)
-        {
-            return;
-        }
-
-        nav.destination = wayPoints[nextIdx].position;
-        Walk();
-        //nav.isStopped = false;
-    }
-
     protected void Walk() 
     {
-        nextIdx = Random.Range(0, wayPoints.Count);
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Walking");
     }
 
-    protected virtual void Runaway(Vector3 _targetPos)
+    protected void Runaway(Vector3 _targetPos)
     {
         destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
 
@@ -177,7 +167,7 @@ public abstract class Monster : MonoBehaviour
         Debug.Log("Runaway");
     }
 
-    public virtual void Damage(int _dmg, Vector3 _targetPos)
+    protected void Damage(int _dmg, Vector3 _targetPos)
     {
         if (monsterAction != MonsterAction.IsDead) 
         {
@@ -209,7 +199,6 @@ public abstract class Monster : MonoBehaviour
 
     public virtual void DropItem()     
     {
-        
     }
 
 
@@ -217,7 +206,6 @@ public abstract class Monster : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F7))
         {
-            Debug.Log(curHp);
             HP -= 99999;
         }
     }

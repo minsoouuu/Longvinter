@@ -33,7 +33,11 @@ public class MonsterSpawnController : MonoBehaviour
     public void SpawnMonster(int ranNum) 
     {
         curTime = 0;
-        MonsterType type = (MonsterType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(MonsterType)).Length + 1);
+
+        int rand = UnityEngine.Random.Range(0, 5);
+        MonsterType type = (MonsterType)rand;
+
+        // MonsterType type = (MonsterType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(MonsterType)).Length);
         Monster monster = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(type);
         monster.transform.SetParent(monsterGroup);
         monster.transform.position = new Vector3(spawnPoints[ranNum].position.x, spawnPoints[ranNum].position.y, spawnPoints[ranNum].position.z);
