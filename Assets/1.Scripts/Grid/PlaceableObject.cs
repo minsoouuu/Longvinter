@@ -67,9 +67,9 @@ public class PlaceableObject : MonoBehaviour
     public void Rotate()
     {
         //기존 회전값에 행렬을 곱함
-        transform.Rotate(new Vector3(0, 90, 0));
+        transform.Rotate(new Vector3(0, 270, 0));
         //90도 회전이라 x는 y, y는 x로 바뀜
-        Size = new Vector3Int(Size.y, Size.x, 1);
+        Size = new Vector3Int(Size.y, Size.x, Size.z);
 
         Vector3[] changeVertices = new Vector3[vertices.Length];
 
@@ -80,6 +80,7 @@ public class PlaceableObject : MonoBehaviour
         }
 
         vertices = changeVertices;
+        transform.GetChild(1).transform.Rotate(new Vector3(0, 90, 0));
     }
     
 
