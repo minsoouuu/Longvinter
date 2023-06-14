@@ -53,6 +53,7 @@ public class JsonData : MonoBehaviour
         public int count;
         public int price;
         public int serial;
+        public int stats;
     }
     [Serializable]
     public class Food

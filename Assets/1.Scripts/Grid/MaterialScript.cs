@@ -37,6 +37,8 @@ public class MaterialScript : MonoBehaviour
         Collecting();
     }
 
+
+
     public void VertexLocalPosition()
     {
         BoxCollider box = gameObject.GetComponent<BoxCollider>();
@@ -87,15 +89,20 @@ public class MaterialScript : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     user.interactionImage.GetComponent<Image>().fillAmount += Time.deltaTime;
+                    if (user.interactionImage.GetComponent<Image>().fillAmount >= 1)
+                    {
+                        user.CloseImage();
+                        user.interactionImage.GetComponent<Image>().fillAmount = 0;
+                        rc.gb.Add(gameObject);
+                        rc.respawn_Time = 0f;
+                        gameObject.SetActive(false);
+                    }
                 }
-                if (user.interactionImage.GetComponent<Image>().fillAmount >= 1)
+                else
                 {
-                    user.CloseImage();
                     user.interactionImage.GetComponent<Image>().fillAmount = 0;
-                    rc.gb.Add(gameObject);
-                    rc.respawn_Time = 0f;
-                    gameObject.SetActive(false);
                 }
+                
             }
             else
             {
