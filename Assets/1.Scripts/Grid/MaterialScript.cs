@@ -18,6 +18,8 @@ public class MaterialScript : MonoBehaviour
     [SerializeField] private User user;
     public RespawnController rc;
 
+    bool ischeck = false;
+
 
     // Start is called before the first frame update
     public void Awake()
@@ -81,6 +83,7 @@ public class MaterialScript : MonoBehaviour
             if (dis < 2f)
             {
                 user.ShowImage();
+                ischeck = true;
                 if (Input.GetKey(KeyCode.E))
                 {
                     user.interactionImage.GetComponent<Image>().fillAmount += Time.deltaTime;
@@ -94,7 +97,15 @@ public class MaterialScript : MonoBehaviour
                     gameObject.SetActive(false);
                 }
             }
+            else
+            {
+                if (!ischeck)
+                {
+                    user.CloseImage();
+                }
+            }
         }
+        /*
         else if(kind == Kind.Rock)
         {
             float dis = Vector3.Distance(transform.position, user.transform.position);
@@ -112,7 +123,13 @@ public class MaterialScript : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+            else
+            {
+                ischeck = true;
+            }
+        
         }
+        */
     }
 
     public void OnDestroy()
