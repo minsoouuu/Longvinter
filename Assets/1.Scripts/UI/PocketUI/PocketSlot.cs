@@ -35,7 +35,8 @@ public class PocketSlot : MonoBehaviour
     {
         if (Item == null)
             return;
-        Debug.Log($"{gameObject.name}:≈¨∏Ø");
+        string commnet = $"{Item.data.itemName} ¿ª »πµÊ«ﬂ¥Ÿ ! ";
+        ToastPopUpManager.instance.Setcomment(commnet);
         Gamemanager.instance.player.im.ADItem(Item, true);
         Item = null;
     }

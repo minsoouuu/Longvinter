@@ -16,7 +16,6 @@ public class User : MonoBehaviour
         /// </summary>
         Direct
     }
-    public Inventory inven;
     public InventoryManager im;
 
     [SerializeField] private float m_moveSpeed = 2;
@@ -129,15 +128,21 @@ public class User : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (inven.invenIsOn == false)
+            if (im.IsOn == false)
             {
-                inven.transform.GetChild(0).gameObject.SetActive(true);
-                inven.invenIsOn = true;
+                im.IsOn = true;
+                for (int i = 0; i < im.transform.childCount; i++)
+                {
+                    im.transform.GetChild(i).gameObject.SetActive(true);
+                }
             }
             else
             {
-                inven.transform.GetChild(0).gameObject.SetActive(false);
-                inven.invenIsOn = false;
+                im.IsOn = false;
+                for (int i = 0; i < im.transform.childCount; i++)
+                {
+                    im.transform.GetChild(i).gameObject.SetActive(false);
+                }
             }
         }
         

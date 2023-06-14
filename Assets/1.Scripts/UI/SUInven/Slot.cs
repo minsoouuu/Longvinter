@@ -70,6 +70,8 @@ public class Slot : MonoBehaviour
     {
         if(item.data.count - 1 <= 0)
             popup.Enable(false);
+        string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
+        TwoButtonPopUpManager.instance.SetCommnet(commnet, item.Use);
 
         mgr.ADItem(item, false);
     }
@@ -79,7 +81,9 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void OnUse()
     {
-        item.Use();
+        string commnet = $"{item.data.itemName} 을 사용하시겠습니까?";
+        TwoButtonPopUpManager.instance.SetCommnet(commnet, item.Use);
+
         popup.Enable(false);
         mgr.ADItem(item, false);
     }

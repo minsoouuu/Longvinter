@@ -76,7 +76,7 @@ public class ItemDataSetController : MonoBehaviour
                     foods[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.foodData.foods[j].name);
                     foods[i].data.image = GetSpriteInAssets(EnumUtil<InvenItemType>.Parse(jsonData.foodData.foods[j].type), jsonData.foodData.foods[j].image);
                     foods[i].data.count = jsonData.foodData.foods[j].count;
-
+                    foods[i].data.stats = jsonData.foodData.foods[j].stats;
                 }
             }
         }
@@ -92,6 +92,7 @@ public class ItemDataSetController : MonoBehaviour
                     plants[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.plantData.plants[j].name);
                     plants[i].data.image = GetSpriteInAssets(EnumUtil<InvenItemType>.Parse(jsonData.plantData.plants[j].type), jsonData.plantData.plants[j].image);
                     plants[i].data.count = jsonData.plantData.plants[j].count;
+                    plants[i].data.plantName = EnumUtil<PlantName>.Parse(jsonData.plantData.plants[j].name);
                 }
             }
         }

@@ -23,13 +23,6 @@ public class TwoButtonPopUpManager : MonoBehaviour
             instance = this;
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            SetCommnet("¤¾¤·", Test);
-        }
-    }
     public void SetCommnet(string comment, UnityAction action)
     {
         twoButton = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.TwoButtonPopUp);

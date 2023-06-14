@@ -19,6 +19,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text title;
     [SerializeField] private TMPro.TMP_Text moneyText;
     [SerializeField] private GameObject countUI;
+    [SerializeField] private Button closeButton;
 
     [HideInInspector] public Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
     private List<Slot> slots = new List<Slot>();
@@ -35,6 +36,8 @@ public class InventoryManager : MonoBehaviour
             moneyText.text = money.ToString();
         }
     }
+    public bool IsOn { get; set; }
+
     void Start()
     {
         itemDic.Add(TitleType.Equipment, new List<Item>());
@@ -42,7 +45,9 @@ public class InventoryManager : MonoBehaviour
         itemDic.Add(TitleType.Food, new List<Item>());
         itemDic.Add(TitleType.Plant, new List<Item>());
 
+        IsOn = false;
         moneySendButton.onClick.AddListener(() => OnButtonDownMoneySend());
+        closeButton.onClick.AddListener(() => OnButtonDownClose());
 
         // 슬롯이 늘엇날 경우를 대비해 코드로 작성
         if (slots.Count == 0)
@@ -59,6 +64,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+        /*  테스트 용
         ItemDataSetController ic = Gamemanager.instance.itemController;
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -68,7 +74,6 @@ public class InventoryManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            /*
             Debug.Log("재료 아이템 추가");
             int rand = Random.Range(0, ic.materilas.Count);
             ADItem(isAdd: true, item: ic.materilas[rand]);
@@ -77,7 +82,6 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("장비 아이템 추가");
             int rand = Random.Range(0, ic.equipments.Count);
             ADItem(isAdd: false, item: ic.equipments[rand]);
-            */
 
             MakingController mc = FindObjectOfType<MakingController>();
             //mc.Ison = !mc.Ison;
@@ -95,6 +99,7 @@ public class InventoryManager : MonoBehaviour
             int rand = Random.Range(0, ic.plants.Count);
             ADItem(isAdd: true, item:ic.plants[rand]);
         }
+        */
     }
 
     /// <summary>
@@ -274,6 +279,15 @@ public class InventoryManager : MonoBehaviour
     void OnButtonDownMoneySend()
     {
         countUI.gameObject.SetActive(true);
+    }
+
+    void OnButtonDownClose()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+            IsOn = false;
+        }
     }
 
     TitleType GetTitleType(Item item)

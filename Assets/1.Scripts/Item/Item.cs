@@ -8,9 +8,11 @@ public struct ItemData
     public int serial;
     public int count;
     public string type;
+    public int stats;
     public Sprite image;
     public ItemName itemName;
     public InvenItemType itemType;
+    public PlantName plantName;
 }
 
 public abstract class Item : MonoBehaviour

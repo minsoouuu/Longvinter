@@ -7,14 +7,11 @@ using System;
 public class ObjectPoolSystem : MonoBehaviour
 {
     [SerializeField] private List<Merchant> slotPrefabs;
-    [SerializeField] private List<Item> itemPrefabs;
-    [SerializeField] private List<House> housePrefabs;
-    [SerializeField] private List<Monster> monsterPrefabs;
 
     private Dictionary<ObjectType, Queue<Merchant>> objectPools = new Dictionary<ObjectType, Queue<Merchant>>();
     private Dictionary<ItemName, Queue<Item>> itemPools = new Dictionary<ItemName, Queue<Item>>();
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
-    private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
+    private Dictionary<HouseType, Queue<PlaceableObject>> housePools = new Dictionary<HouseType, Queue<PlaceableObject>>();
     private Dictionary<PopType, Queue<PopUp>> popPools = new Dictionary<PopType, Queue<PopUp>>();
     private Queue<FishingController> fishingPools = new Queue<FishingController>();
     private Queue<PocketController> pocketPools = new Queue<PocketController>();
@@ -50,7 +47,7 @@ public class ObjectPoolSystem : MonoBehaviour
                         monsterPools[(MonsterType)(j)] = new Queue<Monster>();
                         break;
                     case 3:
-                        housePools[(HouseType)(j)] = new Queue<House>();
+                        housePools[(HouseType)(j)] = new Queue<PlaceableObject>();
                         break;
                     case 4:
                         popPools[(PopType)(j)] = new Queue<PopUp>();
@@ -75,7 +72,7 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.transform.SetParent(transform);
         monsterPools[type].Enqueue(obj);
     }
-    public void ReturnObject(HouseType type, House obj)
+    public void ReturnObject(HouseType type, PlaceableObject obj)
     {
         obj.gameObject.SetActive(false);
         housePools[type].Enqueue(obj);
@@ -236,9 +233,9 @@ public class ObjectPoolSystem : MonoBehaviour
         }
         return item;
     }
-    public House GetObjectOfObjectPooling(HouseType type)
+    public PlaceableObject GetObjectOfObjectPooling(HouseType type)
     {
-        House obj = null;
+        PlaceableObject obj = null;
 
         if (housePools[type].Count != 0)
         {
@@ -246,6 +243,7 @@ public class ObjectPoolSystem : MonoBehaviour
         }
         else
         {
+            string path = $"House/{type}";
         }
         obj.gameObject.SetActive(true);
         return obj;

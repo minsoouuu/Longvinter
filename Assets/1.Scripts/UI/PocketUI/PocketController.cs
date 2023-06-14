@@ -14,9 +14,8 @@ public class PocketController : MonoBehaviour
     private List<Item> items = new List<Item>();
     private Coroutine coroutine;
 
-    private bool isNear = false;
     private bool isOpened = false;
-
+    private bool isOpen = false;
     private void Start()
     {
         escButton.onClick.AddListener(() => OnButtonDownESC());
@@ -42,20 +41,26 @@ public class PocketController : MonoBehaviour
 
         if (dis <= 1f)
         {
-            isNear = true;
-            interUI.gameObject.SetActive(true);
-
+            if (isOpen != true)
+            {
+                interUI.gameObject.SetActive(true);
+            }
             if (Input.GetKeyDown(KeyCode.F))
             {
+                isOpen = true;
                 ShowItems();
                 pocketUI.SetActive(true);
+                interUI.SetActive(false);
             }
         }
         else
         {
-            isNear = false;
-            interUI.SetActive(false);
             pocketUI.SetActive(false);
+            isOpen = false;
+            if (interUI.activeInHierarchy)
+            {
+                interUI.SetActive(false);
+            }
         }
 
         if (pocketUI.activeInHierarchy)
