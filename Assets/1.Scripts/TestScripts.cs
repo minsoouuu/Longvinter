@@ -13,7 +13,7 @@ public class TestScripts : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 int rand = Random.Range(0, Gamemanager.instance.itemController.equipments.Count);
-                po.AddItem(Gamemanager.instance.itemController.equipments[rand]);
+                po.AddItem(Gamemanager.instance.itemController.plants[rand]);
             }
         }
     }

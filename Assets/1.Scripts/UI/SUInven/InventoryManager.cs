@@ -185,11 +185,14 @@ public class InventoryManager : MonoBehaviour
             if (!isAddCheck)
             {
                 // 팝업 (인벤토리가 부족하여 습득하지 못했습니다.)
-                Debug.Log("인벤토리 공간이 부족으로 습득실패");
+                OneButtonPopUpManager.instance.SetComment("인벤토리가 부족하여 습득하지 못했습니다.");
                 return;
             }
 
             itemDic[key].Add(item);
+
+            string commnet = $"{item.data.itemName} 을 획득했다 !";
+            ToastPopUpManager.instance.Setcomment(commnet);
         }
         else
         {
@@ -229,6 +232,22 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+        
+    }
+    public bool CheckEmpty(Item item)
+    {
+        TitleType key = GetTitleType(item);
+
+        bool isAddCheck = false;
+        foreach (var slot in slots)
+        {
+            if (slot.item == null || itemDic[key].Contains(item))
+            {
+                isAddCheck = true;
+                break;
+            }
+        }
+        return isAddCheck;
     }
 
     /// <summary>

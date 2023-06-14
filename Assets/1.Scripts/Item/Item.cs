@@ -12,7 +12,6 @@ public struct ItemData
     public Sprite image;
     public ItemName itemName;
     public InvenItemType itemType;
-    public PlantName plantName;
 }
 
 public abstract class Item : MonoBehaviour

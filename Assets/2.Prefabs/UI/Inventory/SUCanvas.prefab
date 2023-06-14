@@ -63,6 +63,7 @@ MonoBehaviour:
   title: {fileID: 3822040628517633339}
   moneyText: {fileID: 1984540718603280069}
   countUI: {fileID: 1034588360406756048}
+  closeButton: {fileID: 1814815514050457811}
 --- !u!1 &1277139628188501825
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,9 +397,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2960198726777548248}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

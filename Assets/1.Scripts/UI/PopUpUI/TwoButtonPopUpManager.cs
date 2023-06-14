@@ -25,14 +25,11 @@ public class TwoButtonPopUpManager : MonoBehaviour
     }
     public void SetCommnet(string comment, UnityAction action)
     {
+        Debug.Log("TwoButton");
         twoButton = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.TwoButtonPopUp);
         twoButton.transform.SetParent(popParent);
         twoButton.GetComponent<RectTransform>().anchoredPosition = myPos;
         twoButton.GetComponent<TwoButtonPopUp>().Action = action;
         twoButton.SetComment(comment);
-    }
-    void Test()
-    {
-        Debug.Log("¾×¼Ç");
     }
 }

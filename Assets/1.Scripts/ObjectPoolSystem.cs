@@ -11,7 +11,7 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<ObjectType, Queue<Merchant>> objectPools = new Dictionary<ObjectType, Queue<Merchant>>();
     private Dictionary<ItemName, Queue<Item>> itemPools = new Dictionary<ItemName, Queue<Item>>();
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
-    private Dictionary<HouseType, Queue<PlaceableObject>> housePools = new Dictionary<HouseType, Queue<PlaceableObject>>();
+    private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
     private Dictionary<PopType, Queue<PopUp>> popPools = new Dictionary<PopType, Queue<PopUp>>();
     private Queue<FishingController> fishingPools = new Queue<FishingController>();
     private Queue<PocketController> pocketPools = new Queue<PocketController>();
@@ -47,7 +47,7 @@ public class ObjectPoolSystem : MonoBehaviour
                         monsterPools[(MonsterType)(j)] = new Queue<Monster>();
                         break;
                     case 3:
-                        housePools[(HouseType)(j)] = new Queue<PlaceableObject>();
+                        housePools[(HouseType)(j)] = new Queue<House>();
                         break;
                     case 4:
                         popPools[(PopType)(j)] = new Queue<PopUp>();
@@ -72,11 +72,7 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.transform.SetParent(transform);
         monsterPools[type].Enqueue(obj);
     }
-    public void ReturnObject(HouseType type, PlaceableObject obj)
-    {
-        obj.gameObject.SetActive(false);
-        housePools[type].Enqueue(obj);
-    }
+ 
     public void ReturnObject(PopType type, PopUp obj)
     {
         obj.gameObject.SetActive(false);
@@ -232,20 +228,5 @@ public class ObjectPoolSystem : MonoBehaviour
             }
         }
         return item;
-    }
-    public PlaceableObject GetObjectOfObjectPooling(HouseType type)
-    {
-        PlaceableObject obj = null;
-
-        if (housePools[type].Count != 0)
-        {
-            obj = housePools[type].Dequeue();
-        }
-        else
-        {
-            string path = $"House/{type}";
-        }
-        obj.gameObject.SetActive(true);
-        return obj;
     }
 }

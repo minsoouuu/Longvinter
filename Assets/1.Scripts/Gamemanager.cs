@@ -12,6 +12,7 @@ public  class Gamemanager : MonoBehaviour
     public ObjectPoolSystem objectPool;
     public ItemDataSetController itemController;
     public FishingManager fishing;
+    public Transform parentDropItem;
     void Awake()
     {
         if (instance != null)

@@ -106,23 +106,7 @@ public enum ItemName
 
     #endregion
 }
-public enum PlantName
-{
-    FenceGate,
-    Bench,
-    Container,
-    Firepit,
-    Turret,
-    VillageLampPost,
-    WoodStool,
-    Kamiina,
-    Sauna,
-    Tent,
-    TrimmedBush,
-    Vendor,
-    LightBulb,
-    Placeholder,
-}
+
 
 public enum MonsterType
 {

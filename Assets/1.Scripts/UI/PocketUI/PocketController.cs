@@ -109,6 +109,7 @@ public class PocketController : MonoBehaviour
         }
         items.Clear();
         isOpened = false;
+        isOpen = false;
         pocketUI.SetActive(false);
         interUI.SetActive(false);
         Gamemanager.instance.objectPool.ReturnObject(this);

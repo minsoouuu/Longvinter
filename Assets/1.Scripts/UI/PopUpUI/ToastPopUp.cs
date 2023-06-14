@@ -30,7 +30,6 @@ public class ToastPopUp : PopUp
         commnetText.color = new Color(0, 0, 0, 1);
         popUprect.anchoredPosition = new Vector2(200, -50);
         ToastPopUpManager.instance.popUps.Remove(this);
-        Debug.Log(ToastPopUpManager.instance.popUps.Count);
         if (coroutine != null)
         {
             StopCoroutine(coroutine);

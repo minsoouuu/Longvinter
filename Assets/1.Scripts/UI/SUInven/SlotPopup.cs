@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlotPopup : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Item item = null;
     void Start()
     {
         Enable(false);
@@ -13,9 +13,17 @@ public class SlotPopup : MonoBehaviour
     /// <summary>
     /// 팝업 끄고 켜기
     /// </summary>
-    public void Enable(bool isShow)
+    public void Enable(bool isShow,Item item = null)
     {
         gameObject.SetActive(isShow);
+        if (isShow)
+        {
+            this.item = item;
+        }
+        else
+        {
+            item = null;
+        }
     }
 
     /// <summary>
@@ -31,6 +39,6 @@ public class SlotPopup : MonoBehaviour
     /// </summary>
     public void OnUse()
     {
-
+        
     }
 }

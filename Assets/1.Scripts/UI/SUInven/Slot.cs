@@ -70,10 +70,20 @@ public class Slot : MonoBehaviour
     {
         if(item.data.count - 1 <= 0)
             popup.Enable(false);
-        string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
-        TwoButtonPopUpManager.instance.SetCommnet(commnet, item.Use);
 
+        string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
+        TwoButtonPopUpManager.instance.SetCommnet(commnet, ItemDelete);
+    }
+
+    void ItemDelete()
+    {
+        PocketController po = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
+        po.AddItem(item);
+        po.transform.SetParent(Gamemanager.instance.parentDropItem);
+        po.transform.position = Gamemanager.instance.player.transform.position;
         mgr.ADItem(item, false);
+
+        item = null;
     }
 
     /// <summary>
@@ -110,7 +120,7 @@ public class Slot : MonoBehaviour
                 popup.Enable(true);
             }
             */
-            popup.Enable(true);
+            popup.Enable(true,item);
         }
     }
 }

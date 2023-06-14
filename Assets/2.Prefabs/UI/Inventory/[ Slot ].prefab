@@ -861,9 +861,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4871461482499168004, guid: 941b7a75763fb924f8d1b2ca2c6c0ca5, type: 3}
-        m_TargetAssemblyTypeName: ItemClick, Assembly-CSharp
-        m_MethodName: ItemUse
+      - m_Target: {fileID: 460475992541508085}
+        m_TargetAssemblyTypeName: Slot, Assembly-CSharp
+        m_MethodName: OnUse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
