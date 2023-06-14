@@ -7,7 +7,6 @@ public struct MonsterData
 {
     public float speed;
     public float hp;
-    public Vector3 direction;
     public MonsterType monsterType;
 }
 
@@ -21,8 +20,9 @@ public abstract class Monster : MonoBehaviour
         IsDead
     }
 
-    public PocketController pocketcontrol;
     public Vector3 pos;
+    public List<Transform> wayPoints;
+    public int nextIdx;
     public MonsterData monsterData = new MonsterData();
     private MonsterAction monsterAction = new MonsterAction();
     private Vector3 destination;
@@ -32,6 +32,7 @@ public abstract class Monster : MonoBehaviour
 
     [SerializeField] protected NavMeshAgent nav;
     [SerializeField] protected Animator anim;
+    [SerializeField] public Transform dropItemGroup;
 
     [SerializeField] private float viewAngle;
     [SerializeField] private float viewDistance; 
@@ -40,7 +41,15 @@ public abstract class Monster : MonoBehaviour
     public float HP
     {
         get { return curHp; }
-        set { curHp = value; }
+        set { 
+            curHp = value;
+            if (curHp <= 0) 
+            {
+                MonsterDie();
+            }
+
+            }
+        
     }
 
     void Awake()
@@ -53,21 +62,35 @@ public abstract class Monster : MonoBehaviour
         thePlayer = FindObjectOfType<User>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        nav.autoBraking = false;
         curHp = monsterData.hp;
         monsterAction = MonsterAction.IsIdle;
+
+        var group = GameObject.Find("WayPointGroup");
+
+        if (group != null)
+        {
+            group.GetComponentsInChildren<Transform>(wayPoints);
+            wayPoints.RemoveAt(0);
+        }
+
+        MoveWayPoint();
+        Move();
     }
 
     protected void Update()
     {
-        if (monsterAction != MonsterAction.IsDead)
+        if (nav.remainingDistance <= 0.5f && monsterAction != MonsterAction.IsDead) 
         {
+            Walk();
             Move();
             View();
         }
-        if (View())
+        if (View()) 
         {
             Runaway(thePlayer.transform.position);
         }
+        Test();
     }
 
     public abstract void Initialize();
@@ -103,49 +126,33 @@ public abstract class Monster : MonoBehaviour
         return false;
     }
 
-    IEnumerator Roaming()
-    {
-        destination.x = Random.Range(-3f, 3f);
-        destination.z = Random.Range(-3f, 3f);
-        
-        Walk();
-        while (true)
-        {
-            nav.SetDestination(transform.position + destination * 5f);
 
-            float distance = Vector3.Distance(transform.position, destination);
-            if (distance <= 0.1f)
-            {
-                monsterAction = MonsterAction.IsIdle;
-                yield return new WaitForSeconds(Random.Range(1f, 3f));
-                ReSet();
-            }
-            yield return null;
-        }
-    }
 
     protected virtual void Move()
     {
-        StartCoroutine(Roaming());
-        /*
-        if (monsterAction == MonsterAction.IsWalking || monsterAction == MonsterAction.IsRunning) 
+        if (monsterAction == MonsterAction.IsWalking)
         {
-            nav.SetDestination(transform.position + destination * 5f);
-            // rigid.MovePosition(transform.position + transform.forward * monsterData.applySpeed * Time.deltaTime);
+            nextIdx = Random.Range(0, wayPoints.Count);
+            MoveWayPoint();
+            // nav.SetDestination(transform.position + destination * 5f);}
         }
-        */
     }
-    
-    protected virtual void ReSet() 
+
+    private void MoveWayPoint()
     {
-        monsterAction = MonsterAction.IsIdle;
-        nav.ResetPath();
-        destination.Set(Random.Range(-0.2f, 0.2f), 0f, Random.Range(-0.5f, 1f));
+        if (nav.isPathStale)
+        {
+            return;
+        }
+
+        nav.destination = wayPoints[nextIdx].position;
         Walk();
+        nav.isStopped = false;
     }
 
     protected void Walk() 
     {
+        nextIdx = Random.Range(0, wayPoints.Count);
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         anim.SetTrigger("Walking");
@@ -183,36 +190,27 @@ public abstract class Monster : MonoBehaviour
         nav.enabled = false;
         monsterAction = MonsterAction.IsDead;
         anim.SetTrigger("Dead");
+        DropItem();
 
         HP = monsterData.hp;
         Gamemanager.instance.objectPool.ReturnObject(monsterData.monsterType, this);
         MonsterSpawnController._instance.monsterCount--;
-        DropItem();
+       
     }
 
     public virtual void DropItem()     
     {
-        /*
-        switch (monsterData.monsterType)
+        
+    }
+
+
+    protected void Test()
+    {
+        if (Input.GetKeyDown(KeyCode.F7))
         {
-            case MonsterType.Colobus:
-                pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[0]);
-                break;
-            case MonsterType.Gecko:
-
-                break;
-            case MonsterType.Rat:
-
-                break;
-            case MonsterType.Sparrow:
-
-                break;
-            case MonsterType.Taipan:
-
-                break;
-
+            Debug.Log(curHp);
+            HP -= 99999;
         }
-        */
     }
 
 }

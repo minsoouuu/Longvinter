@@ -13,6 +13,11 @@ public class Gecko : Monster
 
     public override void DropItem()
     {
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[3]);
+        PocketController pocket = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
+        pocket.AddItem(Gamemanager.instance.itemController.foods[3]);
+
+        pocket.transform.position = transform.position;
+        pocket.transform.SetParent(dropItemGroup);
     }
+
 }

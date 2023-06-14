@@ -14,6 +14,10 @@ public class Taipan : Monster
 
     public override void DropItem()
     {
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[5]);
+        PocketController pocket = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(4);
+        pocket.AddItem(Gamemanager.instance.itemController.materilas[5]);
+
+        pocket.transform.position = transform.position;
+        pocket.transform.SetParent(dropItemGroup);
     }
 }

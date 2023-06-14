@@ -13,10 +13,14 @@ public class Sparrow : Monster
 
     public override void DropItem()
     {
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[4]);
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[5]);
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[3]);
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[4]);
+        PocketController pocket = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(3);
+        pocket.AddItem(Gamemanager.instance.itemController.foods[4]);
+        pocket.AddItem(Gamemanager.instance.itemController.foods[5]);
+        pocket.AddItem(Gamemanager.instance.itemController.materilas[3]);
+        pocket.AddItem(Gamemanager.instance.itemController.materilas[4]);
+
+        pocket.transform.position = transform.position;
+        pocket.transform.SetParent(dropItemGroup);
     }
 
 }

@@ -13,8 +13,12 @@ public class Rat : Monster
 
     public override void DropItem()
     {
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[0]);
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[1]);
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[0]);
+        PocketController pocket = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(2);
+        pocket.AddItem(Gamemanager.instance.itemController.foods[0]);
+        pocket.AddItem(Gamemanager.instance.itemController.foods[1]);
+        pocket.AddItem(Gamemanager.instance.itemController.materilas[0]);
+
+        pocket.transform.position = transform.position;
+        pocket.transform.SetParent(dropItemGroup);
     }
 }

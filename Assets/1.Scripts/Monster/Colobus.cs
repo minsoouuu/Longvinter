@@ -14,9 +14,12 @@ public class Colobus : Monster
 
     public override void DropItem()
     {
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.foods[2]);
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[1]);
-        pocketcontrol.AddItem(Gamemanager.instance.itemController.materilas[2]);
-    }
+        PocketController pocket = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(1);
+        pocket.AddItem(Gamemanager.instance.itemController.foods[2]);
+        pocket.AddItem(Gamemanager.instance.itemController.materilas[1]);
+        pocket.AddItem(Gamemanager.instance.itemController.materilas[2]);
 
+        pocket.transform.position = transform.position;
+        pocket.transform.SetParent(dropItemGroup);
+    }
 }
