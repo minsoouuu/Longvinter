@@ -72,6 +72,7 @@ public class ObjectPoolSystem : MonoBehaviour
     public void ReturnObject(MonsterType type, Monster obj)
     {
         obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
         monsterPools[type].Enqueue(obj);
     }
     public void ReturnObject(HouseType type, House obj)

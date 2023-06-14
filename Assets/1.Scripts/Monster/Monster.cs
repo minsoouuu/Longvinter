@@ -9,22 +9,22 @@ public struct MonsterData
     public float hp;
     public MonsterType monsterType;
 }
-
+public enum MonsterAction
+{
+    IsIdle,
+    IsWalking,
+    IsRunning,
+    IsDead
+}
 public abstract class Monster : MonoBehaviour
 {
-    protected enum MonsterAction
-    {
-        IsIdle,
-        IsWalking,
-        IsRunning,
-        IsDead
-    }
+   
 
     public Vector3 pos;
     public List<Transform> wayPoints;
     public int nextIdx;
     public MonsterData monsterData = new MonsterData();
-    private MonsterAction monsterAction = new MonsterAction();
+    [HideInInspector] public MonsterAction monsterAction = new MonsterAction();
     private Vector3 destination;
     private User thePlayer;
     private float curHp = 0;
@@ -41,17 +41,26 @@ public abstract class Monster : MonoBehaviour
     public float HP
     {
         get { return curHp; }
-        set { 
+        set
+        {
             curHp = value;
-            if (curHp <= 0) 
+
+            if (curHp <= 0)
             {
                 MonsterDie();
             }
-
-            }
+        }
         
     }
-
+    private void OnEnable()
+    {
+        nav.isStopped = false;
+        nav.destination = wayPoints[nextIdx].position;
+    }
+    private void OnDisable()
+    {
+        nav.isStopped = true;
+    }
     void Awake()
     {
         Initialize();
@@ -59,7 +68,7 @@ public abstract class Monster : MonoBehaviour
 
     private void Start()
     {
-        thePlayer = FindObjectOfType<User>();
+        thePlayer = Gamemanager.instance.player;
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         nav.autoBraking = false;
@@ -147,7 +156,7 @@ public abstract class Monster : MonoBehaviour
 
         nav.destination = wayPoints[nextIdx].position;
         Walk();
-        nav.isStopped = false;
+        //nav.isStopped = false;
     }
 
     protected void Walk() 

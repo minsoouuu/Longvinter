@@ -37,6 +37,12 @@ public class MonsterSpawnController : MonoBehaviour
         Monster monster = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(type);
         monster.transform.SetParent(monsterGroup);
         monster.transform.position = new Vector3(spawnPoints[ranNum].position.x, spawnPoints[ranNum].position.y, spawnPoints[ranNum].position.z);
+
+        if (monster.monsterAction != MonsterAction.IsWalking)
+        {
+            monster.monsterAction = MonsterAction.IsWalking;
+        }
+
         monsterCount++;
     }
 }
