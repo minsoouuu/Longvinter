@@ -5,8 +5,6 @@ using UnityEngine;
 public class Merchant_Object : MonoBehaviour
 {
     [SerializeField] private GameObject merchant;
-    [SerializeField] private GameObject inventory;
-    [SerializeField] private User user;
 
     float dis;
     private void Update()
@@ -16,15 +14,15 @@ public class Merchant_Object : MonoBehaviour
 
     public void Interaction_Merchant()
     {
-        dis = Vector3.Distance(this.transform.position, user.transform.position);
+        dis = Vector3.Distance(this.transform.position, Gamemanager.instance.player.transform.position);
         if (dis < 2f)
         {
             if (Input.GetKey(KeyCode.Space))
             {
                 merchant.SetActive(true);
-                inventory.SetActive(true);
-                user.GetComponent<User>().enabled = false;
-                user.GetComponent<Animator>().enabled = false;
+                Gamemanager.instance.player.im.gameObject.SetActive(true);
+                Gamemanager.instance.player.GetComponent<User>().enabled = false;
+                Gamemanager.instance.player.GetComponent<Animator>().enabled = false;
             }
         }
     }

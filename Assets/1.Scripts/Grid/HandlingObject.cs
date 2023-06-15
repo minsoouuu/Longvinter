@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class HandlingObject : MonoBehaviour
 {
+    public enum PlantKind
+    {
+        House,
+        Fence
+    }
     Vector3 offset;
     public bool PlacedH { get; private set; }
+    public PlantKind pk;
 
     private void Start()
     {
@@ -22,7 +28,7 @@ public class HandlingObject : MonoBehaviour
     private void OnMouseDown()
     {
         if (PlacedH)
-        {
+        {   
             this.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
         }
         else
