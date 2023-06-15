@@ -84,6 +84,7 @@ public enum ItemName
     CookedPerch,
     CookedSalmonShark,
     CookedTuna,
+    Waffle,
 
 
     #endregion

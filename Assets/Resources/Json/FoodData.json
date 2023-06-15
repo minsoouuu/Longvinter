@@ -38,7 +38,7 @@
     },
     {
       "name": "HeatPack",
-      "image": "T_IconH EatPack",
+      "image": "T_IconHeatPack",
       "type": "Foods",
       "price": 25,
       "serial": 4,
@@ -56,7 +56,7 @@
     },
     {
       "name": "Chanterelle",
-      "image": "T_IconChanterelle",
+      "image": "T_IconChanterelles",
       "type": "Foods",
       "price": 25,
       "serial": 6,
@@ -114,6 +114,15 @@
       "type": "Foods",
       "price": 30,
       "serial": 12,
+      "stats": 30,
+      "count": 1
+    },
+    {
+      "name": "Waffle",
+      "image": "Waffle",
+      "type": "Foods",
+      "price": 30,
+      "serial": 13,
       "stats": 30,
       "count": 1
     }

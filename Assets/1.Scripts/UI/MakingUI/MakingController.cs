@@ -22,7 +22,6 @@ public class MakingController : MonoBehaviour
     {
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
         button.onClick.AddListener(() => OnButtonDownComplete());
-        Debug.Log(items.Count);
     }
     private void Update()
     {
@@ -46,8 +45,8 @@ public class MakingController : MonoBehaviour
                 {
                     if (materialSlot[i].ItemData != null)
                     {
-                        materialSlot[i].ItemData.data.count++;
-                        Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
+                        Item item = Gamemanager.instance.itemController.GetItem(materialSlot[i].ItemData.data.itemName);
+                        Gamemanager.instance.player.im.ADItem(item, true);
                     }
                 }
                 SlotDataReset();
@@ -61,16 +60,18 @@ public class MakingController : MonoBehaviour
         if (items.Count >= 3)
             return;
 
+        Item newitem = Gamemanager.instance.itemController.GetItem(item.data.itemName);
         for (int i = 0; i < materialSlot.Length; i++)
         {
             if (materialSlot[i].ItemData == null)
             {
-                materialSlot[i].ItemData = item;
-                items.Add(item.data.itemName);
-                Gamemanager.instance.player.im.ADItem(item, false);
+                materialSlot[i].ItemData = newitem;
+                items.Add(newitem.data.itemName);
+                Gamemanager.instance.player.im.ADItem(newitem, false);
                 break;
             }
         }
+
         if (items.Count >= 2)
         {
             Debug.Log("¿Ï¼ºÇ°");
@@ -115,7 +116,7 @@ public class MakingController : MonoBehaviour
         {
             if (materialSlot[i].ItemData != null)
             {
-                Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, false);
+                //Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, false);
             }
         }
         SlotDataReset();

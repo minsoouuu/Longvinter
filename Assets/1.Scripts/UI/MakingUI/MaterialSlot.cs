@@ -45,14 +45,15 @@ public class MaterialSlot : MonoBehaviour
         if (makeController.items.Contains(ItemData.data.itemName))
         {
             makeController.items.Remove(ItemData.data.itemName);
-            item.data.count++;
-            Gamemanager.instance.player.im.ADItem(item, true);
+            Item newitem = Gamemanager.instance.itemController.GetItem(ItemData.data.itemName);
+            Gamemanager.instance.player.im.ADItem(newitem, true);
 
             ItemData = null;
             if (makeController.completeSlot.ItemData != null)
             {
                 makeController.completeSlot.ItemData = null;
             }
+            Debug.Log(makeController.items.Count);
         }
     }
 }
