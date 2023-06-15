@@ -25,7 +25,7 @@ public class FishingManager : MonoBehaviour
                 IsOn = false;
                 FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
                 fishing.transform.SetParent(parent);
-                fishing.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                //fishing.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             }
         }
     }

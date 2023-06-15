@@ -24,7 +24,7 @@ public class FishingController : MonoBehaviour
     {
         isOn = true;
         handleRT.anchoredPosition = new Vector2(-20, 0);
-        backRT.anchoredPosition = Vector2.zero;
+        //backRT.anchoredPosition = Vector2.zero;
         comPletePoint.anchoredPosition = new Vector2(UnityEngine.Random.Range(-100,100), 0);
     }
     private void Update()
