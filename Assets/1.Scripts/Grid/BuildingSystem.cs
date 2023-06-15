@@ -13,7 +13,6 @@ public class BuildingSystem : MonoBehaviour
     public TileBase takenTile;
     public TileBase resultTile;
     public TileBase originalTile;
-    public User player;
     public List<MaterialScript> tree_rock;
 
     public HandlingObject[] prefab;
@@ -46,7 +45,6 @@ public class BuildingSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = player.GetComponent<User>();
         PlantTree();
     }
 
@@ -97,7 +95,7 @@ public class BuildingSystem : MonoBehaviour
     // Prefab »ý¼º
     public void InitWithObject(HandlingObject building)
     {
-        Vector3 playerpos = new Vector3(player.transform.position.x, 0, player.transform.position.z + 2f);
+        Vector3 playerpos = new Vector3(Gamemanager.instance.player.transform.position.x, 0, Gamemanager.instance.player.transform.position.z + 2f);
         Vector3 pos = SnapCoordinateToGrid(playerpos);
 
         HandlingObject obj = Instantiate(building, pos, Quaternion.identity);

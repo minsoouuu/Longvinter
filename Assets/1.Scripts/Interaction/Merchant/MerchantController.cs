@@ -6,6 +6,13 @@ using System.Linq;
 
 public class MerchantController : MonoBehaviour
 {
+    public enum MerchantKind
+    {
+        Equipment,
+        Material,
+        Food,
+        Plant
+    }
     [SerializeField] private Merchant b_itemlist;
     [SerializeField] private Transform b_parent;
     [SerializeField] private Merchant s_itemlist;
@@ -14,8 +21,9 @@ public class MerchantController : MonoBehaviour
     [SerializeField] private GameObject merchant;
     [SerializeField] private User player;
     [SerializeField] private Toggle[] tg;
+    [SerializeField] private MerchantKind mKind;
 
-    List<Item> equipments_list = new List<Item>();
+    List<Item> item_list = new List<Item>();
     List<Item> merchant_blist = new List<Item>();
     [HideInInspector] public List<Item> merchant_slist = new List<Item>();
     List<Item> Inventory_list = new List<Item>();
@@ -28,69 +36,106 @@ public class MerchantController : MonoBehaviour
     private void OnEnable()
     {
         CreateMerchant_b_ItemList();
+        
     }
+
+    // 상인목록 설정
     // Start is called before the first frame update
     void Awake()
     {
-        Debug.Log("데이터 불러오기");
-        if (Gamemanager.instance.itemController.equipments.Count != 0)
+        switch (mKind)
         {
-            for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
-            {
-                equipments_list.Add(Gamemanager.instance.itemController.equipments[i]);
-            }
+            case MerchantKind.Equipment:
+                if (Gamemanager.instance.itemController.equipments.Count != 0)
+                {
+                    for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
+                    {
+                        item_list.Add(Gamemanager.instance.itemController.equipments[i]);
+                    }
+                }
+                break;
+            case MerchantKind.Material:
+                if (Gamemanager.instance.itemController.materilas.Count != 0)
+                {
+                    for (int i = 0; i < Gamemanager.instance.itemController.materilas.Count; i++)
+                    {
+                        item_list.Add(Gamemanager.instance.itemController.materilas[i]);
+                    }
+                }
+                break;
+            case MerchantKind.Food:
+                if (Gamemanager.instance.itemController.foods.Count != 0)
+                {
+                    for (int i = 0; i < Gamemanager.instance.itemController.foods.Count; i++)
+                    {
+                        item_list.Add(Gamemanager.instance.itemController.foods[i]);
+                    }
+                }
+                break;
+            case MerchantKind.Plant:
+                if (Gamemanager.instance.itemController.plants.Count != 0)
+                {
+                    for (int i = 0; i < Gamemanager.instance.itemController.plants.Count; i++)
+                    {
+                        item_list.Add(Gamemanager.instance.itemController.plants[i]);
+                    }
+                }
+                break;
         }
-        else
-        {
-            Debug.Log("데이터 없음");
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        num = SetToggle();
         Close_Merchant();
-        CreateMerchant_s_ItemList(num);
+        CreateMerchant_s_ItemList(Gamemanager.instance.player.im.curToggle);
     }
 
+    // 상인 판매 목록 생성
     void CreateMerchant_b_ItemList()
     {
-        for (int i = 0; i < equipments_list.Count; i++)
+        for (int i = 0; i < item_list.Count; i++)
         {
-            if (merchant_blist.Contains(equipments_list[i]))
+            // 중복 검사
+            if (merchant_blist.Contains(item_list[i]))
             {
                 continue;
             }
             else
             {
                 Merchant slot = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(myTypeB, true);
-
                 slot.transform.SetParent(b_parent);
-                slot.Setdata(equipments_list[i]);
+                slot.Setdata(item_list[i]);
                 slot.mc = this;
                 merchant_blist.Add(slot.itemdata);
             }
         }
     }
-    public void CreateMerchant_s_ItemList(int num)
+
+    // 인벤토리에 있는 아이템 판매 목록 생성
+    public void CreateMerchant_s_ItemList(Toggle toggle)
     {
         List<Item> list = new List<Item>();
-        switch (num)
+        toggle = Gamemanager.instance.player.im.curToggle;
+        if(toggle == Gamemanager.instance.player.im.toggles[0])
         {
-            case 0:
-                list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Equipment].ToList();
-                break;
-            case 1:
-                list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Material].ToList();
-                break;
-            case 2:
-                list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Food].ToList();
-                break;
-            case 3:
-                list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Plant].ToList();
-                break;
+            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Equipment].ToList();
         }
+        else if(toggle == Gamemanager.instance.player.im.toggles[1])
+        {
+            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Material].ToList();
+        }
+        else if (toggle == Gamemanager.instance.player.im.toggles[2])
+        {
+
+            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Food].ToList();
+        }
+        else
+        {
+            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Plant].ToList();
+        }
+
         for (int i = 0; i < list.Count; i++)
         {
             if (merchant_slist.Contains(list[i]))
@@ -105,6 +150,7 @@ public class MerchantController : MonoBehaviour
                 slot.mc = this;
                 merchant_slist.Add(slot.itemdata);
                 slot_list.Add(slot);
+
             }
         }
     }
@@ -117,34 +163,12 @@ public class MerchantController : MonoBehaviour
         }
     }
 
-    int SetToggle()
-    {
-        int index = 0;
-        for (int i = 0; i < tg.Length; i++)
-        {
-            if (tg[i].isOn)
-            {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
-    public void OnclickToggle(Toggle toggle)
-    {
-        if (toggle.isOn)
-        {
-            CreateMerchant_s_ItemList(num);
-        }
-        
-    }
-
     public void HideSlot(Merchant slot)
     {
         Gamemanager.instance.objectPool.ReturnObject(myTypeS, slot);
     }
 
+    // 상인 닫기 버튼 이벤트
     public void onClick_CloseBtn()
     {
         merchant.SetActive(false);
@@ -152,6 +176,7 @@ public class MerchantController : MonoBehaviour
         player.GetComponent<Animator>().enabled = true;
     }
 
+    // 상인 닫기 이벤트 (esc 활용)
     public void Close_Merchant()
     {
         if (Input.GetKey(KeyCode.Escape))
