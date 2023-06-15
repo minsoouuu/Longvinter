@@ -88,6 +88,7 @@ public class PocketController : MonoBehaviour
     }
     void OnButtonDownESC()
     {
+        isOpen = false;
         for (int i = 0; i < pocketSlots.Count; i++)
         {
             if (pocketSlots[i].Item != null)

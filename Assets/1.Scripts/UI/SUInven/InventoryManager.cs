@@ -14,17 +14,18 @@ public class InventoryManager : MonoBehaviour
     }
 
     [SerializeField] private Transform slotParent;
-    [SerializeField] private Toggle[] toggles;
+    [HideInInspector] public Toggle[] toggles;
     [SerializeField] private Button moneySendButton;
     [SerializeField] private TMPro.TMP_Text title;
     [SerializeField] private TMPro.TMP_Text moneyText;
     [SerializeField] private GameObject countUI;
     [SerializeField] private Button closeButton;
 
+    [HideInInspector] public MakingController mc = null;
     [HideInInspector] public Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
     private List<Slot> slots = new List<Slot>();
 
-    private Toggle curToggle = null;
+    [HideInInspector] public Toggle curToggle = null;
 
     int money = 0;
     public int Money
@@ -100,6 +101,14 @@ public class InventoryManager : MonoBehaviour
             ADItem(isAdd: true, item:ic.plants[rand]);
         }
         */
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+                IsOn = false;
+            }
+        }
     }
 
     /// <summary>
@@ -193,6 +202,8 @@ public class InventoryManager : MonoBehaviour
 
             string commnet = $"{item.data.itemName} 을 획득했다 !";
             ToastPopUpManager.instance.Setcomment(commnet);
+
+            Debug.Log(commnet);
         }
         else
         {

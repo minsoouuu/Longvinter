@@ -12,8 +12,8 @@ public class TestScripts : MonoBehaviour
             PocketController po =  Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
             for (int i = 0; i < 10; i++)
             {
-                int rand = Random.Range(0, Gamemanager.instance.itemController.equipments.Count);
-                po.AddItem(Gamemanager.instance.itemController.plants[rand]);
+                int rand = Random.Range(0, Gamemanager.instance.itemController.foods.Count);
+                po.AddItem(Gamemanager.instance.itemController.foods[rand]);
             }
         }
     }

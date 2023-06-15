@@ -10,6 +10,8 @@ public class FishingController : MonoBehaviour
     [SerializeField] private RectTransform handleRT;
     [SerializeField] private RectTransform backRT;
 
+    [HideInInspector] public FishingManager fM;
+
     private float handleSpeed = 1000f;
 
     bool isTurn = true;
@@ -55,33 +57,43 @@ public class FishingController : MonoBehaviour
             if (handle.GetIsIn())
             {
                 isOn = false;
-                CreatePopUp("성공",true);
+                CreatePopUp(true);
             }
             else
             {
                 isOn = false;
-                CreatePopUp("실패",false);
+                CreatePopUp(false);
             }
         }
     }
-    void CreatePopUp(string commnet,bool isComplete)
+    void CreatePopUp(bool isComplete)
     {
         if (isComplete)
         {
-            OneButtonPopUpManager.instance.SetComment(commnet, FinishEvent);
+            OneButtonPopUpManager.instance.SetComment("성공", FinishEvent);
         }
         else
         {
-            OneButtonPopUpManager.instance.SetComment(commnet);
+            OneButtonPopUpManager.instance.SetComment("실패", FailEvent);
         }
-        Gamemanager.instance.objectPool.ReturnObject(this);
     }
     void FinishEvent()
-    {
-        int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemName)).Length + 1);
+    { 
+        // 테스트
+        int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemName)).Length);
         ItemName itemName = (ItemName)rand;
         Item item = Gamemanager.instance.itemController.GetItem(itemName);
         Gamemanager.instance.player.im.ADItem(item, true);
-        Gamemanager.instance.fishing.IsOn = true;
+        //
+
+        fM.IsOn = true;
+        Gamemanager.instance.player.isMove = true;
+        Gamemanager.instance.objectPool.ReturnObject(this);
+    }
+    void FailEvent()
+    {
+        fM.IsOn = true;
+        Gamemanager.instance.player.isMove = true;
+        Gamemanager.instance.objectPool.ReturnObject(this);
     }
 }

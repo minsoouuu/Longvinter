@@ -11,7 +11,6 @@ public class TwoButtonPopUp : PopUp
     [SerializeField] private Button cancelButton;
     [SerializeField] private TMP_Text text;
 
-    private string comment;
     public UnityAction Action { get; set; }
 
     protected override void Initailize()

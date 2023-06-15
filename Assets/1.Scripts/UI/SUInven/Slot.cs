@@ -74,7 +74,6 @@ public class Slot : MonoBehaviour
         string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
         TwoButtonPopUpManager.instance.SetCommnet(commnet, ItemDelete);
     }
-
     void ItemDelete()
     {
         PocketController po = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
@@ -108,19 +107,15 @@ public class Slot : MonoBehaviour
         // 아이템이 아무것도 없을때는 무반응
         if(item != null)
         {
-            // TODO : 테스트 코드
-            MakingController mc = FindObjectOfType<MakingController>();
             // 제작대가 켜져 있을경우
-            /* if (mc != null && mc.Ison)
+            if (mgr.mc != null)
             {
-                mc.SetSlotData(item);
+                mgr.mc.SetSlotData(item);
             }
             else
             {
-                popup.Enable(true);
+                popup.Enable(true, item);
             }
-            */
-            popup.Enable(true,item);
         }
     }
 }

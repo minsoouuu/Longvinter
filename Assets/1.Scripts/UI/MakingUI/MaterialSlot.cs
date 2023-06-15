@@ -41,9 +41,13 @@ public class MaterialSlot : MonoBehaviour
         Debug.Log("Å¬¸¯");
         if (ItemData == null)
             return;
+
         if (makeController.items.Contains(ItemData.data.itemName))
         {
             makeController.items.Remove(ItemData.data.itemName);
+            item.data.count++;
+            Gamemanager.instance.player.im.ADItem(item, true);
+
             ItemData = null;
             if (makeController.completeSlot.ItemData != null)
             {

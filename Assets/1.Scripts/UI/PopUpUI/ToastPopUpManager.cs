@@ -10,8 +10,6 @@ public class ToastPopUpManager : MonoBehaviour
 
     [HideInInspector] public List<ToastPopUp> popUps = new List<ToastPopUp>();
 
-    PopUp toastPopUp;
-
     private void Awake()
     {
         if (instance != null)
@@ -36,7 +34,7 @@ public class ToastPopUpManager : MonoBehaviour
     }
     void CreatePopUp(string comment)
     {
-        toastPopUp = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.ToastPopUp);
+        PopUp toastPopUp = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.ToastPopUp);
         toastPopUp.transform.SetParent(popParent);
         toastPopUp.SetComment(comment);
     }

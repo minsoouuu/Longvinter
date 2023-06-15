@@ -8,7 +8,7 @@ using System.Linq;
 
 public class MakingController : MonoBehaviour
 {
-    [SerializeField] private MaterialSlot[] MaterialSlot;
+    [SerializeField] private MaterialSlot[] materialSlot;
     [SerializeField] private Button button;
     [SerializeField] private GameObject interUI;
 
@@ -37,32 +37,37 @@ public class MakingController : MonoBehaviour
             Debug.Log("빵 추가");
         }
 
-        float dis = Vector3.Distance(transform.position, Gamemanager.instance.player.transform.position);
-        
-        if (dis <= 0.5f)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            interUI.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.F))
+            if (IsOn == true)
             {
-                transform.GetChild(0).gameObject.SetActive(true);
-                IsOn = true;
+                IsOn = false;
+                for (int i = 0; i < materialSlot.Length; i++)
+                {
+                    if (materialSlot[i].ItemData != null)
+                    {
+                        materialSlot[i].ItemData.data.count++;
+                        Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
+                    }
+                }
+                SlotDataReset();
+                transform.GetChild(0).gameObject.SetActive(false);
+                Gamemanager.instance.player.im.mc = null;
             }
         }
-        else
-        {
-            transform.GetChild(0).gameObject.SetActive(false);
-            interUI.SetActive(false);
-            IsOn = false;
-        }
-
     }
     public void SetSlotData(Item item)
     {
-        for (int i = 0; i < MaterialSlot.Length; i++)
+        if (items.Count >= 3)
+            return;
+
+        for (int i = 0; i < materialSlot.Length; i++)
         {
-            if (MaterialSlot[i].ItemData == null)
+            if (materialSlot[i].ItemData == null)
             {
-                MaterialSlot[i].ItemData = item;
+                materialSlot[i].ItemData = item;
+                items.Add(item.data.itemName);
+                Gamemanager.instance.player.im.ADItem(item, false);
                 break;
             }
         }
@@ -103,59 +108,26 @@ public class MakingController : MonoBehaviour
         if (completeSlot.ItemData == null)
             return;
         // 인벤에 재료 추가
-        //Gamemanager.instance.player.inven.AddItem(completeSlot.ItemData);
-        for (int i = 0; i < MaterialSlot.Length; i++)
+        Gamemanager.instance.player.im.ADItem(completeSlot.ItemData,true);
+
+        // 인벤에서 재료 차감
+        for (int i = 0; i < materialSlot.Length; i++)
         {
-            if (MaterialSlot[i].ItemData != null)
+            if (materialSlot[i].ItemData != null)
             {
-                // 인벤에서 재료 차감
-                //Gamemanager.instance.player.inven.DeleteItem(MaterialSlot[i].ItemData);
+                Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, false);
             }
         }
         SlotDataReset();
     }
+    // 제작대 재료 전부 초기화
     void SlotDataReset()
     {
         items.Clear();
-        for (int i = 0; i < MaterialSlot.Length; i++)
+        for (int i = 0; i < materialSlot.Length; i++)
         {
-            MaterialSlot[i].ItemData = null;
+            materialSlot[i].ItemData = null;
         }
         completeSlot.ItemData = null;
-    }
-
-    // Test .... 
-    void Test()
-    {
-        if (items.Count < 2)
-            return;
-        List<JsonData.RecipeJson> curRecipe = new List<JsonData.RecipeJson>();
-        ItemName comName = new ItemName();
-        InvenItemType type = new InvenItemType();
-        for (int i = 0; i < MaterialSlot.Length; i++)
-        {
-            if (MaterialSlot[i].ItemData == null)
-                return;
-            for (int j = 0; j < recipes.Count; j++)
-            {
-                if (i == 0)
-                {
-                    if (MaterialSlot[i].ItemData.data.itemName.ToString() == recipes[j].material1)
-                    {
-                        curRecipe.Add(recipes[j]);
-                    }
-                }
-                if (i == 1)
-                {
-                    if (MaterialSlot[i].ItemData.data.itemName.ToString() == curRecipe[j].material2)
-                    {
-                        comName = Enum.Parse<ItemName>(curRecipe[j].completeitem);
-                        type = Enum.Parse<InvenItemType>(curRecipe[j].type);
-                    }
-                }
-            }
-        }
-        completeSlot.ItemData = Gamemanager.instance.itemController.GetItem(comName, type);
-        Debug.Log(Gamemanager.instance.itemController.GetItem(comName, type).name);
     }
 }

@@ -11,8 +11,8 @@ public  class Gamemanager : MonoBehaviour
     public JsonData jsonDataController;
     public ObjectPoolSystem objectPool;
     public ItemDataSetController itemController;
-    public FishingManager fishing;
     public Transform parentDropItem;
+    public MakingController makingController;
     void Awake()
     {
         if (instance != null)

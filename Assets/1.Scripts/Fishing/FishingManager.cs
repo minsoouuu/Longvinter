@@ -23,13 +23,18 @@ public class FishingManager : MonoBehaviour
             if (IsOn == true)
             {
                 IsOn = false;
+                Gamemanager.instance.player.isMove = false;
+                popUp.SetActive(false);
                 FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
-                fishing.transform.SetParent(parent);
-                //fishing.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                fishing.transform.SetParent(transform);
+                if (fishing.fM == null)
+                {
+                    fishing.fM = this;
+                }
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
