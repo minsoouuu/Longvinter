@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public struct MonsterData
 {
@@ -16,10 +17,9 @@ public enum MonsterAction
     IsRunning,
     IsDead
 }
+
 public abstract class Monster : MonoBehaviour
 {
-   
-
     public Vector3 pos;
     public List<Transform> wayPoints;
     public int nextIdx = 0;
@@ -50,7 +50,6 @@ public abstract class Monster : MonoBehaviour
                 MonsterDie();
             }
         }
-        
     }
 
     private void OnEnable()
@@ -68,10 +67,9 @@ public abstract class Monster : MonoBehaviour
     {
         thePlayer = Gamemanager.instance.player;
         nav = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
         nav.autoBraking = false;
         curHp = monsterData.hp;
-        monsterAction = MonsterAction.IsIdle;
 
         var group = GameObject.Find("WayPointGroup");
 
@@ -100,7 +98,7 @@ public abstract class Monster : MonoBehaviour
     public abstract void Initialize();
 
     // If hit by or close to the player, they will runaway.
-    public bool View()
+    protected bool View()
     {
         Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
 
@@ -130,23 +128,27 @@ public abstract class Monster : MonoBehaviour
         return false;
     }
 
-
-
     protected void Move()
     {
         Walk();
 
         if (monsterAction == MonsterAction.IsWalking)
         {
-            nextIdx = Random.Range(0, wayPoints.Count);
+            nextIdx = UnityEngine.Random.Range(0, wayPoints.Count);
 
             if (nav.isPathStale)
             {
                 return;
             }
 
-            nav.destination = wayPoints[nextIdx].position;
-            // nav.SetDestination(transform.position + destination * 5f);}
+            try
+            {
+                nav.destination = wayPoints[nextIdx].position;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 
@@ -154,7 +156,13 @@ public abstract class Monster : MonoBehaviour
     {
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
-        anim.SetTrigger("Walking");
+        if (anim != null)// animator is of type "Animator"
+        {
+            if (anim.runtimeAnimatorController != null)// this check eliminiated the warning message
+            {
+                anim.SetTrigger("Walking");
+            }
+        }
     }
 
     protected void Runaway(Vector3 _targetPos)
@@ -163,7 +171,13 @@ public abstract class Monster : MonoBehaviour
 
         monsterAction = MonsterAction.IsRunning;
         nav.speed = monsterData.speed;
-        anim.SetTrigger("Running");
+        if (anim != null)
+        {
+            if (anim.runtimeAnimatorController != null)
+            {
+                anim.SetTrigger("Running");
+            }
+        }
         Debug.Log("Runaway");
     }
 
@@ -178,8 +192,13 @@ public abstract class Monster : MonoBehaviour
                 MonsterDie();
                 return;
             }
-
-            anim.SetTrigger("Hurt");
+            if (anim != null)
+            {
+                if (anim.runtimeAnimatorController != null)
+                {
+                    anim.SetTrigger("Hurt");
+                }
+            }
             Runaway(_targetPos);
         }
     }
@@ -188,19 +207,30 @@ public abstract class Monster : MonoBehaviour
     {
         nav.enabled = false;
         monsterAction = MonsterAction.IsDead;
-        anim.SetTrigger("Dead");
+        if (anim != null)
+        {
+            if (anim.runtimeAnimatorController != null)
+            {
+                anim.SetTrigger("Dead");
+            }
+        }
+        StartCoroutine("DieAfter");
+    }
+
+    IEnumerator DieAfter()
+    {
+        yield return new WaitForSeconds(2.0f);
+
         DropItem();
 
         HP = monsterData.hp;
         Gamemanager.instance.objectPool.ReturnObject(monsterData.monsterType, this);
         MonsterSpawnController._instance.monsterCount--;
-       
     }
 
     public virtual void DropItem()     
     {
     }
-
 
     protected void Test()
     {
