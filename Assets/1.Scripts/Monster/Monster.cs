@@ -25,7 +25,7 @@ public abstract class Monster : MonoBehaviour
     public int nextIdx = 0;
     public MonsterData monsterData = new MonsterData();
     [HideInInspector] public MonsterAction monsterAction = new MonsterAction();
-    private Vector3 destination;
+    //private Vector3 destination;
     private User thePlayer;
     private float curHp = 0;
     protected float currentTime = 1;
@@ -56,6 +56,7 @@ public abstract class Monster : MonoBehaviour
     {
         nav.enabled = true;
         Move();
+        View();
     }
 
     void Awake()
@@ -83,13 +84,13 @@ public abstract class Monster : MonoBehaviour
 
     protected void Update()
     {
-        if (nav.velocity.sqrMagnitude >= 0.2f * 0.2f && nav.remainingDistance <= 0.5f && monsterAction != MonsterAction.IsDead) 
+        if (nav.velocity.sqrMagnitude >= 0.2f * 0.2f && nav.remainingDistance <= 0.5f && monsterAction != MonsterAction.IsRunning && monsterAction != MonsterAction.IsDead) 
         {
             Move();
-            View();
         }
-        if (View()) 
+        if (View())
         {
+            monsterAction = MonsterAction.IsRunning;
             Runaway(thePlayer.transform.position);
         }
         Test();
@@ -131,7 +132,6 @@ public abstract class Monster : MonoBehaviour
     protected void Move()
     {
         Walk();
-
         if (monsterAction == MonsterAction.IsWalking)
         {
             nextIdx = UnityEngine.Random.Range(0, wayPoints.Count);
@@ -152,8 +152,9 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
-    protected void Walk() 
+    protected void Walk()
     {
+        View();
         monsterAction = MonsterAction.IsWalking;
         nav.speed = monsterData.speed;
         if (anim != null)// animator is of type "Animator"
@@ -167,18 +168,17 @@ public abstract class Monster : MonoBehaviour
 
     protected void Runaway(Vector3 _targetPos)
     {
-        destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
-
+        View();
         monsterAction = MonsterAction.IsRunning;
         nav.speed = monsterData.speed;
-        if (anim != null)
+        anim.SetTrigger("Running");
+
+        if (monsterAction == MonsterAction.IsRunning)
         {
-            if (anim.runtimeAnimatorController != null)
-            {
-                anim.SetTrigger("Running");
-            }
+            nav.destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
         }
         Debug.Log("Runaway");
+        Move();
     }
 
     protected void Damage(int _dmg, Vector3 _targetPos)
@@ -192,13 +192,7 @@ public abstract class Monster : MonoBehaviour
                 MonsterDie();
                 return;
             }
-            if (anim != null)
-            {
-                if (anim.runtimeAnimatorController != null)
-                {
-                    anim.SetTrigger("Hurt");
-                }
-            }
+            anim.SetTrigger("Hurt");
             Runaway(_targetPos);
         }
     }
@@ -207,13 +201,7 @@ public abstract class Monster : MonoBehaviour
     {
         nav.enabled = false;
         monsterAction = MonsterAction.IsDead;
-        if (anim != null)
-        {
-            if (anim.runtimeAnimatorController != null)
-            {
-                anim.SetTrigger("Dead");
-            }
-        }
+        anim.SetTrigger("Dead");
         StartCoroutine("DieAfter");
     }
 
