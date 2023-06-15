@@ -14,6 +14,7 @@ public abstract class Player : MonoBehaviour
 {
     [SerializeField] private MyState myState = MyState.None;
     [SerializeField] private Animator animator;
+    [SerializeField] private Monster monster;
 
     float x;
     float z;
@@ -23,6 +24,8 @@ public abstract class Player : MonoBehaviour
     float curHP = 0f;
     float damage = 10f;
     float mentalPower = 0f;
+
+    private User thePlayer;
 
     public float HP
     {
@@ -54,6 +57,7 @@ public abstract class Player : MonoBehaviour
     void Start()
     {
         curHP = maxHP;
+        thePlayer = Gamemanager.instance.player;
     }
     void FixedUpdate()
     {
@@ -63,6 +67,10 @@ public abstract class Player : MonoBehaviour
     void Update()
     {
         if (myState.Equals(MyState.Die)) return;
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Hunt();
+        }
     }
 
     void Move()
@@ -86,15 +94,22 @@ public abstract class Player : MonoBehaviour
         Vector3 vec = new Vector3(x, 0, z);
         transform.position += vec * Speed * Time.deltaTime;
     }
+
     void SetAnimation(string name)
     {
         animator.SetTrigger(name);
     }
+
     void Direction(float x , float z)
     {
         float dir = 0;
         dir = Mathf.Lerp(dir, x, Time.deltaTime);
         Vector3 asd = x * Vector3.right + z * Vector3.forward;
         transform.rotation = Quaternion.LookRotation(asd);
+    }
+
+    void Hunt()
+    {
+        monster.Damage(1, thePlayer.transform.position);
     }
 }

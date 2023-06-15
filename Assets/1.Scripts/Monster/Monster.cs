@@ -181,7 +181,7 @@ public abstract class Monster : MonoBehaviour
         Move();
     }
 
-    protected void Damage(int _dmg, Vector3 _targetPos)
+    public void Damage(int _dmg, Vector3 _targetPos)
     {
         if (monsterAction != MonsterAction.IsDead) 
         {
