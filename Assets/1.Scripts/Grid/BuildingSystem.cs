@@ -17,7 +17,8 @@ public class BuildingSystem : MonoBehaviour
     public List<MaterialScript> tree_rock;
 
     public HandlingObject[] prefab;
-    public Transform parent;
+    public Transform houseparent;
+    public Transform fenceparent;
     [HideInInspector] public PlaceableObject selectedObject;
     List<PlaceableObject> prefab_list = new List<PlaceableObject>();
 
@@ -63,7 +64,7 @@ public class BuildingSystem : MonoBehaviour
             if (CheckTile(selectedObject))
             {
                 selectedObject.Place();
-                parent.GetChild(0).GetComponent<HandlingObject>().SetPlaced();
+                selectedObject.GetComponent<HandlingObject>().SetPlaced();
                 Vector3Int startpos = gridLayout.WorldToCell(selectedObject.GetStartPosition());
 
                 // 타일 미리보기
@@ -100,7 +101,14 @@ public class BuildingSystem : MonoBehaviour
         Vector3 pos = SnapCoordinateToGrid(playerpos);
 
         HandlingObject obj = Instantiate(building, pos, Quaternion.identity);
-        obj.transform.SetParent(parent);
+        if(obj.pk == HandlingObject.PlantKind.House)
+        {
+            obj.transform.SetParent(houseparent);
+        }
+        else if(obj.pk == HandlingObject.PlantKind.Fence)
+        {
+            obj.transform.SetParent(fenceparent);
+        }
         selectedObject = obj.GetComponent<PlaceableObject>();
         prefab_list.Add(selectedObject);
     }
