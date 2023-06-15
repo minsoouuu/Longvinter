@@ -55,26 +55,33 @@ public class FishingController : MonoBehaviour
             if (handle.GetIsIn())
             {
                 isOn = false;
-                int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemName)).Length + 1);
-                ItemName itemName = (ItemName)rand;
-                Item item = Gamemanager.instance.itemController.GetItem(itemName);
-                Gamemanager.instance.player.im.ADItem(item,true);
-                CreatePopUp("성공");
+                CreatePopUp("성공",true);
             }
             else
             {
                 isOn = false;
-                CreatePopUp("실패");
+                CreatePopUp("실패",false);
             }
         }
     }
-    void CreatePopUp(string commnet)
+    void CreatePopUp(string commnet,bool isComplete)
     {
-        OneButtonPopUpManager.instance.SetComment(commnet, FinishEvent);
+        if (isComplete)
+        {
+            OneButtonPopUpManager.instance.SetComment(commnet, FinishEvent);
+        }
+        else
+        {
+            OneButtonPopUpManager.instance.SetComment(commnet);
+        }
+        Gamemanager.instance.objectPool.ReturnObject(this);
     }
     void FinishEvent()
     {
+        int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemName)).Length + 1);
+        ItemName itemName = (ItemName)rand;
+        Item item = Gamemanager.instance.itemController.GetItem(itemName);
+        Gamemanager.instance.player.im.ADItem(item, true);
         Gamemanager.instance.fishing.IsOn = true;
-        Gamemanager.instance.objectPool.ReturnObject(this);
     }
 }

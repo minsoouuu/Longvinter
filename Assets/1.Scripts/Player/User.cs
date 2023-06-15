@@ -16,7 +16,9 @@ public class User : MonoBehaviour
         /// </summary>
         Direct
     }
-    public InventoryManager im;
+
+    [HideInInspector] public bool isMove = true;
+    [HideInInspector] public float maxHp = 100f;
 
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
@@ -47,11 +49,9 @@ public class User : MonoBehaviour
     private List<Collider> m_collisions = new List<Collider>();
 
     public Image interactionImage;
-
+    public InventoryManager im;
 
     private float curHp = 100f;
-    [HideInInspector] public float maxHp = 100f;
-
 
     public float HP
     {
@@ -128,24 +128,9 @@ public class User : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (im.IsOn == false)
-            {
-                im.IsOn = true;
-                for (int i = 0; i < im.transform.childCount; i++)
-                {
-                    im.transform.GetChild(i).gameObject.SetActive(true);
-                }
-            }
-            else
-            {
-                im.IsOn = false;
-                for (int i = 0; i < im.transform.childCount; i++)
-                {
-                    im.transform.GetChild(i).gameObject.SetActive(false);
-                }
-            }
+            OnInventorySetActive();
         }
-        
+
         /*
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
         {
@@ -156,6 +141,9 @@ public class User : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isMove == false)
+            return;
+
         m_animator.SetBool("Grounded", m_isGrounded);
 
         switch (m_controlMode)
@@ -176,7 +164,25 @@ public class User : MonoBehaviour
         m_wasGrounded = m_isGrounded;
         m_jumpInput = false;
     }
-
+    public void OnInventorySetActive()
+    {
+        if (im.IsOn == false)
+        {
+            im.IsOn = true;
+            for (int i = 0; i < im.transform.childCount; i++)
+            {
+                im.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            im.IsOn = false;
+            for (int i = 0; i < im.transform.childCount; i++)
+            {
+                im.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
     private void TankUpdate()
     {
         float v = Input.GetAxis("Vertical");

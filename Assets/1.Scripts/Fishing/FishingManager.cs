@@ -6,9 +6,9 @@ using System;
 
 public class FishingManager : MonoBehaviour
 {
-    [SerializeField] private Image popUp;
+    [SerializeField] private GameObject popUp;
     [SerializeField] private Transform parent;
-    private bool isin = true;
+    private bool isIn = true;
     public bool IsOn { get; set; }
     private void Start()
     {
@@ -16,7 +16,7 @@ public class FishingManager : MonoBehaviour
     }
     private void Update()
     {
-        if (isin == false) return;
+        if (isIn == false) return;
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -33,19 +33,16 @@ public class FishingManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isin = true;
-            popUp.gameObject.SetActive(true);
+            isIn = true;
+            popUp.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            isin = false;
-            popUp.gameObject.SetActive(false);
+            isIn = false;
+            popUp.SetActive(false);
         }
-
-        
-        
     }
 }

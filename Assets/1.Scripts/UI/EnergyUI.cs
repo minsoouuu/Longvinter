@@ -32,11 +32,11 @@ public class EnergyUI : MonoBehaviour
         energy.GetComponent<Image>().fillAmount = energy_fillamount;
     }
     
-    // 2초마다 hp 1씩 감소
+    // 10초마다 hp 1씩 감소
     void LostHP()
     {
         hp_delaytime += Time.deltaTime;
-        if(hp_delaytime > 0.2f)
+        if(hp_delaytime > 10f)
         {
             if(user.HP > 0)
             {
