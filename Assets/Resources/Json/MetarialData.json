@@ -122,7 +122,7 @@
     },
     {
       "name": "Matches",
-      "image": "T_Icon Matches",
+      "image": "T_IconMatches",
       "type": "Materials",
       "price": 20,
       "serial": 15,
@@ -131,7 +131,7 @@
     {
       "name": "WaterCanister",
       "image": "T_WaterCanister",
-      "type": "Foods",
+      "type": "Materials",
       "price": 25,
       "serial": 16,
       "count": 1

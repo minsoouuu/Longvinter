@@ -33,7 +33,7 @@
       "count": 1
     },
     {
-      "name": "MoertnBurstRifle",
+      "name": "ModernBurstRifle",
       "image": "T_IconModernBurstRifle",
       "type": "Equipments",
       "price": 50,
@@ -42,7 +42,7 @@
     },
     {
       "name": "ModernRifle",
-      "image": "T_IconModernRifie",
+      "image": "T_IconModernRifle",
       "type": "Equipments",
       "price": 50,
       "serial": 5,
@@ -50,7 +50,7 @@
     },
     {
       "name": "Rifle",
-      "Image": "T_IconRifle",
+      "image": "T_IconRifle",
       "type": "Equipments",
       "price": 50,
       "serial": 6,

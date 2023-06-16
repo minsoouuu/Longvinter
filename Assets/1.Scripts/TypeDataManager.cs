@@ -28,7 +28,7 @@ public enum ItemName
     AmmoPouch,
     FullAutoPistol,
     SemiAutoPistol,
-    MoertnBurstRifle,
+    ModernBurstRifle,
     ModernRifle,
     Rifle,
     SemiRifle,

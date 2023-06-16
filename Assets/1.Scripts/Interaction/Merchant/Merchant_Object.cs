@@ -18,7 +18,7 @@ public class Merchant_Object : MonoBehaviour
         dis = Vector3.Distance(this.transform.position, Gamemanager.instance.player.transform.position);
         if (dis < 2f)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.B))
             {
                 merchant.SetActive(true);
                 for(int i = 0; i < Gamemanager.instance.player.im.transform.childCount; i++)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5909469460454428404}
   - component: {fileID: 1072181300669748409}
   m_Layer: 0
-  m_Name: MoertnBurstRifle
+  m_Name: ModernBurstRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
