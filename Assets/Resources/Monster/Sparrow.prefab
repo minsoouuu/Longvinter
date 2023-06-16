@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 4921464495955469261}
   m_Layer: 0
   m_Name: Sparrow
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -493,9 +493,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dabd57750b48f5498a74c30c2516261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
+  wayPoints: []
+  nextIdx: 0
+  monsterAction: 0
   nav: {fileID: -3338652720714545304}
   anim: {fileID: 5866666021909216657, guid: 34f30712d30697648b80843f9e09934c, type: 3}
-  rigid: {fileID: 4921464495955469261}
+  dropItemGroup: {fileID: 0}
   viewAngle: 130
   viewDistance: 10
   targetMask:

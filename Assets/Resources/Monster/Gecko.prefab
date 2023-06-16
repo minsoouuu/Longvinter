@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 7607630750679011564}
   m_Layer: 0
   m_Name: Gecko
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -434,9 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1a6b6c871a56a44b75d36915630962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
+  wayPoints: []
+  nextIdx: 0
+  monsterAction: 0
   nav: {fileID: -4599535926603278074}
   anim: {fileID: 5866666021909216657, guid: fb72e4aa9961d99409ba17815d02cc88, type: 3}
-  rigid: {fileID: 7607630750679011564}
+  dropItemGroup: {fileID: 0}
   viewAngle: 130
   viewDistance: 10
   targetMask:

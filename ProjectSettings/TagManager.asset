@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - CompletePoint
+  - Monster
   layers:
   - Default
   - TransparentFX

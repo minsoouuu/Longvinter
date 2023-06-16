@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 7604861727841386813}
   m_Layer: 0
   m_Name: Taipan
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,9 +521,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06046de57eadbc04dbd4ff9ac4d7bd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
+  wayPoints: []
+  nextIdx: 0
+  monsterAction: 0
   nav: {fileID: -1473177343110869412}
   anim: {fileID: 5866666021909216657, guid: 1c77555fce85aa74da16fd6cadfac6b8, type: 3}
-  rigid: {fileID: 290675292896864388}
+  dropItemGroup: {fileID: 0}
   viewAngle: 130
   viewDistance: 10
   targetMask:

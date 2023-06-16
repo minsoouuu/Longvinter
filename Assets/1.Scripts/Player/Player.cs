@@ -12,9 +12,8 @@ public enum MyState
 }
 public abstract class Player : MonoBehaviour
 {
-    [SerializeField] private MyState myState = MyState.None;
+    [SerializeField] public MyState myState = MyState.None;
     [SerializeField] private Animator animator;
-    [SerializeField] private Monster monster;
 
     float x;
     float z;
@@ -67,10 +66,7 @@ public abstract class Player : MonoBehaviour
     void Update()
     {
         if (myState.Equals(MyState.Die)) return;
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Hunt();
-        }
+        
     }
 
     void Move()
@@ -108,8 +104,5 @@ public abstract class Player : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(asd);
     }
 
-    void Hunt()
-    {
-        monster.Damage(1, thePlayer.transform.position);
-    }
+   
 }

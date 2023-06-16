@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 302309173221418746}
   m_Layer: 0
   m_Name: Colobus
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,8 +628,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7b97a026cd88b408f2226a2dffbff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
+  wayPoints: []
+  nextIdx: 0
+  monsterAction: 0
   nav: {fileID: 7130266124024379936}
   anim: {fileID: 5866666021909216657, guid: b7b20bc931c427e46a8b1918db64e552, type: 3}
+  dropItemGroup: {fileID: 0}
   viewAngle: 130
   viewDistance: 10
   targetMask:

@@ -3,7 +3,10 @@ guid: 2368fc67bed32024e81b945bc30e349b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - animator: {instanceID: 0}
+  - monster: {instanceID: 0}
+  - spellPrefab: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

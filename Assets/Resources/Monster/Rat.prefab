@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: -4353094907777425385}
   m_Layer: 0
   m_Name: Rat
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,9 +628,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adf42027761dbf41adc03d3ff2bfc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
+  wayPoints: []
+  nextIdx: 0
+  monsterAction: 0
   nav: {fileID: 8305945326428657618}
   anim: {fileID: 5866666021909216657, guid: 0f1eb8fcb39d732419a570705c23a921, type: 3}
-  rigid: {fileID: 8971940455790555740}
+  dropItemGroup: {fileID: 0}
   viewAngle: 130
   viewDistance: 10
   targetMask:
