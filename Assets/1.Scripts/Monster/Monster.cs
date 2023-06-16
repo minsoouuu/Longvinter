@@ -192,7 +192,13 @@ public abstract class Monster : MonoBehaviour
                 MonsterDie();
                 return;
             }
-            anim.SetTrigger("Hurt");
+            if (anim != null)// animator is of type "Animator"
+            {
+                if (anim.runtimeAnimatorController != null)// this check eliminiated the warning message
+                {
+                    anim.SetTrigger("Hurt");
+                }
+            }
             Runaway(_targetPos);
         }
     }

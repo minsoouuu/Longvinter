@@ -20,6 +20,7 @@ public class User : MonoBehaviour
     [HideInInspector] public bool isMove = true;
     [HideInInspector] public float maxHp = 100f;
     [SerializeField] public GameObject spellPrefab;
+    [SerializeField] public Transform pos;
 
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
@@ -51,8 +52,6 @@ public class User : MonoBehaviour
 
     public Image interactionImage;
     public InventoryManager im;
-
-    public Player player;
 
     private float curHp = 100f;
 
@@ -136,12 +135,7 @@ public class User : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            player.myState = MyState.Attack;
-            Debug.Log(player.myState);
-            if (player.myState.Equals(MyState.Attack))
-            {
-                StartCoroutine(Attack());
-            }
+            StartCoroutine(Attack());
         }
         /*
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
@@ -291,8 +285,6 @@ public class User : MonoBehaviour
 
     public IEnumerator Attack()
     {
-        player.myState = MyState.Attack;
-
         yield return new WaitForSeconds(0.5f);
         CastSpell();
         StopAttack();
@@ -300,12 +292,11 @@ public class User : MonoBehaviour
 
     public void CastSpell()
     {
-        Instantiate(spellPrefab, transform.position, Quaternion.identity);
+        Instantiate(spellPrefab, pos);
     }
 
     public void StopAttack()
     {
         StopCoroutine(Attack());
-        player.myState = MyState.None;
     }
 }
