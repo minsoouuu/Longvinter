@@ -141,16 +141,18 @@ public class ItemDataSetController : MonoBehaviour
             case InvenItemType.Equipments:
                 for (int i = 0; i < equipments.Count; i++)
                 {
-                    if (equipments[i].data.itemName.ToString() == name.ToString())
+                    if (equipments[i].data.itemName == name)
                     {
-                        item =  equipments[i];
+                        Item insItem = new Equipment();
+                        insItem.data = equipments[i].data;
+                        item = insItem;
                     }
                 }
                 break;
             case InvenItemType.Materials:
                 for (int i = 0; i < materilas.Count; i++)
                 {
-                    if (materilas[i].data.itemName.ToString() == name.ToString())
+                    if (materilas[i].data.itemName == name)
                     {
                         item = materilas[i];
                     }
@@ -159,16 +161,17 @@ public class ItemDataSetController : MonoBehaviour
             case InvenItemType.Foods:
                 for (int i = 0; i < foods.Count; i++)
                 {
-                    if (foods[i].data.itemName.ToString() == name.ToString())
+                    if (foods[i].data.itemName == name)
                     {
-                        item = foods[i];
+                        item = new Food();
+                        item.data = foods[i].data;
                     }
                 }
                 break;
             case InvenItemType.Plants:
                 for (int i = 0; i < plants.Count; i++)
                 {
-                    if (plants[i].data.itemName.ToString() == name.ToString())
+                    if (plants[i].data.itemName == name)
                     {
                         item = plants[i];
                     }

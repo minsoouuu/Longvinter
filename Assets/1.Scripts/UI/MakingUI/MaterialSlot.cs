@@ -21,14 +21,11 @@ public class MaterialSlot : MonoBehaviour
             {
                 itemIcon.sprite = item.data.image;
                 makeController.items.Add(ItemData.data.itemName);
+                Debug.Log($"{gameObject.name}::{ItemData.data.count}");
             }
             else
             {
                 itemIcon.sprite = nullSprite;
-                if (makeController.items.Contains(ItemData.data.itemName))
-                {
-                    makeController.items.Remove(ItemData.data.itemName);
-                }
             }
         }
     }
@@ -43,11 +40,20 @@ public class MaterialSlot : MonoBehaviour
     void OnMouseButtonDown()
     {
         if (ItemData == null)
+        {
+            Debug.Log("데이터 없음");
             return;
+        }
 
         //Item materialItem = Gamemanager.instance.itemController.GetItem(ItemData.data.itemName);
         ItemData.data.count = 1;
         Gamemanager.instance.player.im.ADItem(ItemData, true);
+
+        if (makeController.items.Contains(ItemData.data.itemName))
+        {
+            makeController.items.Remove(ItemData.data.itemName);
+        }
+
         ItemData = null;
 
         if (makeController.completeSlot.ItemData != null)

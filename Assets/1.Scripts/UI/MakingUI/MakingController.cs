@@ -34,8 +34,8 @@ public class MakingController : MonoBehaviour
                 {
                     if (materialSlot[i].ItemData != null)
                     {
-                        Item item = Gamemanager.instance.itemController.GetItem(materialSlot[i].ItemData.data.itemName);
-                        Gamemanager.instance.player.im.ADItem(item, true);
+                        //Item item = Gamemanager.instance.itemController.GetItem(materialSlot[i].ItemData.data.itemName);
+                        Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
                     }
                 }
                 SlotDataReset();
@@ -49,14 +49,14 @@ public class MakingController : MonoBehaviour
         if (items.Count >= 3)
             return;
 
-        //Item materialItem = Gamemanager.instance.itemController.GetItem(item.data.itemName);
+        Item materialItem = Gamemanager.instance.itemController.GetItem(item.data.itemName,item.data.itemType);
 
         for (int i = 0; i < materialSlot.Length; i++)
         {
             if (materialSlot[i].ItemData == null)
             {
-                materialSlot[i].ItemData = item;
-                Gamemanager.instance.player.im.ADItem(item, false);
+                materialSlot[i].ItemData = materialItem;
+                Gamemanager.instance.player.im.ADItem(materialItem, false);
                 break;
             }
         }
@@ -87,7 +87,7 @@ public class MakingController : MonoBehaviour
                 }
                 else
                 {
-                    SlotDataReset();
+                    Debug.Log("완성품목 없음");
                 }
             }
         }
@@ -117,6 +117,7 @@ public class MakingController : MonoBehaviour
         items.Clear();
         for (int i = 0; i < materialSlot.Length; i++)
         {
+            Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
             materialSlot[i].ItemData = null;
         }
         completeSlot.ItemData = null;
