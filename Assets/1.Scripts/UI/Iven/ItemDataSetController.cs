@@ -143,7 +143,7 @@ public class ItemDataSetController : MonoBehaviour
                 {
                     if (equipments[i].data.itemName.ToString() == name.ToString())
                     {
-                        item = equipments[i];
+                        item =  equipments[i];
                     }
                 }
                 break;

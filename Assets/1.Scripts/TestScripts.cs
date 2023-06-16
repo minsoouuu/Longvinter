@@ -13,7 +13,8 @@ public class TestScripts : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 int rand = Random.Range(0, Gamemanager.instance.itemController.foods.Count);
-                po.AddItem(Gamemanager.instance.itemController.foods[rand]);
+                po.AddItem(Gamemanager.instance.itemController.GetItem(Gamemanager.instance.itemController.foods[rand].data.itemName,
+                           Gamemanager.instance.itemController.foods[rand].data.itemType));
             }
         }
     }

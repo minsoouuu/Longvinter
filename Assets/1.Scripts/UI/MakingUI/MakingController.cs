@@ -25,17 +25,6 @@ public class MakingController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SetSlotData(Gamemanager.instance.itemController.GetItem(ItemName.SugarBeet, InvenItemType.Materials));
-            Debug.Log("설탕 추가");
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            SetSlotData(Gamemanager.instance.itemController.GetItem(ItemName.Bread, InvenItemType.Foods));
-            Debug.Log("빵 추가");
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (IsOn == true)
@@ -60,14 +49,14 @@ public class MakingController : MonoBehaviour
         if (items.Count >= 3)
             return;
 
-        Item newitem = Gamemanager.instance.itemController.GetItem(item.data.itemName);
+        //Item materialItem = Gamemanager.instance.itemController.GetItem(item.data.itemName);
+
         for (int i = 0; i < materialSlot.Length; i++)
         {
             if (materialSlot[i].ItemData == null)
             {
-                materialSlot[i].ItemData = newitem;
-                items.Add(newitem.data.itemName);
-                Gamemanager.instance.player.im.ADItem(newitem, false);
+                materialSlot[i].ItemData = item;
+                Gamemanager.instance.player.im.ADItem(item, false);
                 break;
             }
         }
@@ -108,6 +97,7 @@ public class MakingController : MonoBehaviour
         Debug.Log("완성");
         if (completeSlot.ItemData == null)
             return;
+
         // 인벤에 재료 추가
         Gamemanager.instance.player.im.ADItem(completeSlot.ItemData,true);
 

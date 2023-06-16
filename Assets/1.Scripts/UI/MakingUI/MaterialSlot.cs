@@ -25,6 +25,10 @@ public class MaterialSlot : MonoBehaviour
             else
             {
                 itemIcon.sprite = nullSprite;
+                if (makeController.items.Contains(ItemData.data.itemName))
+                {
+                    makeController.items.Remove(ItemData.data.itemName);
+                }
             }
         }
     }
@@ -38,22 +42,18 @@ public class MaterialSlot : MonoBehaviour
     }
     void OnMouseButtonDown()
     {
-        Debug.Log("Å¬¸¯");
         if (ItemData == null)
             return;
 
-        if (makeController.items.Contains(ItemData.data.itemName))
-        {
-            makeController.items.Remove(ItemData.data.itemName);
-            Item newitem = Gamemanager.instance.itemController.GetItem(ItemData.data.itemName);
-            Gamemanager.instance.player.im.ADItem(newitem, true);
+        //Item materialItem = Gamemanager.instance.itemController.GetItem(ItemData.data.itemName);
+        ItemData.data.count = 1;
+        Gamemanager.instance.player.im.ADItem(ItemData, true);
+        ItemData = null;
 
-            ItemData = null;
-            if (makeController.completeSlot.ItemData != null)
-            {
-                makeController.completeSlot.ItemData = null;
-            }
-            Debug.Log(makeController.items.Count);
+        if (makeController.completeSlot.ItemData != null)
+        {
+            makeController.completeSlot.ItemData = null;
         }
+        Debug.Log(makeController.items.Count);
     }
 }

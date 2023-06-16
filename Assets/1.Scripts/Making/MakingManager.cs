@@ -15,6 +15,7 @@ public class MakingManager : MonoBehaviour
             if (mc.IsOn == false)
             {
                 interUI.SetActive(true);
+
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     interUI.SetActive(false);

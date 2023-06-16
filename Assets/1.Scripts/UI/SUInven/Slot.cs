@@ -103,7 +103,6 @@ public class Slot : MonoBehaviour
     public void OnPopup()
     {
         mgr.SlotPopupAllOff();
-
         // 아이템이 아무것도 없을때는 무반응
         if(item != null)
         {

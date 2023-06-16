@@ -218,7 +218,9 @@ public class InventoryManager : MonoBehaviour
                     {
                         dicItem.data.count--;
                         if (dicItem.data.count <= 0)
+                        {
                             DeleteData(dicItem);
+                        }
                     }
                     break;
                 }
