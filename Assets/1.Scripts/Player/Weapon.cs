@@ -4,27 +4,38 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private GameObject sparkEffect;
+    [SerializeField] private float speed = 5f;
+
     private User thePlayer;
     private Monster monster;
 
-    public float speed = 5f;
 
     private void Update()
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.forward * speed);
+        GetComponent<Rigidbody>().AddForce(transform.up * speed*-1);
     }
 
-    private void OnTriggerEnter(Collider target)
+    private void OnCollisionEnter(Collision target)
     {
-        if (target.tag.Equals("Monster"))
+        if (target.collider.tag == "Monster")
         {
-            monster.Damage(10, thePlayer.transform.position);
-
+            ShowEffect(target);
+            monster.Damage(999, thePlayer.transform.position);
             Destroy(this.gameObject);
         }
     }
+
+    void ShowEffect(Collision target)
+    {
+        ContactPoint contact = target.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.back, contact.normal);
+        GameObject spark = Instantiate(sparkEffect, contact.point - (contact.normal * 0.5f), rot);
+        spark.transform.SetParent(this.transform);
+    }
+
     void OnBecameInvisible()
     {
-        Destroy(this.gameObject);// 자기 자신을 지웁니다.
+        Destroy(this.gameObject);
     }
 }
