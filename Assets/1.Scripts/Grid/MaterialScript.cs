@@ -112,31 +112,37 @@ public class MaterialScript : MonoBehaviour
                 }
             }
         }
-        /*
         else if(kind == Kind.Rock)
         {
             float dis = Vector3.Distance(transform.position, user.transform.position);
             if (dis < 2f)
             {
                 user.ShowImage();
+                ischeck = true;
                 if (Input.GetKey(KeyCode.E))
                 {
                     user.interactionImage.GetComponent<Image>().fillAmount += Time.deltaTime;
+                    if (user.interactionImage.GetComponent<Image>().fillAmount >= 1)
+                    {
+                        user.CloseImage();
+                        user.interactionImage.GetComponent<Image>().fillAmount = 0;
+                        Destroy(gameObject);
+                    }
                 }
-                if (user.interactionImage.GetComponent<Image>().fillAmount >= 1)
+                else
                 {
-                    user.CloseImage();
                     user.interactionImage.GetComponent<Image>().fillAmount = 0;
-                    Destroy(gameObject);
                 }
+
             }
             else
             {
-                ischeck = true;
+                if (!ischeck)
+                {
+                    user.CloseImage();
+                }
             }
-        
         }
-        */
     }
 
     public void OnDestroy()
