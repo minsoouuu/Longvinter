@@ -33,22 +33,28 @@ public class Slot : MonoBehaviour
     {
         if(item != null)
         {
-            // 아이템 갯수가 2개 이상일때만 숫자 표시
-            if (item.data.count > 1)
+            if (mgr.countDic.ContainsKey(item.data.itemName))
             {
-                cntTextBG.SetActive(true);
-                cntTxt.text = item.data.count.ToString();
+                icon.sprite = item.data.image;
+
+                if (mgr.countDic[item.data.itemName] > 1)
+                {
+                    cntTextBG.SetActive(true);
+                    cntTxt.text = mgr.countDic[item.data.itemName].ToString();
+                }
+                else
+                {
+                    cntTextBG.SetActive(false);
+                    cntTxt.text = string.Empty;
+                }
             }
             else
             {
                 cntTextBG.SetActive(false);
                 cntTxt.text = string.Empty;
-            }
-
-            icon.sprite = item.data.image;
-
-            if(item.data.count <= 0)
                 Empty();
+            }
+            // 아이템 갯수가 2개 이상일때만 숫자 표시
         }
     }
 
@@ -68,8 +74,15 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void OnDelete()
     {
-        if(item.data.count - 1 <= 0)
+        if (mgr.countDic[item.data.itemName] < 1)
+        {
             popup.Enable(false);
+        }
+
+        if (item.data.count - 1 <= 0)
+        {
+
+        }
 
         string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
         TwoButtonPopUpManager.instance.SetCommnet(commnet, ItemDelete);

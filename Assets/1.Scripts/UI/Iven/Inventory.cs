@@ -142,7 +142,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.data.count += 1;
+                            //it.data.count += 1;
                             break;
                         }
                     }
@@ -160,7 +160,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.data.count += 1;
+                            //it.data.count += 1;
                             break;
                         }
                     }
@@ -179,7 +179,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.data.count += 1;
+                            //it.data.count += 1;
                             break;
                         }
                     }
@@ -197,7 +197,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.data.count += 1;
+                            //it.data.count += 1;
                             break;  
                         }
                     }
@@ -227,11 +227,11 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.data.count -= 1;
-                            if (it.data.count <= 0)
-                            {
-                                equipments.Remove(it);
-                            }
+                            //it.data.count -= 1;
+                            //if (it.data.count <= 0)
+                            //{
+                            //   equipments.Remove(it);
+                            //}
                             break;
                         }
                     }
@@ -249,12 +249,12 @@ public class Inventory : MonoBehaviour
                     {
                         if (item.data.itemName == it.data.itemName)
                         {
-                            it.data.count -= 1;
-                            if (it.data.count <= 0)
-                            {
-                                materials.Remove(it);
-                            }
-                            break;
+                          // it.data.count -= 1;
+                          // if (it.data.count <= 0)
+                          // {
+                          //     materials.Remove(it);
+                          // }
+                          // break;
                         }
                     }
                 }
@@ -270,15 +270,15 @@ public class Inventory : MonoBehaviour
                 {
                     foreach (var it in foods)
                     {
-                        if (item.data.itemName == it.data.itemName)
-                        {
-                            it.data.count -= 1;
-                            if (it.data.count <= 0)
-                            {
-                                foods.Remove(it);
-                            }
-                            break;
-                        }
+                      // if (item.data.itemName == it.data.itemName)
+                      // {
+                      //     it.data.count -= 1;
+                      //     if (it.data.count <= 0)
+                      //     {
+                      //         foods.Remove(it);
+                      //     }
+                      //     break;
+                      // }
                     }
                 }
                 curItems = foods.ToList();
@@ -292,15 +292,15 @@ public class Inventory : MonoBehaviour
                 {
                     foreach (var it in plants)
                     {
-                        if (item.data.itemName == it.data.itemName)
-                        {
-                            it.data.count -= 1;
-                            if (it.data.count <= 0)
-                            {
-                                plants.Remove(it);
-                            }
-                            break;
-                        }
+                      //  if (item.data.itemName == it.data.itemName)
+                      //  {
+                      //      it.data.count -= 1;
+                      //      if (it.data.count <= 0)
+                      //      {
+                      //          plants.Remove(it);
+                      //      }
+                      //      break;
+                      //  }
                     }
                 }
                 curItems = plants.ToList();

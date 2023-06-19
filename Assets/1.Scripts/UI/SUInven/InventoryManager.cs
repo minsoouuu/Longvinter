@@ -23,6 +23,7 @@ public class InventoryManager : MonoBehaviour
 
     [HideInInspector] public MakingController mc = null;
     [HideInInspector] public Dictionary<TitleType, List<Item>> itemDic = new Dictionary<TitleType, List<Item>>();
+    [HideInInspector] public Dictionary<ItemName, int> countDic = new Dictionary<ItemName, int>();
     private List<Slot> slots = new List<Slot>();
 
     [HideInInspector] public Toggle curToggle = null;
@@ -65,42 +66,6 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        /*  테스트 용
-        ItemDataSetController ic = Gamemanager.instance.itemController;
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            Debug.Log("장비 아이템 추가");
-            int rand = Random.Range(0, ic.equipments.Count);
-            ADItem(isAdd: true, item: ic.equipments[rand]);
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Debug.Log("재료 아이템 추가");
-            int rand = Random.Range(0, ic.materilas.Count);
-            ADItem(isAdd: true, item: ic.materilas[rand]);
-            
-
-            Debug.Log("장비 아이템 추가");
-            int rand = Random.Range(0, ic.equipments.Count);
-            ADItem(isAdd: false, item: ic.equipments[rand]);
-
-            MakingController mc = FindObjectOfType<MakingController>();
-            //mc.Ison = !mc.Ison;
-            //Debug.Log(mc.Ison ? "제작대 On" : "제작대 Off");
-        }
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            Debug.Log("음식 아이템 추가");
-            int rand = Random.Range(0, ic.foods.Count);
-            ADItem(isAdd: true, item: ic.foods[rand]);
-        }
-        if (Input.GetKeyDown(KeyCode.F4))
-        {
-            Debug.Log("설치 아이템 추가");
-            int rand = Random.Range(0, ic.plants.Count);
-            ADItem(isAdd: true, item:ic.plants[rand]);
-        }
-        */
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -167,6 +132,7 @@ public class InventoryManager : MonoBehaviour
     public void DeleteData(Item item)
     {
         itemDic[GetTitleType(item)].Remove(item);
+        countDic.Remove(item.data.itemName);
     }
 
     /// <summary>
@@ -199,6 +165,7 @@ public class InventoryManager : MonoBehaviour
             }
 
             itemDic[key].Add(item);
+            countDic.Add(item.data.itemName, 1);
 
             string commnet = $"{item.data.itemName} 을 획득했다 !";
             ToastPopUpManager.instance.Setcomment(commnet);
@@ -212,15 +179,25 @@ public class InventoryManager : MonoBehaviour
                 Debug.Log($"Item Name Check : {item.data.itemName}, {dicItem.data.itemName}");
                 if (item.data.itemName == dicItem.data.itemName)
                 {
-                    if(isAdd)
-                        dicItem.data.count++;
+                    if (isAdd)
+                    {
+                        countDic[dicItem.data.itemName]++;
+                        //dicItem.data.count++;
+                    }
                     else
                     {
-                        dicItem.data.count--;
+                        countDic[dicItem.data.itemName]--;
+                        //dicItem.data.count--;
+                        if (countDic[dicItem.data.itemName] <= 0)
+                        {
+                            DeleteData(dicItem);
+                        }
+                        /*
                         if (dicItem.data.count <= 0)
                         {
                             DeleteData(dicItem);
                         }
+                        */
                     }
                     break;
                 }

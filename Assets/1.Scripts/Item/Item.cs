@@ -6,7 +6,6 @@ public struct ItemData
 {
     public int price;
     public int serial;
-    public int count;
     public int stats;
     public Sprite image;
     public ItemName itemName;

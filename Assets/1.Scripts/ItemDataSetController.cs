@@ -5,12 +5,6 @@ using System;
 
 public class ItemDataSetController : MonoBehaviour
 {
-    enum DataType
-    {
-        Item,
-        Monster,
-    }
-
     public List<Item> equipments;
     public List<Item> materilas;
     public List<Item> foods;
@@ -20,16 +14,7 @@ public class ItemDataSetController : MonoBehaviour
     {
         SetData();
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F6))
-        {
-            foreach (var item in plants)
-            {
-                Debug.Log(item.data.price);
-            }
-        }
-    }
+
     void SetData()
     {
         JsonData jsonData = Gamemanager.instance.jsonDataController;
@@ -44,7 +29,6 @@ public class ItemDataSetController : MonoBehaviour
                     equipments[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.equimentData.equipments[j].type);
                     equipments[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.equimentData.equipments[j].name);
                     equipments[i].data.image = GetSpriteInAssets(EnumUtil<InvenItemType>.Parse(jsonData.equimentData.equipments[j].type), jsonData.equimentData.equipments[j].image);
-                    equipments[i].data.count = jsonData.equimentData.equipments[j].count;
                 }
             }
         }
@@ -59,7 +43,6 @@ public class ItemDataSetController : MonoBehaviour
                     materilas[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.materialData.materials[j].type);
                     materilas[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.materialData.materials[j].name);
                     materilas[i].data.image = GetSpriteInAssets(EnumUtil<InvenItemType>.Parse(jsonData.materialData.materials[j].type), jsonData.materialData.materials[j].image);
-                    materilas[i].data.count = jsonData.materialData.materials[j].count;
 
                 }
             }
@@ -75,7 +58,6 @@ public class ItemDataSetController : MonoBehaviour
                     foods[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.foodData.foods[j].type);
                     foods[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.foodData.foods[j].name);
                     foods[i].data.image = GetSpriteInAssets(EnumUtil<InvenItemType>.Parse(jsonData.foodData.foods[j].type), jsonData.foodData.foods[j].image);
-                    foods[i].data.count = jsonData.foodData.foods[j].count;
                     foods[i].data.stats = jsonData.foodData.foods[j].stats;
                 }
             }
@@ -91,7 +73,6 @@ public class ItemDataSetController : MonoBehaviour
                     plants[i].data.itemType = EnumUtil<InvenItemType>.Parse(jsonData.plantData.plants[j].type);
                     plants[i].data.itemName = EnumUtil<ItemName>.Parse(jsonData.plantData.plants[j].name);
                     plants[i].data.image = GetSpriteInAssets(EnumUtil<InvenItemType>.Parse(jsonData.plantData.plants[j].type), jsonData.plantData.plants[j].image);
-                    plants[i].data.count = jsonData.plantData.plants[j].count;
                 }
             }
         }
@@ -128,6 +109,7 @@ public class ItemDataSetController : MonoBehaviour
                 if (items[i][j].data.itemName == name)
                 {
                     item = items[i][j];
+                    break;
                 }
             }
         }
@@ -143,9 +125,8 @@ public class ItemDataSetController : MonoBehaviour
                 {
                     if (equipments[i].data.itemName == name)
                     {
-                        Item insItem = new Equipment();
-                        insItem.data = equipments[i].data;
-                        item = insItem;
+                        item = equipments[i];
+                        break;
                     }
                 }
                 break;
@@ -155,6 +136,7 @@ public class ItemDataSetController : MonoBehaviour
                     if (materilas[i].data.itemName == name)
                     {
                         item = materilas[i];
+                        break;
                     }
                 }
                 break;
@@ -163,8 +145,7 @@ public class ItemDataSetController : MonoBehaviour
                 {
                     if (foods[i].data.itemName == name)
                     {
-                        item = new Food();
-                        item.data = foods[i].data;
+                        item = foods[i];
                         break;
                     }
                 }
@@ -175,6 +156,7 @@ public class ItemDataSetController : MonoBehaviour
                     if (plants[i].data.itemName == name)
                     {
                         item = plants[i];
+                        break;
                     }
                 }
                 break;
