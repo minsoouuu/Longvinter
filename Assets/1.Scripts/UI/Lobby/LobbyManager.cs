@@ -11,6 +11,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Button joinButton;
     public GameObject setNick;
     public InputField nameField;
+    public GameObject settingUI;
     
 
     void Start()
@@ -54,5 +55,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             playerList.text = "\n" + PhotonNetwork.PlayerList[i].NickName;
         }
+    }
+
+    public void OnclickSettingUI()
+    {
+        settingUI.SetActive(true);
     }
 }
