@@ -185,6 +185,7 @@ public abstract class Monster : MonoBehaviour
     {
         if (monsterAction != MonsterAction.IsDead) 
         {
+            Debug.Log("Hurt");
             monsterData.hp -= _dmg;
 
             if (monsterData.hp <= 0)

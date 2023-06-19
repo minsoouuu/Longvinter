@@ -24154,5 +24154,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe8c55093f32e54abfa90e1f902cc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkEffect: {fileID: 0}
+  sparkEffect: {fileID: 1975959190090480}
   speed: 5
