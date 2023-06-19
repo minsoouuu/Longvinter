@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Portal : MonoBehaviour
+public class Portal2 : MonoBehaviour
 {
     public GameObject intertaction_img;
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<User>())
@@ -29,7 +28,7 @@ public class Portal : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("House");
             }
         }
     }
