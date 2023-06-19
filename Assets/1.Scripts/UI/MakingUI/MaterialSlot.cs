@@ -21,7 +21,6 @@ public class MaterialSlot : MonoBehaviour
             {
                 itemIcon.sprite = item.data.image;
                 makeController.items.Add(ItemData.data.itemName);
-                Debug.Log($"{gameObject.name}::{ItemData.data.count}");
             }
             else
             {
@@ -46,7 +45,6 @@ public class MaterialSlot : MonoBehaviour
         }
 
         //Item materialItem = Gamemanager.instance.itemController.GetItem(ItemData.data.itemName);
-        ItemData.data.count = 1;
         Gamemanager.instance.player.im.ADItem(ItemData, true);
 
         if (makeController.items.Contains(ItemData.data.itemName))

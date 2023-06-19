@@ -13,6 +13,7 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
     private Dictionary<PopType, Queue<PopUp>> popPools = new Dictionary<PopType, Queue<PopUp>>();
+    private Dictionary<WeaponName, Queue<Weapon>> weaponPolls = new Dictionary<WeaponName, Queue<Weapon>>();
     private Queue<FishingController> fishingPools = new Queue<FishingController>();
     private Queue<PocketController> pocketPools = new Queue<PocketController>();
 
@@ -28,7 +29,8 @@ public class ObjectPoolSystem : MonoBehaviour
             Enum.GetValues(typeof(ItemName)).Length,
             Enum.GetValues(typeof(MonsterType)).Length,
             Enum.GetValues(typeof(HouseType)).Length,
-            Enum.GetValues(typeof(PopType)).Length
+            Enum.GetValues(typeof(PopType)).Length,
+            Enum.GetValues(typeof(WeaponName)).Length
         };
         for (int i = 0; i < typeCount.Length; i++)
         {
@@ -51,9 +53,18 @@ public class ObjectPoolSystem : MonoBehaviour
                     case 4:
                         popPools[(PopType)(j)] = new Queue<PopUp>();
                         break;
+                    case 5:
+                        weaponPolls[(WeaponName)(j)] = new Queue<Weapon>();
+                        break;
                 }
             }
         }
+    }
+    public void ReturnObject(WeaponName name, Weapon obj)
+    {
+        obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
+        weaponPolls[name].Enqueue(obj);
     }
     public void ReturnObject(ObjectType objectType, Merchant obj)
     {
@@ -111,6 +122,23 @@ public class ObjectPoolSystem : MonoBehaviour
                 obj = Instantiate(slotPrefabs[1]);
             }
             
+        }
+        obj.gameObject.SetActive(true);
+        return obj;
+    }
+    public Weapon GetObjectOfObjectPooling(WeaponName name)
+    {
+        Weapon obj = null;
+
+        if (weaponPolls[name].Count != 0)
+        {
+            obj = weaponPolls[name].Dequeue();
+        }
+        else
+        {
+            string path = $"Weapon/{name}";
+            Weapon weapon = Resources.Load<Weapon>(path);
+            obj = Instantiate(weapon);
         }
         obj.gameObject.SetActive(true);
         return obj;

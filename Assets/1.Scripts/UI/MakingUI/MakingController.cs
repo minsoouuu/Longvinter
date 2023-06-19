@@ -49,14 +49,13 @@ public class MakingController : MonoBehaviour
         if (items.Count >= 3)
             return;
 
-        Item materialItem = Gamemanager.instance.itemController.GetItem(item.data.itemName,item.data.itemType);
 
         for (int i = 0; i < materialSlot.Length; i++)
         {
             if (materialSlot[i].ItemData == null)
             {
-                materialSlot[i].ItemData = materialItem;
-                Gamemanager.instance.player.im.ADItem(materialItem, false);
+                materialSlot[i].ItemData = item;
+                Gamemanager.instance.player.im.ADItem(item, false);
                 break;
             }
         }

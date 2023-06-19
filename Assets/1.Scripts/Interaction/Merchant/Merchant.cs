@@ -31,14 +31,12 @@ public class Merchant : MonoBehaviour
     {
         Gamemanager.instance.inventory.ADItem(itemdata, false);
         //inven.Money += itemdata.data.price;
-        if(itemdata.data.count <= 0)
+        if(Gamemanager.instance.player.im.countDic[itemdata.data.itemName] <= 0)
         {
             Gamemanager.instance.objectPool.ReturnObject(mc.myTypeS, this);
             mc.merchant_slist.Remove(this.itemdata);
             mc.slot_list.Remove(this);
-            this.itemdata.data.count = 1;
         }
-        
     }
 
     // 데이터 세팅
@@ -48,6 +46,4 @@ public class Merchant : MonoBehaviour
         image.sprite = itemdata.data.image;
         mk.text = itemdata.data.price.ToString();
     }
-    
-    
 }

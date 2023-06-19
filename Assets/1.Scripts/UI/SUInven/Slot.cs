@@ -79,11 +79,6 @@ public class Slot : MonoBehaviour
             popup.Enable(false);
         }
 
-        if (item.data.count - 1 <= 0)
-        {
-
-        }
-
         string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
         TwoButtonPopUpManager.instance.SetCommnet(commnet, ItemDelete);
     }

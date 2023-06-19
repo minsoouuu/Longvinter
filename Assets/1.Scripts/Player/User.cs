@@ -53,8 +53,18 @@ public class User : MonoBehaviour
     public Image interactionImage;
     public InventoryManager im;
 
+    private Weapon weapon = null;
     private float curHp = 100f;
 
+    // 무기 장착할때 여기로 데이터 넣어주면 됨
+    public Weapon Weapon
+    {
+        get { return weapon; }
+        set
+        {
+            weapon = value;
+        }
+    }
     public float HP
     {
         get { return curHp; }
@@ -69,6 +79,8 @@ public class User : MonoBehaviour
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
         //curHp = maxHp;
+
+        Weapon = Resources.Load<Weapon>($"Weapon/WaterMelonSword");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -285,6 +297,13 @@ public class User : MonoBehaviour
 
     public void Attack()
     {
-        Instantiate(weaponPrefab, pos.position, pos.rotation);
+        if (Weapon == null)
+            return;
+
+        Weapon weapon = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(Weapon.myName);
+        weapon.transform.position = transform.position;
+        weapon.transform.rotation = transform.rotation;
+
+        //Instantiate(weaponPrefab, pos.position, pos.rotation);
     }
 }

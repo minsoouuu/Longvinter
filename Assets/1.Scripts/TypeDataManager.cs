@@ -124,6 +124,12 @@ public enum HouseType
     Test3,
     Test4
 }
+
+public enum WeaponName
+{
+    WaterMelonSword,
+}
+
 public static class EnumUtil<T>
 {
     public static T Parse(string s)
