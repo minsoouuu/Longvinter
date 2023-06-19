@@ -15,6 +15,7 @@ public class TestScripts : MonoBehaviour
                 int rand = Random.Range(0, Gamemanager.instance.itemController.foods.Count);
                 po.AddItem(Gamemanager.instance.itemController.GetItem(Gamemanager.instance.itemController.foods[rand].data.itemName,
                            Gamemanager.instance.itemController.foods[rand].data.itemType));
+                Debug.Log($"{Gamemanager.instance.itemController.foods[rand].data.image}");
             }
         }
     }

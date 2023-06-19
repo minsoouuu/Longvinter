@@ -77,7 +77,7 @@ public class PocketController : MonoBehaviour
         {
             for (int i = 0; i < items.Count; i++)
             {
-                pocketSlots[i].Item = items[i];
+                pocketSlots[i].SetData(items[i]);
             }
             isOpened = true;
         }
@@ -85,6 +85,10 @@ public class PocketController : MonoBehaviour
     public void AddItem(Item item)
     {
         items.Add(item);
+        if (item != null)
+        {
+            Debug.Log($"{items.Count}");
+        }
     }
     void OnButtonDownESC()
     {
@@ -103,11 +107,9 @@ public class PocketController : MonoBehaviour
     {
         for (int i = 0; i < pocketSlots.Count; i++)
         {
-            if (pocketSlots[i].Item != null)
-            {
-                pocketSlots[i].Item = null;
-            }
+            pocketSlots[i].DeleteData();
         }
+
         items.Clear();
         isOpened = false;
         isOpen = false;

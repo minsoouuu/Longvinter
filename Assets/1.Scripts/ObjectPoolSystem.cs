@@ -19,7 +19,6 @@ public class ObjectPoolSystem : MonoBehaviour
     private void Awake()
     {
         DataSetting();
-
     }
     void DataSetting()
     {

@@ -68,7 +68,7 @@ public class ItemDataSetController : MonoBehaviour
         {
             for (int j = 0; j < jsonData.foodData.foods.Count; j++)
             {
-                if (foods[i].gameObject.name == jsonData.foodData.foods[j].name)
+                if (foods[i].name == jsonData.foodData.foods[j].name)
                 {
                     foods[i].data.price = jsonData.foodData.foods[j].price;
                     foods[i].data.serial = jsonData.foodData.foods[j].serial;
@@ -165,6 +165,7 @@ public class ItemDataSetController : MonoBehaviour
                     {
                         item = new Food();
                         item.data = foods[i].data;
+                        break;
                     }
                 }
                 break;

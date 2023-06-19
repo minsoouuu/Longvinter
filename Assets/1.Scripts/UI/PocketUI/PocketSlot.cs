@@ -15,7 +15,7 @@ public class PocketSlot : MonoBehaviour
         set
         {
             item = value;
-            if (item != null)
+            if (Item != null)
             {
                 icon.sprite = Item.data.image;
                 Debug.Log($"{gameObject.name}:{Item.data.itemName}");
@@ -31,9 +31,20 @@ public class PocketSlot : MonoBehaviour
         nullSprite = Resources.Load<Sprite>("Longvinter_Icons/Gradient");
         button.onClick.AddListener(() => OnButtonDown());
     }
+    public void SetData(Item item)
+    {
+        Item = item;
+        icon.sprite = Item.data.image;
+        Debug.Log($"{gameObject.name}:{Item.data.itemName}");
+    }
+    public void DeleteData()
+    {
+        Item = null;
+        icon.sprite = nullSprite;
+    }
     public void OnButtonDown()
     {
-        if (Item == null)
+        if (icon.sprite == nullSprite)
             return;
 
         Gamemanager.instance.player.im.ADItem(Item, true);
