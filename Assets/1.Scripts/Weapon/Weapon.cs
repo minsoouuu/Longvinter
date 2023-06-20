@@ -76,6 +76,7 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
+    /*
     void ShowEffect(Collision target)
     {
         ContactPoint contact = target.contacts[0];
@@ -83,6 +84,7 @@ public abstract class Weapon : MonoBehaviour
         GameObject spark = Instantiate(sparkEffect, contact.point - (contact.normal * 0.5f), rot);
         spark.transform.SetParent(this.transform);
     }
+    */
 
     void ReturnObject()
     {
