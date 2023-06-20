@@ -61,4 +61,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         settingUI.SetActive(true);
     }
+
+    public void OnClickBackToLobby()
+    {
+        settingUI.SetActive(false);
+    }
 }
