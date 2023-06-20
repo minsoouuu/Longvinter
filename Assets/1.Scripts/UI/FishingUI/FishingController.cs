@@ -12,6 +12,7 @@ public class FishingController : MonoBehaviour
 
     [HideInInspector] public FishingManager fM;
 
+    private List<Item> dropItems = new List<Item>();
     private float handleSpeed = 1000f;
 
     bool isTurn = true;
@@ -19,6 +20,9 @@ public class FishingController : MonoBehaviour
     Vector2 maxPos;
     private void Awake()
     {
+        dropItems.Add(Gamemanager.instance.itemController.GetItem(ItemName.Tuna));
+        dropItems.Add(Gamemanager.instance.itemController.GetItem(ItemName.Fuel));
+
         handleRT = handle.GetComponent<RectTransform>();
         maxPos = new Vector2(backRT.rect.xMax * 2, backRT.rect.yMax * 2);
     }
@@ -78,13 +82,9 @@ public class FishingController : MonoBehaviour
         }
     }
     void FinishEvent()
-    { 
-        // Å×½ºÆ®
-        int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemName)).Length);
-        ItemName itemName = (ItemName)rand;
-        Item item = Gamemanager.instance.itemController.GetItem(itemName);
-        Gamemanager.instance.player.im.ADItem(item, true);
-        //
+    {
+        int rand = UnityEngine.Random.Range(0, dropItems.Count);
+        Gamemanager.instance.player.im.ADItem(dropItems[rand], true);
 
         fM.IsOn = true;
         Gamemanager.instance.player.isMove = true;

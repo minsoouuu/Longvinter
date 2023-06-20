@@ -107,8 +107,10 @@ public enum ItemName
 
     #endregion
 }
-
-
+public enum FishName
+{
+    Tuna,
+}
 public enum MonsterType
 {
     Rat,

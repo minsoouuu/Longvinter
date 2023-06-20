@@ -13,9 +13,12 @@ public class ObjectPoolSystem : MonoBehaviour
     private Dictionary<MonsterType, Queue<Monster>> monsterPools = new Dictionary<MonsterType, Queue<Monster>>();
     private Dictionary<HouseType, Queue<House>> housePools = new Dictionary<HouseType, Queue<House>>();
     private Dictionary<PopType, Queue<PopUp>> popPools = new Dictionary<PopType, Queue<PopUp>>();
-    private Dictionary<WeaponName, Queue<Weapon>> weaponPolls = new Dictionary<WeaponName, Queue<Weapon>>();
+    private Dictionary<WeaponName, Queue<Weapon>> weaponPools = new Dictionary<WeaponName, Queue<Weapon>>();
+    private Dictionary<FishName, Queue<Fish>> fishPools = new Dictionary<FishName, Queue<Fish>>();
+
     private Queue<FishingController> fishingPools = new Queue<FishingController>();
     private Queue<PocketController> pocketPools = new Queue<PocketController>();
+
 
     private void Awake()
     {
@@ -30,8 +33,10 @@ public class ObjectPoolSystem : MonoBehaviour
             Enum.GetValues(typeof(MonsterType)).Length,
             Enum.GetValues(typeof(HouseType)).Length,
             Enum.GetValues(typeof(PopType)).Length,
-            Enum.GetValues(typeof(WeaponName)).Length
+            Enum.GetValues(typeof(WeaponName)).Length,
+            Enum.GetValues(typeof(FishName)).Length
         };
+
         for (int i = 0; i < typeCount.Length; i++)
         {
             for (int j = 0; j < typeCount[i]; j++)
@@ -54,17 +59,26 @@ public class ObjectPoolSystem : MonoBehaviour
                         popPools[(PopType)(j)] = new Queue<PopUp>();
                         break;
                     case 5:
-                        weaponPolls[(WeaponName)(j)] = new Queue<Weapon>();
+                        weaponPools[(WeaponName)(j)] = new Queue<Weapon>();
+                        break;
+                    case 6:
+                        fishPools[(FishName)(j)] = new Queue<Fish>();
                         break;
                 }
             }
         }
     }
+    public void ReturnObject(FishName name, Fish obj)
+    {
+        obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
+        fishPools[name].Enqueue(obj);
+    }
     public void ReturnObject(WeaponName name, Weapon obj)
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
-        weaponPolls[name].Enqueue(obj);
+        weaponPools[name].Enqueue(obj);
     }
     public void ReturnObject(ObjectType objectType, Merchant obj)
     {
@@ -126,13 +140,30 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
+    public Fish GetObjectOfObjectPooling(FishName name)
+    {
+        Fish obj = null;
+
+        if (fishPools[name].Count != 0)
+        {
+            obj = fishPools[name].Dequeue();
+        }
+        else
+        {
+            string path = $"Fishing/{name}";
+            Fish fish = Resources.Load<Fish>(path);
+            obj = Instantiate(fish);
+        }
+        obj.gameObject.SetActive(true);
+        return obj;
+    }
     public Weapon GetObjectOfObjectPooling(WeaponName name)
     {
         Weapon obj = null;
 
-        if (weaponPolls[name].Count != 0)
+        if (weaponPools[name].Count != 0)
         {
-            obj = weaponPolls[name].Dequeue();
+            obj = weaponPools[name].Dequeue();
         }
         else
         {
