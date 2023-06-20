@@ -11,6 +11,7 @@ public abstract class Weapon : MonoBehaviour
     private User thePlayer;
 
     public WeaponName myName = new WeaponName();
+    private Coroutine coroutine = null;
 
     public abstract void Initallize();
     private void Start()
@@ -19,9 +20,41 @@ public abstract class Weapon : MonoBehaviour
         Initallize();
     }
 
+    private void OnEnable()
+    {
+        if (coroutine == null)
+        {
+            coroutine = StartCoroutine("Disappear");
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+    }
+
     private void Update()
     {
-        GetComponent<Rigidbody>().AddForce(transform.up * speed * -1);
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        //GetComponent<Rigidbody>().AddForce(transform.up * speed *-1);
+    }
+
+    IEnumerator Disappear()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        try
+        {
+            ReturnObject();
+        }
+        catch (ArgumentOutOfRangeException e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
     private void OnTriggerEnter(Collider target)
@@ -31,7 +64,15 @@ public abstract class Weapon : MonoBehaviour
             Monster m = target.GetComponent<Monster>();
             m.Damage(999, thePlayer.transform.position);
             //ShowEffect(target);
-            ReturnObject();
+
+            try
+            {
+                ReturnObject();
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 
@@ -48,9 +89,4 @@ public abstract class Weapon : MonoBehaviour
         Gamemanager.instance.objectPool.ReturnObject(myName,this);
     }
 
-    void OnBecameInvisible()
-    {
-        ReturnObject();
-        //Destroy(this.gameObject);
-    }
 }

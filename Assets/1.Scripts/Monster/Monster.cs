@@ -175,7 +175,10 @@ public abstract class Monster : MonoBehaviour
 
         if (monsterAction == MonsterAction.IsRunning)
         {
-            nav.destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
+            Vector3 runDirection = new Vector3(_targetPos.x - transform.position.x, 0f, _targetPos.z - transform.position.z).normalized;
+            transform.rotation = Quaternion.LookRotation(runDirection * -1);
+            nav.destination = runDirection * -1;
+            
         }
         Debug.Log("Runaway");
         Move();

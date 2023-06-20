@@ -301,8 +301,8 @@ public class User : MonoBehaviour
             return;
 
         Weapon weapon = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(Weapon.myName);
-        weapon.transform.position = transform.position;
-        weapon.transform.rotation = transform.rotation;
+        weapon.transform.position = pos.position;
+        weapon.transform.rotation = pos.rotation;
 
         //Instantiate(weaponPrefab, pos.position, pos.rotation);
     }
