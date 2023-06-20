@@ -177,6 +177,9 @@ public class BuildingSystem : MonoBehaviour
             case "Tent":
                 InitWithObject(prefab[1]);
                 break;
+            case "Bench":
+                InitWithObject(prefab[2]);
+                break;
         }
     }
 

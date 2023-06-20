@@ -7,7 +7,8 @@ public class HandlingObject : MonoBehaviour
     public enum PlantKind
     {
         House,
-        Fence
+        Fence,
+        Shelf
     }
     Vector3 offset;
     public bool PlacedH { get; private set; }
