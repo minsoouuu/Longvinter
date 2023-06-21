@@ -10,8 +10,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Text playerList;
     public Button joinButton;
     public GameObject setNick;
-    public InputField nameField;
+    public GameObject quitPopup;
     public GameObject settingUI;
+    public GameObject guideUI;
+    public InputField nameField;
     
 
     void Start()
@@ -57,7 +59,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OnclickSettingUI()
+    public void OnClickSettingUI()
     {
         settingUI.SetActive(true);
     }
@@ -65,5 +67,31 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnClickBackToLobby()
     {
         settingUI.SetActive(false);
+    }
+
+    public void OnClickGuideUI()
+    {
+        guideUI.SetActive(true);
+    }
+
+    public void OnClickBackToSetting()
+    {
+        guideUI.SetActive(false);
+    }
+    
+    public void OnClickQuit()
+    {
+        quitPopup.SetActive(true);
+    }
+
+    public void YesQuit()
+    {
+        Debug.Log("게임 종료");
+        Application.Quit();
+    }
+
+    public void NoQuit()
+    {
+        quitPopup.SetActive(false);
     }
 }
