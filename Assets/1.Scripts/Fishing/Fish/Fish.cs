@@ -14,6 +14,7 @@ public abstract class Fish : MonoBehaviour
     {
         Idle,
         Move,
+        Die,
     }
 
     [SerializeField] private NavMeshAgent nav;
@@ -22,25 +23,54 @@ public abstract class Fish : MonoBehaviour
     public FishingManager fm;
     public DropItem dropItem = new DropItem();
 
+    [SerializeField] private Vector3 nextPos;
+
     State curState = State.Idle;
+
+
 
     private void Start()
     {
         Initillize();
-        nav.SetDestination(GetRandomMovePoint());
+        nextPos = GetRandomMovePoint();
+        nav.SetDestination(nextPos);
+        Debug.Log(nextPos);
     }
     public abstract void Initillize();
 
     private void Update()
     {
+        if (curState == State.Die)
+            return;
 
     }
-    
-    void SetAnimation(string name)
+    void Move()
     {
-        animator.SetTrigger(name);
+        Vector3 curPos = transform.position; // 현재 위치
+        float dis = Vector3.Distance(curPos, nextPos); // 목표 위치
+        
+        if (dis <= 2f)
+        {
+            StartCoroutine(MoveWaitingTime());
+            Debug.Log(nextPos);
+        }
     }
+    IEnumerator MoveWaitingTime()
+    {
+        curState = State.Idle;
+        SetAnimation(curState);
 
+        yield return new WaitForSeconds(1f);
+        curState = State.Move;
+        SetAnimation(curState);
+        nextPos = GetRandomMovePoint();
+        nav.SetDestination(nextPos);
+        Debug.Log(nextPos);
+    }
+    void SetAnimation(State state)
+    {
+        animator.SetTrigger(state.ToString());
+    }
     Vector3 GetRandomMovePoint()
     {
         float randPoint_x = fm.boxCol.bounds.size.x;
