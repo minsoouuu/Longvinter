@@ -44,7 +44,7 @@ public class FishingManager : MonoBehaviour
     {
         WaitForSeconds wait = new WaitForSeconds(5f);
 
-        while (true)
+        while (fishCount <= 5)
         {
             if (fishCount <= 5)
             {

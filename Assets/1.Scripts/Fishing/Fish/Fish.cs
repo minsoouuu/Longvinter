@@ -27,12 +27,13 @@ public abstract class Fish : MonoBehaviour
     private void Start()
     {
         Initillize();
+        nav.SetDestination(GetRandomMovePoint());
     }
     public abstract void Initillize();
 
     private void Update()
     {
-       
+
     }
     
     void SetAnimation(string name)
