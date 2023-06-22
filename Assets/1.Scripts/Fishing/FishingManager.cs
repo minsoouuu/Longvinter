@@ -24,7 +24,9 @@ public class FishingManager : MonoBehaviour
         if (fishCount > 5)
             return;
 
-        Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(FishName.Tuna);
+        int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(FishName)).Length);
+
+        Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling((FishName)rand);
         fish.transform.position = GetRandomSpawnPoint();
         fish.transform.SetParent(transform);
         fish.fm = this;
