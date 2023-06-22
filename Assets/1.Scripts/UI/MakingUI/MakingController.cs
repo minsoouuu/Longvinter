@@ -20,6 +20,7 @@ public class MakingController : MonoBehaviour
 
     private void Start()
     {
+        Gamemanager.instance.makingController = this;
         recipes = Gamemanager.instance.jsonDataController.recipeData.recipe.ToList();
         button.onClick.AddListener(() => OnButtonDownComplete());
     }
