@@ -70,7 +70,6 @@ public class BuildingSystem : MonoBehaviour
 
                 // 타일 색칠하기
                 PlantArea(startpos, selectedObject.Size, resultTile);
-                DeleteArea();
                 //Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
                 selectedObject = null;
             }
@@ -143,9 +142,7 @@ public class BuildingSystem : MonoBehaviour
     // 타일 미리보기
     public void TakenArea(Vector3Int startpos, Vector3Int size)
     {
-#if UNITY_EDITOR
-        mainTilemap.EditorPreviewBoxFill(startpos, takenTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
-#endif
+        mainTilemap.BoxFill(startpos, takenTile, startpos.x, startpos.y, startpos.x + (size.x - 1), startpos.y + (size.y - 1));
     }
 
     // 타일 색칠하기
@@ -158,9 +155,7 @@ public class BuildingSystem : MonoBehaviour
     // 미리보기 타일 지우기
     public void DeleteArea()
     {
-#if UNITY_EDITOR
-        mainTilemap.ClearAllEditorPreviewTiles();
-#endif
+        mainTilemap.SwapTile(takenTile, originalTile);
     }
 
 
