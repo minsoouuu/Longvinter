@@ -10,7 +10,7 @@ public class FishingController : MonoBehaviour
     [SerializeField] private RectTransform handleRT;
     [SerializeField] private RectTransform backRT;
 
-    [HideInInspector] public FishingManager fM;
+    [HideInInspector] public Fish fish;
 
     private List<Item> dropItems = new List<Item>();
     private float handleSpeed = 1000f;
@@ -83,16 +83,23 @@ public class FishingController : MonoBehaviour
     }
     void FinishEvent()
     {
-        int rand = UnityEngine.Random.Range(0, dropItems.Count);
-        Gamemanager.instance.player.im.ADItem(dropItems[rand], true);
+        int rand = UnityEngine.Random.Range(0, fish.fishData.items.Count);
+        Item item = Gamemanager.instance.itemController.GetItem(fish.fishData.items[rand].data.itemName);
 
-        fM.IsOn = true;
+        // 아이템 떨굴때
+        //PocketController pocket = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
+        //pocket.AddItem(item);
+        //pocket.transform.SetParent(Gamemanager.instance.parentDropItem.transform);
+
+        // 아이템을 인벤으로 바로 
+        Gamemanager.instance.player.im.ADItem(item, true);
+
         Gamemanager.instance.player.isMove = true;
+        Gamemanager.instance.objectPool.ReturnObject(fish.fishName, fish);
         Gamemanager.instance.objectPool.ReturnObject(this);
     }
     void FailEvent()
     {
-        fM.IsOn = true;
         Gamemanager.instance.player.isMove = true;
         Gamemanager.instance.objectPool.ReturnObject(this);
     }

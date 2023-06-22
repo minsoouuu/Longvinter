@@ -17,28 +17,19 @@ public class FishingManager : MonoBehaviour
     private void Start()
     {
         IsOn = true;
-        StartCoroutine(FishSpawn());
+        InvokeRepeating("Spawn", 0f, 5);
     }
-    private void Update()
+    void Spawn()
     {
-        if (isIn == false) return;
+        if (fishCount > 5)
+            return;
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (IsOn == true)
-            {
-                IsOn = false;
-                Gamemanager.instance.player.isMove = false;
-                popUp.SetActive(false);
-                FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
-                fishing.transform.SetParent(transform);
+        Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(FishName.Tuna);
+        fish.transform.position = GetRandomSpawnPoint();
+        fish.transform.SetParent(transform);
+        fish.fm = this;
+        fishCount++;
 
-                if (fishing.fM == null)
-                {
-                    fishing.fM = this;
-                }
-            }
-        }
     }
     IEnumerator FishSpawn()
     {
@@ -69,6 +60,7 @@ public class FishingManager : MonoBehaviour
 
         return randPos + transform.position;
     }
+    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -85,4 +77,5 @@ public class FishingManager : MonoBehaviour
             popUp.SetActive(false);
         }
     }
+    */
 }

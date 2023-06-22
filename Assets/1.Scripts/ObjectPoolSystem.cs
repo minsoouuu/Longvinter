@@ -70,6 +70,7 @@ public class ObjectPoolSystem : MonoBehaviour
     }
     public void ReturnObject(FishName name, Fish obj)
     {
+        Debug.Log("¹°°í±â ¹Ý³³");
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
         fishPools[name].Enqueue(obj);

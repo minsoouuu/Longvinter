@@ -19,6 +19,7 @@ public class User : MonoBehaviour
 
     [HideInInspector] public bool isMove = true;
     [HideInInspector] public float maxHp = 100f;
+
     [SerializeField] public GameObject weaponPrefab;
     [SerializeField] public Transform pos;
 
@@ -137,6 +138,7 @@ public class User : MonoBehaviour
         }
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
+
 
     private void Update()
     {

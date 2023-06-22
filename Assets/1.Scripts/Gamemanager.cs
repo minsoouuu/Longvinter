@@ -13,6 +13,8 @@ public  class Gamemanager : MonoBehaviour
     public ItemDataSetController itemController;
     public Transform parentDropItem;
     public MakingController makingController;
+    public InteractionUIManager interUI;
+
     void Awake()
     {
         if (instance != null)

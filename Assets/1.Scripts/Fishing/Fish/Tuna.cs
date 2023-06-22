@@ -6,7 +6,10 @@ public class Tuna : Fish
 {
     public override void Initillize()
     {
-        dropItem.items = new List<Item>();
-        dropItem.items.Add(Gamemanager.instance.itemController.GetItem(ItemName.Tuna));
+        fishData.items = new List<Item>();
+        fishData.items.Add(Gamemanager.instance.itemController.GetItem(ItemName.Tuna));
+        fishData.speed = 1f;
+
+        fishName = FishName.Tuna;
     }
 }

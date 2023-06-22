@@ -5,9 +5,10 @@ using UnityEngine.AI;
 
 public abstract class Fish : MonoBehaviour
 {
-    public struct DropItem
+    public struct FishData
     {
         public List<Item> items;
+        public float speed;
     }
 
     public enum State
@@ -15,7 +16,8 @@ public abstract class Fish : MonoBehaviour
         Idle,
         Move,
         Die,
-        Jump
+        Jump,
+        Fear,
     }
 
     [SerializeField] private NavMeshAgent nav;
@@ -25,18 +27,19 @@ public abstract class Fish : MonoBehaviour
     private Coroutine coroutine = null;
 
     public FishingManager fm;
-    public DropItem dropItem = new DropItem();
-
+    public FishData fishData = new FishData();
+    public FishName fishName = new FishName();
     [SerializeField] private Vector3 nextPos;
 
-    public State curState = State.Idle;
+    State curState = State.Idle;
 
-
+    public bool IsIn { get; set; }
     private void Start()
     {
         Initillize();
         nextPos = GetRandomMovePoint();
         nav.SetDestination(nextPos);
+        nav.speed = fishData.speed;
        
     }
     public abstract void Initillize();
@@ -45,6 +48,11 @@ public abstract class Fish : MonoBehaviour
         if (coroutine == null)
         {
             coroutine = StartCoroutine(Jump());
+        }
+
+        if (nav.enabled == false)
+        {
+            nav.enabled = true;
         }
     }
     private void OnDisable()
@@ -60,65 +68,154 @@ public abstract class Fish : MonoBehaviour
         if (curState == State.Die)
             return;
 
+        float dis = Vector3.Distance(transform.position, Gamemanager.instance.player.transform.position);
+
+        if (dis <= 1f)
+        {
+            IsIn = true;
+        }
+        else
+        {
+            if (IsIn == true)
+            {
+                IsIn = false;
+            }
+        }
+
+        if (IsIn)
+        {
+            if (Gamemanager.instance.interUI.IsOn == false)
+            {
+                Debug.Log("접근");
+                Gamemanager.instance.interUI.SetUi("R", "낚시");
+                Gamemanager.instance.interUI.IsOn = true;
+
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Debug.Log("낚시 시작");
+                    nav.enabled = false;
+                    curState = State.Fear;
+                    SetAnimation(curState);
+                    FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
+                    fishing.transform.SetParent(transform);
+
+                    if (fishing.fish == null)
+                    {
+                        fishing.fish = this;
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            if (Gamemanager.instance.interUI.IsOn == true)
+            {
+                Gamemanager.instance.interUI.IsOn = false;
+                Gamemanager.instance.interUI.DeleteUI();
+            }
+        }
+
+
+        return;
+        if (dis <= 1f)
+        {
+            if (IsIn == true)
+                return;
+            
+            IsIn = true;
+
+            if (Gamemanager.instance.interUI.IsOn == false)
+            {
+                Debug.Log("접근");
+                Gamemanager.instance.interUI.SetUi("R", "낚시");
+                Gamemanager.instance.interUI.IsOn = true;
+
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Debug.Log("낚시 시작");
+                    nav.enabled = false;
+                    curState = State.Fear;
+                    SetAnimation(curState);
+                    FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
+                    fishing.transform.SetParent(transform);
+
+                    if (fishing.fish == null)
+                    {
+                        fishing.fish = this;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (IsIn == true && Gamemanager.instance.interUI.IsOn == true)
+            {
+                IsIn = false;
+                Gamemanager.instance.interUI.IsOn = false;
+                Gamemanager.instance.interUI.DeleteUI();
+            }
+        }
+
         Move();
     }
     void Move()
     {
         Vector3 curPos = transform.position; // 현재 위치
-        float dis = Vector3.Distance(curPos, nextPos); // 목표 위치
+        float dis = (curPos - nextPos).sqrMagnitude;
         
-        if (dis <= 2f)
+        if (dis <= 2f * 2f)
         {
             StartCoroutine(MoveWaitingTime());
         }
     }
-
+    
     IEnumerator Jump()
     {
         WaitForSeconds wait = new WaitForSeconds(5f);
-
-        int randJumpPower = Random.Range(0, 10);
-        Vector3 jump = new Vector3(0, randJumpPower, 0);
+        WaitForSeconds delay = new WaitForSeconds(1f);
 
         while (true)
         {
-            rigidbody.AddForce(jump, ForceMode.Impulse);
-            Debug.Log("점프!");
-            yield return wait;
+            if (curState != State.Jump)
+            {
+                curState = State.Jump;
+                SetAnimation(curState);
+
+                yield return delay;
+                curState = State.Move;
+                SetAnimation(curState);
+                Debug.Log("점프!");
+
+                yield return wait;
+            }
         }
     }
-    IEnumerator MoveWaitingTime()
+    public IEnumerator MoveWaitingTime()
     {
-        curState = State.Idle;
-        SetAnimation(curState);
-
-        yield return new WaitForSeconds(1f);
-        curState = State.Move;
-        SetAnimation(curState);
-        nextPos = GetRandomMovePoint();
-        nav.SetDestination(nextPos);
-        Debug.Log("대기");
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("FishingZone"))
+        if (curState != State.Idle)
         {
+            Debug.Log("대기");
             curState = State.Idle;
             SetAnimation(curState);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("FishingZone"))
-        {
-            curState = State.Jump;
+
+            yield return new WaitForSeconds(2f);
+            curState = State.Move;
             SetAnimation(curState);
+            nextPos = GetRandomMovePoint();
+            nav.SetDestination(nextPos);
         }
     }
     void SetAnimation(State state)
     {
         animator.SetTrigger(state.ToString());
     }
+    public void Die()
+    {
+        curState = State.Die;
+        SetAnimation(curState);
+    }
+  
     Vector3 GetRandomMovePoint()
     {
         float randPoint_x = fm.boxCol.bounds.size.x;
