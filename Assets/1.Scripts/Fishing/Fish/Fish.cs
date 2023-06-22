@@ -15,18 +15,21 @@ public abstract class Fish : MonoBehaviour
         Idle,
         Move,
         Die,
+        Jump
     }
 
     [SerializeField] private NavMeshAgent nav;
     [SerializeField] private Animator animator;
+    [SerializeField] private Rigidbody rigidbody;
+
+    private Coroutine coroutine = null;
 
     public FishingManager fm;
     public DropItem dropItem = new DropItem();
 
     [SerializeField] private Vector3 nextPos;
 
-    State curState = State.Idle;
-
+    public State curState = State.Idle;
 
 
     private void Start()
@@ -34,15 +37,30 @@ public abstract class Fish : MonoBehaviour
         Initillize();
         nextPos = GetRandomMovePoint();
         nav.SetDestination(nextPos);
-        Debug.Log(nextPos);
+       
     }
     public abstract void Initillize();
-
+    private void OnEnable()
+    {
+        if (coroutine == null)
+        {
+            coroutine = StartCoroutine(Jump());
+        }
+    }
+    private void OnDisable()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+    }
     private void Update()
     {
         if (curState == State.Die)
             return;
 
+        Move();
     }
     void Move()
     {
@@ -52,7 +70,21 @@ public abstract class Fish : MonoBehaviour
         if (dis <= 2f)
         {
             StartCoroutine(MoveWaitingTime());
-            Debug.Log(nextPos);
+        }
+    }
+
+    IEnumerator Jump()
+    {
+        WaitForSeconds wait = new WaitForSeconds(5f);
+
+        int randJumpPower = Random.Range(0, 10);
+        Vector3 jump = new Vector3(0, randJumpPower, 0);
+
+        while (true)
+        {
+            rigidbody.AddForce(jump, ForceMode.Impulse);
+            Debug.Log("점프!");
+            yield return wait;
         }
     }
     IEnumerator MoveWaitingTime()
@@ -65,7 +97,23 @@ public abstract class Fish : MonoBehaviour
         SetAnimation(curState);
         nextPos = GetRandomMovePoint();
         nav.SetDestination(nextPos);
-        Debug.Log(nextPos);
+        Debug.Log("대기");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("FishingZone"))
+        {
+            curState = State.Idle;
+            SetAnimation(curState);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("FishingZone"))
+        {
+            curState = State.Jump;
+            SetAnimation(curState);
+        }
     }
     void SetAnimation(State state)
     {
@@ -81,6 +129,6 @@ public abstract class Fish : MonoBehaviour
 
         Vector3 randPos = new Vector3(randPoint_x, 0, randPoint_z);
 
-        return randPos + transform.position;
+        return randPos;
     }
 }
