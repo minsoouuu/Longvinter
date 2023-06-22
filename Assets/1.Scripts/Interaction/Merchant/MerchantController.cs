@@ -26,7 +26,6 @@ public class MerchantController : MonoBehaviour
     List<Item> item_list = new List<Item>();
     List<Item> merchant_blist = new List<Item>();
     [HideInInspector] public List<Item> merchant_slist = new List<Item>();
-    List<Item> Inventory_list = new List<Item>();
 
     [HideInInspector] public List<Merchant> slot_list = new List<Merchant>(); 
     [HideInInspector] public ObjectType myTypeB = ObjectType.BuySlot;

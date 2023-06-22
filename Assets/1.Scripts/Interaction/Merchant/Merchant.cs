@@ -21,30 +21,28 @@ public class Merchant : MonoBehaviour
     public void OnClickBuy()
     {
         mc.CreateMerchant_s_ItemList(Gamemanager.instance.player.im.curToggle);
-        Gamemanager.instance.inventory.ADItem(itemdata, true);
 
         if (Gamemanager.instance.player.im.Money < itemdata.data.price)
         {
+            OneButtonPopUpManager.instance.SetComment("돈이 부족합니다");
             return;
         }
         else
         {
-            Gamemanager.instance.inventory.ADItem(itemdata, true);
+            Gamemanager.instance.player.im.ADItem(itemdata, true);
             Gamemanager.instance.player.im.Money -= itemdata.data.price;
         }
-        
-        //inven. -= itemdata.data.price;
     }
 
 
     // 판매 목록 버튼 이벤트
     public void OnClickSell()
     {
-        Gamemanager.instance.inventory.ADItem(itemdata, false);
+        Gamemanager.instance.player.im.ADItem(itemdata, false);
         Gamemanager.instance.player.im.Money += itemdata.data.price;
-        //inven.Money += itemdata.data.price;
         if(Gamemanager.instance.player.im.countDic[itemdata.data.itemName] <= 0)
         {
+            Debug.Log("삭제");
             Gamemanager.instance.objectPool.ReturnObject(mc.myTypeS, this);
             mc.merchant_slist.Remove(this.itemdata);
             mc.slot_list.Remove(this);

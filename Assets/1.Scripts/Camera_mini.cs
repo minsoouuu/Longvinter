@@ -7,7 +7,7 @@ public class Camera_mini : MonoBehaviour
     Vector3 pos;
 
     float pos_x = 0f;
-    float pos_y = 5f;
+    float pos_y = 50f;
     float pos_z = 0f;
     private void Start()
     {

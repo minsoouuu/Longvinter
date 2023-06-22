@@ -42,6 +42,7 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
+        Money = 1000;
         itemDic.Add(TitleType.Equipment, new List<Item>());
         itemDic.Add(TitleType.Material, new List<Item>());
         itemDic.Add(TitleType.Food, new List<Item>());
