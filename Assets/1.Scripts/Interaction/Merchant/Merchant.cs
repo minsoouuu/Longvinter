@@ -22,6 +22,17 @@ public class Merchant : MonoBehaviour
     {
         mc.CreateMerchant_s_ItemList(Gamemanager.instance.player.im.curToggle);
         Gamemanager.instance.inventory.ADItem(itemdata, true);
+
+        if (Gamemanager.instance.player.im.Money < itemdata.data.price)
+        {
+            return;
+        }
+        else
+        {
+            Gamemanager.instance.inventory.ADItem(itemdata, true);
+            Gamemanager.instance.player.im.Money -= itemdata.data.price;
+        }
+        
         //inven. -= itemdata.data.price;
     }
 
@@ -30,6 +41,7 @@ public class Merchant : MonoBehaviour
     public void OnClickSell()
     {
         Gamemanager.instance.inventory.ADItem(itemdata, false);
+        Gamemanager.instance.player.im.Money += itemdata.data.price;
         //inven.Money += itemdata.data.price;
         if(Gamemanager.instance.player.im.countDic[itemdata.data.itemName] <= 0)
         {
