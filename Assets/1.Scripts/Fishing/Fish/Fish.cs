@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.AI;
-
+using System;
 public abstract class Fish : MonoBehaviour
 {
     public struct FishData
@@ -33,7 +33,6 @@ public abstract class Fish : MonoBehaviour
     [SerializeField] private Vector3 nextPos;
 
     State curState = State.Idle;
-
     public bool IsIn { get; set; }
     private void Start()
     {
@@ -73,6 +72,51 @@ public abstract class Fish : MonoBehaviour
 
         if (dis <= 1f)
         {
+            if (IsIn == false && fm.IsOn == false)
+            {
+                IsIn = true;
+                fm.IsOn = true;
+            }
+        }
+        else
+        { 
+            if (IsIn == true)
+            {
+                IsIn = false;
+
+                if (fm.IsOn == true)
+                {
+                    fm.IsOn = false;
+                }
+            }
+        }
+
+        if (IsIn == true && fm.IsOn == true)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Debug.Log("³¬½Ã ½ÃÀÛ");
+                nav.enabled = false;
+
+                curState = State.Fear;
+                SetAnimation(curState);
+
+                FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
+                fishing.transform.SetParent(fm.transform);
+
+                if (fishing.fish == null)
+                {
+                    fishing.fish = this;
+                }
+            }
+        }
+        Move();
+
+
+        return;
+
+        if (dis <= 1f)
+        {
             IsIn = true;
             interUI.SetActive(true);
 
@@ -103,7 +147,6 @@ public abstract class Fish : MonoBehaviour
             }
         }
 
-        Move();
 
         return;
         if (dis <= 1f)

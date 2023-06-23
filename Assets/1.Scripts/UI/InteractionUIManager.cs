@@ -17,6 +17,7 @@ public class InteractionUIManager : MonoBehaviour
         set
         {
             isOn = value;
+            uiObj.gameObject.SetActive(value);
         }
     }
     public void SetUi(string buttonText, string text)

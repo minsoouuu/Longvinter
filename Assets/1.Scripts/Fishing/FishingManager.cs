@@ -8,15 +8,22 @@ public class FishingManager : MonoBehaviour
 {
     [SerializeField] private GameObject popUp;
     [SerializeField] private Transform parent;
-
+    [SerializeField] private InteractionUIManager interUI;
     [HideInInspector] public BoxCollider boxCol;
     [HideInInspector] public int fishCount = 0;
 
-    private bool isIn = true;
-    public bool IsOn { get; set; }
+    private bool isOn = false;
+    public bool IsOn
+    {
+        get { return isOn; }
+        set
+        {
+            isOn = value;
+            interUI.IsOn = value;
+        }
+    }
     private void Start()
     {
-        IsOn = true;
         InvokeRepeating("Spawn", 0f, 5);
     }
     void Spawn()

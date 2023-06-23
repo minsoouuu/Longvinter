@@ -238,5 +238,4 @@ public abstract class Monster : MonoBehaviour
             HP -= 99999;
         }
     }
-
 }
