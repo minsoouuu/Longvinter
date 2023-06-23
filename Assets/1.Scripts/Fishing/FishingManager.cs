@@ -29,7 +29,7 @@ public class FishingManager : MonoBehaviour
     }
     void Spawn()
     {
-        if (fishCount > 5)
+        if (fishCount > 10)
             return;
 
         int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(FishName)).Length);

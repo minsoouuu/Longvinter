@@ -75,7 +75,7 @@ public class FishingController : MonoBehaviour
     {
         if (isComplete)
         {
-            OneButtonPopUpManager.instance.SetComment("성공", FinishEvent);
+            OneButtonPopUpManager.instance.SetComment("성공", CompleteEvent);
         }
         else
         {
@@ -83,7 +83,7 @@ public class FishingController : MonoBehaviour
             fish.StartCoroutine("MoveWaitingTime");
         }
     }
-    void FinishEvent()
+    void CompleteEvent()
     {
         int rand = UnityEngine.Random.Range(0, fish.fishData.items.Count);
         Item item = Gamemanager.instance.itemController.GetItem(fish.fishData.items[rand].data.itemName);

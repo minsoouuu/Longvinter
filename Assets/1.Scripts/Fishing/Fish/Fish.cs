@@ -23,7 +23,6 @@ public abstract class Fish : MonoBehaviour
 
     [SerializeField] private NavMeshAgent nav;
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject interUI;
 
     private Coroutine coroutine = null;
 
@@ -53,6 +52,11 @@ public abstract class Fish : MonoBehaviour
         if (nav.enabled == false)
         {
             nav.enabled = true;
+        }
+
+        if (curState == State.Die)
+        {
+            curState = State.Move;
         }
     }
     private void OnDisable()
@@ -111,85 +115,6 @@ public abstract class Fish : MonoBehaviour
             }
         }
         Move();
-
-
-        return;
-
-        if (dis <= 1f)
-        {
-            IsIn = true;
-            interUI.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Debug.Log("³¬½Ã ½ÃÀÛ");
-                nav.enabled = false;
-                curState = State.Fear;
-                SetAnimation(curState);
-                FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
-                fishing.transform.SetParent(fm.transform);
-
-                if (fishing.fish == null)
-                {
-                    fishing.fish = this;
-                }
-            }
-        }
-        else
-        {
-            if (IsIn == true)
-            {
-                IsIn = false;
-                interUI.SetActive(false);
-                nav.enabled = true;
-                curState = State.Idle;
-                SetAnimation(curState);
-            }
-        }
-
-
-        return;
-        if (dis <= 1f)
-        {
-            if (IsIn == true)
-                return;
-            
-            IsIn = true;
-
-            if (Gamemanager.instance.interUI.IsOn == false)
-            {
-                Debug.Log("Á¢±Ù");
-                Gamemanager.instance.interUI.SetUi("R", "³¬½Ã");
-                Gamemanager.instance.interUI.IsOn = true;
-
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    Debug.Log("³¬½Ã ½ÃÀÛ");
-
-                    nav.enabled = false;
-                    curState = State.Fear;
-                    SetAnimation(curState);
-
-                    FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
-                    fishing.transform.SetParent(fm.transform);
-
-                    if (fishing.fish == null)
-                    {
-                        fishing.fish = this;
-                    }
-                }
-            }
-        }
-        else
-        {
-            if (IsIn == true && Gamemanager.instance.interUI.IsOn == true)
-            {
-                IsIn = false;
-                Gamemanager.instance.interUI.IsOn = false;
-                Gamemanager.instance.interUI.DeleteUI();
-            }
-        }
-
     }
     void Move()
     {
@@ -236,7 +161,7 @@ public abstract class Fish : MonoBehaviour
             curState = State.Idle;
             SetAnimation(curState);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             curState = State.Move;
             SetAnimation(curState);
             nextPos = GetRandomMovePoint();
@@ -253,9 +178,8 @@ public abstract class Fish : MonoBehaviour
         SetAnimation(curState);
 
         Gamemanager.instance.objectPool.ReturnObject(fishName, this);
-        Debug.Log("Á×¾ú´Ù");
+        fm.fishCount--;
     }
-
     Vector3 GetRandomMovePoint()
     {
         float randPoint_x = fm.spawnZone.bounds.size.x;
