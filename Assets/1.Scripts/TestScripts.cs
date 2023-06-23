@@ -9,6 +9,8 @@ public class TestScripts : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
+            Gamemanager.instance.player.im.Money += 100000;
+            return;
             PocketController po =  Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
             for (int i = 0; i < 10; i++)
             {

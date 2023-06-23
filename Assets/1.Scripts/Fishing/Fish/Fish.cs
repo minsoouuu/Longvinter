@@ -258,13 +258,13 @@ public abstract class Fish : MonoBehaviour
 
     Vector3 GetRandomMovePoint()
     {
-        float randPoint_x = fm.boxCol.bounds.size.x;
-        float randPoint_z = fm.boxCol.bounds.size.z;
+        float randPoint_x = fm.spawnZone.bounds.size.x;
+        float randPoint_z = fm.spawnZone.bounds.size.z;
 
         randPoint_x = UnityEngine.Random.Range((randPoint_x / 2) * -1, randPoint_x / 2);
         randPoint_z = UnityEngine.Random.Range((randPoint_z / 2) * -1, randPoint_z / 2);
 
-        Vector3 randPos = new Vector3(randPoint_x, 0, randPoint_z);
+        Vector3 randPos = new Vector3(randPoint_x, 0, randPoint_z) + fm.transform.position;
 
         return randPos;
     }

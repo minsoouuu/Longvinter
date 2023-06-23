@@ -141,7 +141,7 @@ public class ObjectPoolSystem : MonoBehaviour
         obj.gameObject.SetActive(true);
         return obj;
     }
-    public Fish GetObjectOfObjectPooling(FishName name)
+    public Fish GetObjectOfObjectPooling(FishName name,Vector3 pos)
     {
         Fish obj = null;
 
@@ -153,7 +153,7 @@ public class ObjectPoolSystem : MonoBehaviour
         {
             string path = $"Fishing/{name}";
             Fish fish = Resources.Load<Fish>(path);
-            obj = Instantiate(fish);
+            obj = Instantiate(fish, pos, Quaternion.identity);
         }
         obj.gameObject.SetActive(true);
         return obj;

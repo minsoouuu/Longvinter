@@ -31,6 +31,7 @@ public class MakingController : MonoBehaviour
             if (IsOn == true)
             {
                 IsOn = false;
+                /*
                 for (int i = 0; i < materialSlot.Length; i++)
                 {
                     if (materialSlot[i].ItemData != null)
@@ -39,6 +40,7 @@ public class MakingController : MonoBehaviour
                         Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
                     }
                 }
+                */
                 SlotDataReset();
                 transform.GetChild(0).gameObject.SetActive(false);
                 Gamemanager.instance.player.im.mc = null;

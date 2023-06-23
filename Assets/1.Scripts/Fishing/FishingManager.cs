@@ -9,8 +9,9 @@ public class FishingManager : MonoBehaviour
     [SerializeField] private GameObject popUp;
     [SerializeField] private Transform parent;
     [SerializeField] private InteractionUIManager interUI;
-    [HideInInspector] public BoxCollider boxCol;
     [HideInInspector] public int fishCount = 0;
+    
+    public BoxCollider spawnZone;
 
     private bool isOn = false;
     public bool IsOn
@@ -33,7 +34,7 @@ public class FishingManager : MonoBehaviour
 
         int rand = UnityEngine.Random.Range(0, Enum.GetValues(typeof(FishName)).Length);
 
-        Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling((FishName)rand);
+        Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling((FishName)rand,transform.position);
         fish.transform.position = GetRandomSpawnPoint();
         fish.transform.SetParent(transform);
         fish.fm = this;
@@ -48,7 +49,7 @@ public class FishingManager : MonoBehaviour
         {
             if (fishCount <= 5)
             {
-                Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(FishName.Tuna);
+                Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(FishName.Tuna,transform.position);
                 fish.transform.position = GetRandomSpawnPoint();
                 fish.transform.SetParent(parent);
                 fish.fm = this;
@@ -59,32 +60,15 @@ public class FishingManager : MonoBehaviour
     }
     Vector3 GetRandomSpawnPoint()
     {
-        float randPoint_x = boxCol.bounds.size.x;
-        float randPoint_z = boxCol.bounds.size.z;
+
+        float randPoint_x = spawnZone.bounds.size.x;
+        float randPoint_z = spawnZone.bounds.size.z;
 
         randPoint_x = UnityEngine.Random.Range((randPoint_x / 2) * -1, randPoint_x / 2);
         randPoint_z = UnityEngine.Random.Range((randPoint_z / 2) * -1, randPoint_z / 2);
 
-        Vector3 randPos = new Vector3(randPoint_x, 0, randPoint_z);
+        Vector3 randPos = new Vector3(randPoint_x, 0, randPoint_z) + transform.position;
 
-        return randPos + transform.position;
+        return randPos;
     }
-    /*
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isIn = true;
-            popUp.SetActive(true);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isIn = false;
-            popUp.SetActive(false);
-        }
-    }
-    */
 }
