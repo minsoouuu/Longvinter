@@ -56,6 +56,7 @@ public class FishingController : MonoBehaviour
                 isTurn = true;
             }
         }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (handle.GetIsIn())
@@ -79,6 +80,7 @@ public class FishingController : MonoBehaviour
         else
         {
             OneButtonPopUpManager.instance.SetComment("실패", FailEvent);
+            fish.StartCoroutine("MoveWaitingTime");
         }
     }
     void FinishEvent()
@@ -94,8 +96,8 @@ public class FishingController : MonoBehaviour
         // 아이템을 인벤으로 바로 
         Gamemanager.instance.player.im.ADItem(item, true);
 
+        fish.Die();
         Gamemanager.instance.player.isMove = true;
-        Gamemanager.instance.objectPool.ReturnObject(fish.fishName, fish);
         Gamemanager.instance.objectPool.ReturnObject(this);
     }
     void FailEvent()

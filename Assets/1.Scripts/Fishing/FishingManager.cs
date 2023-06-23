@@ -43,7 +43,7 @@ public class FishingManager : MonoBehaviour
             {
                 Fish fish = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(FishName.Tuna);
                 fish.transform.position = GetRandomSpawnPoint();
-                fish.transform.SetParent(transform);
+                fish.transform.SetParent(parent);
                 fish.fm = this;
                 fishCount++;
                 yield return wait;

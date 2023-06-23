@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,7 +23,7 @@ public abstract class Fish : MonoBehaviour
 
     [SerializeField] private NavMeshAgent nav;
     [SerializeField] private Animator animator;
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private GameObject interUI;
 
     private Coroutine coroutine = null;
 
@@ -73,49 +74,36 @@ public abstract class Fish : MonoBehaviour
         if (dis <= 1f)
         {
             IsIn = true;
+            interUI.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Debug.Log("³¬½Ã ½ÃÀÛ");
+                nav.enabled = false;
+                curState = State.Fear;
+                SetAnimation(curState);
+                FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
+                fishing.transform.SetParent(fm.transform);
+
+                if (fishing.fish == null)
+                {
+                    fishing.fish = this;
+                }
+            }
         }
         else
         {
             if (IsIn == true)
             {
                 IsIn = false;
+                interUI.SetActive(false);
+                nav.enabled = true;
+                curState = State.Idle;
+                SetAnimation(curState);
             }
         }
 
-        if (IsIn)
-        {
-            if (Gamemanager.instance.interUI.IsOn == false)
-            {
-                Debug.Log("Á¢±Ù");
-                Gamemanager.instance.interUI.SetUi("R", "³¬½Ã");
-                Gamemanager.instance.interUI.IsOn = true;
-
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    Debug.Log("³¬½Ã ½ÃÀÛ");
-                    nav.enabled = false;
-                    curState = State.Fear;
-                    SetAnimation(curState);
-                    FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
-                    fishing.transform.SetParent(transform);
-
-                    if (fishing.fish == null)
-                    {
-                        fishing.fish = this;
-                    }
-
-                }
-            }
-        }
-        else
-        {
-            if (Gamemanager.instance.interUI.IsOn == true)
-            {
-                Gamemanager.instance.interUI.IsOn = false;
-                Gamemanager.instance.interUI.DeleteUI();
-            }
-        }
-
+        Move();
 
         return;
         if (dis <= 1f)
@@ -134,11 +122,13 @@ public abstract class Fish : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     Debug.Log("³¬½Ã ½ÃÀÛ");
+
                     nav.enabled = false;
                     curState = State.Fear;
                     SetAnimation(curState);
+
                     FishingController fishing = Gamemanager.instance.objectPool.GetObjectOfObjectPooling("FishingController");
-                    fishing.transform.SetParent(transform);
+                    fishing.transform.SetParent(fm.transform);
 
                     if (fishing.fish == null)
                     {
@@ -157,7 +147,6 @@ public abstract class Fish : MonoBehaviour
             }
         }
 
-        Move();
     }
     void Move()
     {
@@ -193,6 +182,11 @@ public abstract class Fish : MonoBehaviour
     }
     public IEnumerator MoveWaitingTime()
     {
+        if (nav.enabled == false)
+        {
+            nav.enabled = true;
+        }
+
         if (curState != State.Idle)
         {
             Debug.Log("´ë±â");
@@ -214,8 +208,11 @@ public abstract class Fish : MonoBehaviour
     {
         curState = State.Die;
         SetAnimation(curState);
+
+        Gamemanager.instance.objectPool.ReturnObject(fishName, this);
+        Debug.Log("Á×¾ú´Ù");
     }
-  
+
     Vector3 GetRandomMovePoint()
     {
         float randPoint_x = fm.boxCol.bounds.size.x;
