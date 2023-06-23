@@ -26,7 +26,7 @@ public class MerchantController : MonoBehaviour
     List<Item> item_list = new List<Item>();
     List<Item> merchant_blist = new List<Item>();
     [HideInInspector] public List<Item> merchant_slist = new List<Item>();
-
+    [HideInInspector] public List<Merchant> sell_merchant_list = new List<Merchant>();
     [HideInInspector] public List<Merchant> slot_list = new List<Merchant>(); 
     [HideInInspector] public ObjectType myTypeB = ObjectType.BuySlot;
     [HideInInspector] public ObjectType myTypeS = ObjectType.SellSlot;
@@ -108,6 +108,7 @@ public class MerchantController : MonoBehaviour
                 slot.Setdata(item_list[i]);
                 slot.mc = this;
                 merchant_blist.Add(slot.itemdata);
+                sell_merchant_list.Add(slot);
             }
         }
     }
@@ -184,6 +185,25 @@ public class MerchantController : MonoBehaviour
             player.GetComponent<User>().enabled = true;
             player.GetComponent<Animator>().enabled = true;
         }
+    }
+
+    // 판매목록 버튼 비활성화
+    public void DisableMerchant()
+    {
+        for(int i = 0; i < sell_merchant_list.Count; i++)
+        {
+            sell_merchant_list[i].GetComponent<Merchant>().ispop = true;
+        }
+    }
+
+    // 판매목록 버튼 활성화
+    public void EnableMerchant()
+    {
+        for (int i = 0; i < sell_merchant_list.Count; i++)
+        {
+            sell_merchant_list[i].GetComponent<Merchant>().ispop = false;
+        }
+
     }
 
 
