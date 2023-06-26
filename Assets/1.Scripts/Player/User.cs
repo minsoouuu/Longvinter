@@ -150,7 +150,7 @@ public class User : MonoBehaviour
             OnInventorySetActive();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             // 각종 팝업 떠있을 때는 마우스 이벤트 x
             Attack();
