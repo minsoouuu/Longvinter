@@ -71,7 +71,6 @@ public class BuildingSystem : MonoBehaviour
                 // 타일 색칠하기
                 PlantArea(startpos, selectedObject.Size, resultTile);
                 //Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
-                selectedObject = null;
 
                 GenerateNavmesh();
             }

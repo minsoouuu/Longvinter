@@ -5,25 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class House : MonoBehaviour
 {
-    [SerializeField] private GameObject house_UI;
-    [SerializeField] private 
+    //private SceneChangeController sc;
     float dis;
-
+    bool ison;
     private void Start()
     {
+        //sc = FindObjectOfType<SceneChangeController>();
+        ison = false;
     }
     // Update is called once per frame
     void Update()
     {
         dis = Vector3.Distance(this.transform.position, Gamemanager.instance.player.transform.position);
-        Debug.Log(dis);
-        if(dis < 2f)
+        if(BuildingSystem.b_instance.selectedObject.Placed == true)
         {
-            house_UI.SetActive(true);
-            if (Input.GetKey(KeyCode.Space))
+            if (dis < 4f)
             {
-                SceneManager.LoadScene("House");
+                if (ison == false)
+                {
+                    ison = true;
+                    Gamemanager.instance.interUI.IsOn = true;
+                    Gamemanager.instance.interUI.SetUi("P", "들어가기");
+                }
+                if (Input.GetKey(KeyCode.P))
+                {
+                    SceneManager.LoadScene("House");
+                }
+            }
+            else
+            {
+                if (ison == true)
+                {
+                    ison = false;
+                    Gamemanager.instance.interUI.DeleteUI();
+                    Gamemanager.instance.interUI.IsOn = false;
+                }
             }
         }
+        
     }
 }

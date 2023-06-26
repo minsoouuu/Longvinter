@@ -7,6 +7,12 @@ public class Merchant_Object : MonoBehaviour
     [SerializeField] private GameObject merchant;
 
     float dis;
+    [HideInInspector] public bool ison;
+
+    private void Start()
+    {
+        ison = false;
+    }
     private void Update()
     {
         Interaction_Merchant();
@@ -18,6 +24,12 @@ public class Merchant_Object : MonoBehaviour
         dis = Vector3.Distance(this.transform.position, Gamemanager.instance.player.transform.position);
         if (dis < 2f)
         {
+            if (ison == false)
+            {
+                ison = true;
+                Gamemanager.instance.interUI.IsOn = true;
+                Gamemanager.instance.interUI.SetUi("B", "상점열기");
+            }
             if (Input.GetKey(KeyCode.B))
             {
                 merchant.SetActive(true);
@@ -25,9 +37,21 @@ public class Merchant_Object : MonoBehaviour
                 {
                     Gamemanager.instance.player.im.transform.GetChild(i).gameObject.SetActive(true);
                 }
-                
+                if(ison == true)
+                {
+                    Gamemanager.instance.interUI.SetUi("ESC", "상점닫기");
+                }
                 Gamemanager.instance.player.GetComponent<User>().enabled = false;
                 Gamemanager.instance.player.GetComponent<Animator>().enabled = false;
+            }
+        }
+        else
+        {
+            if (ison == true)
+            {
+                ison = false;
+                Gamemanager.instance.interUI.DeleteUI();
+                Gamemanager.instance.interUI.IsOn = false;
             }
         }
     }

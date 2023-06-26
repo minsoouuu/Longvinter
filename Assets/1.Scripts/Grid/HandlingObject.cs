@@ -13,14 +13,37 @@ public class HandlingObject : MonoBehaviour
     }
     Vector3 offset;
     public bool PlacedH { get; private set; }
+    bool isDelete;
     public PlantKind pk;
-
+    
     private void Start()
     {
+        isDelete = false;
         Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(BuildingSystem.b_instance.selectedObject.GetStartPosition());
         BuildingSystem.b_instance.TakenArea(startpos, BuildingSystem.b_instance.selectedObject.Size);
     }
 
+    private void Update()
+    {
+        if (isDelete == true)
+        {
+            if (Gamemanager.instance.interUI.text.text.Equals("삭제"))
+            {
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    Destroy(this.gameObject);
+                    Gamemanager.instance.interUI.IsOn = false;
+                    Gamemanager.instance.interUI.DeleteUI();
+                }
+            }
+            if (Input.GetKey(KeyCode.T))
+            {
+                isDelete = false;
+                Gamemanager.instance.interUI.IsOn = false;
+                Gamemanager.instance.interUI.DeleteUI();
+            }
+        }
+    }
     public void SetPlaced()
     {
         PlacedH = true;
@@ -29,13 +52,15 @@ public class HandlingObject : MonoBehaviour
     private void OnMouseDown()
     {
         if (PlacedH)
-        {   
-            this.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
+        {
+            Gamemanager.instance.interUI.IsOn = true;
+            Gamemanager.instance.interUI.SetUi("Z", "삭제");
+
+            isDelete = true;
         }
         else
         {
             offset = transform.position - ClickObject();
-            Debug.Log("false");
         }
     }
     
@@ -47,14 +72,7 @@ public class HandlingObject : MonoBehaviour
         BoundsInt area = new BoundsInt();
         TileBase[] baseArray = BuildingSystem.b_instance.GetTileBlock(area, BuildingSystem.b_instance.mainTilemap);
         TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
-        foreach (var b in baseArray)
-        {
-            //b에 takenTile가 있다면???
-            if (b == BuildingSystem.b_instance.takenTile)
-            {
-                
-            }
-        }
+        
         BuildingSystem.b_instance.DeleteArea();
         if (!PlacedH)
         {
@@ -84,10 +102,5 @@ public class HandlingObject : MonoBehaviour
             }
         }
         return Vector3.zero;
-    }
-
-    public void OnClick()
-    {
-        Destroy(this.gameObject);
     }
 }

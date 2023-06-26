@@ -9,7 +9,7 @@ public class PlaceableObject : MonoBehaviour
     public Vector3Int Size { get; private set; }
     private Vector3[] vertices;
     
-    private void Start()
+    private void Awake()
     {
         VertexLocalPosition();
         CalculateTileSize();
@@ -37,7 +37,7 @@ public class PlaceableObject : MonoBehaviour
     }
 
     //Vertex를 계산해서 타일 사이즈 측정
-    private void CalculateTileSize()
+    public void CalculateTileSize()
     {
         Vector3Int[] verticesInt = new Vector3Int[vertices.Length];
 

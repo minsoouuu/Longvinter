@@ -120,20 +120,20 @@ public class MerchantController : MonoBehaviour
         toggle = Gamemanager.instance.player.im.curToggle;
         if(toggle == Gamemanager.instance.player.im.toggles[0])
         {
-            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Equipment].ToList();
+            list = Gamemanager.instance.player.im.itemDic[TitleType.Equipment].ToList();
         }
         else if(toggle == Gamemanager.instance.player.im.toggles[1])
         {
-            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Material].ToList();
+            list = Gamemanager.instance.player.im.itemDic[TitleType.Material].ToList();
         }
         else if (toggle == Gamemanager.instance.player.im.toggles[2])
         {
 
-            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Food].ToList();
+            list = Gamemanager.instance.player.im.itemDic[TitleType.Food].ToList();
         }
         else
         {
-            list = Gamemanager.instance.player.im.itemDic[InventoryManager.TitleType.Plant].ToList();
+            list = Gamemanager.instance.player.im.itemDic[TitleType.Plant].ToList();
         }
 
         for (int i = 0; i < list.Count; i++)
@@ -184,6 +184,8 @@ public class MerchantController : MonoBehaviour
             merchant.SetActive(false);
             player.GetComponent<User>().enabled = true;
             player.GetComponent<Animator>().enabled = true;
+            Gamemanager.instance.interUI.IsOn = false;
+            Gamemanager.instance.interUI.DeleteUI();
         }
     }
 

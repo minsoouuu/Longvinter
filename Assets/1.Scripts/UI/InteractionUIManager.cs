@@ -8,7 +8,7 @@ public class InteractionUIManager : MonoBehaviour
 {
     [SerializeField] private Image uiObj;
     [SerializeField] private TMP_Text buttonText;
-    [SerializeField] private TMP_Text text;
+    public TMP_Text text;
 
     private bool isOn = false;
     public bool IsOn
