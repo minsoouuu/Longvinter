@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class User : MonoBehaviour
     [HideInInspector] public bool isMove = true;
     [HideInInspector] public float maxHp = 100f;
 
+    [SerializeField] public static bool GameIsPaused = false;
+    [SerializeField] public GameObject menuCanvas;
     [SerializeField] public GameObject weaponPrefab;
     [SerializeField] public Transform pos;
 
@@ -147,17 +150,34 @@ public class User : MonoBehaviour
             OnInventorySetActive();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
+            // 각종 팝업 떠있을 때는 마우스 이벤트 x
             Attack();
         }
-        /*
-        if (!m_jumpInput && Input.GetKey(KeyCode.Space))
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            m_jumpInput = true;
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+            Setting();
         }
-        */
+
+
+    
+    /*
+    if (!m_jumpInput && Input.GetKey(KeyCode.Space))
+    {
+        m_jumpInput = true;
     }
+    */
+}
 
     private void FixedUpdate()
     {
@@ -305,7 +325,22 @@ public class User : MonoBehaviour
         Weapon weapon = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(Weapon.myName);
         weapon.transform.position = pos.position;
         weapon.transform.rotation = pos.rotation;
+    }
 
-        //Instantiate(weaponPrefab, pos.position, pos.rotation);
+    public void Setting()
+    {
+    }
+    public void Resume()
+    {
+        menuCanvas.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
+
+    public void Pause()
+    {
+        menuCanvas.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 }

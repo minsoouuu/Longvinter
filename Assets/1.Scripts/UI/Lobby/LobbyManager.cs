@@ -14,7 +14,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject settingUI;
     public GameObject guideUI;
     public InputField nameField;
-    
 
     void Start()
     {
