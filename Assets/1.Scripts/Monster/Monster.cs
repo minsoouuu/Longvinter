@@ -143,7 +143,6 @@ public abstract class Monster : MonoBehaviour
 
             try
             {
-                //nav.destination = wayPoints[nextIdx].position;
                 nav.SetDestination(wayPoints[nextIdx].position);
             }
             catch (ArgumentOutOfRangeException e)

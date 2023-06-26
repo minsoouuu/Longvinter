@@ -14,6 +14,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject settingUI;
     public GameObject guideUI;
     public InputField nameField;
+    public AudioSource closeSound;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.NickName = nameField.text;
         connectionInfoText.text = nameField.text + " 입장합니다.";
         UpdatePlayer();
+        closeSound.Play();
         PhotonNetwork.LoadLevel("Game");
     }
 
@@ -65,6 +67,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickBackToLobby()
     {
+        closeSound.Play();
         settingUI.SetActive(false);
     }
 
@@ -75,6 +78,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickBackToSetting()
     {
+        closeSound.Play();
         guideUI.SetActive(false);
     }
     
@@ -91,6 +95,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void NoQuit()
     {
+        closeSound.Play();
         quitPopup.SetActive(false);
     }
+
+
 }

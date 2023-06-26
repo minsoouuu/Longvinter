@@ -33,4 +33,5 @@ public class AudioManager : MonoBehaviour
     {
         AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
     }
+
 }

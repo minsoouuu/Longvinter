@@ -5,7 +5,6 @@ using System;
 
 public class MonsterSpawnController : MonoBehaviour
 {
-    [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform monsterGroup;
     [SerializeField] private List<Monster> monsters;
     [SerializeField] private float spawnTime = 5f;
@@ -14,23 +13,47 @@ public class MonsterSpawnController : MonoBehaviour
     private int maxCount = 25;
     private float curTime;
 
+    public GameObject rangeObject;
+    BoxCollider rangeCollider;
+
     public static MonsterSpawnController _instance;
+
+    private void Awake()
+    {
+        rangeCollider = rangeObject.GetComponent<BoxCollider>();
+    }
 
     private void Start()
     {
         _instance = this; 
     }
+
+
     private void Update()
     {
         if (curTime >= spawnTime && monsterCount < maxCount)
         {
-            int x = UnityEngine.Random.Range(0, spawnPoints.Length);
-            SpawnMonster(x);
+            SpawnMonster();
         }
         curTime += Time.deltaTime;
     }
 
-    public void SpawnMonster(int ranNum) 
+    public Vector3 GetRandomMovePoint()
+    {
+        Vector3 originPosition = rangeObject.transform.position;
+        // 콜라이더의 사이즈를 가져오는 bound.size 사용
+        float randPoint_x = rangeCollider.bounds.size.x;
+        float randPoint_z = rangeCollider.bounds.size.z;
+
+        randPoint_x = UnityEngine.Random.Range((randPoint_x / 2) * -1, randPoint_x / 2);
+        randPoint_z = UnityEngine.Random.Range((randPoint_z / 2) * -1, randPoint_z / 2);
+        Vector3 randPos = new Vector3(randPoint_x, 0f, randPoint_z);
+
+        Vector3 respawnPosition = originPosition + randPos;
+        return respawnPosition;
+    }
+
+    public void SpawnMonster() 
     {
         curTime = 0;
 
@@ -39,7 +62,7 @@ public class MonsterSpawnController : MonoBehaviour
 
         // MonsterType type = (MonsterType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(MonsterType)).Length);
         Monster monster = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(type);
-        monster.transform.position = new Vector3(spawnPoints[ranNum].localPosition.x, spawnPoints[ranNum].localPosition.y, spawnPoints[ranNum].localPosition.z);
+        monster.transform.position = GetRandomMovePoint();
         monster.transform.SetParent(monsterGroup);
 
         if (monster.monsterAction != MonsterAction.IsWalking)

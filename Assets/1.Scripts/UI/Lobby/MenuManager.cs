@@ -7,7 +7,8 @@ public class MenuManager : MonoBehaviour
     public GameObject quitPopup;
     public GameObject settingUI;
     public GameObject guideUI;
-    
+    public AudioSource closeSound;
+
     public void OnClickSettingUI()
     {
         settingUI.SetActive(true);
@@ -15,6 +16,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnClickBackToLobby()
     {
+        closeSound.Play();
         settingUI.SetActive(false);
     }
 
@@ -25,6 +27,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnClickBackToSetting()
     {
+        closeSound.Play();
         guideUI.SetActive(false);
     }
 
@@ -41,6 +44,7 @@ public class MenuManager : MonoBehaviour
 
     public void NoQuit()
     {
+        closeSound.Play();
         quitPopup.SetActive(false);
     }
 }
