@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
 public class BuildingSystem : MonoBehaviour
@@ -20,7 +21,6 @@ public class BuildingSystem : MonoBehaviour
     public Transform fenceparent;
     [HideInInspector] public PlaceableObject selectedObject;
     List<PlaceableObject> prefab_list = new List<PlaceableObject>();
-
 
     // Å¸ÀÏ¸Ê »ý¼º
     public TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
@@ -72,6 +72,8 @@ public class BuildingSystem : MonoBehaviour
                 PlantArea(startpos, selectedObject.Size, resultTile);
                 //Destroy(selectedObject.gameObject.GetComponent<HandlingObject>());
                 selectedObject = null;
+
+                GenerateNavmesh();
             }
             else
             {
@@ -206,5 +208,17 @@ public class BuildingSystem : MonoBehaviour
                 BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile);
             }
         }
+    }
+
+    private void GenerateNavmesh()
+    {
+        NavMeshSurface[] surfaces = gameObject.GetComponentsInChildren<NavMeshSurface>();
+
+        foreach (var s in surfaces)
+        {
+            s.RemoveData();
+            s.BuildNavMesh();
+        }
+
     }
 }

@@ -166,7 +166,6 @@ public class User : MonoBehaviour
             {
                 Pause();
             }
-            Setting();
         }
 
 
@@ -327,9 +326,6 @@ public class User : MonoBehaviour
         weapon.transform.rotation = pos.rotation;
     }
 
-    public void Setting()
-    {
-    }
     public void Resume()
     {
         menuCanvas.SetActive(false);
