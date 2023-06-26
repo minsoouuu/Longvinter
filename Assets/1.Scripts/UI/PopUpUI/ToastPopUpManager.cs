@@ -37,5 +37,13 @@ public class ToastPopUpManager : MonoBehaviour
         PopUp toastPopUp = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(PopType.ToastPopUp);
         toastPopUp.transform.SetParent(popParent);
         toastPopUp.SetComment(comment);
+      
+        /*
+        if (popUps.Count > 0)
+        {
+            RectTransform popPos = popUps[^1].popUprect;
+            RectTransform popRec = toastPopUp.GetComponent<ToastPopUp>().popUprect;
+        }
+        */
     }
 }

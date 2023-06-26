@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class User : MonoBehaviour
 {
@@ -75,6 +76,10 @@ public class User : MonoBehaviour
         set
         {
             curHp = value;
+            if (HP <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -325,7 +330,29 @@ public class User : MonoBehaviour
         weapon.transform.position = pos.position;
         weapon.transform.rotation = pos.rotation;
     }
+    void Die()
+    {
+        PocketController po =  Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
+        int titleCount = Enum.GetValues(typeof(TitleType)).Length;
+        int itemCount = 0;
 
+        for (int i = 0; i < titleCount; i++)
+        {
+            if (im.itemDic[(TitleType)i].Count > 0)
+            {
+                for (int j = im.itemDic[(TitleType)i].Count; j < 0; j--)
+                {
+                    if (itemCount > po.pocketSlots.Count)
+                        break;
+
+                    po.AddItem(im.itemDic[(TitleType)i][j]);
+                    im.itemDic[(TitleType)i].Remove(im.itemDic[(TitleType)i][j]);
+                    itemCount++;
+                }
+                Die();
+            }
+        }
+    }
     public void Resume()
     {
         menuCanvas.SetActive(false);

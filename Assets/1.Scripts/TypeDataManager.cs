@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+public enum TitleType
+{
+    Equipment,
+    Material,
+    Food,
+    Plant
+}
 public enum PopType
 {
     ToastPopUp,

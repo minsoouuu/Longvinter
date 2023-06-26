@@ -11,8 +11,8 @@ public class ToastPopUp : PopUp
 
     private Coroutine coroutine;
     private Image popImage;
-    private RectTransform popUprect;
 
+    [HideInInspector] public RectTransform popUprect;
     [HideInInspector] public Sequence sequence;
 
     private void OnEnable()
@@ -49,7 +49,7 @@ public class ToastPopUp : PopUp
     }
     public void Move(float finishPos)
     {
-        sequence.Append(popUprect.DOAnchorPosY((popUprect.anchoredPosition.y + finishPos), 1, true));
+        //sequence.Append(popUprect.DOAnchorPosY((popUprect.anchoredPosition.y + finishPos), 0.5f, true));
     }
     IEnumerator PopUpHide()
     {

@@ -6,10 +6,11 @@ using System;
 
 public class PocketController : MonoBehaviour
 {
-    [SerializeField] private List<PocketSlot> pocketSlots;
     [SerializeField] private Button escButton;
     [SerializeField] private GameObject interUI;
     [SerializeField] private GameObject pocketUI;
+
+    public List<PocketSlot> pocketSlots;
 
     private List<Item> items = new List<Item>();
     private Coroutine coroutine;

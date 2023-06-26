@@ -5,13 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    public enum TitleType
-    {
-        Equipment,
-        Material,
-        Food,
-        Plant
-    }
+    
 
     [SerializeField] private Transform slotParent;
     [HideInInspector] public Toggle[] toggles;
