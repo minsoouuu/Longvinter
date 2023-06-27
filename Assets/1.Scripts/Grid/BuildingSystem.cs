@@ -13,7 +13,7 @@ public class BuildingSystem : MonoBehaviour
     public Tilemap mainTilemap;
     public TileBase takenTile;
     public TileBase resultTile;
-    public TileBase originalTile;
+    public List<TileBase> originalTile;
     public List<MaterialScript> tree_rock;
 
     public HandlingObject[] prefab;
@@ -21,6 +21,8 @@ public class BuildingSystem : MonoBehaviour
     public Transform fenceparent;
     [HideInInspector] public PlaceableObject selectedObject;
     List<PlaceableObject> prefab_list = new List<PlaceableObject>();
+
+    public MaterialScript ground;
 
     // 타일맵 생성
     public TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
@@ -35,6 +37,7 @@ public class BuildingSystem : MonoBehaviour
             count++;
         }
         
+        
         return array;
     }
     private void Awake()
@@ -45,6 +48,7 @@ public class BuildingSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CreateTile();
         PlantTree();
     }
 
@@ -156,7 +160,8 @@ public class BuildingSystem : MonoBehaviour
     // 미리보기 타일 지우기
     public void DeleteArea()
     {
-        mainTilemap.SwapTile(takenTile, originalTile);
+        int rand = Random.Range(0, 4);
+        mainTilemap.SwapTile(takenTile, originalTile[rand]);
     }
 
 
@@ -196,6 +201,13 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
+    public void CreateTile()
+    {
+        Vector3Int startpos_ground = gridLayout.WorldToCell(ground.GetStartPosition());
+        int rand = Random.Range(0, 4);
+        PlantArea(startpos_ground, ground.Size, originalTile[rand]);
+    }
+
     public void ClearTile()
     {
         foreach (var item in tree_rock)
@@ -204,7 +216,8 @@ public class BuildingSystem : MonoBehaviour
             {
                 Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
                 // 타일 색칠하기
-                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile);
+                int rand = Random.Range(0, 4);
+                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile[rand]);
             }
         }
     }

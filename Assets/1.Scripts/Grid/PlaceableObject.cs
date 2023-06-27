@@ -84,7 +84,8 @@ public class PlaceableObject : MonoBehaviour
     {
         Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(this.GetStartPosition());
 
+        int rand = Random.Range(0, 4);
         // 타일 색칠하기
-        BuildingSystem.b_instance.PlantArea(startpos, this.Size, BuildingSystem.b_instance.originalTile);
+        BuildingSystem.b_instance.PlantArea(startpos, this.Size, BuildingSystem.b_instance.originalTile[rand]);
     }
 }

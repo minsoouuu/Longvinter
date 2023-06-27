@@ -96,7 +96,13 @@ public class MaterialScript : MonoBehaviour
                         rc.gb.Add(gameObject);
                         rc.respawn_Time = 0f;
                         gameObject.SetActive(false);
-                        // 나무 캐고 나서 상자 떨굴지 인벤에 바로 넣는다. 코드 짜야함
+                        PocketController pocket = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
+                        pocket.AddItem(Gamemanager.instance.itemController.materilas[1]);
+                        pocket.AddItem(Gamemanager.instance.itemController.materilas[2]);
+                        pocket.AddItem(Gamemanager.instance.itemController.materilas[10]);
+                        pocket.AddItem(Gamemanager.instance.itemController.materilas[16]);
+
+                        pocket.transform.position = transform.position;
                     }
                 }
                 else
