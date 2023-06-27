@@ -6,6 +6,8 @@ public class Food : Item
 {
     public override void Use()
     {
+        base.Use();
+
         Gamemanager.instance.player.HP += data.stats;
         OneButtonPopUpManager.instance.SetComment($"HP를 {data.stats} 회복했습니다.");
     }

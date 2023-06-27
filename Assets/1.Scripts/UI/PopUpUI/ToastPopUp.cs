@@ -49,7 +49,7 @@ public class ToastPopUp : PopUp
     }
     public void Move(float finishPos)
     {
-        //sequence.Append(popUprect.DOAnchorPosY((popUprect.anchoredPosition.y + finishPos), 0.5f, true));
+        sequence.Append(popUprect.DOAnchorPosY((popUprect.anchoredPosition.y + finishPos), 1f, true));
     }
     IEnumerator PopUpHide()
     {

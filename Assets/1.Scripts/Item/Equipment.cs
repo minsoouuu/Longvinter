@@ -6,6 +6,6 @@ public class Equipment : Item
 {
     public override void Use()
     {
-        
+        base.Use();
     }
 }

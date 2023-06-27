@@ -102,7 +102,6 @@ public class Slot : MonoBehaviour
         TwoButtonPopUpManager.instance.SetCommnet(commnet, item.Use);
 
         popup.Enable(false);
-        mgr.ADItem(item, false);
     }
 
     /// <summary>

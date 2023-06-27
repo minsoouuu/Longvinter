@@ -6,6 +6,6 @@ public class Materials : Item
 {
     public override void Use()
     {
-
+        base.Use();
     }
 }

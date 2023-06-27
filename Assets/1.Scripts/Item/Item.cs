@@ -16,5 +16,8 @@ public abstract class Item : MonoBehaviour
 {
     public ItemData data = new ItemData();
 
-    public abstract void Use();
+    public virtual void Use()
+    {
+        Gamemanager.instance.player.im.ADItem(this, false);
+    }
 }

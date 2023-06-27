@@ -6,6 +6,7 @@ public class Plant : Item
 {
     public override void Use()
     {
+        base.Use();
         BuildingSystem.b_instance.Create_prefab(data.itemName.ToString());
     }
 }
