@@ -14,7 +14,7 @@ public class MonsterSpawnController : MonoBehaviour
     private float curTime;
 
     public GameObject rangeObject;
-    BoxCollider rangeCollider;
+    private BoxCollider rangeCollider;
 
     public static MonsterSpawnController _instance;
 
@@ -41,7 +41,7 @@ public class MonsterSpawnController : MonoBehaviour
     public Vector3 GetRandomMovePoint()
     {
         Vector3 originPosition = rangeObject.transform.position;
-        // 콜라이더의 사이즈를 가져오는 bound.size 사용
+
         float randPoint_x = rangeCollider.bounds.size.x;
         float randPoint_z = rangeCollider.bounds.size.z;
 
@@ -53,7 +53,7 @@ public class MonsterSpawnController : MonoBehaviour
         return respawnPosition;
     }
 
-    public void SpawnMonster() 
+    public void SpawnMonster()
     {
         curTime = 0;
 
@@ -64,6 +64,7 @@ public class MonsterSpawnController : MonoBehaviour
         Monster monster = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(type);
         monster.transform.position = GetRandomMovePoint();
         monster.transform.SetParent(monsterGroup);
+        monster.rangeCollider = rangeCollider;
 
         if (monster.monsterAction != MonsterAction.IsWalking)
         {
@@ -72,37 +73,4 @@ public class MonsterSpawnController : MonoBehaviour
 
         monsterCount++;
     }
-
-    /*
-    Vector3 GetRandomMovePoint()
-    {
-    1.몬스터를 생성할 구역(Collider)을 정하고.  *** 맵의 콜라이더를 사용해서 전체적인 구역에서 생성하기.(기존 4개는 일정한 좌표라 부자연스러울 수 있음)
-
-                                                * 기존에 만들어진 스폰 포인트의 구역에서 랜덤좌표 구해 생성하기.
-                                                  - 실시간 베이크 사용하기.
-                                                  - 스폰포인트에 집 못짓게하기.
-
-                                                *** 울타리 등을 이용하여 사냥터의 개념으로 일정 구역에서만 소환하기(사냥터 안에서만 이동) 
-                                                  - 구역 안에 가둬서 관리할 경우 풀링 시스템 구조를 살짝 바꿔야함(생성시 좌료를 구역 안으로 설정해야함. 금방함)
-                                                  - 같은 방식으로 랜덤좌표 구하면 되니 nav 문제x
-                                                  - 실시간 베이크를 안해도 되는 방법 (사냥터에선 집 못짓게 설정해야함)
-                                                  - 맵 전체를 누비고 다니는것도 나쁘지 않아서 고민좀 해야됨.
-
-                                                결론 - 몬스터 생성과 이동을 구역안에서 랜덤하게(기존 4개 x)
-
-    2. 영역의 사이즈를 측정(평면).
-        float randPoint_x = 구역의 콜라이더.bounds.size.x;  
-        float randPoint_z = 구역의 콜라이더.bounds.size.z;  
-
-    3. float 값으로 영역의 사이즈 안에서 랜덤하게 값을 구함.
-        randPoint_x = UnityEngine.Random.Range((randPoint_x / 2) * -1, randPoint_x / 2); 
-        randPoint_z = UnityEngine.Random.Range((randPoint_z / 2) * -1, randPoint_z / 2);
-
-    4. 구한 값의 x , z 를 Vector3값으로 만들어줌
-        Vector3 randPos = new Vector3(randPoint_x, 0, randPoint_z) + 기준이 되는 위치를 더해줘야 함;
-
-    5. 랜덤 좌표 반환
-        return randPos;
-    }
-    */
 }

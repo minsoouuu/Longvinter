@@ -21,15 +21,19 @@ public enum MonsterAction
 public abstract class Monster : MonoBehaviour
 {
     public Vector3 pos;
-    public List<Transform> wayPoints;
-    public int nextIdx = 0;
+    //public List<Transform> wayPoints;
+    //public int nextIdx = 0;
     public MonsterData monsterData = new MonsterData();
+    
+    public BoxCollider rangeCollider; //map collider
+
     [HideInInspector] public MonsterAction monsterAction = new MonsterAction();
     //private Vector3 destination;
     private User thePlayer;
     private float curHp = 0;
     protected float currentTime = 1;
 
+    
     [SerializeField] protected NavMeshAgent nav;
     [SerializeField] protected Animator anim;
     [SerializeField] public Transform dropItemGroup;
@@ -72,12 +76,14 @@ public abstract class Monster : MonoBehaviour
         nav.autoBraking = false;
         curHp = monsterData.hp;
 
-        var group = GameObject.Find("WayPointGroup");
+        //var group = GameObject.Find("WayPointGroup");
 
-        if (group != null)
+        /*
+         * if (group != null)
         {
             group.GetComponentsInChildren<Transform>(wayPoints);
         }
+        */
 
         Move();
     }
@@ -129,12 +135,24 @@ public abstract class Monster : MonoBehaviour
         return false;
     }
 
+    public Vector3 GetRandomMovePoint()
+    {
+        float randPoint_x = rangeCollider.bounds.size.x;
+        float randPoint_z = rangeCollider.bounds.size.z;
+
+        randPoint_x = UnityEngine.Random.Range((randPoint_x / 2) * -1, randPoint_x / 2);
+        randPoint_z = UnityEngine.Random.Range((randPoint_z / 2) * -1, randPoint_z / 2);
+        Vector3 randPos = new Vector3(randPoint_x, 0f, randPoint_z);
+
+        return randPos;
+    }
+
     protected void Move()
     {
         Walk();
         if (monsterAction == MonsterAction.IsWalking)
         {
-            nextIdx = UnityEngine.Random.Range(0, wayPoints.Count);
+            //nextIdx = UnityEngine.Random.Range(0, wayPoints.Count);
 
             if (nav.isPathStale)
             {
@@ -143,7 +161,7 @@ public abstract class Monster : MonoBehaviour
 
             try
             {
-                nav.SetDestination(wayPoints[nextIdx].position);
+                nav.SetDestination(GetRandomMovePoint());
             }
             catch (ArgumentOutOfRangeException e)
             {
