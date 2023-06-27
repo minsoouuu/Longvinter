@@ -159,14 +159,19 @@ public abstract class Monster : MonoBehaviour
                 return;
             }
 
-            try
+            if (rangeCollider!= null)
             {
-                nav.SetDestination(GetRandomMovePoint());
+                try
+                {
+                    nav.SetDestination(GetRandomMovePoint());
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+
+            
         }
     }
 

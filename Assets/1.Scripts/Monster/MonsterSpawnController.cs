@@ -61,10 +61,12 @@ public class MonsterSpawnController : MonoBehaviour
         MonsterType type = (MonsterType)rand;
 
         // MonsterType type = (MonsterType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(MonsterType)).Length);
+
         Monster monster = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(type);
+        monster.rangeCollider = rangeCollider;
         monster.transform.position = GetRandomMovePoint();
         monster.transform.SetParent(monsterGroup);
-        monster.rangeCollider = rangeCollider;
+        
 
         if (monster.monsterAction != MonsterAction.IsWalking)
         {
