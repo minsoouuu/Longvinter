@@ -37,6 +37,7 @@ public abstract class Monster : MonoBehaviour
     [SerializeField] protected NavMeshAgent nav;
     [SerializeField] protected Animator anim;
     [SerializeField] public Transform dropItemGroup;
+    [SerializeField] public AudioSource MonsterDieSound;
 
     [SerializeField] private float viewAngle;
     [SerializeField] private float viewDistance; 
@@ -107,7 +108,7 @@ public abstract class Monster : MonoBehaviour
     // If hit by or close to the player, they will runaway.
     protected bool View()
     {
-        Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
+        Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);   // Explore surrounding collider
 
         for (int i = 0; i < _target.Length; i++)
         {
@@ -235,6 +236,7 @@ public abstract class Monster : MonoBehaviour
         nav.enabled = false;
         monsterAction = MonsterAction.IsDead;
         anim.SetTrigger("Dead");
+        MonsterDieSound.Play();
         StartCoroutine("DieAfter");
     }
 
