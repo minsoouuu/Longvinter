@@ -93,6 +93,7 @@ public class PocketController : MonoBehaviour
     }
     void OnButtonDownESC()
     {
+        AudioManager.instance.audio.Play();
         isOpen = false;
         for (int i = 0; i < pocketSlots.Count; i++)
         {

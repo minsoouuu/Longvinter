@@ -9,8 +9,25 @@ public class TestScripts : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            ToastPopUpManager.instance.Setcomment("ぞしぞし");
+            for (int i = 0; i < Gamemanager.instance.itemController.materilas.Count; i++)
+            {
+                Gamemanager.instance.player.im.ADItem(Gamemanager.instance.itemController.materilas[i], true);
+            }
+            for (int i = 0; i < Gamemanager.instance.itemController.plants.Count; i++)
+            {
+                Gamemanager.instance.player.im.ADItem(Gamemanager.instance.itemController.plants[i], true);
+            }
+            for (int i = 0; i < Gamemanager.instance.itemController.foods.Count; i++)
+            {
+                Gamemanager.instance.player.im.ADItem(Gamemanager.instance.itemController.foods[i], true);
+            }
+            for (int i = 0; i < Gamemanager.instance.itemController.equipments.Count; i++)
+            {
+                Gamemanager.instance.player.im.ADItem(Gamemanager.instance.itemController.equipments[i], true);
+            }
+
             return;
+            ToastPopUpManager.instance.Setcomment("ぞしぞし");
             PocketController po =  Gamemanager.instance.objectPool.GetObjectOfObjectPooling(0);
             for (int i = 0; i < 10; i++)
             {

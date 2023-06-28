@@ -44,9 +44,10 @@ public class PocketSlot : MonoBehaviour
     }
     public void OnButtonDown()
     {
-        if (icon.sprite == nullSprite)
+        if (Item == null)
             return;
 
+        AudioManager.instance.audio.Play();
         Gamemanager.instance.player.im.ADItem(Item, true);
 
         if (Gamemanager.instance.player.im.CheckEmpty(Item))

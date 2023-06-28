@@ -6,11 +6,18 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
+
     public AudioMixer audioMixer;
     public Slider BgmSlider;
     public Slider SfxSlider;
     public GameObject mute;
+    public AudioSource audio;
 
+    private void Awake()
+    {
+        instance = this;
+    }
     public void Sfx()
     {
         AudioSource sfxButton1 = GetComponent<AudioSource>();

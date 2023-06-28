@@ -66,6 +66,7 @@ public class InventoryManager : MonoBehaviour
             for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).gameObject.SetActive(false);
+                SlotPopupAllOff();
                 IsOn = false;
             }
         }
@@ -289,6 +290,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
+            AudioManager.instance.audio.Play();
             transform.GetChild(i).gameObject.SetActive(false);
             IsOn = false;
         }

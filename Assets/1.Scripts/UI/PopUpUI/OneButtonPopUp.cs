@@ -27,6 +27,7 @@ public class OneButtonPopUp : PopUp
         if (Action != null)
         {
             Action();
+            AudioManager.instance.audio.Play();
             Action = null;
         }
         base.ReturnObject();

@@ -78,7 +78,7 @@ public class Slot : MonoBehaviour
         {
             popup.Enable(false);
         }
-
+        AudioManager.instance.audio.Play();
         string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
         TwoButtonPopUpManager.instance.SetCommnet(commnet, ItemDelete);
     }
@@ -98,6 +98,7 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void OnUse()
     {
+        AudioManager.instance.audio.Play();
         string commnet = $"{item.data.itemName} 을 사용하시겠습니까?";
         TwoButtonPopUpManager.instance.SetCommnet(commnet, item.Use);
 
@@ -117,9 +118,11 @@ public class Slot : MonoBehaviour
             if (mgr.mc != null)
             {
                 mgr.mc.SetSlotData(item);
+                AudioManager.instance.audio.Play();
             }
             else
             {
+                AudioManager.instance.audio.Play();
                 popup.Enable(true, item);
             }
         }

@@ -31,6 +31,7 @@ public class TwoButtonPopUp : PopUp
         if (Action != null)
         {
             Action();
+            AudioManager.instance.audio.Play();
         }
         Action = null;
         base.ReturnObject();
@@ -39,6 +40,7 @@ public class TwoButtonPopUp : PopUp
     {
         if (Action != null)
         {
+            AudioManager.instance.audio.Play();
             Action = null;
         }
         base.ReturnObject();

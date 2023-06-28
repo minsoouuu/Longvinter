@@ -29,6 +29,18 @@
       "material1": "Raspberry",
       "material2": "WaterCanister",
       "type": "Foods"
+    },
+    {
+      "completeitem": "CookedPerch",
+      "material1": "Perch",
+      "material2": "Salt",
+      "type": "Foods"
+    },
+    {
+      "completeitem": "Tent",
+      "material1": "Wood",
+      "material2": "Wood",
+      "type": "Plants"
     }
   ]
 }
