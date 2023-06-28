@@ -43,18 +43,19 @@ public class SelectCountController : MonoBehaviour
     {
         if (Gamemanager.instance.player.im.Money <= Count)
             return;
-
+        AudioManager.instance.audio.Play();
         Count++;
     }
     void OnButtonCountDown()
     {
         if (Count <= 0)
             return;
-
+        AudioManager.instance.audio.Play();
         Count--;
     }
     void OnButtonOK()
     {
+        AudioManager.instance.audio.Play();
         Gamemanager.instance.player.im.Money -= Count;
         gameObject.SetActive(false);
     }

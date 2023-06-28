@@ -226,6 +226,7 @@ public class User : MonoBehaviour
             {
                 im.transform.GetChild(i).gameObject.SetActive(false);
             }
+            im.SlotPopupAllOff();
         }
     }
     private void TankUpdate()
