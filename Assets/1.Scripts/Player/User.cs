@@ -156,13 +156,13 @@ public class User : MonoBehaviour
             OnInventorySetActive();
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             // ???? ???? ?????? ???? ?????? ?????? x
             Attack();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.F10))
         {
             if (GameIsPaused)
             {
