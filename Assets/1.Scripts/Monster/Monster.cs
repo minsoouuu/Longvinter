@@ -112,7 +112,7 @@ public abstract class Monster : MonoBehaviour
         for (int i = 0; i < _target.Length; i++)
         {
             Transform _targetTrans = _target[i].transform;
-            if (_targetTrans.name == "Player")
+            if (_targetTrans.tag == "Player")
             {
                 Vector3 _direction = (_targetTrans.position - transform.position).normalized;
                 float _angle = Vector3.Angle(_direction, transform.forward);
@@ -122,7 +122,7 @@ public abstract class Monster : MonoBehaviour
                     RaycastHit _hit;
                     if (Physics.Raycast(transform.position + transform.up, _direction, out _hit, viewDistance))
                     {
-                        if (_hit.transform.name == "Player")
+                        if (_hit.transform.tag == "Player")
                         {
                             Debug.DrawRay(transform.position + transform.up, _direction, Color.blue);
 

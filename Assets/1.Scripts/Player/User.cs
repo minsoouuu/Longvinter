@@ -25,6 +25,7 @@ public class User : MonoBehaviour
     [SerializeField] public static bool GameIsPaused = false;
     [SerializeField] public GameObject menuCanvas;
     [SerializeField] public GameObject weaponPrefab;
+    [SerializeField] public AudioSource WeaponSound;
     [SerializeField] public Transform pos;
 
     [SerializeField] private float m_moveSpeed = 2;
@@ -61,7 +62,7 @@ public class User : MonoBehaviour
     private Weapon weapon = null;
     private float curHp = 100f;
 
-    // 무기 장착할때 여기로 데이터 넣어주면 됨
+    // ???? ???????? ?????? ?????? ???????? ??
     public Weapon Weapon
     {
         get { return weapon; }
@@ -157,7 +158,7 @@ public class User : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            // 각종 팝업 떠있을 때는 마우스 이벤트 x
+            // ???? ???? ?????? ???? ?????? ?????? x
             Attack();
         }
 
@@ -327,6 +328,7 @@ public class User : MonoBehaviour
             return;
 
         Weapon weapon = Gamemanager.instance.objectPool.GetObjectOfObjectPooling(Weapon.myName);
+        WeaponSound.Play();
         weapon.transform.position = pos.position;
         weapon.transform.rotation = pos.rotation;
     }
