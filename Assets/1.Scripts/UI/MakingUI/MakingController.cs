@@ -41,7 +41,7 @@ public class MakingController : MonoBehaviour
                     }
                 }
                 */
-                SlotDataReset();
+                SlotDataReset(false);
                 transform.GetChild(0).gameObject.SetActive(false);
                 Gamemanager.instance.player.im.mc = null;
             }
@@ -111,16 +111,20 @@ public class MakingController : MonoBehaviour
                 //Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, false);
             }
         }
-        SlotDataReset();
+        SlotDataReset(true);
     }
     // 제작대 재료 전부 초기화
-    void SlotDataReset()
+    void SlotDataReset(bool isCom)
     {
         items.Clear();
         for (int i = 0; i < materialSlot.Length; i++)
         {
-            Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
             materialSlot[i].ItemData = null;
+
+            if (!isCom)
+            {
+                Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
+            }
         }
         completeSlot.ItemData = null;
     }
