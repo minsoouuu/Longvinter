@@ -23,7 +23,6 @@ public class BuildingSystem : MonoBehaviour
     List<PlaceableObject> prefab_list = new List<PlaceableObject>();
 
     public MaterialScript ground;
-
     // 타일맵 생성
     public TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
     {
@@ -48,7 +47,6 @@ public class BuildingSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateTile();
         PlantTree();
     }
 
@@ -85,10 +83,7 @@ public class BuildingSystem : MonoBehaviour
 
             
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Destroy(selectedObject.gameObject);
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -131,7 +126,6 @@ public class BuildingSystem : MonoBehaviour
         // Debug.Log(area.position);
         area.size = ob.Size;
         //Debug.Log(area.size);
-
         TileBase[] baseArray = GetTileBlock(area, mainTilemap);
         foreach (var b in baseArray)
         {
@@ -160,8 +154,7 @@ public class BuildingSystem : MonoBehaviour
     // 미리보기 타일 지우기
     public void DeleteArea()
     {
-        int rand = Random.Range(0, 4);
-        mainTilemap.SwapTile(takenTile, originalTile[rand]);
+        mainTilemap.SwapTile(takenTile, originalTile[0]);
     }
 
 
@@ -171,7 +164,6 @@ public class BuildingSystem : MonoBehaviour
     {
         if (selectedObject != null)
         {
-            Destroy(selectedObject.gameObject);
             selectedObject = null;
         }
         switch (name)
@@ -201,12 +193,7 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-    public void CreateTile()
-    {
-        Vector3Int startpos_ground = gridLayout.WorldToCell(ground.GetStartPosition());
-        int rand = Random.Range(0, 4);
-        PlantArea(startpos_ground, ground.Size, originalTile[rand]);
-    }
+    
 
     public void ClearTile()
     {
@@ -216,8 +203,7 @@ public class BuildingSystem : MonoBehaviour
             {
                 Vector3Int startpos = BuildingSystem.b_instance.gridLayout.WorldToCell(item.GetStartPosition());
                 // 타일 색칠하기
-                int rand = Random.Range(0, 4);
-                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile[rand]);
+                BuildingSystem.b_instance.PlantArea(startpos, item.Size, BuildingSystem.b_instance.originalTile[0]);
             }
         }
     }
