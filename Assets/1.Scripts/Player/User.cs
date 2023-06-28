@@ -79,7 +79,7 @@ public class User : MonoBehaviour
             curHp = value;
             if (HP <= 0)
             {
-                Die();
+                //Die();
             }
         }
     }
