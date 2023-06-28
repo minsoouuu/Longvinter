@@ -117,13 +117,19 @@ public class MakingController : MonoBehaviour
     void SlotDataReset(bool isCom)
     {
         items.Clear();
-        for (int i = 0; i < materialSlot.Length; i++)
+        if (materialSlot.Length > 0)
         {
-            materialSlot[i].ItemData = null;
-
-            if (!isCom)
+            for (int i = 0; i < materialSlot.Length; i++)
             {
-                Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
+                materialSlot[i].ItemData = null;
+
+                if (!isCom)
+                {
+                    if (materialSlot[i].ItemData != null)
+                    {
+                        Gamemanager.instance.player.im.ADItem(materialSlot[i].ItemData, true);
+                    }
+                }
             }
         }
         completeSlot.ItemData = null;
