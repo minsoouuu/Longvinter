@@ -76,7 +76,7 @@ public class PlaceableObject : MonoBehaviour
         }
 
         vertices = changeVertices;
-        transform.GetChild(1).transform.Rotate(new Vector3(0, 90, 0));
+        //transform.Rotate(new Vector3(0, 90, 0));
     }
     
 

@@ -59,6 +59,11 @@ public class BuildingSystem : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            selectedObject.Rotate();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (CheckTile(selectedObject))
@@ -85,10 +90,6 @@ public class BuildingSystem : MonoBehaviour
         }
         
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            selectedObject.Rotate();
-        }
     }
 
     // Prefab »ý¼º
