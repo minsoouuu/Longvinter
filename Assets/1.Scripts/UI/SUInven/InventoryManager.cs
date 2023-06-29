@@ -52,6 +52,7 @@ public class InventoryManager : MonoBehaviour
             for (int i = 0; i < slotParent.childCount; i++)
             {
                 slots.Add(slotParent.GetChild(i).GetComponent<Slot>());
+                slotParent.GetChild(i).GetComponent<Slot>().mgr = this;
             }
         }
 
@@ -208,12 +209,12 @@ public class InventoryManager : MonoBehaviour
             {
                 if (isAdd && slot.item == null)
                 {
-                    slot.SetData(item, this).SetUI();
+                    slot.SetData(item).SetUI();
                     break;
                 }
                 else if(slot.item != null && slot.item == item)
                 {
-                    slot.SetData(item, this).SetUI();
+                    slot.SetData(item).SetUI();
                     break;
                 }
             }
@@ -260,7 +261,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     if (slot.item == null)
                     {
-                        slot.SetData(itemDic[tapType][i], this).SetUI();
+                        slot.SetData(itemDic[tapType][i]).SetUI();
                         break;
                     }
                 }

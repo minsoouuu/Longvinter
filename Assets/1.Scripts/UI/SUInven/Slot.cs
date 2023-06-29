@@ -13,15 +13,14 @@ public class Slot : MonoBehaviour
     [SerializeField] private Sprite emptySprite;
 
     [HideInInspector] public Item item = null;
+    [HideInInspector] public InventoryManager mgr;
 
     public SlotPopup popup;
 
-    private InventoryManager mgr;
     
-    public Slot SetData(Item item, InventoryManager mgr)
+    public Slot SetData(Item item)
     {
         this.item = item;
-        this.mgr = mgr;
 
         return this;
     }
@@ -81,6 +80,7 @@ public class Slot : MonoBehaviour
         AudioManager.instance.audio.Play();
         string commnet = $"{item.data.itemName} 을 버리시겠습니까?";
         TwoButtonPopUpManager.instance.SetCommnet(commnet, ItemDelete);
+        popup.Enable(false);
     }
     void ItemDelete()
     {
